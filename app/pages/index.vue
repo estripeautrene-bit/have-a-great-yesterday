@@ -43,8 +43,8 @@ const spacingTokens = [
     <!-- CHECKPOINT BANNER -->
     <div class="checkpoint-banner">
       <div class="container">
-        <span class="checkpoint-label">Checkpoint 1 — Foundation Review</span>
-        <span class="checkpoint-note">Design tokens · Typography · Base layout primitives · Wordmark</span>
+        <span class="checkpoint-label">Checkpoint 2 — Global Shell Review</span>
+        <span class="checkpoint-note">Header · Navigation · Mobile menu · Persistent CTA · Footer</span>
       </div>
     </div>
 

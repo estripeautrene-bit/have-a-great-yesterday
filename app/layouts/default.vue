@@ -1,8 +1,10 @@
 <template>
   <div class="site-wrapper">
-    <main id="main-content" tabindex="-1">
+    <TheHeader />
+    <main id="main-content" tabindex="-1" class="site-main">
       <slot />
     </main>
+    <TheFooter />
   </div>
 </template>
 
@@ -13,8 +15,10 @@
   flex-direction: column;
 }
 
-main {
+/* Offset fixed header — value comes from --header-height in tokens.css */
+.site-main {
   flex: 1;
+  padding-top: var(--header-height);
   outline: none;
 }
 </style>
