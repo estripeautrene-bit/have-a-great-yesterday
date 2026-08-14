@@ -1,12 +1,15 @@
 <script setup lang="ts">
 const navLinks = [
-  { label: 'The Method', href: '/the-method' },
-  { label: "What you're going through", href: '/what-are-you-going-through' },
+  { label: 'Method',                    href: '/method' },
+  { label: "What You're Going Through", href: '/what-are-you-going-through' },
+  { label: 'Ideas',                     href: '/ideas' },
+  { label: 'Hall of Fame',              href: '/hall-of-fame' },
+  { label: 'Our Story',                 href: '/our-story' },
 ]
 
 const legalLinks = [
   { label: 'Privacy', href: '/privacy' },
-  { label: 'Terms', href: '/terms' },
+  { label: 'Terms',   href: '/terms' },
 ]
 
 const year = new Date().getFullYear()
@@ -22,7 +25,7 @@ const year = new Date().getFullYear()
           <NuxtLink to="/" aria-label="HaveAGreatYesterday — home">
             <WordmarkHGY variant="dark" size="md" />
           </NuxtLink>
-          <p class="footer__tagline">The home of the MyHGY™ Method.</p>
+          <p class="footer__tagline">The editorial home of the MyHGY™ Method.</p>
         </div>
 
         <nav aria-label="Footer navigation">
@@ -33,6 +36,36 @@ const year = new Date().getFullYear()
           </ul>
         </nav>
       </div>
+
+      <!-- Ecosystem chain -->
+      <div class="footer__ecosystem">
+        <div class="ecosystem__item">
+          <span class="ecosystem__name">HaveAGreatYesterday.com</span>
+          <span class="ecosystem__desc">Editorial home</span>
+        </div>
+        <span class="ecosystem__arrow" aria-hidden="true">→</span>
+        <div class="ecosystem__item">
+          <span class="ecosystem__name">MyHGY™ Method</span>
+          <span class="ecosystem__desc">The practice</span>
+        </div>
+        <span class="ecosystem__arrow" aria-hidden="true">→</span>
+        <div class="ecosystem__item">
+          <a
+            href="https://mydopa.app"
+            class="ecosystem__name ecosystem__name--link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >MyDopa</a>
+          <span class="ecosystem__desc">The companion app</span>
+        </div>
+      </div>
+
+      <!-- Attribution -->
+      <p class="footer__attribution">
+        The MyHGY™ Method draws on concepts from the work of
+        <strong>Dan Sullivan</strong> and <strong>Lior Weinstein</strong>.
+        HaveAGreatYesterday.com is not affiliated with or endorsed by either individual.
+      </p>
 
       <!-- Bottom bar -->
       <div class="footer__bottom">
@@ -65,7 +98,7 @@ const year = new Date().getFullYear()
   align-items: flex-start;
   gap: var(--space-12);
   padding-bottom: var(--space-10);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-wrap: wrap;
 }
 
@@ -78,7 +111,7 @@ const year = new Date().getFullYear()
 .footer__tagline {
   font-family: var(--font-body);
   font-size: var(--text-small);
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
   line-height: var(--lh-body);
   max-width: 28ch;
 }
@@ -91,6 +124,67 @@ const year = new Date().getFullYear()
   margin: 0;
   padding: 0;
   text-align: right;
+}
+
+/* ── Ecosystem chain ──────────────────────────────────── */
+.footer__ecosystem {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-block: var(--space-8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ecosystem__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ecosystem__name {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.ecosystem__name--link {
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.ecosystem__name--link:hover {
+  color: var(--color-sun);
+}
+
+.ecosystem__desc {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.02em;
+}
+
+.ecosystem__arrow {
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+/* ── Attribution ──────────────────────────────────────── */
+.footer__attribution {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: rgba(255, 255, 255, 0.3);
+  line-height: var(--lh-body);
+  padding-block: var(--space-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  max-width: 68ch;
+}
+
+.footer__attribution strong {
+  font-weight: var(--weight-medium);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* ── Bottom bar ───────────────────────────────────────── */
@@ -106,7 +200,7 @@ const year = new Date().getFullYear()
 .footer__copy {
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.25);
   line-height: 1;
 }
 
@@ -123,7 +217,7 @@ const year = new Date().getFullYear()
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition: color var(--transition-fast);
 }
@@ -135,17 +229,18 @@ const year = new Date().getFullYear()
 
 .footer__link--muted {
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 .footer__link--muted:hover {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 /* ── Mobile ───────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .footer__top { flex-direction: column; gap: var(--space-8); }
-  .footer__nav { text-align: left; }
-  .footer__bottom { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+  .footer__top       { flex-direction: column; gap: var(--space-8); }
+  .footer__nav       { text-align: left; }
+  .footer__ecosystem { gap: var(--space-3); }
+  .footer__bottom    { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
 }
 </style>

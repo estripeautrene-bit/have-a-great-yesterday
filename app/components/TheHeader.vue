@@ -1,10 +1,16 @@
 <script setup lang="ts">
+type NavItem = { label: string; href: string; external?: boolean }
+
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 
-const navItems = [
-  { label: 'The Method', href: '/the-method' },
-  { label: "What you're going through", href: '/what-are-you-going-through' },
+const navItems: NavItem[] = [
+  { label: 'Method',                   href: '/method' },
+  { label: "What You're Going Through", href: '/what-are-you-going-through' },
+  { label: 'Ideas',                    href: '/ideas' },
+  { label: 'Hall of Fame',             href: '/hall-of-fame' },
+  { label: 'Our Story',                href: '/our-story' },
+  { label: 'MyDopa',                   href: 'https://mydopa.app', external: true },
 ]
 
 const route = useRoute()
@@ -28,18 +34,26 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
       <nav class="header__nav" aria-label="Main navigation">
         <ul class="nav__list" role="list">
           <li v-for="item in navItems" :key="item.href">
+            <!-- External link (MyDopa) -->
+            <a
+              v-if="item.external"
+              :href="item.href"
+              class="nav__link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >{{ item.label }}</a>
+            <!-- Internal link -->
             <NuxtLink
+              v-else
               :to="item.href"
               class="nav__link"
               :class="{ 'nav__link--active': route.path === item.href }"
-            >
-              {{ item.label }}
-            </NuxtLink>
+            >{{ item.label }}</NuxtLink>
           </li>
         </ul>
 
         <NuxtLink to="/what-are-you-going-through" class="header__cta">
-          Start here
+          Show me what I can do from here.
         </NuxtLink>
       </nav>
 
@@ -58,7 +72,6 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
     </div>
   </header>
 
-  <!-- Mobile menu — teleports to <body> via TheMobileMenu -->
   <TheMobileMenu
     id="mobile-menu"
     :open="isMenuOpen"
@@ -94,7 +107,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   height: 100%;
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-6);
 }
 
 /* Logo */
@@ -109,14 +122,14 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .header__nav {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-5);
   margin-left: auto;
 }
 
 .nav__list {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-4);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -124,13 +137,13 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 .nav__link {
   font-family: var(--font-body);
-  font-size: var(--text-small);
+  font-size: 0.8125rem; /* 13px — compact to fit 6 items + long CTA */
   font-weight: var(--weight-medium);
   color: var(--color-muted-ink);
   text-decoration: none;
   letter-spacing: 0.01em;
-  transition: color var(--transition-fast);
   white-space: nowrap;
+  transition: color var(--transition-fast);
 }
 
 .nav__link:hover,
@@ -138,21 +151,21 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   color: var(--color-ink);
 }
 
-/* Header CTA */
+/* Header CTA — exact locked copy, kept to one line at 13px */
 .header__cta {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   background: var(--color-ink);
   color: var(--color-paper);
   font-family: var(--font-body);
-  font-size: var(--text-small);
+  font-size: 0.8125rem; /* 13px */
   font-weight: var(--weight-semibold);
   text-decoration: none;
-  padding: var(--space-2) var(--space-5);
+  padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-full);
-  letter-spacing: 0.01em;
   white-space: nowrap;
-  transition: opacity var(--transition-fast), background var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
 
 .header__cta:hover {
@@ -160,7 +173,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   color: var(--color-ink);
 }
 
-/* Hamburger — mobile only */
+/* Hamburger — shown below 1100px where 6 items + long CTA get crowded */
 .header__hamburger {
   display: none;
   flex-direction: column;
@@ -181,10 +194,9 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   height: 2px;
   background: currentColor;
   border-radius: 2px;
-  transition: opacity var(--transition-fast);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
   .header__nav       { display: none; }
   .header__hamburger { display: flex; }
 }

@@ -1,7 +1,9 @@
 <script setup lang="ts">
+type NavItem = { label: string; href: string; external?: boolean }
+
 const props = defineProps<{
   open: boolean
-  navItems: { label: string; href: string }[]
+  navItems: NavItem[]
 }>()
 
 const emit = defineEmits<{ close: [] }>()
@@ -59,12 +61,11 @@ function onKeydown(e: KeyboardEvent) {
         aria-label="Navigation menu"
         @keydown="onKeydown"
       >
-        <!-- Menu header row -->
+        <!-- Top row -->
         <div class="mobile-menu__top">
           <NuxtLink to="/" class="mobile-menu__logo" aria-label="HaveAGreatYesterday — home">
             <WordmarkHGY variant="dark" size="md" />
           </NuxtLink>
-
           <button
             ref="closeBtn"
             class="mobile-menu__close"
@@ -82,17 +83,26 @@ function onKeydown(e: KeyboardEvent) {
         <nav class="mobile-menu__nav" aria-label="Mobile navigation">
           <ul role="list">
             <li v-for="item in navItems" :key="item.href">
-              <NuxtLink :to="item.href" class="mobile-menu__link">
-                {{ item.label }}
-              </NuxtLink>
+              <a
+                v-if="item.external"
+                :href="item.href"
+                class="mobile-menu__link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{ item.label }}</a>
+              <NuxtLink
+                v-else
+                :to="item.href"
+                class="mobile-menu__link"
+              >{{ item.label }}</NuxtLink>
             </li>
           </ul>
         </nav>
 
-        <!-- Primary CTA -->
+        <!-- Primary CTA — exact locked copy -->
         <div class="mobile-menu__footer">
           <NuxtLink to="/what-are-you-going-through" class="mobile-menu__cta">
-            Start here
+            Show me what I can do from here.
           </NuxtLink>
         </div>
       </div>
@@ -150,7 +160,7 @@ function onKeydown(e: KeyboardEvent) {
 /* ── Nav links ────────────────────────────────────────── */
 .mobile-menu__nav {
   flex: 1;
-  padding: var(--space-12) var(--page-gutter) var(--space-8);
+  padding: var(--space-10) var(--page-gutter) var(--space-6);
 }
 
 .mobile-menu__nav ul {
@@ -159,7 +169,6 @@ function onKeydown(e: KeyboardEvent) {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
 }
 
 .mobile-menu__link {
@@ -167,9 +176,9 @@ function onKeydown(e: KeyboardEvent) {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: var(--weight-bold);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  padding-block: var(--space-3);
+  padding-block: var(--space-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   transition: color var(--transition-fast);
   line-height: var(--lh-heading);
@@ -182,7 +191,7 @@ function onKeydown(e: KeyboardEvent) {
 
 /* ── Footer / CTA ─────────────────────────────────────── */
 .mobile-menu__footer {
-  padding: var(--space-8) var(--page-gutter) var(--space-12);
+  padding: var(--space-6) var(--page-gutter) var(--space-10);
   flex-shrink: 0;
 }
 
@@ -200,13 +209,14 @@ function onKeydown(e: KeyboardEvent) {
   padding: var(--space-5) var(--space-6);
   border-radius: var(--radius-lg);
   text-align: center;
+  line-height: var(--lh-ui);
   transition: opacity var(--transition-fast);
   min-height: 56px;
 }
 
 .mobile-menu__cta:hover,
 .mobile-menu__cta:focus-visible {
-  opacity: 0.9;
+  opacity: 0.88;
 }
 
 /* ── Transition ───────────────────────────────────────── */
