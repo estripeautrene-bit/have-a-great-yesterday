@@ -21,62 +21,52 @@ defineProps<{
 
 <style scoped>
 /*
-  Typographic construction mirrors the MyDopa wordmark logic:
-  two-part name, two weights, accent color for the second part.
-  MyDopa uses Playfair Display + purple. We use Manrope + Sun yellow.
+  Playfair Display — same typeface, same weight split as the MyDopa wordmark
+  (My = 900, HGY = 600). Two brands feel like a deliberate family.
+  Palette is MyHGY-only: Sun yellow + Ink. No purple, no MyDopa colors.
+  Manrope and Inter are untouched — wordmark font is isolated here.
 */
 .wordmark {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
   white-space: nowrap;
   display: inline-flex;
   align-items: baseline;
 }
 
-/* Sizes */
+/* Sizes — md (2rem / 32px) matches MyDopa nav logo */
 .wordmark--sm { font-size: 1.25rem; }
 .wordmark--md { font-size: 2rem; }
 .wordmark--lg { font-size: 3rem; }
 
-/* "My" — heavier weight, primary color */
+/* "My" — weight 900, matching MyDopa's heavy first part */
 .wordmark__my {
-  font-weight: 800;
+  font-weight: 900;
 }
 
-/* "HGY" — slightly lighter, accent treatment */
+/* "HGY" — weight 600, matching MyDopa's lighter second part */
 .wordmark__hgy {
   font-weight: 600;
 }
 
 /* ™ superscript */
 .wordmark__tm {
-  font-size: 0.38em;
+  font-size: 0.36em;
   font-weight: 700;
   vertical-align: super;
-  margin-left: 0.05em;
+  margin-left: 0.04em;
   line-height: 1;
 }
 
-/* ── DARK VARIANT (on Ink/black background) ──────────────── */
-.wordmark--dark .wordmark__my {
-  color: #ffffff;
-}
+/* ── DARK VARIANT (on Ink / black backgrounds) ───────────── */
+.wordmark--dark .wordmark__my  { color: #ffffff; }
+.wordmark--dark .wordmark__hgy { color: var(--color-sun); }
+.wordmark--dark .wordmark__tm  { color: var(--color-sun); opacity: 0.8; }
 
-.wordmark--dark .wordmark__hgy {
-  color: var(--color-sun);
-}
-
-.wordmark--dark .wordmark__tm {
-  color: var(--color-sun);
-  opacity: 0.8;
-}
-
-/* ── LIGHT VARIANT (on Paper/Warm-Paper background) ─────── */
-/*
-  Yellow text on white fails WCAG contrast.
-  Solution: Ink-black text throughout, Sun-yellow underline accent on "HGY".
-  This preserves the two-color logic without sacrificing legibility.
-*/
+/* ── LIGHT VARIANT (on Paper / Warm-Paper backgrounds) ─────
+   Yellow text on white fails WCAG contrast (~1.8:1).
+   "HGY" stays Ink; a Sun-yellow underline bar carries the accent.
+   Contrast of Ink (#111) on white: 19.6:1 — passes AAA. */
 .wordmark--light .wordmark__my {
   color: var(--color-ink);
 }
@@ -84,7 +74,7 @@ defineProps<{
 .wordmark--light .wordmark__hgy {
   color: var(--color-ink);
   position: relative;
-  padding-bottom: 0.05em;
+  padding-bottom: 0.06em;
 }
 
 .wordmark--light .wordmark__hgy::after {
@@ -92,14 +82,14 @@ defineProps<{
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.1em;
-  height: 0.12em;
+  bottom: -0.08em;
+  height: 0.1em;
   background-color: var(--color-sun);
   border-radius: 2px;
 }
 
 .wordmark--light .wordmark__tm {
   color: var(--color-ink);
-  opacity: 0.6;
+  opacity: 0.55;
 }
 </style>

@@ -62,8 +62,8 @@ const spacingTokens = [
         </div>
 
         <div class="wordmark-anatomy">
-          <p class="anatomy-note">"My" — Manrope 800, white · "HGY" — Manrope 600, Sun #F4C542 · ™ superscript</p>
-          <p class="anatomy-note">Typographic construction mirrors MyDopa's two-color, two-weight logic — translated into the MyHGY palette. No purple, no copy of MyDopa visual identity.</p>
+          <p class="anatomy-note">"My" — Playfair Display 900, white · "HGY" — Playfair Display 600, Sun #F4C542 · ™ superscript</p>
+          <p class="anatomy-note">Same typeface and weight split as MyDopa (Playfair Display, 900/600). MyHGY palette only — no purple. The two brands read as deliberate family, not coincidence.</p>
         </div>
       </div>
     </section>
@@ -80,7 +80,7 @@ const spacingTokens = [
         </div>
 
         <div class="wordmark-anatomy">
-          <p class="anatomy-note" style="color: var(--color-muted-ink)">"My" — Manrope 800, Ink #111111 · "HGY" — Manrope 600, Ink #111111 + Sun-yellow underline accent · Yellow text on white is not used (fails contrast).</p>
+          <p class="anatomy-note" style="color: var(--color-muted-ink)">"My" — Playfair Display 900, Ink #111111 · "HGY" — Playfair Display 600, Ink #111111 + Sun-yellow underline accent · Yellow text on white is not used (fails contrast at ~1.8:1).</p>
         </div>
       </div>
     </section>
