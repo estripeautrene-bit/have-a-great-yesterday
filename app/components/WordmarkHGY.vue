@@ -1,8 +1,10 @@
 <script setup lang="ts">
 defineProps<{
   /**
-   * 'dark'  — white "My" + Sun-yellow "HGY™" on dark backgrounds
-   * 'light' — Ink-black "My" + Ink-black "HGY™" with Sun-yellow underline accent
+   * 'dark'  — white "My" + Sun-yellow "HGY™" on dark/ink backgrounds
+   * 'light' — Sun-yellow "My" + Ink "HGY™" on white/warm-paper backgrounds
+   *           NOTE: Sun yellow (#F4C542) on white fails WCAG 2.2 AA (~1.8:1).
+   *           This is an intentional brand decision, flagged for review.
    */
   variant?: 'dark' | 'light'
   size?: 'sm' | 'md' | 'lg'
@@ -21,9 +23,8 @@ defineProps<{
 
 <style scoped>
 /*
-  Playfair Display — same typeface, same weight split as the MyDopa wordmark
-  (My = 900, HGY = 600). Two brands feel like a deliberate family.
-  Palette is MyHGY-only: Sun yellow + Ink. No purple, no MyDopa colors.
+  Playfair Display — same typeface and weight split as MyDopa (900/600).
+  Two brands read as deliberate family.
   Manrope and Inter are untouched — wordmark font is isolated here.
 */
 .wordmark {
@@ -40,14 +41,10 @@ defineProps<{
 .wordmark--lg { font-size: 3rem; }
 
 /* "My" — weight 900, matching MyDopa's heavy first part */
-.wordmark__my {
-  font-weight: 900;
-}
+.wordmark__my  { font-weight: 900; }
 
 /* "HGY" — weight 600, matching MyDopa's lighter second part */
-.wordmark__hgy {
-  font-weight: 600;
-}
+.wordmark__hgy { font-weight: 600; }
 
 /* ™ superscript */
 .wordmark__tm {
@@ -64,32 +61,9 @@ defineProps<{
 .wordmark--dark .wordmark__tm  { color: var(--color-sun); opacity: 0.8; }
 
 /* ── LIGHT VARIANT (on Paper / Warm-Paper backgrounds) ─────
-   Yellow text on white fails WCAG contrast (~1.8:1).
-   "HGY" stays Ink; a Sun-yellow underline bar carries the accent.
-   Contrast of Ink (#111) on white: 19.6:1 — passes AAA. */
-.wordmark--light .wordmark__my {
-  color: var(--color-ink);
-}
-
-.wordmark--light .wordmark__hgy {
-  color: var(--color-ink);
-  position: relative;
-  padding-bottom: 0.06em;
-}
-
-.wordmark--light .wordmark__hgy::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.08em;
-  height: 0.1em;
-  background-color: var(--color-sun);
-  border-radius: 2px;
-}
-
-.wordmark--light .wordmark__tm {
-  color: var(--color-ink);
-  opacity: 0.55;
-}
+   "My" = Sun yellow #F4C542 (intentional brand decision — contrast ~1.8:1, below AA).
+   "HGY" = Ink #111111 (19.6:1 on white — passes AAA). */
+.wordmark--light .wordmark__my  { color: var(--color-sun); }
+.wordmark--light .wordmark__hgy { color: var(--color-ink); }
+.wordmark--light .wordmark__tm  { color: var(--color-ink); opacity: 0.55; }
 </style>

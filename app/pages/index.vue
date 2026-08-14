@@ -80,7 +80,15 @@ const spacingTokens = [
         </div>
 
         <div class="wordmark-anatomy">
-          <p class="anatomy-note" style="color: var(--color-muted-ink)">"My" — Playfair Display 900, Ink #111111 · "HGY" — Playfair Display 600, Ink #111111 + Sun-yellow underline accent · Yellow text on white is not used (fails contrast at ~1.8:1).</p>
+          <p class="anatomy-note" style="color: var(--color-muted-ink)">"My" — Playfair Display 900, Sun yellow #F4C542 · "HGY" — Playfair Display 600, Ink #111111 · ™ Ink, reduced opacity</p>
+        </div>
+
+        <div class="contrast-flag">
+          <span class="contrast-flag__icon">⚠️</span>
+          <div>
+            <strong>Contrast note — intentional brand decision, pending sign-off</strong><br>
+            "My" in Sun yellow (#F4C542) on white (#FFFFFF) = approximately 1.8:1. This fails WCAG 2.2 AA (minimum 4.5:1 for normal text). "HGY" in Ink on white = 19.6:1, passes AAA. The full wordmark as implemented does not meet AA at the wordmark scale. This is flagged for your explicit approval before production use.
+          </div>
         </div>
       </div>
     </section>
@@ -93,6 +101,7 @@ const spacingTokens = [
           <WordmarkHGY variant="light" size="md" />
           <WordmarkHGY variant="light" size="lg" />
         </div>
+        <p style="font-size: var(--text-small); color: var(--color-muted-ink); margin-top: var(--space-4)">Warm Paper (#FFF9E8) background — same contrast note applies to "My" in Sun yellow.</p>
       </div>
     </section>
 
@@ -246,6 +255,33 @@ const spacingTokens = [
 </template>
 
 <style scoped>
+
+/* ── CONTRAST FLAG ─────────────────────────────────────────── */
+.contrast-flag {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  background: #fff3cd;
+  border-left: 4px solid var(--color-sun);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-4) var(--space-5);
+  margin-top: var(--space-6);
+  font-size: var(--text-small);
+  color: var(--color-ink);
+  line-height: var(--lh-body);
+}
+
+.contrast-flag__icon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contrast-flag strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+
 
 /* ── CHECKPOINT BANNER ─────────────────────────────────────── */
 .checkpoint-banner {
