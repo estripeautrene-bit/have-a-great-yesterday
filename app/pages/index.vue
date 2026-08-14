@@ -20,7 +20,7 @@ const typeScale = [
   { label: 'H1', cssVar: '--text-h1', size: '32–48px', font: 'Manrope', weight: '800', sample: 'What you can do from here.' },
   { label: 'H2', cssVar: '--text-h2', size: '24–36px', font: 'Manrope', weight: '700', sample: 'The method that works backwards.' },
   { label: 'H3', cssVar: '--text-h3', size: '20–28px', font: 'Manrope', weight: '700', sample: 'Evidence replaces assumption.' },
-  { label: 'Body Large', cssVar: '--text-body-lg', size: '18–20px', font: 'Inter', weight: '400', sample: 'You don't need a plan. You need a starting point — something real from where you already are.' },
+  { label: 'Body Large', cssVar: '--text-body-lg', size: '18–20px', font: 'Inter', weight: '400', sample: "You don't need a plan. You need a starting point — something real from where you already are." },
   { label: 'Body', cssVar: '--text-body', size: '16px', font: 'Inter', weight: '400', sample: 'The MyHGY Method starts with yesterday, because yesterday already happened. That makes it the only day you can fully account for.' },
   { label: 'Small / UI', cssVar: '--text-small', size: '14px', font: 'Inter', weight: '400', sample: 'Updated August 2026 · 4 min read' },
 ]
