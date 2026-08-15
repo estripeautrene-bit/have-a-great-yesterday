@@ -10,7 +10,7 @@ const choices = usePainChoices()
       <h2 id="pain-prompt" class="pain-prompt">Tell us what you're going through</h2>
 
       <p class="pain-note">
-        The MyHGY™ Method is built for where you actually are.
+        The <InlineWordmark variant="light" /> Method is built for where you actually are.
         These situations are the starting point — not a label.
       </p>
 

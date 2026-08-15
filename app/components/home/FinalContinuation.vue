@@ -15,7 +15,7 @@
         </p>
 
         <p class="final__body">
-          The practice starts where you actually are. Tell us what you're going through. MyHGY will help you understand what is real, what remains available to you, and what you can do from here. The response is free, specific to your situation, and takes less than five minutes to begin.
+          The practice starts where you actually are. Tell us what you're going through. <InlineWordmark variant="light" /> will help you understand what is real, what remains available to you, and what you can do from here. The response is free, specific to your situation, and takes less than five minutes to begin.
         </p>
 
         <NuxtLink to="/what-are-you-going-through" class="final__cta">
@@ -23,7 +23,7 @@
         </NuxtLink>
 
         <p class="final__secondary">
-          Or <NuxtLink to="/newsletter" class="final__secondary-link">join the MyHGY email relationship</NuxtLink> — the founder's own practice, useful ideas about the method, and continued help without pressure and without a product pitch until you're ready.
+          Or <NuxtLink to="/newsletter" class="final__secondary-link">join the <InlineWordmark variant="light" /> email relationship</NuxtLink> — the founder's own practice, useful ideas about the method, and continued help without pressure and without a product pitch until you're ready.
         </p>
 
       </div>

@@ -1,28 +1,3 @@
-<script setup lang="ts">
-const thinkers = [
-  {
-    name: 'Dan Sullivan',
-    desc: 'Founder of Strategic Coach and one of the most influential figures in entrepreneurial coaching. Sullivan has discussed the "great yesterday" concept publicly for years, developing his own thinking around how consciously collecting good days shapes identity and future capability. His work brought this territory to a wide audience.',
-  },
-  {
-    name: 'Eckhart Tolle',
-    desc: 'Author of The Power of Now. Tolle gave readers an adversary they could observe directly: compulsive thought and identification with mental commentary about the past and future. His central distinction — between present lived reality and the mind\'s uncontrolled construction of what happened and what might happen — is foundational to MyHGY\'s insistence that a painful event and the story the mind builds around it are not the same thing.',
-  },
-  {
-    name: 'Maxwell Maltz',
-    desc: 'Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior and proposed that the mind operates like a goal-seeking system — one that needs a clear target, feedback, and course correction. Within that model, mistakes become correction information rather than permanent verdicts about identity, and preserved evidence of past capability becomes usable material for future confidence.',
-  },
-  {
-    name: 'Viktor Frankl',
-    desc: 'Author of Man\'s Search for Meaning. Frankl\'s work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to MyHGY\'s position on what remains available to a person after a painful event.',
-  },
-  {
-    name: 'Martin Seligman',
-    desc: 'Seligman\'s positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins MyHGY\'s evidence practice.',
-  },
-]
-</script>
-
 <template>
   <section class="hof section bg-stone" aria-labelledby="hof-heading">
     <div class="container">
@@ -33,24 +8,44 @@ const thinkers = [
           This territory has a history.
         </h2>
         <p class="hof__sub">
-          The ideas behind MyHGY™ grew from a long tradition of serious thinking about attention, self-image, agency, evidence, and what it means to remain a capable person in the face of difficulty.
+          The ideas behind <InlineWordmark variant="light" /> grew from a long tradition of serious thinking about attention, self-image, agency, evidence, and what it means to remain a capable person in the face of difficulty.
         </p>
       </div>
 
       <div class="hof__grid">
-        <article
-          v-for="t in thinkers"
-          :key="t.name"
-          class="hof__card"
-        >
-          <h3 class="hof__name">{{ t.name }}</h3>
-          <p class="hof__desc">{{ t.desc }}</p>
+        <article class="hof__card">
+          <h3 class="hof__name">Dan Sullivan</h3>
+          <p class="hof__desc">Founder of Strategic Coach and one of the most influential figures in entrepreneurial coaching. Sullivan has discussed the "great yesterday" concept publicly for years, developing his own thinking around how consciously collecting good days shapes identity and future capability. His work brought this territory to a wide audience.</p>
+          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
+        </article>
+
+        <article class="hof__card">
+          <h3 class="hof__name">Eckhart Tolle</h3>
+          <p class="hof__desc">Author of The Power of Now. Tolle gave readers an adversary they could observe directly: compulsive thought and identification with mental commentary about the past and future. His central distinction — between present lived reality and the mind's uncontrolled construction of what happened and what might happen — is foundational to <InlineWordmark variant="light" :show-tm="false" />'s insistence that a painful event and the story the mind builds around it are not the same thing.</p>
+          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
+        </article>
+
+        <article class="hof__card">
+          <h3 class="hof__name">Maxwell Maltz</h3>
+          <p class="hof__desc">Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior and proposed that the mind operates like a goal-seeking system — one that needs a clear target, feedback, and course correction. Within that model, mistakes become correction information rather than permanent verdicts about identity, and preserved evidence of past capability becomes usable material for future confidence.</p>
+          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
+        </article>
+
+        <article class="hof__card">
+          <h3 class="hof__name">Viktor Frankl</h3>
+          <p class="hof__desc">Author of Man's Search for Meaning. Frankl's work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to <InlineWordmark variant="light" :show-tm="false" />'s position on what remains available to a person after a painful event.</p>
+          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
+        </article>
+
+        <article class="hof__card">
+          <h3 class="hof__name">Martin Seligman</h3>
+          <p class="hof__desc">Seligman's positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins <InlineWordmark variant="light" :show-tm="false" />'s evidence practice.</p>
           <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
         </article>
       </div>
 
       <p class="hof__attribution">
-        MyHGY is not affiliated with, sponsored by, endorsed by, or partnered with any of the individuals listed here. Each is recognized solely for the contribution their published work has made to this field.
+        <InlineWordmark variant="light" /> is not affiliated with, sponsored by, endorsed by, or partnered with any of the individuals listed here. Each is recognized solely for the contribution their published work has made to this field.
       </p>
 
       <div class="hof__footer">

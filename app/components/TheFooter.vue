@@ -45,7 +45,7 @@ const year = new Date().getFullYear()
         </div>
         <span class="ecosystem__arrow" aria-hidden="true">→</span>
         <div class="ecosystem__item">
-          <span class="ecosystem__name">MyHGY™ Method</span>
+          <span class="ecosystem__name"><InlineWordmark variant="dark" /> Method</span>
           <span class="ecosystem__desc">The practice</span>
         </div>
         <span class="ecosystem__arrow" aria-hidden="true">→</span>
@@ -62,7 +62,7 @@ const year = new Date().getFullYear()
 
       <!-- Attribution -->
       <p class="footer__attribution">
-        The MyHGY™ Method draws on concepts from the work of
+        The <InlineWordmark variant="dark" /> Method draws on concepts from the work of
         <strong>Dan Sullivan</strong> and <strong>Lior Weinstein</strong>.
         HaveAGreatYesterday.com is not affiliated with or endorsed by either individual.
       </p>

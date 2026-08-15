@@ -45,7 +45,7 @@
             While I was already building the tool to support that practice, I heard a podcast story about a father who believed his job was to help his children collect great days — and therefore great yesterdays. The story reinforced my conviction that consciously preserving the good in our lives can change how we experience the present and approach the future.
           </p>
           <p class="founder__body">
-            That is what became MyHGY™.
+            That is what became <InlineWordmark variant="light" />.
           </p>
           <p class="founder__body">
             Not a gratitude journal. Not a positivity system. A methodology for returning to what is actually true, identifying what you can still do, acting on it, and keeping the evidence so that progress becomes visible — not only felt.

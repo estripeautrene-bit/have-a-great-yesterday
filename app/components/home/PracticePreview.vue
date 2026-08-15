@@ -20,7 +20,7 @@ const features = [
           The practice is something you can begin today.
         </h2>
         <p class="practice__sub">
-          The MyHGY™ Method is not an app. It is a repeatable structure for the ordinary days — one you can begin manually, with whatever you have at hand.
+          The <InlineWordmark variant="light" /> Method is not an app. It is a repeatable structure for the ordinary days — one you can begin manually, with whatever you have at hand.
         </p>
       </div>
 

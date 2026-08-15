@@ -18,7 +18,7 @@ const steps = [
       <div class="method__header">
         <p class="method__eyebrow">The sequence</p>
         <h2 id="method-heading" class="method__heading">
-          The MyHGY™ Method follows a recurring sequence — not a checklist to complete once, but a practice to return to.
+          The <InlineWordmark variant="dark" /> Method follows a recurring sequence — not a checklist to complete once, but a practice to return to.
         </h2>
       </div>
 

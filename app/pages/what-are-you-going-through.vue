@@ -20,7 +20,7 @@ useSeoMeta({
           <p class="wayg-hero__body">
             We're building a step-by-step experience that meets you exactly where you are —
             whatever you're going through. It will help you find your footing using the
-            MyHGY™ Method, without requiring you to have a plan first.
+            <InlineWordmark variant="light" /> Method, without requiring you to have a plan first.
           </p>
           <p class="wayg-hero__body">
             Until it's ready, everything you need to understand the Method is already on the site.
@@ -67,7 +67,7 @@ useSeoMeta({
             <div class="wayg-step__number" aria-hidden="true">2</div>
             <div class="wayg-step__content">
               <p class="wayg-step__title">See what the Method says about where you are</p>
-              <p class="wayg-step__desc">The MyHGY™ Method maps your situation to specific steps — not generic advice. You'll see which phase applies to you and why.</p>
+              <p class="wayg-step__desc">The <InlineWordmark variant="light" /> Method maps your situation to specific steps — not generic advice. You'll see which phase applies to you and why.</p>
             </div>
           </div>
 
@@ -97,7 +97,7 @@ useSeoMeta({
 
           <div class="wayg-meanwhile__links">
             <NuxtLink to="/method" class="wayg-meanwhile__link wayg-meanwhile__link--primary">
-              Read the MyHGY™ Method →
+              Read the <InlineWordmark variant="light" /> Method →
             </NuxtLink>
             <NuxtLink to="/ideas" class="wayg-meanwhile__link">
               Browse ideas and practice notes →

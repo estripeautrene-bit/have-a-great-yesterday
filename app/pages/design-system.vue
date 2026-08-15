@@ -21,7 +21,7 @@ const typeScale = [
   { label: 'H2', cssVar: '--text-h2', size: '24–36px', font: 'Manrope', weight: '700', sample: 'The method that works backwards.' },
   { label: 'H3', cssVar: '--text-h3', size: '20–28px', font: 'Manrope', weight: '700', sample: 'Evidence replaces assumption.' },
   { label: 'Body Large', cssVar: '--text-body-lg', size: '18–20px', font: 'Inter', weight: '400', sample: "You don't need a plan. You need a starting point — something real from where you already are." },
-  { label: 'Body', cssVar: '--text-body', size: '16px', font: 'Inter', weight: '400', sample: 'The MyHGY Method starts with yesterday, because yesterday already happened. That makes it the only day you can fully account for.' },
+  { label: 'Body', cssVar: '--text-body', size: '16px', font: 'Inter', weight: '400', sample: 'The practice starts where you actually are — not where you planned to be. Evidence replaces assumption. Progress becomes visible.' },
   { label: 'Small / UI', cssVar: '--text-small', size: '14px', font: 'Inter', weight: '400', sample: 'Updated August 2026 · 4 min read' },
 ]
 
@@ -63,7 +63,7 @@ const spacingTokens = [
 
         <div class="wordmark-anatomy">
           <p class="anatomy-note">"My" — Playfair Display 900, white · "HGY" — Playfair Display 600, Sun #F4C542 · ™ superscript</p>
-          <p class="anatomy-note">Same typeface and weight split as MyDopa (Playfair Display, 900/600). MyHGY palette only — no purple. The two brands read as deliberate family, not coincidence.</p>
+          <p class="anatomy-note">Same typeface and weight split as MyDopa (Playfair Display, 900/600). <InlineWordmark variant="dark" :show-tm="false" /> palette only — no purple. The two brands read as deliberate family, not coincidence.</p>
         </div>
       </div>
     </section>

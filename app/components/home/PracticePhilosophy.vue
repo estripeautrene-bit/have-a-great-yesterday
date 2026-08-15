@@ -33,7 +33,7 @@
             That middle is where most personal development is either kept or lost.
           </p>
           <p class="philosophy__para philosophy__closing">
-            MyHGY is not another source of insight.<br>
+            <InlineWordmark variant="light" /> is not another source of insight.<br>
             It is the continuity mechanism between insights.
           </p>
           <blockquote class="philosophy__pull-quote">

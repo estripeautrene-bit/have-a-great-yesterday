@@ -15,7 +15,7 @@
         </h2>
 
         <p class="bridge__body">
-          Everything in the MyHGY™ Method can be practiced without software. That independence is intentional. If the practice only works after purchasing a product, it is not a methodology — it is marketing.
+          Everything in the <InlineWordmark variant="dark" /> Method can be practiced without software. That independence is intentional. If the practice only works after purchasing a product, it is not a methodology — it is marketing.
         </p>
 
         <p class="bridge__body">

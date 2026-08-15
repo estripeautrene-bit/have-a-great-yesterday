@@ -2,7 +2,7 @@
   <section class="hero bg-warm-paper" aria-labelledby="hero-headline">
     <div class="hero__inner container">
 
-      <span class="hero__eyebrow">MyHGY™ Method</span>
+      <span class="hero__eyebrow"><InlineWordmark variant="light" /> Method</span>
 
       <h1 id="hero-headline" class="hero__headline">
         Something happened.<br>It does not have to become the whole story.
@@ -13,7 +13,7 @@
       </p>
 
       <p class="hero__sub">
-        Tell us what you're going through. MyHGY will help you separate what actually happened from what it now feels like it means — and find what you can do from here.
+        Tell us what you're going through. <InlineWordmark variant="light" /> will help you separate what actually happened from what it now feels like it means — and find what you can do from here.
       </p>
 
       <NuxtLink to="/what-are-you-going-through" class="hero__cta">
@@ -21,7 +21,7 @@
       </NuxtLink>
 
       <NuxtLink to="/method" class="hero__secondary">
-        What is the MyHGY™ Method? →
+        What is the <InlineWordmark variant="light" /> Method? →
       </NuxtLink>
 
     </div>
