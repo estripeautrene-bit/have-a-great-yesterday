@@ -10,6 +10,7 @@ const navLinks = [
 const legalLinks = [
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms',   href: '/terms' },
+  { label: 'Cookies', href: '/cookie-policy' },
 ]
 
 const year = new Date().getFullYear()
