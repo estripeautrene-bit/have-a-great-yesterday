@@ -10,17 +10,28 @@
           </a>
         </div>
 
-        <h2 id="bridge-heading" class="bridge__heading draft-copy">
-          Blueprint §6 — MyDopa bridge heading. Connects the editorial site / Method to the MyDopa app.
+        <h2 id="bridge-heading" class="bridge__heading">
+          A manual practice can work. And it has natural limits.
         </h2>
 
-        <p class="bridge__body draft-copy">
-          Blueprint §6 — bridge paragraph. Explains the relationship between practising the MyHGY™ Method
-          and using MyDopa as the companion tool. Does not imply they are the same product.
+        <p class="bridge__body">
+          Everything in the MyHGY™ Method can be practiced without software. That independence is intentional. If the practice only works after purchasing a product, it is not a methodology — it is marketing.
         </p>
 
-        <p class="bridge__body draft-copy">
-          Blueprint §6 — second bridge paragraph or supporting detail. Ecosystem distinction.
+        <p class="bridge__body">
+          But a manual practice runs into real friction over time. Memory scatters. Captured moments accumulate in places you cannot easily find. The context that made a particular day meaningful is difficult to reconstruct weeks later. Patterns that are forming across months are nearly impossible to see without a way to look at the whole. And when continuity breaks — as it will — there is no system that remembers where you were or helps you return.
+        </p>
+
+        <p class="bridge__body bridge__product">
+          MyDopa is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible — so that confidence is built on what you have actually lived, not on a feeling that changes with every difficult morning.
+        </p>
+
+        <p class="bridge__body">
+          MyDopa does not replace the practice. It removes the friction that causes the practice to break.
+        </p>
+
+        <p class="bridge__supporting">
+          <em>MyDopa is transformation through visible and continuous progress.</em>
         </p>
 
         <a
@@ -29,7 +40,7 @@
           target="_blank"
           rel="noopener noreferrer"
         >
-          Explore MyDopa →
+          Request a MyDopa invitation →
         </a>
 
         <p class="bridge__note">
@@ -62,19 +73,18 @@
   line-height: var(--lh-heading);
 }
 
-/* Override draft-copy on dark bg */
-.bridge__heading.draft-copy,
-.bridge__body.draft-copy {
-  background: rgba(244, 197, 66, 0.08);
-  border-color: rgba(244, 197, 66, 0.2);
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .bridge__body {
   font-family: var(--font-body);
   font-size: var(--text-body-lg);
   line-height: var(--lh-body);
   color: rgba(255, 255, 255, 0.75);
+}
+
+.bridge__supporting {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: var(--lh-body);
 }
 
 .bridge__cta {

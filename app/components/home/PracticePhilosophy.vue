@@ -11,18 +11,34 @@
         </h2>
 
         <div class="philosophy__body">
-          <p class="philosophy__para draft-copy">
-            Blueprint §6 — first body paragraph. Editorial voice. Why the analogy to practice
-            (music, sport, medicine) applies to personal development. Tone: grounded, not motivational.
+          <p class="philosophy__para">
+            The problem is not that people lack insight.
           </p>
-          <p class="philosophy__para draft-copy">
-            Blueprint §6 — second body paragraph. The cost of treating personal development as a
-            series of one-off interventions vs. a daily practice. Specific, honest.
+          <p class="philosophy__para">
+            Most people who are trying to grow have already encountered something useful. They have read a book that landed. Heard an idea that changed how they saw something. Finished a course, a session, a seminar, a conversation — and understood, at least for a while, exactly how they wanted to live.
           </p>
-          <p class="philosophy__para draft-copy">
-            Blueprint §6 — third body paragraph or closing. Transition into what this practice
-            specifically looks like.
+          <p class="philosophy__para">
+            The problem is that insight is episodic, while life is continuous.
           </p>
+          <p class="philosophy__para">
+            A book ends. A podcast finishes. A seminar sends everyone home. A coaching session concludes. Then ordinary life resumes — the commute, the difficult conversation, the distraction, the moment when the idea would have mattered but had already faded back into the background.
+          </p>
+          <p class="philosophy__para">
+            Athletes do not show up for competition without having practiced. Musicians do not perform without having rehearsed. A language is not learned by listening to one podcast. In every domain where meaningful change is expected, improvement comes through repeated practice — not through a single episode of understanding, however powerful.
+          </p>
+          <p class="philosophy__para">
+            Personal development is frequently delivered differently. It is delivered in episodes. The insight may be real. The question is what happens in the middle: between the book and the next book, the session and the next session, the moment of understanding and the moment it is most needed.
+          </p>
+          <p class="philosophy__para">
+            That middle is where most personal development is either kept or lost.
+          </p>
+          <p class="philosophy__para philosophy__closing">
+            MyHGY is not another source of insight.<br>
+            It is the continuity mechanism between insights.
+          </p>
+          <blockquote class="philosophy__pull-quote">
+            The only way to have a great yesterday is to be here today.
+          </blockquote>
         </div>
 
       </div>
@@ -69,6 +85,22 @@
   font-size: var(--text-body-lg);
   line-height: var(--lh-body);
   color: var(--color-ink);
+}
+
+.philosophy__closing {
+  font-weight: var(--weight-semibold);
+}
+
+.philosophy__pull-quote {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  font-style: italic;
+  color: var(--color-ink);
+  border-left: 4px solid var(--color-sun);
+  padding-left: var(--space-6);
+  margin: var(--space-8) 0 0;
+  line-height: var(--lh-heading);
 }
 
 @media (max-width: 640px) {

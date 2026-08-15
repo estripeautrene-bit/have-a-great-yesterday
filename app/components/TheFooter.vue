@@ -25,7 +25,7 @@ const year = new Date().getFullYear()
           <NuxtLink to="/" aria-label="HaveAGreatYesterday — home">
             <WordmarkHGY variant="dark" size="md" />
           </NuxtLink>
-          <p class="footer__tagline">The editorial home of the MyHGY™ Method.</p>
+          <p class="footer__tagline">Personal development deserves a practice.</p>
         </div>
 
         <nav aria-label="Footer navigation">

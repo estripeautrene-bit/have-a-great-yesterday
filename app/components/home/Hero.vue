@@ -4,16 +4,24 @@
 
       <span class="hero__eyebrow">MyHGY™ Method</span>
 
-      <h1 id="hero-headline" class="hero__headline draft-copy">
-        Blueprint §6 — hero display headline. Pain-led, first-person, destination-forward.
+      <h1 id="hero-headline" class="hero__headline">
+        Something happened.<br>It does not have to become the whole story.
       </h1>
 
-      <p class="hero__sub draft-copy">
-        Blueprint §6 — hero sub-headline. 1–2 sentences. Acknowledges pain, bridges to possibility. Method introduced after recognition.
+      <p class="hero__sub">
+        Your mind can take one difficult event and make it feel like the only thing that is true about your life. It is not.
+      </p>
+
+      <p class="hero__sub">
+        Tell us what you're going through. MyHGY will help you separate what actually happened from what it now feels like it means — and find what you can do from here.
       </p>
 
       <NuxtLink to="/what-are-you-going-through" class="hero__cta">
         Show me what I can do from here.
+      </NuxtLink>
+
+      <NuxtLink to="/method" class="hero__secondary">
+        What is the MyHGY™ Method? →
       </NuxtLink>
 
     </div>
@@ -79,6 +87,20 @@
 .hero__cta:hover {
   background: var(--color-sun);
   color: var(--color-ink);
+}
+
+.hero__secondary {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-muted-ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.hero__secondary:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

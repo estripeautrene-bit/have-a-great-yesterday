@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const steps = [
-  { label: 'Pain',             n: 1 },
-  { label: 'Reality',          n: 2 },
-  { label: 'Agency',           n: 3 },
-  { label: 'Goal',             n: 4 },
-  { label: 'Action',           n: 5 },
-  { label: 'Commitment',       n: 6 },
-  { label: 'Evidence',         n: 7 },
-  { label: 'Visible Progress', n: 8 },
+  { label: 'Pain',             n: 1, desc: 'Something has happened that is real, and it deserves to be named clearly.' },
+  { label: 'Reality',          n: 2, desc: 'Separate the event itself from the conclusions that have formed around it — and the feared futures that have not yet arrived.' },
+  { label: 'Agency',           n: 3, desc: 'Identify what remains within your control or influence today, even if it is smaller than you wish.' },
+  { label: 'Goal',             n: 4, desc: 'Choose a meaningful destination proportional to where you are — not where you imagined you would be.' },
+  { label: 'Action',           n: 5, desc: 'Take one concrete next step rather than continuing to analyze the situation.' },
+  { label: 'Commitment',       n: 6, desc: 'Decide to keep going — not because every day will be good, but because returning after difficulty is what progress actually looks like.' },
+  { label: 'Evidence',         n: 7, desc: 'Notice and preserve meaningful moments while life is happening, before memory collapses the day into a single verdict.' },
+  { label: 'Visible Progress', n: 8, desc: 'Allow the accumulated evidence to show you what is actually changing — so that confidence is built on what you have lived, not on what someone told you to believe.' },
 ]
 </script>
 
@@ -17,8 +17,8 @@ const steps = [
 
       <div class="method__header">
         <p class="method__eyebrow">The sequence</p>
-        <h2 id="method-heading" class="method__heading draft-copy">
-          Blueprint §6 — method section heading. Introduces the 8-step sequence.
+        <h2 id="method-heading" class="method__heading">
+          The MyHGY™ Method follows a recurring sequence — not a checklist to complete once, but a practice to return to.
         </h2>
       </div>
 
@@ -30,9 +30,7 @@ const steps = [
         >
           <span class="method__step-n" aria-hidden="true">{{ String(step.n).padStart(2, '0') }}</span>
           <strong class="method__step-label">{{ step.label }}</strong>
-          <p class="method__step-desc draft-copy">
-            Blueprint §6 — role of {{ step.label }} in the sequence.
-          </p>
+          <p class="method__step-desc">{{ step.desc }}</p>
         </li>
       </ol>
 
@@ -109,12 +107,6 @@ const steps = [
   margin-top: var(--space-2);
 }
 
-/* Override .draft-copy colors on dark background */
-.method__step-desc.draft-copy {
-  background: rgba(244, 197, 66, 0.08);
-  border-color: rgba(244, 197, 66, 0.25);
-  color: rgba(255, 255, 255, 0.45);
-}
 
 @media (max-width: 1024px) {
   .method__rail { grid-template-columns: repeat(2, 1fr); }

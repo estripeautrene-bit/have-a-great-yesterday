@@ -1,9 +1,25 @@
 <script setup lang="ts">
-// Placeholder profiles — replace with real entries from Blueprint / content layer
-const profiles = [
-  { initials: 'A·B', situation: 'Job or career disruption' },
-  { initials: 'C·D', situation: 'Starting over' },
-  { initials: 'E·F', situation: 'Health uncertainty' },
+const thinkers = [
+  {
+    name: 'Dan Sullivan',
+    desc: 'Founder of Strategic Coach and one of the most influential figures in entrepreneurial coaching. Sullivan has discussed the "great yesterday" concept publicly for years, developing his own thinking around how consciously collecting good days shapes identity and future capability. His work brought this territory to a wide audience.',
+  },
+  {
+    name: 'Eckhart Tolle',
+    desc: 'Author of The Power of Now. Tolle gave readers an adversary they could observe directly: compulsive thought and identification with mental commentary about the past and future. His central distinction — between present lived reality and the mind\'s uncontrolled construction of what happened and what might happen — is foundational to MyHGY\'s insistence that a painful event and the story the mind builds around it are not the same thing.',
+  },
+  {
+    name: 'Maxwell Maltz',
+    desc: 'Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior and proposed that the mind operates like a goal-seeking system — one that needs a clear target, feedback, and course correction. Within that model, mistakes become correction information rather than permanent verdicts about identity, and preserved evidence of past capability becomes usable material for future confidence.',
+  },
+  {
+    name: 'Viktor Frankl',
+    desc: 'Author of Man\'s Search for Meaning. Frankl\'s work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to MyHGY\'s position on what remains available to a person after a painful event.',
+  },
+  {
+    name: 'Martin Seligman',
+    desc: 'Seligman\'s positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins MyHGY\'s evidence practice.',
+  },
 ]
 </script>
 
@@ -13,31 +29,29 @@ const profiles = [
 
       <div class="hof__header">
         <p class="hof__eyebrow">Hall of Fame</p>
-        <h2 id="hof-heading" class="hof__heading draft-copy">
-          Blueprint §6 — Hall of Fame section heading. Credibility / social proof.
+        <h2 id="hof-heading" class="hof__heading">
+          This territory has a history.
         </h2>
-        <p class="hof__sub draft-copy">
-          Blueprint §6 — 1 sentence framing who is in the Hall of Fame and why it matters.
+        <p class="hof__sub">
+          The ideas behind MyHGY™ grew from a long tradition of serious thinking about attention, self-image, agency, evidence, and what it means to remain a capable person in the face of difficulty.
         </p>
       </div>
 
       <div class="hof__grid">
         <article
-          v-for="p in profiles"
-          :key="p.initials"
+          v-for="t in thinkers"
+          :key="t.name"
           class="hof__card"
-          aria-label="Placeholder Hall of Fame entry"
         >
-          <div class="hof__avatar" aria-hidden="true">{{ p.initials }}</div>
-          <div class="hof__content">
-            <p class="hof__name draft-copy">Blueprint §6 — name or handle</p>
-            <p class="hof__situation">{{ p.situation }}</p>
-            <p class="hof__quote draft-copy">
-              Blueprint §6 — 1–2 sentence quote or testimonial from this person's experience with the method.
-            </p>
-          </div>
+          <h3 class="hof__name">{{ t.name }}</h3>
+          <p class="hof__desc">{{ t.desc }}</p>
+          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry →</NuxtLink>
         </article>
       </div>
+
+      <p class="hof__attribution">
+        MyHGY is not affiliated with, sponsored by, endorsed by, or partnered with any of the individuals listed here. Each is recognized solely for the contribution their published work has made to this field.
+      </p>
 
       <div class="hof__footer">
         <NuxtLink to="/hall-of-fame" class="hof__link">
@@ -83,7 +97,7 @@ const profiles = [
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-8);
 }
 
 .hof__card {
@@ -92,51 +106,45 @@ const profiles = [
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-}
-
-.hof__avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: var(--color-stone);
-  border: 2px solid var(--color-sun);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-bold);
-  color: var(--color-muted-ink);
-  flex-shrink: 0;
-}
-
-.hof__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .hof__name {
   font-family: var(--font-display);
-  font-size: var(--text-body);
+  font-size: var(--text-h3);
   font-weight: var(--weight-bold);
   color: var(--color-ink);
+  line-height: var(--lh-heading);
 }
 
-.hof__situation {
-  font-size: var(--text-xs);
-  font-weight: var(--weight-medium);
-  color: var(--color-muted-ink);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.hof__quote {
+.hof__desc {
   font-size: var(--text-small);
   line-height: var(--lh-body);
   color: var(--color-ink);
+  flex: 1;
+}
+
+.hof__entry-link {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-muted-ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
   margin-top: var(--space-2);
+}
+
+.hof__entry-link:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+
+.hof__attribution {
+  font-size: var(--text-xs);
+  color: var(--color-muted-ink);
+  line-height: var(--lh-body);
+  max-width: var(--container-md);
+  margin-bottom: var(--space-8);
+  font-style: italic;
 }
 
 .hof__footer {
@@ -158,7 +166,11 @@ const profiles = [
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .hof__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
   .hof__grid { grid-template-columns: 1fr; }
 }
 </style>

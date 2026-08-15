@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const features = [
-  { n: '01', label: 'Blueprint §6 — feature label 1', desc: 'Blueprint §6 — description of what this feature of the practice involves.' },
-  { n: '02', label: 'Blueprint §6 — feature label 2', desc: 'Blueprint §6 — description of what this feature of the practice involves.' },
-  { n: '03', label: 'Blueprint §6 — feature label 3', desc: 'Blueprint §6 — description of what this feature of the practice involves.' },
-  { n: '04', label: 'Blueprint §6 — feature label 4', desc: 'Blueprint §6 — description of what this feature of the practice involves.' },
+  { n: '01', label: 'Return to present reality', desc: 'Separate what actually happened from the story your mind has built around it. What is known? What remains uncertain? What is actually true right now?' },
+  { n: '02', label: 'Identify what remains available', desc: 'Something is still within your control or influence. Name it.' },
+  { n: '03', label: 'Choose a direction', desc: 'A meaningful destination — even a modest one — gives consecutive actions somewhere to go.' },
+  { n: '04', label: 'Take one constructive action', desc: 'Not a plan. Not a decision to decide later. One action, today.' },
+  { n: '05', label: 'Notice what happened', desc: 'While life is happening, pause long enough to recognize meaningful moments: something handled well, a connection made, a fear faced, a promise kept. Evidence is the raw material of confidence.' },
+  { n: '06', label: 'Preserve it', desc: 'Write it down close enough to the moment that the detail and the feeling are still alive. Do not rely on memory at the end of the day.' },
+  { n: '07', label: 'Reflect and return', desc: 'At the end of the day, compare what you preserved against the mind\'s verdict. And when the practice breaks — as it will — the only rule is to return.' },
 ]
 </script>
 
@@ -13,11 +16,11 @@ const features = [
 
       <div class="practice__header">
         <p class="practice__eyebrow">What the practice looks like</p>
-        <h2 id="practice-heading" class="practice__heading draft-copy">
-          Blueprint §6 — section heading for the practice preview.
+        <h2 id="practice-heading" class="practice__heading">
+          The practice is something you can begin today.
         </h2>
-        <p class="practice__sub draft-copy">
-          Blueprint §6 — 1–2 sentences. Grounds the practice in time, frequency, and format.
+        <p class="practice__sub">
+          The MyHGY™ Method is not an app. It is a repeatable structure for the ordinary days — one you can begin manually, with whatever you have at hand.
         </p>
       </div>
 
@@ -28,8 +31,8 @@ const features = [
           class="practice__feature"
         >
           <span class="practice__feature-n">{{ f.n }}</span>
-          <h3 class="practice__feature-label draft-copy">{{ f.label }}</h3>
-          <p class="practice__feature-desc draft-copy">{{ f.desc }}</p>
+          <h3 class="practice__feature-label">{{ f.label }}</h3>
+          <p class="practice__feature-desc">{{ f.desc }}</p>
         </div>
       </div>
 

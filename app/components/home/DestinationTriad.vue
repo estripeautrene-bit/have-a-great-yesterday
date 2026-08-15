@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const pillars = [
-  { name: 'Clarity', number: '01' },
-  { name: 'Accuracy', number: '02' },
-  { name: 'Self-Confidence', number: '03' },
+  { name: 'Clarity', number: '01', desc: 'Understand where you actually are, what still matters, and where you can go from here.' },
+  { name: 'Accuracy', number: '02', desc: 'See your situation through present facts and lived evidence — not through unlimited prediction or an old story about yourself.' },
+  { name: 'Self-Confidence', number: '03', desc: 'Build belief from visible evidence of your own action, capability, recovery, and progress — not from encouragement that has nothing underneath it.' },
 ]
 </script>
 
@@ -11,12 +11,11 @@ const pillars = [
     <div class="container">
 
       <div class="triad__header">
-        <p class="triad__eyebrow">Where the method takes you</p>
-        <h2 id="triad-heading" class="triad__heading draft-copy">
-          Blueprint §6 — destination triad section heading.
+        <h2 id="triad-heading" class="triad__heading">
+          This is where the work leads.
         </h2>
-        <p class="triad__sub draft-copy">
-          Blueprint §6 — 1–2 sentences introducing the three destination outcomes.
+        <p class="triad__sub">
+          Success starts with awareness and focus, requires commitment, and is visible when it becomes consistent.
         </p>
       </div>
 
@@ -28,9 +27,7 @@ const pillars = [
         >
           <span class="triad__number" aria-hidden="true">{{ pillar.number }}</span>
           <h3 class="triad__name">{{ pillar.name }}</h3>
-          <p class="triad__desc draft-copy">
-            Blueprint §6 — description of {{ pillar.name }} as an outcome of the MyHGY™ Method.
-          </p>
+          <p class="triad__desc">{{ pillar.desc }}</p>
         </div>
       </div>
 
@@ -44,15 +41,6 @@ const pillars = [
   margin-bottom: var(--space-16);
 }
 
-.triad__eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-muted-ink);
-  margin-bottom: var(--space-4);
-}
 
 .triad__heading {
   font-family: var(--font-display);
