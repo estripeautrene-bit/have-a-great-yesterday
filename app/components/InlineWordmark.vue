@@ -20,8 +20,10 @@ withDefaults(defineProps<{
   letter-spacing: -0.01em;
 }
 
-/* "My" is always Sun yellow, weight 900 */
-.imark__my { color: #F4C542; font-weight: 900; }
+/* "My" weight 900; Sun yellow on light, brighter golden on dark */
+.imark__my { font-weight: 900; }
+.imark--light .imark__my { color: #F4C542; }
+.imark--dark  .imark__my { color: #FFD147; }
 
 /* "HGY" weight 600; ink on light, white on dark */
 .imark__hgy { font-weight: 600; }

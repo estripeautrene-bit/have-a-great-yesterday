@@ -56,7 +56,7 @@ defineProps<{
 }
 
 /* ── DARK VARIANT (on Ink / black backgrounds) ───────────── */
-.wordmark--dark .wordmark__my  { color: #F4C542; opacity: 1; }
+.wordmark--dark .wordmark__my  { color: #FFD147; opacity: 1; }
 .wordmark--dark .wordmark__hgy { color: #ffffff; }
 .wordmark--dark .wordmark__tm  { color: #ffffff; opacity: 0.75; }
 
