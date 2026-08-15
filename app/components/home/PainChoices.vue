@@ -16,14 +16,12 @@ const choices = usePainChoices()
 
       <ul class="pain-grid" role="list" aria-label="Pain choice categories — visual preview">
         <li
-          v-for="choice in choices"
+          v-for="(choice, index) in choices"
           :key="choice"
           class="pain-card"
         >
-          <span class="pain-card__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.5" />
-            </svg>
+          <span class="pain-card__number" aria-hidden="true">
+            {{ String(index + 1).padStart(2, '0') }}
           </span>
           <span class="pain-card__label">{{ choice }}</span>
         </li>
@@ -73,17 +71,34 @@ const choices = usePainChoices()
   gap: var(--space-4);
   background: var(--color-paper);
   border: 1px solid rgba(0, 0, 0, 0.07);
+  border-left: 3px solid var(--color-sun);
   border-radius: var(--radius-lg);
   padding: var(--space-5) var(--space-6);
-  /* Visual only — cursor default signals these are not interactive */
+  box-shadow: 0 2px 10px rgba(17, 17, 17, 0.06);
+  transition: box-shadow 0.15s ease;
   cursor: default;
   user-select: none;
 }
 
-.pain-card__icon {
+.pain-card:hover {
+  box-shadow: 0 4px 18px rgba(17, 17, 17, 0.10);
+}
+
+.pain-card__number {
   flex-shrink: 0;
-  color: var(--color-stone);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-warm-paper);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-extrabold);
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  line-height: 1;
 }
 
 .pain-card__label {

@@ -56,11 +56,15 @@
           <p class="founder__signature">— René Estripeaut, founder</p>
         </div>
 
-        <!-- Photo placeholder -->
-        <div class="founder__portrait" aria-label="Founder portrait — image coming">
-          <div class="founder__portrait-placeholder">
-            <span class="founder__portrait-label">Photo</span>
-          </div>
+        <!-- Founder portrait -->
+        <div class="founder__portrait">
+          <img
+            src="/rene-founder.png"
+            alt="René Estripeaut, founder of MyHGY"
+            class="founder__portrait-img"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
       </div>
@@ -123,27 +127,19 @@
   margin-top: var(--space-4);
 }
 
-/* Portrait placeholder */
 .founder__portrait {
   position: sticky;
   top: calc(var(--header-height) + var(--space-8));
 }
 
-.founder__portrait-placeholder {
+.founder__portrait-img {
+  width: 100%;
+  height: auto;
   aspect-ratio: 3 / 4;
-  background: var(--color-stone);
+  object-fit: cover;
+  object-position: center top;
   border-radius: var(--radius-xl);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px dashed rgba(0, 0, 0, 0.12);
-}
-
-.founder__portrait-label {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--color-muted-ink);
-  font-style: italic;
+  display: block;
 }
 
 @media (max-width: 900px) {
