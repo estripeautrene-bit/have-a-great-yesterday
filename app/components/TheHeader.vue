@@ -3,6 +3,8 @@ type NavItem = { label: string; href: string; external?: boolean }
 
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
+const isDark = ref(false)
+let darkObserver: IntersectionObserver | null = null
 
 const navItems: NavItem[] = [
   { label: 'Method',                   href: '/method' },
@@ -17,17 +19,34 @@ const route = useRoute()
 watch(() => route.path, () => { isMenuOpen.value = false })
 
 const onScroll = () => { isScrolled.value = window.scrollY > 4 }
-onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
+
+  const darkSections = document.querySelectorAll('.bg-ink')
+  if (darkSections.length) {
+    const headerHeight = (document.querySelector<HTMLElement>('.header')?.offsetHeight ?? 64)
+    darkObserver = new IntersectionObserver(
+      (entries) => { isDark.value = entries.some(e => e.isIntersecting) },
+      { rootMargin: `0px 0px -${window.innerHeight - headerHeight}px 0px`, threshold: 0 }
+    )
+    darkSections.forEach(s => darkObserver!.observe(s))
+  }
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  darkObserver?.disconnect()
+})
 </script>
 
 <template>
-  <header class="header" :class="{ 'header--scrolled': isScrolled }">
+  <header class="header" :class="{ 'header--scrolled': isScrolled, 'header--dark': isDark }">
     <div class="header__inner">
 
       <!-- Logo -->
       <NuxtLink to="/" class="header__logo" aria-label="HaveAGreatYesterday — home">
-        <WordmarkHGY variant="light" size="md" />
+        <WordmarkHGY :variant="isDark ? 'dark' : 'light'" size="md" />
       </NuxtLink>
 
       <!-- Desktop nav -->
@@ -91,6 +110,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
   background: var(--color-paper);
   border-bottom: 1px solid transparent;
   transition:
+    background var(--transition-base),
     border-color var(--transition-base),
     box-shadow var(--transition-base);
 }
@@ -98,6 +118,34 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 .header--scrolled {
   border-bottom-color: var(--color-stone);
   box-shadow: 0 1px 16px rgba(0, 0, 0, 0.06);
+}
+
+.header--dark {
+  background: var(--color-ink);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.header--dark .nav__link {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.header--dark .nav__link:hover,
+.header--dark .nav__link--active {
+  color: #ffffff;
+}
+
+.header--dark .header__cta {
+  background: var(--color-sun);
+  color: var(--color-ink);
+}
+
+.header--dark .header__cta:hover {
+  background: #ffffff;
+  color: var(--color-ink);
+}
+
+.header--dark .header__hamburger {
+  color: #ffffff;
 }
 
 .header__inner {

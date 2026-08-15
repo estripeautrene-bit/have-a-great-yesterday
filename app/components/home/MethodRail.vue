@@ -103,7 +103,7 @@ const steps = [
 .method__step-desc {
   font-size: var(--text-small);
   line-height: var(--lh-body);
-  color: rgba(255, 255, 255, 0.5);
+  color: #F5F3EE;
   margin-top: var(--space-2);
 }
 

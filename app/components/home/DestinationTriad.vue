@@ -64,8 +64,11 @@ const pillars = [
 }
 
 .triad__item {
-  padding-top: var(--space-6);
-  border-top: 3px solid var(--color-sun);
+  padding: var(--space-6);
+  border-top: 4px solid var(--color-sun);
+  background: var(--color-warm-paper);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(17, 17, 17, 0.06);
 }
 
 .triad__number {
@@ -74,7 +77,7 @@ const pillars = [
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
   letter-spacing: 0.1em;
-  color: var(--color-muted-ink);
+  color: var(--color-sun);
   margin-bottom: var(--space-3);
 }
 
