@@ -23,15 +23,15 @@
         </p>
 
         <p class="bridge__body bridge__product">
-          MyDopa is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible — so that confidence is built on what you have actually lived, not on a feeling that changes with every difficult morning.
+          <InlineMyDopa /> is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible — so that confidence is built on what you have actually lived, not on a feeling that changes with every difficult morning.
         </p>
 
         <p class="bridge__body">
-          MyDopa does not replace the practice. It removes the friction that causes the practice to break.
+          <InlineMyDopa /> does not replace the practice. It removes the friction that causes the practice to break.
         </p>
 
         <p class="bridge__supporting">
-          <em>MyDopa is transformation through visible and continuous progress.</em>
+          <em><InlineMyDopa /> is transformation through visible and continuous progress.</em>
         </p>
 
         <a
@@ -44,7 +44,7 @@
         </a>
 
         <p class="bridge__note">
-          MyDopa is a separate product. No affiliation or endorsement of this site is implied.
+          <InlineMyDopa /> is a separate product. No affiliation or endorsement of this site is implied.
         </p>
 
       </div>

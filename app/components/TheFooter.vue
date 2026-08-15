@@ -56,7 +56,7 @@ const year = new Date().getFullYear()
             class="ecosystem__name ecosystem__name--link"
             target="_blank"
             rel="noopener noreferrer"
-          >MyDopa™</a>
+          ><InlineMyDopa /></a>
           <span class="ecosystem__desc">The companion app</span>
         </div>
       </div>

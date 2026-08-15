@@ -228,7 +228,7 @@ const pillars = [
           </p>
 
           <p class="mbridge__body mbridge__product">
-            MyDopa is the purpose-built equipment for the practice.
+            <InlineMyDopa /> is the purpose-built equipment for the practice.
             <strong>MyToday</strong> captures meaningful moments while life is happening.
             <strong>MyYesterday</strong> helps you understand what the accumulated evidence
             means. <strong>MyProgress</strong> makes continuity and accumulation visible —
@@ -237,12 +237,12 @@ const pillars = [
           </p>
 
           <p class="mbridge__body">
-            MyDopa does not replace the practice. It removes the friction that causes the
+            <InlineMyDopa /> does not replace the practice. It removes the friction that causes the
             practice to break.
           </p>
 
           <p class="mbridge__supporting">
-            <em>MyDopa is transformation through visible and continuous progress.</em>
+            <em><InlineMyDopa /> is transformation through visible and continuous progress.</em>
           </p>
 
           <a
@@ -255,7 +255,7 @@ const pillars = [
           </a>
 
           <p class="mbridge__note">
-            MyDopa is a separate product. No affiliation or endorsement of this site is implied.
+            <InlineMyDopa /> is a separate product. No affiliation or endorsement of this site is implied.
           </p>
 
         </div>

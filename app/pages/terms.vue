@@ -76,7 +76,7 @@ useSeoMeta({
 
           <h2>External links</h2>
           <p>
-            The site may link to third-party websites, including MyDopa™ (a separate product).
+            The site may link to third-party websites, including <InlineMyDopa /> (a separate product).
             We are not responsible for the content or practices of any external site. A link
             does not constitute an endorsement.
           </p>

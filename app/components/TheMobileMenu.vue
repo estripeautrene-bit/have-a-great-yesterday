@@ -89,7 +89,7 @@ function onKeydown(e: KeyboardEvent) {
                 class="mobile-menu__link"
                 target="_blank"
                 rel="noopener noreferrer"
-              >{{ item.label }}</a>
+              ><InlineMyDopa v-if="item.label === 'MyDopa'" /><template v-else>{{ item.label }}</template></a>
               <NuxtLink
                 v-else
                 :to="item.href"
