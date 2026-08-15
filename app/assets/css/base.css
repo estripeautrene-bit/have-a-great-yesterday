@@ -188,6 +188,11 @@ h3.draft-copy {
 }
 
 
+/* Prevent anchor targets from scrolling under the fixed header */
+[id] {
+  scroll-margin-top: var(--header-height);
+}
+
 /* Screen-reader only */
 .sr-only {
   position: absolute;
