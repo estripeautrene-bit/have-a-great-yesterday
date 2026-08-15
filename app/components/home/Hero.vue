@@ -30,17 +30,17 @@
 
 <style scoped>
 .hero {
-  min-height: 92vh;
+  min-height: 85vh;
   display: flex;
-  align-items: center;
-  padding-block: var(--space-32) var(--space-20);
+  align-items: flex-start;
+  padding-block: var(--space-16) var(--space-20);
 }
 
 .hero__inner {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--space-8);
+  gap: var(--space-5);
   max-width: var(--container-md);
 }
 
@@ -80,7 +80,6 @@
   text-decoration: none;
   padding: var(--space-4) var(--space-8);
   border-radius: var(--radius-full);
-  margin-top: var(--space-4);
   transition: background var(--transition-fast), color var(--transition-fast);
 }
 
@@ -104,7 +103,7 @@
 }
 
 @media (max-width: 640px) {
-  .hero { min-height: 80vh; padding-block: var(--space-20) var(--space-16); }
+  .hero { min-height: 80vh; padding-block: var(--space-12) var(--space-12); }
   .hero__cta { width: 100%; justify-content: center; }
 }
 </style>
