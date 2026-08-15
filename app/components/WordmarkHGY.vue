@@ -56,9 +56,9 @@ defineProps<{
 }
 
 /* ── DARK VARIANT (on Ink / black backgrounds) ───────────── */
-.wordmark--dark .wordmark__my  { color: var(--color-sun); }
+.wordmark--dark .wordmark__my  { color: #F4C542; opacity: 1; }
 .wordmark--dark .wordmark__hgy { color: #ffffff; }
-.wordmark--dark .wordmark__tm  { color: #ffffff; opacity: 0.7; }
+.wordmark--dark .wordmark__tm  { color: #ffffff; opacity: 0.75; }
 
 /* ── LIGHT VARIANT (on Paper / Warm-Paper backgrounds) ─────
    "My" = Sun yellow #F4C542 (intentional brand decision — contrast ~1.8:1, below AA).

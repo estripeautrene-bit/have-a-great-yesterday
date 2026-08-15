@@ -126,12 +126,12 @@ onUnmounted(() => {
 }
 
 .header--dark .nav__link {
-  color: rgba(255, 255, 255, 0.55);
+  color: #ffffff;
 }
 
 .header--dark .nav__link:hover,
 .header--dark .nav__link--active {
-  color: #ffffff;
+  color: #F4C542;
 }
 
 .header--dark .header__cta {
