@@ -21,7 +21,7 @@
       </NuxtLink>
 
       <NuxtLink to="/method" class="hero__secondary">
-        What is the <InlineWordmark variant="light" /> Method? →
+        What is the MyHGY™ Method? →
       </NuxtLink>
 
     </div>

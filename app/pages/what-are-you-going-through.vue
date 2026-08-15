@@ -97,7 +97,7 @@ useSeoMeta({
 
           <div class="wayg-meanwhile__links">
             <NuxtLink to="/method" class="wayg-meanwhile__link wayg-meanwhile__link--primary">
-              Read the <InlineWordmark variant="light" /> Method →
+              Read the MyHGY™ Method →
             </NuxtLink>
             <NuxtLink to="/ideas" class="wayg-meanwhile__link">
               Browse ideas and practice notes →
