@@ -5,6 +5,9 @@
       <slot />
     </main>
     <TheFooter />
+    <ClientOnly>
+      <TheCookieBanner />
+    </ClientOnly>
   </div>
 </template>
 
