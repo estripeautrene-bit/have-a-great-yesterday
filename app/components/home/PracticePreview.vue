@@ -87,7 +87,7 @@ const features = [
   font-size: var(--text-xs);
   font-weight: var(--weight-bold);
   letter-spacing: 0.08em;
-  color: var(--color-muted-ink);
+  color: var(--color-sun);
   margin-bottom: var(--space-3);
 }
 
