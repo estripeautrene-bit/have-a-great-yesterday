@@ -34,42 +34,67 @@ useSeoMeta({
             <p class="osn__byline">By René Estripeaut</p>
 
             <p class="osn__body">
-              For most of my life, I did not trust myself to create structure. I could begin with energy and ideas, but I was insecure about my ability to stay with a process and finish what I started.
+              Years ago, <em>The Power of Now</em> helped me see the difference between what is happening in the present and the story my mind creates about it. Later, Quantum Growth—a nine-month mindset course led by Lue Araujo through Boost Your Mind and based on the Bob Proctor and Sandra Gallagher framework—helped me understand how repetition influences the subconscious and the frequency from which we think, feel, and act.
             </p>
             <p class="osn__body">
-              I had encountered good ideas before. Years ago, <em>The Power of Now</em> showed me that the present moment and the story my mind was telling about it were not the same thing. The insight was real. Then it faded. I understood something important, but I did not yet know how to sustain it in ordinary life.
+              I started putting those ideas into practice in two simple ways. Every morning, while having coffee, I wrote ten things I was grateful for. Every night, I recorded at least three good things that had happened.
             </p>
             <p class="osn__body">
-              What I did not yet understand was why. Then I enrolled in a nine-month mindset course — Quantum Growth, led by Lue Araujo through Boost Your Mind and based on the Bob Proctor/Sandra Gallagher framework — and it gave me the missing piece. I learned that thoughts and reality are not the same, that the present is what is actually real, and that beliefs formed long ago keep running beneath conscious thought — shaping how you perceive, decide, and act — no matter what new idea you grasp on the surface. Understanding something once was never going to be enough. Those older patterns had years of repetition behind them. To change what I believed, I would have to repeat a new behavior long enough for my own evidence to catch up with it.
+              The morning practice helped me begin with gratitude. The nighttime practice helped me close the day on a positive note.
             </p>
             <p class="osn__body">
-              So I stopped trying to think my way forward and started doing. During the course I built two small daily practices that became the bookends of my day. Each morning, before my shower, I wrote ten things I was grateful for — an orientation, a way to begin from appreciation. Each night, I wrote down at least three good things that had actually happened: a confirmed deal, a real conversation, a moment with one of my daughters. The point was to preserve what actually occurred, so the day would not collapse into the mind's one-word verdict by evening.
+              They became the bookends of my day.
             </p>
             <p class="osn__body">
-              Those practices changed things. But they left a gap. There was a smaller class of moments — unexpectedly running into someone and getting a good hug, a particular smile from one of my kids, a lead calling back after a year, a moment of courage — that disappeared first. By evening I might remember something had mattered, but the feeling and the living detail had already leaked away. The problem was the delay between noticing a moment and capturing it.
+              <strong>What was missing was the middle.</strong>
             </p>
             <p class="osn__body">
-              I didn't want to carry a notebook all day, and my phone was already in my hand. So I started capturing those moments the instant they happened, while the words and the feeling were still alive. I came to believe that repeatedly noticing, preserving, and revisiting these moments could impress a fuller record of my life upon my subconscious, and help me sustain a higher, more consistent personal frequency. What began as a way to stop forgetting became something else: an accumulating body of evidence that I was building, acting, connecting, recovering, and progressing — even on the days my mind was ready to call the whole thing ordinary or lost.
+              Good things were happening throughout the day: an unexpected hug, a smile from one of my daughters, a lead calling back, a productive conversation, a moment when I handled something well. Each one could elevate my frequency right then, while I was living my life.
             </p>
             <p class="osn__body">
-              That evidence began to matter in ways I had not expected. I stopped drinking. I followed a twelve-week half-marathon plan, and at kilometer seventeen I told myself: today I finish. I crossed the last five hundred meters with a daughter on each hand. I read twenty-seven books in eight months. I entered the Ocean to Ocean rally — three days across Panama, demanding terrain that required staying fully present or falling over — and made it through. I kept building MyDopa. None of these were separate accomplishments. They were the same discovery, expressed different ways: repetition created kept promises, kept promises generated evidence, and the accumulating evidence made a level of self-trust I had never had increasingly believable.
+              Most of them disappeared before nighttime.
             </p>
             <p class="osn__body">
-              When my scattered notes and calendar entries became impossible to use, I started building a dedicated tool for it, despite having never written a line of code. We built the first screen — MyToday — to capture moments as they happen. While I was already developing MyDopa, I heard a podcast story about a father who believed his job was to help his children collect great days — and therefore great yesterdays. The story reinforced my conviction that consciously preserving the good in our lives can change how we experience the present and approach the future. That story led me to add MyYesterday — a place to revisit the evidence and understand what it meant. MyProgress came next, accumulating the evidence and making progress visible over time.
+              I realized that these moments could do much more if I captured them in real time, while they were still alive. A more accurate picture of my life would require making this a consistent practice: notice the good, capture it, and allow it to register.
             </p>
             <p class="osn__body">
-              The complete practice beneath all of this is what became the <InlineWordmark variant="light" /> Method.
+              This was going to be the key to imprinting upon my subconscious all the goodness that was really happening. Anchoring the good through consistent conscious effort was the practice I had been missing.
             </p>
             <p class="osn__body">
-              Not a gratitude journal. Not a positivity system. A methodology for returning
-              to what is actually true, identifying what you can still do, acting on it, and
-              keeping the evidence so that progress becomes visible — not only felt.
+              As artificial intelligence began changing the world of work, I took an AI course to learn how it could support my finance business. That experience gave me the confidence to approach Claude Code with an idea.
             </p>
             <p class="osn__body">
-              I am still inside this practice. I am not teaching it from the other side.
+              I built the MVP of MyDopa to make one essential personal-development practice possible throughout the day: capture each good thing as it happens so that a steady stream of positive reality is consciously imprinted into the subconscious. This continuous imprint elevates your frequency, and that is the missing middle.
+            </p>
+            <p class="osn__body">
+              MyDopa turns those captures into something more useful than disconnected notes in a notebook. As they accumulate, AI can organize the evidence and develop a clearer understanding of how we are living, responding, and progressing.
+            </p>
+            <p class="osn__body">
+              MyProgress makes that evidence visible. We already use scorecards to understand our money, health, sleep, and exercise. Strava shows us that one run belongs to a larger journey. A banking app turns hundreds of transactions into a clear financial picture. MyProgress does something similar for personal development: it turns everyday actions and moments into a visible record of our progress as people.
+            </p>
+            <p class="osn__body">
+              After I had built the first MVP of MyDopa and had been using it for a while, I went to the gym and heard Dan Sullivan describe an idea from his coach, Lior Weinstein. Lior believed his responsibility was to help his children have great todays so they could have great yesterdays—because a great past is a powerful predictor of the future.
+            </p>
+            <p class="osn__body">
+              I immediately recognized the connection. Someone else understood the value of collecting what is good today, carrying it forward, and using a stronger past to approach the future.
+            </p>
+            <p class="osn__body">
+              MyDopa became the tool for practicing the missing middle. The complete practice beneath it became the <InlineWordmark variant="light" /> Method.
+            </p>
+            <p class="osn__body">
+              In my own life, these practices have helped me feel calmer, sleep better, strengthen my relationships, work more productively, follow through more consistently, and get more meaningful things done. Consistent practice replaces a distorted story with visible evidence of what is actually happening and what we are capable of doing.
+            </p>
+            <p class="osn__body">
+              That is the deeper return: greater accuracy about our lives, greater clarity about what to do next, and greater self-confidence built from evidence we can see.
+            </p>
+            <p class="osn__body">
+              Personal development becomes sustainable when it moves from something we occasionally understand to something we consistently practice.
+            </p>
+            <p class="osn__body">
+              <strong>I am still inside this practice.</strong>
             </p>
 
-            <p class="osn__signature">— René Estripeaut, founder</p>
+            <p class="osn__signature"><strong>— René Estripeaut, founder</strong></p>
           </div>
 
           <!-- Founder portrait -->
