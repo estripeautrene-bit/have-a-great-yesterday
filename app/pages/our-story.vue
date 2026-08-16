@@ -34,7 +34,7 @@ useSeoMeta({
             <p class="osn__byline">By René Estripeaut</p>
 
             <p class="osn__body">
-              Years ago, <em>The Power of Now</em> helped me see the difference between what is happening in the present and the story my mind creates about it. Later, Quantum Growth—a nine-month mindset course led by Lue Araujo through Boost Your Mind and based on the Bob Proctor and Sandra Gallagher framework—helped me understand how repetition influences the subconscious and the frequency from which we think, feel, and act.
+              Years ago, <em>The Power of Now</em> helped me see the difference between what is happening in the present and the story my mind creates about it. Later, Quantum Growth—a nine-month mindset course led by Lue Araujo through Boost Your Mind and based on the Bob Proctor and Sandra Gallagher framework—helped me understand how repetition can reinforce patterns in the subconscious and influence what I came to think of as my personal frequency: the state from which I think, feel, and act.
             </p>
             <p class="osn__body">
               I started putting those ideas into practice in two simple ways. Every morning, while having coffee, I wrote ten things I was grateful for. Every night, I recorded at least three good things that had happened.
@@ -46,10 +46,10 @@ useSeoMeta({
               They became the bookends of my day.
             </p>
             <p class="osn__body">
-              <strong>What was missing was the middle.</strong>
+              What was missing was the middle.
             </p>
             <p class="osn__body">
-              Good things were happening throughout the day: an unexpected hug, a smile from one of my daughters, a lead calling back, a productive conversation, a moment when I handled something well. Each one could elevate my frequency right then, while I was living my life.
+              Good things were happening throughout the day: an unexpected hug, a smile from one of my daughters, a lead calling back, a productive conversation, a moment when I handled something well. Each one could elevate how I felt right then, while I was living my life.
             </p>
             <p class="osn__body">
               Most of them disappeared before nighttime.
@@ -58,43 +58,52 @@ useSeoMeta({
               I realized that these moments could do much more if I captured them in real time, while they were still alive. A more accurate picture of my life would require making this a consistent practice: notice the good, capture it, and allow it to register.
             </p>
             <p class="osn__body">
-              This was going to be the key to imprinting upon my subconscious all the goodness that was really happening. Anchoring the good through consistent conscious effort was the practice I had been missing.
+              I came to believe that anchoring the good through consistent conscious effort could help impress a fuller and more accurate record of my life upon my subconscious. That was the practice I had been missing.
             </p>
             <p class="osn__body">
               As artificial intelligence began changing the world of work, I took an AI course to learn how it could support my finance business. That experience gave me the confidence to approach Claude Code with an idea.
             </p>
             <p class="osn__body">
-              I built the MVP of MyDopa to make one essential personal-development practice possible throughout the day: capture each good thing as it happens so that a steady stream of positive reality is consciously imprinted into the subconscious. This continuous imprint elevates your frequency, and that is the missing middle.
+              I built the MVP of <InlineMyDopa /> to make one essential personal-development practice possible throughout the day: capture each good thing as it happens, preserve it, and create a continuous record of the reality I was actually living.
             </p>
             <p class="osn__body">
-              MyDopa turns those captures into something more useful than disconnected notes in a notebook. As they accumulate, AI can organize the evidence and develop a clearer understanding of how we are living, responding, and progressing.
+              <InlineMyDopa /> turns those captures into something more useful than disconnected notes in a notebook. As they accumulate, AI can organize the evidence and develop a clearer understanding of how we are living, responding, and progressing.
             </p>
             <p class="osn__body">
-              MyProgress makes that evidence visible. We already use scorecards to understand our money, health, sleep, and exercise. Strava shows us that one run belongs to a larger journey. A banking app turns hundreds of transactions into a clear financial picture. MyProgress does something similar for personal development: it turns everyday actions and moments into a visible record of our progress as people.
+              <InlineMyProgress /> makes that evidence visible. We already use scorecards to understand our money, health, sleep, and exercise. Strava shows us that one run belongs to a larger journey. A banking app turns hundreds of transactions into a clear financial picture. <InlineMyProgress /> does something similar for personal development: it turns everyday actions and moments into a visible record of our progress as people.
             </p>
             <p class="osn__body">
-              After I had built the first MVP of MyDopa and had been using it for a while, I went to the gym and heard Dan Sullivan describe an idea from his coach, Lior Weinstein. Lior believed his responsibility was to help his children have great todays so they could have great yesterdays—because a great past is a powerful predictor of the future.
+              While I was already developing <InlineMyDopa />, I heard a podcast story about a father who believed his job was to help his children collect great days—and therefore great yesterdays. The story reinforced my conviction that consciously preserving the good in our lives can change how we experience the present and approach the future.
             </p>
             <p class="osn__body">
               I immediately recognized the connection. Someone else understood the value of collecting what is good today, carrying it forward, and using a stronger past to approach the future.
             </p>
             <p class="osn__body">
-              MyDopa became the tool for practicing the missing middle. The complete practice beneath it became the <InlineWordmark variant="light" /> Method.
+              <InlineMyDopa /> became the tool for practicing the missing middle.
             </p>
             <p class="osn__body">
-              In my own life, these practices have helped me feel calmer, sleep better, strengthen my relationships, work more productively, follow through more consistently, and get more meaningful things done. Consistent practice replaces a distorted story with visible evidence of what is actually happening and what we are capable of doing.
+              As I kept practicing, the idea expanded beyond capturing good moments. It became a way of returning to present reality, identifying what remained within my control, choosing meaningful direction, taking constructive action, continuing after interruption, preserving lived evidence, and making progress visible over time.
             </p>
             <p class="osn__body">
-              That is the deeper return: greater accuracy about our lives, greater clarity about what to do next, and greater self-confidence built from evidence we can see.
+              The complete practice became the <InlineWordmark variant="light" /> Method.
+            </p>
+            <p class="osn__body">
+              In my own life, these practices have helped me feel calmer, sleep better, strengthen my relationships, work more productively, follow through more consistently, and get more meaningful things done. Consistent practice has helped me replace distorted stories with visible evidence of what is actually happening and what I am capable of doing.
+            </p>
+            <p class="osn__body">
+              That is the deeper return: greater accuracy about my life, greater clarity about what to do next, and greater self-confidence built from evidence I can see.
+            </p>
+            <p class="osn__body">
+              Inside organizations, the same problem appears after training, coaching, and leadership programs: people understand something valuable, then ordinary work resumes. <InlineWordmark variant="light" /> gives that learning a continuing practice—helping people return to what is real, act on what they can control, preserve evidence of application, and make progress visible over time.
             </p>
             <p class="osn__body">
               Personal development becomes sustainable when it moves from something we occasionally understand to something we consistently practice.
             </p>
             <p class="osn__body">
-              <strong>I am still inside this practice.</strong>
+              I am still inside this practice.
             </p>
 
-            <p class="osn__signature"><strong>— René Estripeaut, founder</strong></p>
+            <p class="osn__signature">— René Estripeaut, founder</p>
           </div>
 
           <!-- Founder portrait -->
