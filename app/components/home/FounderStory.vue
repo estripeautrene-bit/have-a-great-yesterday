@@ -12,48 +12,15 @@
           </h2>
           <p class="founder__byline">By René Estripeaut</p>
           <p class="founder__body">
-            For most of my life, I was convinced I had no structure.
+            For most of my life, I did not trust myself to create structure. I could begin with energy and ideas, but I was insecure about my ability to stay with a process and finish what I started.
           </p>
           <p class="founder__body">
-            I was the person who starts things and does not finish. My mind was always faster than my follow-through — and faster than my willingness to put in consistent effort.
+            So I stopped trying to think my way forward and started doing. I built two small daily practices that became the bookends of my day. Each morning I wrote ten things I was grateful for. Each night I wrote down at least three good things that had actually happened: a confirmed deal, a real conversation, a moment with one of my daughters. The point was to preserve what actually occurred, so the day would not collapse into the mind's one-word verdict by evening.
           </p>
           <p class="founder__body">
-            Then the evidence began to change.
+            I didn't want to carry a notebook all day, and my phone was already in my hand. So I started capturing moments the instant they happened, while the words and the feeling were still alive. What began as a way to stop forgetting became something else: an accumulating body of evidence that I was building, acting, connecting, recovering, and progressing — even on the days my mind was ready to call the whole thing ordinary or lost.
           </p>
-          <p class="founder__body">
-            A book called <em>The Power of Now</em> showed me that the present moment and the story my mind was telling about the present moment were not the same thing. That insight was real. Then it faded. I did not know how to keep it.
-          </p>
-          <p class="founder__body">
-            Later, I began two daily practices: a morning gratitude notebook and a nightly Three Good Things record. The gratitude notebook oriented me at the start of each day. The Three Good Things notebook preserved what actually occurred — a confirmed deal, a real conversation, a moment with one of my daughters — so the day did not collapse into a single vague verdict by evening.
-          </p>
-          <p class="founder__body">
-            Those practices changed things. But they left a gap.
-          </p>
-          <p class="founder__body">
-            Smaller moments — unexpectedly running into someone I'd been thinking about, a conversation that went better than expected, a deadline I met when I wasn't sure I would, a fear I faced — were disappearing before I could get them into any notebook. By evening the feeling that something meaningful had happened was still there, but the living detail had leaked out.
-          </p>
-          <p class="founder__body">
-            I started capturing those moments on my phone, close to when they happened. That changed the practice entirely. What began as a way to stop forgetting became something else: an accumulating body of evidence. Evidence that I was building, acting, connecting, recovering, and progressing — even on the days my mind was ready to call the whole thing ordinary or lost.
-          </p>
-          <p class="founder__body">
-            That evidence began to matter in ways I had not expected.
-          </p>
-          <p class="founder__body">
-            I ran a half marathon. I stopped drinking. I read twenty-seven books in eight months. I rode across Panama on a motorcycle — three days of demanding terrain that required me to stay fully present or fall over. I did not feel like a disciplined person during any of it. I felt like someone showing up, one kept promise at a time, with a record to prove it.
-          </p>
-          <p class="founder__body">
-            While I was already building the tool to support that practice, I heard a podcast story about a father who believed his job was to help his children collect great days — and therefore great yesterdays. The story reinforced my conviction that consciously preserving the good in our lives can change how we experience the present and approach the future.
-          </p>
-          <p class="founder__body">
-            That is what became <InlineWordmark variant="light" />.
-          </p>
-          <p class="founder__body">
-            Not a gratitude journal. Not a positivity system. A methodology for returning to what is actually true, identifying what you can still do, acting on it, and keeping the evidence so that progress becomes visible — not only felt.
-          </p>
-          <p class="founder__body">
-            I am still inside this practice. I am not teaching it from the other side.
-          </p>
-          <p class="founder__signature">— René Estripeaut, founder</p>
+          <NuxtLink to="/our-story" class="founder__link">Read our story →</NuxtLink>
         </div>
 
         <!-- Founder portrait -->
@@ -119,12 +86,19 @@
   color: var(--color-ink);
 }
 
-.founder__signature {
+.founder__link {
+  display: inline-block;
   font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: var(--weight-medium);
-  color: var(--color-muted-ink);
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
   margin-top: var(--space-4);
+}
+
+.founder__link:hover {
+  color: var(--color-sun);
 }
 
 .founder__portrait {
