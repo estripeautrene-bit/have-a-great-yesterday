@@ -12,6 +12,7 @@ const navItems: NavItem[] = [
   { label: 'Ideas',                    href: '/ideas' },
   { label: 'Hall of Fame',             href: '/hall-of-fame' },
   { label: 'Our Story',                href: '/our-story' },
+  { label: 'For Organizations',        href: '/for-organizations' },
   { label: 'MyDopa',                   href: 'https://mydopa.app', external: true },
 ]
 
