@@ -244,7 +244,7 @@ export function useHallOfFame() {
       slug: 'bob-proctor',
       name: 'Bob Proctor',
       role: 'Personal-development teacher and author',
-      keyWork: 'Paradigms · A/B/C goals · the knowing–doing gap',
+      keyWork: 'Paradigms · repetition · A/B/C goals',
       previewDesc: "Proctor's work on paradigms and the knowing–doing gap — and its direct influence on the founder's development — forms part of the conceptual foundation for why MyHGY is built around continuous practice rather than singular insight.",
       intro: [
         "Bob Proctor spent decades teaching a model of personal development centered on paradigms — deeply established patterns of thought and behavior that continue operating even after a person consciously decides they want something different.",
