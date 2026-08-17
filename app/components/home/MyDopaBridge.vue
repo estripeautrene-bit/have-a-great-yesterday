@@ -18,20 +18,8 @@
           Everything in the <InlineWordmark variant="dark" /> Method can be practiced without software. That independence is intentional. If the practice only works after purchasing a product, it is not a methodology — it is marketing.
         </p>
 
-        <p class="bridge__body">
-          But a manual practice runs into real friction over time. Memory scatters. Captured moments accumulate in places you cannot easily find. The context that made a particular day meaningful is difficult to reconstruct weeks later. Patterns that are forming across months are nearly impossible to see without a way to look at the whole. And when continuity breaks — as it will — there is no system that remembers where you were or helps you return.
-        </p>
-
         <p class="bridge__body bridge__product">
-          <InlineMyDopa /> is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible — so that confidence is built on what you have actually lived, not on a feeling that changes with every difficult morning.
-        </p>
-
-        <p class="bridge__body">
-          <InlineMyDopa /> does not replace the practice. It removes the friction that causes the practice to break.
-        </p>
-
-        <p class="bridge__supporting">
-          <em><InlineMyDopa /> is transformation through visible and continuous progress.</em>
+          <InlineMyDopa /> is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible.
         </p>
 
         <a

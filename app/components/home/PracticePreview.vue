@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const features = [
-  { n: '01', label: 'Return to present reality', desc: 'Separate what actually happened from the story your mind has built around it. What is known? What remains uncertain? What is actually true right now?' },
+  { n: '01', label: 'Return to present reality', desc: 'Separate what actually happened from the story your mind has built around it.' },
   { n: '02', label: 'Identify what remains available', desc: 'Something is still within your control or influence. Name it.' },
   { n: '03', label: 'Choose a direction', desc: 'A meaningful destination — even a modest one — gives consecutive actions somewhere to go.' },
-  { n: '04', label: 'Take one constructive action', desc: 'Not a plan. Not a decision to decide later. One action, today.' },
-  { n: '05', label: 'Notice what happened', desc: 'While life is happening, pause long enough to recognize meaningful moments: something handled well, a connection made, a fear faced, a promise kept. Evidence is the raw material of confidence.' },
-  { n: '06', label: 'Preserve it', desc: 'Write it down close enough to the moment that the detail and the feeling are still alive. Do not rely on memory at the end of the day.' },
-  { n: '07', label: 'Reflect and return', desc: 'At the end of the day, compare what you preserved against the mind\'s verdict. And when the practice breaks — as it will — the only rule is to return.' },
+  { n: '04', label: 'Take one constructive action', desc: 'Not a plan. One action, today.' },
+  { n: '05', label: 'Notice what happened', desc: 'Pause to recognize meaningful moments: something handled well, a connection made, a fear faced.' },
+  { n: '06', label: 'Preserve it', desc: 'Write it down close enough to the moment that the detail and the feeling are still alive.' },
+  { n: '07', label: 'Reflect and return', desc: 'Compare what you preserved against the mind\'s verdict. When the practice breaks — return.' },
 ]
 </script>
 
@@ -34,6 +34,12 @@ const features = [
           <h3 class="practice__feature-label">{{ f.label }}</h3>
           <p class="practice__feature-desc">{{ f.desc }}</p>
         </div>
+      </div>
+
+      <div class="practice__footer">
+        <NuxtLink to="/method" class="practice__link">
+          See the full Method →
+        </NuxtLink>
       </div>
 
     </div>
@@ -103,6 +109,26 @@ const features = [
 .practice__feature-desc {
   font-size: var(--text-body);
   line-height: var(--lh-body);
+}
+
+.practice__footer {
+  text-align: center;
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--color-stone);
+  margin-top: var(--space-4);
+}
+
+.practice__link {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.practice__link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 640px) {

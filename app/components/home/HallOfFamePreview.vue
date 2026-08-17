@@ -15,19 +15,19 @@
       <div class="hof__grid">
         <article class="hof__card">
           <h3 class="hof__name">Dan Sullivan</h3>
-          <p class="hof__desc">Founder of Strategic Coach and one of the most influential figures in entrepreneurial coaching. Sullivan has discussed the "great yesterday" concept publicly for years, developing his own thinking around how consciously collecting good days shapes identity and future capability. His work brought this territory to a wide audience.</p>
+          <p class="hof__desc">Founder of Strategic Coach. Sullivan's work on consciously collecting good days as a way to shape identity and future capability brought this territory to a wide audience.</p>
           <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Eckhart Tolle</h3>
-          <p class="hof__desc">Author of The Power of Now. Tolle gave readers an adversary they could observe directly: compulsive thought and identification with mental commentary about the past and future. His central distinction — between present lived reality and the mind's uncontrolled construction of what happened and what might happen — is foundational to <InlineWordmark variant="light" :show-tm="false" />'s insistence that a painful event and the story the mind builds around it are not the same thing.</p>
+          <p class="hof__desc">Author of The Power of Now. His central distinction — between present lived reality and the mind's construction of what happened — is foundational to <InlineWordmark variant="light" :show-tm="false" />'s insistence that a painful event and the story around it are not the same thing.</p>
           <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Maxwell Maltz</h3>
-          <p class="hof__desc">Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior and proposed that the mind operates like a goal-seeking system — one that needs a clear target, feedback, and course correction. Within that model, mistakes become correction information rather than permanent verdicts about identity, and preserved evidence of past capability becomes usable material for future confidence.</p>
+          <p class="hof__desc">Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior — a model in which mistakes become correction information rather than permanent verdicts, and preserved evidence of past capability becomes usable material for future confidence.</p>
           <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
