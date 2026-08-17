@@ -96,7 +96,7 @@ const nextEntry = currentIndex < entries.length - 1 ? entries[currentIndex + 1] 
         <div class="hofe__foot-inner">
 
           <p class="hofe__disclaimer">
-            {{ entry.disclaimer ?? `${entry.name} is cited here solely for their published intellectual contributions. HaveAGreatYesterday.com and the MyHGY™ Method are not affiliated with, sponsored by, or endorsed by ${entry.name}. This recognition does not imply any relationship, collaboration, or endorsement.` }}
+            {{ entry.disclaimer ?? `${entry.name} is cited here solely for his published intellectual contributions. HaveAGreatYesterday.com and the MyHGY™ Method are not affiliated with, sponsored by, or endorsed by ${entry.name}. This recognition does not imply any relationship, collaboration, or endorsement.` }}
           </p>
 
           <nav class="hofe__nav" aria-label="Other Hall of Fame entries">
