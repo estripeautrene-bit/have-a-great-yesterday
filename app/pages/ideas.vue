@@ -24,7 +24,7 @@ const articles: Article[] = [
     lane: 'Pain-Led Help',
     color: 'green',
     title: "What to do when you can't find your footing",
-    excerpt: 'A step-by-step walk through the first three moves of the MyHGY™ Method — written for the days when starting feels impossible.',
+    excerpt: 'A step-by-step walk through three practical moves drawn from the MyHGY™ Method — written for the days when starting feels impossible.',
   },
   {
     lane: 'Method',
@@ -35,8 +35,8 @@ const articles: Article[] = [
   {
     lane: 'Founder Essay',
     color: 'muted',
-    title: 'On collecting good days: where this idea came from',
-    excerpt: 'René Estripeaut on the moment he understood that consciously preserving what is good in your days is not optimism — it is accuracy.',
+    title: 'The moments your mind forgets: why I started preserving evidence from ordinary days',
+    excerpt: 'René Estripeaut on discovering that meaningful evidence from ordinary days — action, capability, courage, connection, contribution, learning, recovery, enjoyment, progress — disappears unless it is deliberately noticed and preserved.',
   },
 ]
 </script>

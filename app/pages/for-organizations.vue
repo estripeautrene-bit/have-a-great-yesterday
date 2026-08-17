@@ -1,7 +1,7 @@
 <script setup lang="ts">
 useSeoMeta({
   title: 'For Organizations — HaveAGreatYesterday.com',
-  description: 'The MyHGY™ Method gives organizational learning investments a continuing practice — for learning transfer, repetition, application, preserved evidence, and visible behavior change over time.',
+  description: 'The MyHGY™ Method gives organizational learning investments a continuing practice — for learning transfer, repetition, application, preserved evidence, and visible evidence of application and progress over time.',
 })
 
 const mechanisms = [
@@ -13,7 +13,7 @@ const mechanisms = [
   {
     n: '02',
     label: 'Repetition',
-    desc: 'The methodology follows a recurring sequence — not a one-time intervention. Each pass reinforces the learning at the behavioral level where change actually occurs.',
+    desc: 'Insight is episodic. Life is continuous. The old pattern has repetition on its side. A workshop or program introduces understanding — then ordinary work resumes immediately. The continuing practice gives participants repeated chances to apply what they learned and generate new lived evidence from real situations.',
   },
   {
     n: '03',
@@ -32,8 +32,8 @@ const mechanisms = [
   },
   {
     n: '06',
-    label: 'Visible Behavior Change',
-    desc: 'Progress accumulates into a visible record. Change becomes something people can see — not only something they believe is happening.',
+    label: 'Visible Evidence of Application and Progress',
+    desc: 'Progress accumulates into a visible record. What participants are actually doing — applying, attempting, adjusting — becomes something they can see, not only something they believe is happening.',
   },
 ]
 </script>
@@ -117,7 +117,7 @@ const mechanisms = [
           </h2>
           <p class="fos__sub">
             Learning transfer, repetition, application, preserved evidence,
-            reflection, and visible behavior change — the <InlineWordmark variant="dark" />
+            reflection, and visible evidence of application and progress — the <InlineWordmark variant="dark" />
             Method brings a continuing structure to what programs create.
           </p>
         </div>

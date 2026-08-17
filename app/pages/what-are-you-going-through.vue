@@ -67,7 +67,7 @@ useSeoMeta({
             <div class="wayg-step__number" aria-hidden="true">2</div>
             <div class="wayg-step__content">
               <p class="wayg-step__title">See what the Method says about where you are</p>
-              <p class="wayg-step__desc">The <InlineWordmark variant="light" /> Method maps your situation to specific steps — not generic advice. You'll see which phase applies to you and why.</p>
+              <p class="wayg-step__desc">The experience applies <InlineWordmark variant="light" /> principles to your situation — helping you separate what happened from the story around it, understand what is true now, identify what remains within your influence, and find a constructive place to begin.</p>
             </div>
           </div>
 
@@ -91,8 +91,7 @@ useSeoMeta({
         <div class="wayg-meanwhile__inner">
           <h2 id="meanwhile-heading" class="wayg-meanwhile__heading">In the meantime</h2>
           <p class="wayg-meanwhile__body">
-            The Method is already documented in full. You can read it, understand how it works,
-            and begin applying it — no guided flow required.
+            The core ideas behind the Method are already available throughout the site. You can begin understanding the practice now while we continue building the guided experience.
           </p>
 
           <div class="wayg-meanwhile__links">

@@ -129,10 +129,10 @@ export function useHallOfFame() {
       ],
       sections: [
         {
-          heading: 'The last human freedom',
+          heading: 'The capacity that remained',
           paragraphs: [
-            "Frankl's most cited observation is this: between stimulus and response, there is a space. In that space is a human being's freedom to choose their response. And in that freedom — regardless of what has happened, regardless of what cannot be changed — lies something that cannot be taken.",
-            "This is not optimism. Frankl was not arguing that terrible things are actually fine, or that attitude makes hardship pleasant. He was making a more precise claim: that even under conditions of genuine deprivation and real loss, the capacity for a chosen response remains. It is small. It costs something. But it is there.",
+            "What Frankl documented, across conditions of extreme deprivation, was a persistent human capacity: even when circumstances have removed almost everything, the possibility of a chosen response does not fully disappear. It becomes constrained, costly, and often small. But it remains.",
+            "This is not optimism. Frankl was not arguing that terrible things are actually fine, or that attitude makes hardship pleasant. He was making a more precise claim: that a person under genuine constraint still retains some capacity to orient toward meaning, exercise agency in some form, and choose — within narrow limits — how to respond to what cannot be changed.",
             "The people Frankl observed who maintained coherence under extreme conditions did so by finding — or holding — a sense of meaning. Not comfort. Not denial. A reason for which bearing what must be borne was worth something.",
           ],
         },
@@ -165,8 +165,8 @@ export function useHallOfFame() {
           heading: 'Three Good Things',
           paragraphs: [
             "Among the specific practices that came out of Seligman's research, Three Good Things is the one most directly adjacent to the MyHGY Method. The practice is simple: each evening, write down three things that went well today, and for each, write a brief note about why it happened.",
-            "In Seligman's research, participants who did this practice for one week showed measurable increases in wellbeing and decreases in depressive symptoms. Many continued the practice beyond the study period on their own because they found it useful. The effect was not trivial and not short-lived.",
-            "The proposed mechanism involves attention: the practice trains habitual attention toward what went well rather than toward what went wrong. This is not suppression of difficulty — it is a deliberate exercise in where attention lands and what it collects. Repeated over time, this habit shifts the baseline from which a person experiences their days.",
+            "In Seligman's research, a one-week version of this practice produced measurable increases in wellbeing and decreases in depressive symptoms for participants. The longer-term findings were more nuanced: sustained benefit was associated with participants who continued the practice after the study ended — not with the one-week intervention itself.",
+            "The distinction matters. A single intervention introduces a pattern of attention; continuing the practice is what produces the cumulative shift. The proposed mechanism: repeated, deliberate attention toward what went well trains a habit that gradually changes the baseline from which a person experiences their days.",
           ],
         },
         {
