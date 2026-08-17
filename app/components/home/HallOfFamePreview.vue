@@ -16,31 +16,31 @@
         <article class="hof__card">
           <h3 class="hof__name">Dan Sullivan</h3>
           <p class="hof__desc">Founder of Strategic Coach. Sullivan's work on consciously collecting good days as a way to shape identity and future capability brought this territory to a wide audience.</p>
-          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
+          <NuxtLink to="/hall-of-fame/dan-sullivan" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Eckhart Tolle</h3>
           <p class="hof__desc">Author of The Power of Now. His central distinction — between present lived reality and the mind's construction of what happened — is foundational to <InlineWordmark variant="light" :show-tm="false" />'s insistence that a painful event and the story around it are not the same thing.</p>
-          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
+          <NuxtLink to="/hall-of-fame/eckhart-tolle" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Maxwell Maltz</h3>
           <p class="hof__desc">Author of Psycho-Cybernetics. Maltz identified self-image as the governing mechanism of behavior — a model in which mistakes become correction information rather than permanent verdicts, and preserved evidence of past capability becomes usable material for future confidence.</p>
-          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
+          <NuxtLink to="/hall-of-fame/maxwell-maltz" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Viktor Frankl</h3>
           <p class="hof__desc">Author of Man's Search for Meaning. Frankl's work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to <InlineWordmark variant="light" :show-tm="false" />'s position on what remains available to a person after a painful event.</p>
-          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
+          <NuxtLink to="/hall-of-fame/viktor-frankl" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
 
         <article class="hof__card">
           <h3 class="hof__name">Martin Seligman</h3>
           <p class="hof__desc">Seligman's positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins <InlineWordmark variant="light" :show-tm="false" />'s evidence practice.</p>
-          <NuxtLink to="/hall-of-fame" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
+          <NuxtLink to="/hall-of-fame/martin-seligman" class="hof__entry-link">Read the full entry <span class="hof__arrow" aria-hidden="true">→</span></NuxtLink>
         </article>
       </div>
 
