@@ -10,6 +10,7 @@ export interface HallOfFameEntry {
     paragraphs: string[]
   }[]
   connection: string[]
+  disclaimer?: string
 }
 
 export function useHallOfFame() {
@@ -189,6 +190,113 @@ export function useHallOfFame() {
         "Seligman's work provides the scientific adjacency — evidence from controlled research — for what the MyHGY Method asks you to do. Three Good Things and the method are not the same practice, but they draw from overlapping territory: deliberate, structured attention to what was good in a day as a practice that, done consistently, changes how a person functions over time.",
         "The method is more specific than Three Good Things — it asks for evidence, not just notation; it has a defined sequence; it asks what you did, not just what went well. But the underlying logic about attention as a trainable function, and about the cumulative effect of that training on capability and wellbeing, runs through Seligman's body of research.",
       ],
+    },
+    {
+      slug: 'james-clear',
+      name: 'James Clear',
+      role: 'Author',
+      keyWork: 'Atomic Habits (2018)',
+      previewDesc: "Clear's work on systems over goals, identity built from accumulated evidence, and practices small enough to repeat on an ordinary day provides modern context for MyHGY's emphasis on repetition, continuity, and returning after interruption.",
+      intro: [
+        "James Clear is an author whose work focuses on how repeated behavior, systems, environment, and identity interact over time. His 2018 book Atomic Habits translated a large body of behavioral thinking into a practical framework built around a simple proposition: meaningful change often emerges from actions small enough to repeat consistently.",
+        "The importance of Clear's contribution is larger than the observation that small actions matter. His work provides an operating language for turning intention into repeated behavior — and for understanding why change that appears insignificant on a single day can become consequential when accumulated over time.",
+      ],
+      sections: [
+        {
+          heading: 'Systems, repetition, and the ordinary day',
+          paragraphs: [
+            "One of Clear's central distinctions is between goals and systems.",
+            "A goal establishes a desired outcome. A system is the recurring process through which movement toward that outcome occurs.",
+            "This matters because most of life happens between milestones. A person may decide where they want to go in a moment, but the direction becomes meaningful through what they repeatedly do afterward.",
+            "Clear's work repeatedly brings attention back to this ordinary territory: the environment in which behavior occurs, the friction surrounding an action, the cues that make behavior more likely, and the repeated actions through which a process becomes part of everyday life.",
+            "The result is a practical account of something personal development often overlooks. Understanding what to do and repeatedly doing it are different problems.",
+          ],
+        },
+        {
+          heading: 'Identity and accumulated evidence',
+          paragraphs: [
+            "Clear also connects repeated action to identity.",
+            "Rather than treating identity as something established only through declaration, his framework emphasizes the relationship between repeated behavior and the picture a person develops of who they are.",
+            "Each individual action may appear small. Across time, however, repeated actions create evidence.",
+            "A person who repeatedly writes begins accumulating evidence of being someone who writes. A person who repeatedly trains accumulates evidence of being someone who trains. A person who repeatedly returns after interruption accumulates evidence of being someone who continues.",
+            "The importance is not perfection. It is the accumulation.",
+            "Behavior becomes personally meaningful because the record begins to say something about the person performing it.",
+          ],
+        },
+        {
+          heading: 'Small enough to continue',
+          paragraphs: [
+            "Another important contribution of Atomic Habits is its emphasis on reducing the size and friction of a behavior until repetition becomes realistic.",
+            "Clear's Two-Minute Rule, environment design, habit tracking, and related tools all serve a similar purpose: make the desired behavior easier to begin and easier to repeat under ordinary conditions.",
+            "This is an important distinction from relying on occasional motivation.",
+            "A practice that works only on unusually motivated days has limited reach. A practice that can survive an ordinary Tuesday has the opportunity to become continuous.",
+          ],
+        },
+      ],
+      connection: [
+        "James Clear's work provides important modern context for MyHGY's emphasis on persistent small practices, repetition, continuity, and returning after interruption.",
+        "The MyHGY™ Method addresses a related problem from a different starting point. Valuable insight may occur in a book, course, conversation, coaching engagement, or moment of clarity. The question is what happens afterward.",
+        "MyHGY asks the person to repeatedly return to present reality, constructive action, and lived evidence. The individual actions can be small. Their significance comes from repetition, preservation, and accumulation.",
+        "Clear's work helps explain why a continuing system matters. MyHGY extends that logic into the territory of personal development by using repeated practice to preserve evidence of action, capability, connection, learning, recovery, and progress across ordinary life.",
+      ],
+    },
+    {
+      slug: 'bob-proctor',
+      name: 'Bob Proctor',
+      role: 'Personal-development teacher and author',
+      keyWork: 'Paradigms · A/B/C goals · the knowing–doing gap',
+      previewDesc: "Proctor's work on paradigms and the knowing–doing gap — and its direct influence on the founder's development — forms part of the conceptual foundation for why MyHGY is built around continuous practice rather than singular insight.",
+      intro: [
+        "Bob Proctor spent decades teaching a model of personal development centered on paradigms — deeply established patterns of thought and behavior that continue operating even after a person consciously decides they want something different.",
+        "His work emphasized a problem that is easy to recognize: knowing something and living it are different achievements. A person can understand an idea intellectually and still continue behaving according to patterns established long before the new understanding arrived.",
+        "For René Estripeaut, this body of thinking became particularly important through the Bob Proctor and Sandra Gallagher framework taught during the Quantum Growth program led by Lue Araujo through Boost Your Mind.",
+      ],
+      sections: [
+        {
+          heading: 'The knowing–doing gap',
+          paragraphs: [
+            "One of the most useful ideas in this tradition is the knowing–doing gap.",
+            "Human beings frequently know far more than they consistently apply.",
+            "They may know that exercise matters, know what conversation needs to happen, know which behavior would serve them better, know how they want to respond, or understand an important lesson from a book or course.",
+            "Understanding creates possibility. Application creates experience.",
+            "The distance between the two is where much of personal development is won or lost.",
+            "Proctor's work repeatedly emphasized that intellectual understanding alone does not automatically replace an established way of operating. The new idea has to enter lived behavior.",
+          ],
+        },
+        {
+          heading: 'Paradigms and repetition',
+          paragraphs: [
+            "Within the Proctor framework, a paradigm is an established pattern that influences perception, emotion, decisions, and behavior beneath ordinary conscious intention.",
+            "The practical implication is significant.",
+            "A new idea may be understood immediately while an established pattern has years of repetition behind it.",
+            "Changing direction therefore requires more than hearing the new idea once. The person repeatedly returns to the new understanding and repeatedly acts from it until lived experience begins supporting a different way of operating.",
+            "This is the part of Proctor's work that became especially consequential in René's own development.",
+            "The lesson was not simply to think differently. It was to repeatedly practice differently.",
+            "Over time, repeated action produced evidence: sobriety, physical training, reading, difficult goals, accountability, daily practices, returning after interruption, and commitments carried forward.",
+            "The evidence gradually became harder for an older self-story to dismiss.",
+          ],
+        },
+        {
+          heading: 'Goals that require growth',
+          paragraphs: [
+            "The A/B/C goal framework provided another important idea.",
+            "An A-type goal is already within familiar capability. A B-type goal requires stretching beyond the current position while the route remains reasonably understandable. A C-type goal reaches into territory where the path is not yet known.",
+            "The value of the C-type goal is what it requires from the person pursuing it.",
+            "The destination creates direction before the entire route is visible. Movement then requires action, learning, adjustment, persistence, and a willingness to continue without complete certainty.",
+            "For René, this idea became a practical way of approaching challenges that previously would have appeared too large to begin.",
+          ],
+        },
+      ],
+      connection: [
+        "Bob Proctor's influence on MyHGY is most important at the point where insight becomes practice.",
+        "The MyHGY™ Method is built around the recognition that understanding something once rarely gives a new way of living enough repetition to compete with established patterns.",
+        "Its governing mechanism is therefore continuous practice.",
+        "Insight introduces a possibility. Repetition keeps the possibility alive. Action generates lived evidence. Preserved evidence accumulates. Visibility allows that accumulated evidence to influence the story a person holds about themselves.",
+        "This is where Proctor's influence and MyHGY's independent development meet.",
+        "Proctor's framework helped René understand why repetition mattered. René's subsequent lived practice — and eventually MyHGY and MyDopa — developed around making that repetition easier to continue while preserving and making visible the evidence it generates.",
+        "MyHGY does not claim that repetition is the only way human beings change, nor does it present popular-psychology descriptions of the subconscious as settled neuroscience. The contribution here is practical: a new understanding needs repeated application if it is going to have a meaningful opportunity to become part of ordinary life.",
+      ],
+      disclaimer: "Bob Proctor is cited here solely for his intellectual contributions and for his influence through the framework René encountered in his own personal-development work. HaveAGreatYesterday.com, the MyHGY™ Method, and MyDopa™ are not affiliated with, sponsored by, certified by, or endorsed by Bob Proctor, Sandra Gallagher, their organizations, Lue Araujo, or Boost Your Mind. This recognition does not imply any relationship, collaboration, or endorsement.",
     },
   ]
 
