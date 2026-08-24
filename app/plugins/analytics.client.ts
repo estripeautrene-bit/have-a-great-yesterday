@@ -34,9 +34,13 @@ export default defineNuxtPlugin(() => {
 
     posthog.init(config.public.posthogKey as string, {
       api_host: config.public.posthogHost as string,
+      capture_pageview: false, // Nuxt SPA: pageviews captured manually via router.afterEach
       capture_exceptions: true,
       person_profiles: 'identified_only',
     })
+
+    // Capture the current pageview immediately after init
+    posthog.capture('$pageview', { current_url: router.currentRoute.value.fullPath })
 
     // Capture a pageview on every SPA route change
     router.afterEach((to) => {
