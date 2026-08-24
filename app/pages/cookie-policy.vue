@@ -1,7 +1,9 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Cookie Policy — HaveAGreatYesterday.com',
-  description: 'How HaveAGreatYesterday.com uses cookies and analytics.',
+  description: 'How HaveAGreatYesterday.com uses cookies and similar browser storage.',
+  path: '/cookie-policy',
+  robots: 'noindex',
 })
 </script>
 
@@ -12,123 +14,133 @@ useSeoMeta({
       <div class="container container--md">
         <p class="legal-eyebrow">Legal</p>
         <h1 id="cookie-heading" class="legal-heading">Cookie Policy</h1>
-        <p class="legal-meta">Effective date: <strong>[To be confirmed before launch]</strong></p>
+        <p class="legal-meta">Effective date: <strong>August 24, 2026</strong></p>
       </div>
     </section>
 
     <section class="legal-body section bg-paper">
       <div class="container container--md">
 
-        <p class="draft-copy">
-          DRAFT — This policy has not been reviewed by René or legal counsel.
-          Do not publish until reviewed and approved before launch.
-        </p>
-
         <div class="legal-content">
 
           <p>
-            This Cookie Policy explains how HaveAGreatYesterday.com uses cookies and similar
-            technologies when you visit the site. We keep our data footprint small by design —
-            we use one analytics tool and nothing else.
+            This Cookie Policy explains what cookies and similar browser storage
+            HaveAGreatYesterday.com sets when you visit. We keep our data footprint small by
+            design.
           </p>
 
+          <!-- ─── SECTION 1: The short version ──────────────────────────── -->
           <h2>The short version</h2>
           <p>
-            We use <strong>PostHog</strong> to understand how visitors use the site — which
-            pages they read, how far they scroll, and whether they sign up for the email list.
-            PostHog sets a cookie that gives your browser an anonymous ID. We do not use
-            advertising cookies. You can opt out at any time.
+            Today, this site does not set any first-party cookies. The only thing stored in
+            your browser by our site code is a single localStorage entry that records your
+            response to the analytics consent banner. No analytics, advertising, or tracking
+            cookies are currently active.
           </p>
 
-          <h2>What is PostHog?</h2>
-          <p>
-            PostHog is an open-source product analytics platform. We use it to count page
-            views, measure time spent on articles, and understand which content resonates. The
-            data helps us improve the site — nothing else. PostHog does not sell data to
-            advertisers.
-          </p>
-          <p>
-            PostHog, Inc. operates the service and processes data in the United States. You
-            can review PostHog's own privacy policy at posthog.com/privacy.
-          </p>
+          <!-- ─── SECTION 2: What we store today ────────────────────────── -->
+          <h2>What we store today</h2>
 
-          <h2>What PostHog collects</h2>
-          <p>When you visit the site, PostHog may automatically record:</p>
-          <ul>
-            <li>Pages you visit and how long you spend on each.</li>
-            <li>Links and buttons you click.</li>
-            <li>Whether you signed up for the email list.</li>
-            <li>Your approximate country or region (derived from your IP address — the full IP is not stored).</li>
-            <li>Browser type, operating system, and screen size.</li>
-            <li>The website or link that brought you here.</li>
-          </ul>
+          <h3>Consent preference — <code>hgy-cookie-consent</code> (localStorage)</h3>
           <p>
-            PostHog does not collect your name, email address, or any content you type into
-            forms. If you join the email list, that address goes to our email provider
-            separately and is not linked to your PostHog analytics record.
-          </p>
-
-          <h2>Cookies and storage PostHog uses</h2>
-          <p>
-            PostHog sets a first-party cookie named <strong>ph_*</strong> (where * is a
-            project identifier). This cookie stores an anonymous visitor ID so PostHog can
-            count unique visits and follow a session without identifying you personally. It
-            expires after one year.
-          </p>
-          <p>
-            PostHog also uses browser localStorage to store your session state and, if you opt
-            out, your opt-out preference. LocalStorage persists until you clear it.
-          </p>
-
-          <h2>How to opt out</h2>
-          <p>
-            You can stop PostHog from collecting data about your visit in any of these ways:
+            When you respond to the consent banner, we write your choice —
+            <code>accepted</code> or <code>declined</code> — to your browser's localStorage
+            under the key <code>hgy-cookie-consent</code>.
           </p>
           <ul>
-            <li>
-              <strong>Browser settings:</strong> Block or delete cookies and clear localStorage
-              in your browser settings. Your browser's help section explains how.
-            </li>
-            <li>
-              <strong>Do Not Track:</strong> PostHog respects the browser
-              Do Not Track signal. [<em>Confirm this is enabled in the PostHog configuration
-              before launch.</em>]
-            </li>
-            <li>
-              <strong>Browser console:</strong> If PostHog is loaded, you can call
-              <code>posthog.opt_out_capturing()</code> in your browser's developer console to
-              opt out for that browser.
-            </li>
+            <li>This is a localStorage entry, not a cookie. It is not sent with HTTP requests.</li>
+            <li>It stays on your device and is not transmitted to our servers or any third party.</li>
+            <li>It persists until you clear your browser's localStorage for this site.</li>
+            <li>It controls whether analytics (PostHog, when activated) initialises on your visits.</li>
           </ul>
+
+          <!-- ─── SECTION 3: Third-party network behavior ────────────────── -->
+          <h2>Third-party network behavior</h2>
+
+          <h3>Cloudflare Pages (hosting and CDN)</h3>
           <p>
-            Opting out does not affect your ability to read the site or sign up for the email
-            list.
+            The site is served through Cloudflare's network. Cloudflare may set its own
+            technical cookies — such as <code>__cf_bm</code> (bot management) — as part of
+            its CDN and security services. These cookies are set by Cloudflare, not by our
+            site code, and are governed by
+            <a
+              href="https://www.cloudflare.com/privacypolicy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="legal-link"
+            >Cloudflare's privacy policy</a>.
+            We do not read or process Cloudflare's cookies.
           </p>
 
-          <h2>How long we keep analytics data</h2>
+          <!-- ─── SECTION 4: PostHog ────────────────────────────────────── -->
+          <h2>Analytics cookies — PostHog</h2>
+
           <p>
-            We retain PostHog analytics data for up to 12 months. [<em>Confirm retention
-            period in PostHog project settings before launch.</em>]
+            PostHog is not currently active. The PostHog SDK is not installed and no API key
+            is configured. PostHog sets no cookies and collects no data at this time.
           </p>
 
+          <p>
+            When PostHog is activated, it will only run for visitors who have chosen
+            <strong>Accept</strong> on the consent banner. It will not run for visitors who
+            have chosen <strong>Decline</strong> or who have not yet made a choice.
+          </p>
+          <p>
+            When active, PostHog will set a first-party cookie (named <code>ph_*</code>, where
+            <code>*</code> is a project identifier) to assign your browser an anonymous
+            visitor ID. It will also use localStorage to store your session state. This
+            section will be updated with full details when PostHog goes live.
+          </p>
+
+          <!-- ─── SECTION 5: Advertising cookies ───────────────────────── -->
           <h2>Advertising cookies</h2>
           <p>
-            We do not use advertising cookies, retargeting pixels, or any technology that
-            tracks you across other websites for advertising. No advertising network receives
-            data from your visit.
+            We do not use advertising cookies, retargeting pixels, or any technology designed
+            to track you across other websites for advertising purposes. No advertising network
+            receives data from your visit.
           </p>
 
+          <!-- ─── SECTION 6: Marketing and email tracking ─────────────────── -->
+          <h2>Marketing and email tracking</h2>
+          <p>
+            This site does not currently use marketing or email tracking. No email capture
+            or delivery system is active, and no tracking pixels are set. If email delivery
+            goes live, any associated tracking behavior will be documented here before activation.
+          </p>
+
+          <!-- ─── SECTION 7: How to manage your preferences ────────────── -->
+          <h2>How to manage your preferences</h2>
+          <p>
+            To remove the consent preference stored by this site, clear your browser's
+            localStorage for <strong>haveagreatyesterday.com</strong>. In most browsers:
+          </p>
+          <ul>
+            <li>Open Developer Tools (F12 or right-click → Inspect).</li>
+            <li>Go to the Application (Chrome/Edge) or Storage (Firefox) tab.</li>
+            <li>Select Local Storage → your site URL → delete the <code>hgy-cookie-consent</code> entry.</li>
+          </ul>
+          <p>
+            After clearing, the consent banner will reappear on your next visit and you can
+            make a fresh choice.
+          </p>
+          <p>
+            You can also block or delete Cloudflare technical cookies through your browser's
+            standard cookie controls. This does not affect your ability to read the site.
+          </p>
+
+          <!-- ─── SECTION 8: Changes ────────────────────────────────────── -->
           <h2>Changes to this policy</h2>
           <p>
-            We will update this policy before launch to reflect the final analytics
-            configuration. The effective date at the top of the page will be updated whenever
-            the policy changes.
+            This policy will be updated when PostHog is activated, when email tracking is
+            introduced, or whenever we add new storage mechanisms. Material changes will be
+            reflected in an updated effective date at the top of this page.
           </p>
 
+          <!-- ─── SECTION 9: Contact ────────────────────────────────────── -->
           <h2>Contact</h2>
           <p>
             Questions about this policy can be sent to
-            <strong>[contact email — confirm before launch]</strong>.
+            <strong>contact@myhgy.com</strong>.
           </p>
 
         </div>
@@ -185,6 +197,18 @@ useSeoMeta({
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-stone);
   margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.legal-content h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  line-height: var(--lh-heading);
 }
 
 .legal-content p,
@@ -205,8 +229,18 @@ useSeoMeta({
 .legal-content code {
   font-family: ui-monospace, monospace;
   font-size: 0.875em;
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--color-stone);
   padding: 1px 5px;
   border-radius: 3px;
 }
+
+.legal-link {
+  color: var(--color-ink);
+  text-underline-offset: 2px;
+}
+
+.legal-link:hover {
+  color: var(--color-muted-ink);
+}
+
 </style>

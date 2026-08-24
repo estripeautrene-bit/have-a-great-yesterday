@@ -22,9 +22,6 @@
           Show me what I can do from here.
         </NuxtLink>
 
-        <p class="final__secondary">
-          Or <NuxtLink to="/newsletter" class="final__secondary-link">join the MyHGY™ email relationship</NuxtLink> — the founder's own practice, useful ideas about the method, and continued help without pressure and without a product pitch until you're ready.
-        </p>
 
       </div>
 

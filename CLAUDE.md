@@ -1,22 +1,8 @@
 # HaveAGreatYesterday.com — Claude Instructions
 
-## Governing document hierarchy
+## Project separation
 
-When documents conflict, the higher one wins:
-
-1. `MyHGY™ Source of Truth v2 — August 13, 2026` (doctrine — highest authority)
-2. `MyHGY™ Website Blueprint v1 — August 13, 2026` (experience, brand, content, technical spec)
-3. Build instructions passed at session start (scope)
-
-Do not invent doctrine. Surface substantive brand or product questions rather than resolving them silently.
-
----
-
-## ABSOLUTE PROHIBITION — do not modify MyDopa
-
-The MyDopa project at `/Users/reneestripeaut/MyDopa/` is read-only. Never modify it in any way, for any reason.
-
-Do not copy from MyDopa: brand colors, fonts, voice, copy, routes, product screens, mascot, app logic, secrets, keys, user data, or database structure.
+The MyDopa project is a separate repository and product. Never modify it. Do not copy from it: brand colors, fonts, voice, copy, routes, product screens, mascot, app logic, secrets, keys, user data, or database structure.
 
 ---
 
@@ -86,19 +72,6 @@ The `/what-are-you-going-through` route must be a **static placeholder only**. I
 
 ---
 
-## Checkpoint discipline
-
-At every checkpoint:
-1. Report what was created, what files changed, what was verified
-2. Give the exact command and URL to view it
-3. List any open decisions
-4. State the recommended next action
-5. **Wait for visual approval** before advancing to the next checkpoint
-
-**Hard stop after Checkpoint 1:** Do not build the global shell, header, nav, footer, homepage, or any component work until Checkpoint 1 is explicitly approved.
-
----
-
 ## Stack
 
 - Framework: Nuxt 4 + Vue 3
@@ -107,4 +80,4 @@ At every checkpoint:
 - Routing: Nuxt file-based pages (`app/pages/`)
 - Content: `@nuxt/content` for markdown-driven pages
 - Package manager: npm
-- Deployment: Cloudflare Pages (push `main` → auto-deploy)
+- Deployment: GitHub Pages via GitHub Actions (`npx nuxi generate --no-fork` → `.output/public`)

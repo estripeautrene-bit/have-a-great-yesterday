@@ -1,7 +1,8 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'What Are You Going Through? — HaveAGreatYesterday.com',
   description: 'The MyHGY™ Method guided experience is coming. Find your footing from exactly where you are.',
+  path: '/what-are-you-going-through',
   robots: 'noindex',
 })
 </script>
@@ -59,7 +60,6 @@ useSeoMeta({
                 <div class="wayg-mock-card">Health uncertainty</div>
                 <div class="wayg-mock-card wayg-mock-card--more">+ 4 more</div>
               </div>
-              <p class="wayg-step__placeholder-note">Visual placeholder — not interactive</p>
             </div>
           </div>
 
@@ -264,14 +264,6 @@ useSeoMeta({
 
 .wayg-mock-card--more {
   opacity: 0.45;
-}
-
-.wayg-step__placeholder-note {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  color: var(--color-muted-ink);
-  font-style: italic;
-  opacity: 0.6;
 }
 
 /* Meanwhile */

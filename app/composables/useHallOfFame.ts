@@ -4,12 +4,14 @@ export interface HallOfFameEntry {
   role: string
   keyWork: string
   previewDesc: string
+  metaDesc?: string
   intro: string[]
   sections: {
     heading: string
     paragraphs: string[]
   }[]
   connection: string[]
+  seeAlso?: { label: string; path: string }
   disclaimer?: string
 }
 
@@ -19,8 +21,9 @@ export function useHallOfFame() {
       slug: 'dan-sullivan',
       name: 'Dan Sullivan',
       role: 'Founder, Strategic Coach',
-      keyWork: 'The Gap and the Gain · 10x Is Easier Than 2x',
+      keyWork: 'The Gap and the Gain (with Benjamin Hardy) · 10x Is Easier Than 2x (with Benjamin Hardy)',
       previewDesc: "Sullivan's work on consciously collecting good days as a way to shape identity and future capability brought this territory to a wide audience.",
+      metaDesc: "Dan Sullivan and Dr. Benjamin Hardy address an important problem: people can make real progress and still fail to experience it because they lose sight of how far they have come. That insight strongly reinforces the territory MyHGY™ occupies.",
       intro: [
         "Dan Sullivan is the founder of Strategic Coach, an entrepreneurial coaching program that has run continuously since 1988. Over more than three decades of working directly with entrepreneurs, Sullivan developed a set of frameworks around the relationship between past experience, present identity, and future capability.",
       ],
@@ -28,7 +31,7 @@ export function useHallOfFame() {
         {
           heading: 'The Gap and the Gain',
           paragraphs: [
-            "Sullivan's most recognized contribution is the distinction between measuring in the Gap and measuring in the Gain. The Gap is the distance between where you are and where you want to be — the distance to your ideal. The Gain is the distance you have actually traveled from where you started.",
+            "Sullivan's most recognized contribution is the distinction between measuring in the Gap and measuring in the Gain — a framework developed through decades of direct work with entrepreneurs and brought to a wide audience in a 2021 book he co-authored with Dr. Benjamin Hardy. The Gap is the distance between where you are and where you want to be — the distance to your ideal. The Gain is the distance you have actually traveled from where you started.",
             "High achievers often suffer not because they lack progress but because they measure against an ideal that retreats as they approach it. Progress disappears as soon as it is benchmarked against a higher target. The result is a person who has done a great deal but cannot feel it.",
             "Measuring in the Gain means turning around and measuring backward — counting what actually happened, what actually changed, what was actually built. The past becomes usable material rather than something to escape from.",
           ],
@@ -43,9 +46,10 @@ export function useHallOfFame() {
         },
       ],
       connection: [
-        "The MyHGY Method is a structured practice for closing the day by preserving evidence of what was good in it — what you did, what happened, what you noticed that mattered. Sullivan's framework on measuring in the Gain provides part of the conceptual foundation for why this is worth doing at all.",
-        "The act of reviewing your day through the lens of what went well — and preserving that in a form you can return to — is a form of measuring in the Gain. The method gives this a repeatable daily structure. The underlying logic about why it changes your operating picture draws from the territory Sullivan made legible.",
+        "The MyHGY Method grew from René Estripeaut's own practice — a years-long habit of gratitude work, structured reflection, Three Good Things exercises, and real-time capture of what actually happened in a day. That practice was already the foundation of MyDopa when René encountered Sullivan's work and the story behind the name \"Have a Great Yesterday.\" Sullivan and Hardy address an important related problem: that people can make real progress and still fail to experience it, because they lose sight of how far they have come. That insight strongly reinforces the territory MyHGY™ occupies. The method was developed independently and follows its own methodology.",
+        "Sullivan's work provides a practical language for a common human problem, and The Gap and the Gain makes that dynamic legible for a wide audience. The relationship between Sullivan and Hardy's framework and MyHGY™ is one of important intellectual adjacency and reinforcement — not shared mechanism or derivation.",
       ],
+      seeAlso: { label: 'The history of "Have a Great Yesterday"', path: '/history' },
     },
     {
       slug: 'eckhart-tolle',
@@ -53,6 +57,7 @@ export function useHallOfFame() {
       role: 'Author and teacher',
       keyWork: 'The Power of Now · A New Earth',
       previewDesc: "His central distinction — between present lived reality and the mind's construction of what happened — is foundational to the method's insistence that a painful event and the story around it are not the same thing.",
+      metaDesc: "Eckhart Tolle's distinction between a painful event and the story constructed around it underpins the MyHGY™ Method's view of difficult days.",
       intro: [
         "Eckhart Tolle is a contemporary spiritual author whose work centers on the distinction between direct present experience and the mind's narration of experience. His two most widely read books — The Power of Now (1997) and A New Earth (2005) — examine what happens when human beings live primarily inside their own mental commentary rather than in contact with what is actually occurring.",
       ],
@@ -70,7 +75,7 @@ export function useHallOfFame() {
           paragraphs: [
             "Tolle's work on presence — the capacity to be in contact with what is actually happening rather than with the mind's commentary about it — has implications for how people relate to both their present experience and their past.",
             "A person who has learned to notice the difference between their direct experience and their mental narration of it has access to a distinction that most people spend their lives without. They can ask: is this the event, or is this what I am saying about the event? That question is not available to someone who cannot separate the two.",
-            "The Power of Now has reached tens of millions of readers in part because this distinction is both simple and difficult: most people intuitively recognize, when it is named precisely, that much of their suffering is narrative rather than situational.",
+            "The Power of Now has reached millions of readers worldwide in part because this distinction is both simple and difficult: most people intuitively recognize, when it is named precisely, that much of their suffering is narrative rather than situational.",
           ],
         },
       ],
@@ -85,6 +90,7 @@ export function useHallOfFame() {
       role: 'Plastic surgeon and author',
       keyWork: 'Psycho-Cybernetics (1960)',
       previewDesc: "Maltz identified self-image as the governing mechanism of behavior — a model in which mistakes become correction information rather than permanent verdicts, and preserved evidence of past capability becomes usable material for future confidence.",
+      metaDesc: "Maxwell Maltz's model of self-image as a feedback mechanism is the direct intellectual basis for the MyHGY™ Method's evidence practice.",
       intro: [
         "Maxwell Maltz was a plastic surgeon who noticed something unexpected in his practice: patients who underwent surgery to correct a physical flaw sometimes continued to feel disfigured despite the successful outcome. The problem was not the face. It was the internal picture the patient held of themselves. This observation led Maltz to develop a model of self-image as the governing mechanism of human behavior, published in 1960 as Psycho-Cybernetics.",
         "Psycho-Cybernetics sold millions of copies and influenced a generation of coaches, athletes, and self-improvement writers. Its central claim remains one of the more precise accounts of why behavior change is difficult and what makes it possible.",
@@ -124,8 +130,9 @@ export function useHallOfFame() {
       role: 'Psychiatrist and author',
       keyWork: "Man's Search for Meaning (1946) · Logotherapy",
       previewDesc: "Frankl's work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to the method's position on what remains available to a person after a painful event.",
+      metaDesc: "Viktor Frankl's work on what remains available after extremity grounds the MyHGY™ Method's view of what a difficult day still holds.",
       intro: [
-        "Viktor Frankl was a Viennese psychiatrist who survived Auschwitz, Dachau, and two other Nazi concentration camps. His observations during that period — about what allowed some people to maintain psychological coherence and a sense of purpose under conditions of extreme deprivation — became the foundation for a form of psychotherapy he called logotherapy, and for the book he published after liberation in 1946.",
+        "Viktor Frankl was a Viennese psychiatrist who survived four Nazi concentration camps, including Theresienstadt and Auschwitz. His observations during that period — about what allowed some people to maintain psychological coherence and a sense of purpose under conditions of extreme deprivation — became the foundation for a form of psychotherapy he called logotherapy, and for the book he published after liberation in 1946.",
         "Man's Search for Meaning has been called one of the most influential books of the twentieth century. It is not a book about happiness or optimism. It is a book about what remains available to a human being when circumstances have taken away almost everything else.",
       ],
       sections: [
@@ -156,8 +163,9 @@ export function useHallOfFame() {
       slug: 'martin-seligman',
       name: 'Martin Seligman',
       role: 'Psychologist · University of Pennsylvania',
-      keyWork: 'Learned Optimism · Flourish · Three Good Things practice',
+      keyWork: 'Learned Optimism · Flourish · "Three Good Things" (2005 paper)',
       previewDesc: "Seligman's positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins the method's evidence practice.",
+      metaDesc: "Martin Seligman's positive psychology research — including Three Good Things — provides scientific support for the MyHGY™ Method's evidence practice.",
       intro: [
         "Martin Seligman is a research psychologist at the University of Pennsylvania who, as president of the American Psychological Association in 1998, helped establish positive psychology as a recognized research field. The founding premise: psychology had spent most of its history studying pathology — what goes wrong in human beings. Positive psychology asks a different question: what allows human beings to function well, and what makes a life worth living?",
       ],
@@ -197,6 +205,7 @@ export function useHallOfFame() {
       role: 'Author',
       keyWork: 'Atomic Habits (2018)',
       previewDesc: "Clear's work on systems over goals, identity built from accumulated evidence, and practices small enough to repeat on an ordinary day provides modern context for MyHGY's emphasis on repetition, continuity, and returning after interruption.",
+      metaDesc: "James Clear's work on identity built through repeated small actions provides modern context for the MyHGY™ Method's emphasis on continuity.",
       intro: [
         "James Clear is an author whose work focuses on how repeated behavior, systems, environment, and identity interact over time. His 2018 book Atomic Habits translated a large body of behavioral thinking into a practical framework built around a simple proposition: meaningful change often emerges from actions small enough to repeat consistently.",
         "The importance of Clear's contribution is larger than the observation that small actions matter. His work provides an operating language for turning intention into repeated behavior — and for understanding why change that appears insignificant on a single day can become consequential when accumulated over time.",
@@ -246,6 +255,7 @@ export function useHallOfFame() {
       role: 'Personal-development teacher and author',
       keyWork: 'Paradigms · repetition · A/B/C goals',
       previewDesc: "Proctor's work on paradigms and the knowing–doing gap — and its direct influence on the founder's development — forms part of the conceptual foundation for why MyHGY is built around continuous practice rather than singular insight.",
+      metaDesc: "Bob Proctor's work on paradigms and the knowing–doing gap — and his influence on the founder — explains why MyHGY is built around continuous practice.",
       intro: [
         "Bob Proctor spent decades teaching a model of personal development centered on paradigms — deeply established patterns of thought and behavior that continue operating even after a person consciously decides they want something different.",
         "His work emphasized a problem that is easy to recognize: knowing something and living it are different achievements. A person can understand an idea intellectually and still continue behaving according to patterns established long before the new understanding arrived.",

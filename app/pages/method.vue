@@ -1,7 +1,17 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'The MyHGY™ Method — HaveAGreatYesterday.com',
-  description: 'A recurring practice for returning to what is actually true, identifying what you can still do, acting on it, and building visible progress. The complete MyHGY™ Method.',
+  description: 'A recurring practice for returning to what is true, finding what you can still do, acting on it, and building visible evidence of progress over time.',
+  path: '/method',
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'The MyHGY™ Method — HaveAGreatYesterday.com',
+  url: `${siteUrl}/method`,
+  description: 'A recurring practice for returning to what is true, finding what you can still do, acting on it, and building visible evidence of progress over time.',
 })
 
 const steps = [
@@ -287,9 +297,6 @@ const pillars = [
             Show me what I can do from here.
           </NuxtLink>
 
-          <p class="mfinal__secondary">
-            Or <NuxtLink to="/newsletter" class="mfinal__secondary-link">join the MyHGY™ email relationship</NuxtLink> — the founder's own practice, useful ideas about the method, and continued help without pressure and without a product pitch until you're ready.
-          </p>
 
         </div>
       </div>

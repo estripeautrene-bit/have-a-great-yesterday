@@ -117,9 +117,9 @@ function onDecline() {
   font-weight: var(--weight-semibold);
   border: none;
   cursor: pointer;
+  min-height: 44px;
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-full);
-  line-height: 1;
   transition:
     background var(--transition-fast),
     color var(--transition-fast),

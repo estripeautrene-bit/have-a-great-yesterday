@@ -192,6 +192,7 @@ onUnmounted(() => {
   text-decoration: none;
   letter-spacing: 0.01em;
   white-space: nowrap;
+  padding-block: var(--space-2);
   transition: color var(--transition-fast);
 }
 
@@ -211,7 +212,7 @@ onUnmounted(() => {
   font-size: 0.8125rem; /* 13px */
   font-weight: var(--weight-semibold);
   text-decoration: none;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-full);
   white-space: nowrap;
   transition: background var(--transition-fast), color var(--transition-fast);

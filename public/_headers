@@ -1,0 +1,41 @@
+# Cloudflare Pages security headers — applied to every response.
+#
+# WHY 'unsafe-inline' IN script-src:
+#   Nuxt 4 injects two inline scripts that cannot be hash-allowlisted in a
+#   static build: (1) <script type="importmap"> for the module entry point,
+#   and (2) <script>window.__NUXT__={…}</script> whose content includes a
+#   build-specific UUID that changes on every deploy.  Nonces require a
+#   server rendering request per page load; this site is static.  The
+#   trade-off is accepted deliberately: 'unsafe-inline' weakens script
+#   injection protection but all other directives remain tight.
+#
+# WHY 'unsafe-inline' IN style-src:
+#   Vue 3 scoped component CSS is SSR-injected as inline <style> blocks in
+#   the HTML document.  Vite/Nuxt does not extract them to external files
+#   in this build.
+#
+# WHEN POSTHOG GOES LIVE — add to connect-src:
+#   https://app.posthog.com
+#
+# WHEN EMAIL / SUPABASE GOES LIVE — audit and extend connect-src.
+#
+# TO TIGHTEN SCRIPT-SRC IN A FUTURE PHASE:
+#   Install nuxt-security or add a Cloudflare Worker that injects per-request
+#   nonces, then replace 'unsafe-inline' with 'nonce-{value}'.
+
+/*
+  # Prevent this site being embedded in an iframe on any other origin
+  X-Frame-Options: DENY
+
+  # Block MIME-type sniffing — serve files as declared, no browser guessing
+  X-Content-Type-Options: nosniff
+
+  # On cross-origin navigations send only the origin, not the full URL path
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Disable browser features the site does not use
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=(), browsing-topics=()
+
+  # Content Security Policy
+  # default-src 'none' means anything not explicitly listed below is blocked.
+  Content-Security-Policy: default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'none'; object-src 'none'

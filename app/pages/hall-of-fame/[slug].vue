@@ -9,9 +9,25 @@ if (!entry) {
   throw createError({ statusCode: 404, statusMessage: 'Hall of Fame entry not found' })
 }
 
-useSeoMeta({
-  title: `${entry.name} — Hall of Fame | HaveAGreatYesterday.com`,
-  description: entry.previewDesc,
+usePageSeo({
+  title: `${entry.name} — Hall of Fame — HaveAGreatYesterday.com`,
+  description: entry.metaDesc ?? entry.previewDesc,
+  path: route.path,
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: `${entry.name} — Hall of Fame — HaveAGreatYesterday.com`,
+  url: `${siteUrl}${route.path}`,
+  description: entry.metaDesc ?? entry.previewDesc,
+  mainEntity: {
+    '@type': 'Person',
+    name: entry.name,
+    jobTitle: entry.role,
+    description: entry.metaDesc ?? entry.previewDesc,
+  },
 })
 
 const currentIndex = entries.findIndex(e => e.slug === slug)
@@ -86,6 +102,14 @@ const nextEntry = currentIndex < entries.length - 1 ? entries[currentIndex + 1] 
             class="hofe__conn-p"
           >{{ p }}</p>
 
+          <NuxtLink
+            v-if="entry.seeAlso"
+            :to="entry.seeAlso.path"
+            class="hofe__conn-see-also"
+          >
+            {{ entry.seeAlso.label }} →
+          </NuxtLink>
+
         </div>
       </div>
     </section>
@@ -96,7 +120,7 @@ const nextEntry = currentIndex < entries.length - 1 ? entries[currentIndex + 1] 
         <div class="hofe__foot-inner">
 
           <p class="hofe__disclaimer">
-            {{ entry.disclaimer ?? `${entry.name} is cited here solely for his published intellectual contributions. HaveAGreatYesterday.com and the MyHGY™ Method are not affiliated with, sponsored by, or endorsed by ${entry.name}. This recognition does not imply any relationship, collaboration, or endorsement.` }}
+            {{ entry.disclaimer ?? `${entry.name} is cited here solely for their published intellectual contributions. HaveAGreatYesterday.com and the MyHGY™ Method are not affiliated with, sponsored by, or endorsed by ${entry.name}. This recognition does not imply any relationship, collaboration, or endorsement.` }}
           </p>
 
           <nav class="hofe__nav" aria-label="Other Hall of Fame entries">
@@ -284,6 +308,22 @@ const nextEntry = currentIndex < entries.length - 1 ? entries[currentIndex + 1] 
 
 .hofe__conn-p:last-child {
   margin-bottom: 0;
+}
+
+.hofe__conn-see-also {
+  display: inline-block;
+  margin-top: var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-muted-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.hofe__conn-see-also:hover {
+  color: var(--color-ink);
 }
 
 /* ══════════════════════════════════════════════════════════════════════

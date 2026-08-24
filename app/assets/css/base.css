@@ -144,7 +144,7 @@ strong, b {
 
 /* Visible keyboard focus for all interactive elements */
 :focus-visible {
-  outline: 3px solid var(--color-sun);
+  outline: 3px solid var(--color-ink);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
@@ -167,26 +167,6 @@ strong, b {
 .skip-link:focus {
   top: var(--space-4);
 }
-
-/* Draft / placeholder copy — unmistakably non-final; remove when blueprint copy lands */
-.draft-copy {
-  background: rgba(244, 197, 66, 0.12);
-  border: 1px dashed rgba(244, 197, 66, 0.45);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-style: italic;
-  color: var(--color-muted-ink);
-  display: inline;
-}
-
-p.draft-copy,
-h1.draft-copy,
-h2.draft-copy,
-h3.draft-copy {
-  display: block;
-  padding: var(--space-3) var(--space-4);
-}
-
 
 /* Prevent anchor targets from scrolling under the fixed header */
 [id] {

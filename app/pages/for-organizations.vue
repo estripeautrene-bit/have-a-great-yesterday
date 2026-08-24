@@ -1,7 +1,17 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'For Organizations — HaveAGreatYesterday.com',
-  description: 'The MyHGY™ Method gives organizational learning investments a continuing practice — for learning transfer, repetition, application, preserved evidence, and visible evidence of application and progress over time.',
+  description: 'The MyHGY™ Method gives learning investments a continuing practice — for transfer, repetition, and visible evidence of application and progress.',
+  path: '/for-organizations',
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'For Organizations — HaveAGreatYesterday.com',
+  url: `${siteUrl}/for-organizations`,
+  description: 'The MyHGY™ Method gives learning investments a continuing practice — for transfer, repetition, and visible evidence of application and progress.',
 })
 
 const mechanisms = [

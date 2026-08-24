@@ -1,7 +1,17 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Hall of Fame — HaveAGreatYesterday.com',
-  description: 'The ideas behind the MyHGY™ Method grew from a long tradition of serious thinking about attention, self-image, agency, and what it means to remain a capable person in the face of difficulty.',
+  description: 'Thinkers whose work shaped the MyHGY™ Method — on self-image, agency, meaning, and what it means to remain a capable person through difficulty.',
+  path: '/hall-of-fame',
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Hall of Fame — HaveAGreatYesterday.com',
+  url: `${siteUrl}/hall-of-fame`,
+  description: 'Thinkers whose work shaped the MyHGY™ Method — on self-image, agency, meaning, and what it means to remain a capable person through difficulty.',
 })
 
 const { entries } = useHallOfFame()
@@ -59,7 +69,7 @@ const { entries } = useHallOfFame()
         <div class="hofp__cta-inner">
           <p class="hofp__cta-label">The method itself</p>
           <p class="hofp__cta-body">
-            The <InlineWordmark variant="light" /> Method is a structured daily practice for closing the day with evidence of what was good in it. Read about how it works.
+            The <InlineWordmark variant="light" /> Method is a structured daily practice for returning to what is actually true about your day — what you did, what you handled, what you brought to it, what was there alongside whatever was hard. Done consistently, it builds a visible record of action, capability, and progress that the mind would otherwise lose. Read about how it works.
           </p>
           <NuxtLink to="/method" class="hofp__cta-link">
             Learn about the MyHGY™ Method →

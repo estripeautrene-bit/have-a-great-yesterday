@@ -1,7 +1,21 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Our Story — HaveAGreatYesterday.com',
   description: 'How René Estripeaut built the MyHGY™ Method — a personal practice of evidence, continuity, and visible progress that became a methodology.',
+  path: '/our-story',
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Our Story — HaveAGreatYesterday.com',
+  url: `${siteUrl}/our-story`,
+  description: 'How René Estripeaut built the MyHGY™ Method — a personal practice of evidence, continuity, and visible progress that became a methodology.',
+  author: {
+    '@type': 'Person',
+    name: 'René Estripeaut',
+  },
 })
 </script>
 

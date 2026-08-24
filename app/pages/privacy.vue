@@ -1,7 +1,9 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Privacy Policy — HaveAGreatYesterday.com',
-  description: 'How HaveAGreatYesterday.com handles your information.',
+  description: 'How HaveAGreatYesterday.com handles information about visitors.',
+  path: '/privacy',
+  robots: 'noindex',
 })
 </script>
 
@@ -12,109 +14,156 @@ useSeoMeta({
       <div class="container container--md">
         <p class="legal-eyebrow">Legal</p>
         <h1 id="privacy-heading" class="legal-heading">Privacy Policy</h1>
-        <p class="legal-meta">Effective date: <strong>[To be confirmed before launch]</strong></p>
+        <p class="legal-meta">Effective date: <strong>August 24, 2026</strong></p>
       </div>
     </section>
 
     <section class="legal-body section bg-paper">
       <div class="container container--md">
 
-        <p class="draft-copy">
-          DRAFT — This policy has not been reviewed by René or legal counsel.
-          Do not publish until reviewed and approved before launch.
-        </p>
-
         <div class="legal-content">
 
           <p>
-            This privacy policy explains how HaveAGreatYesterday.com ("we," "us," "the site")
-            handles information about visitors and email subscribers. We operate an editorial
-            website. We are not a SaaS product, marketplace, or app. Our data footprint is small
-            by design.
+            HaveAGreatYesterday.com ("we," "us," "the site") is an editorial website about the
+            MyHGY™ Method. We do not run a store, a subscription product, or a user-account
+            system. Our data footprint today is small by design — we do not collect personal
+            information from visitors through any form or sign-up flow on this site.
           </p>
 
-          <h2>What we collect</h2>
+          <!-- ─── SECTION 1: What we collect today ──────────────────────── -->
+          <h2>What we collect today</h2>
 
-          <h3>Email address</h3>
+          <h3>Hosting logs — Cloudflare Pages</h3>
           <p>
-            If you choose to join the email list, we collect your email address. Signing up is
-            entirely voluntary. We do not require an account to read the site.
+            The site is hosted on Cloudflare Pages. Cloudflare automatically logs standard
+            HTTP request metadata — including IP address, request path, HTTP method, timestamp,
+            and browser user-agent string — for network security and CDN performance. This
+            processing is governed by Cloudflare's own privacy policy. We do not have real-time
+            access to raw Cloudflare request logs under the standard Cloudflare Pages plan.
           </p>
 
-          <h3>Usage data</h3>
+          <h3>Fonts</h3>
           <p>
-            We use PostHog for analytics. PostHog may collect your IP address, browser type,
-            pages visited, and time spent on pages to help us understand how the site is used.
-            This data is aggregated and is not used to identify you personally. You can review
-            PostHog's own privacy policy at posthog.com.
+            Typefaces (Manrope, Inter, Playfair Display) are served directly from this site.
+            No font requests are made to Google or any external service.
           </p>
 
-          <h3>What we do not collect</h3>
+          <h3>Consent preference — browser localStorage</h3>
           <p>
-            We do not collect names, phone numbers, payment information, health data, or any
-            sensitive personal information. We do not run advertising networks or sell data.
+            When you make a choice on the analytics consent banner, we store that choice
+            (<code>accepted</code> or <code>declined</code>) in your browser's localStorage
+            under the key <code>hgy-cookie-consent</code>. This value stays on your device;
+            it is not transmitted to our servers. Clearing your browser's localStorage
+            removes it.
           </p>
 
-          <h2>How we use your email address</h2>
+          <!-- ─── SECTION 2: Analytics (PostHog) ────────────────────────── -->
+          <h2>Analytics — PostHog</h2>
+
           <p>
-            We use email addresses solely to send editorial content: the founder's practice
-            notes, method updates, and ideas related to the MyHGY™ Method. We do not send
-            promotional email on behalf of third parties.
+            We plan to use <strong>PostHog</strong> for product analytics — to understand which
+            content helps, how visitors move through the site, and what doesn't land. The
+            consent infrastructure is already in place: a banner appears on first visit asking
+            whether you accept or decline analytics. Your choice is stored locally as described
+            above.
           </p>
 
-          <h2>Third-party services</h2>
           <p>
-            We use the following third-party services that may process data on our behalf:
+            PostHog is not currently active. The PostHog SDK is not installed and no API key
+            is configured. No analytics data is collected at this time. When PostHog is enabled,
+            this section will be updated to describe exactly what it collects and how your
+            consent preference controls its behavior.
           </p>
+
+          <p>
+            When PostHog is enabled, it will collect data only from visitors who have accepted
+            analytics. Visitors who decline will not be tracked. PostHog, Inc. operates the
+            service. You can review PostHog's privacy policy at posthog.com/privacy.
+          </p>
+
+          <!-- ─── SECTION 3: What we do not collect ─────────────────────── -->
+          <h2>What we do not collect</h2>
+          <p>We do not collect:</p>
           <ul>
-            <li><strong>Email service provider</strong> — [provider name to be confirmed before launch] stores and delivers emails to subscribers.</li>
-            <li><strong>PostHog</strong> — analytics and product analytics. Data is processed per PostHog's data processing agreement.</li>
-            <li><strong>Cloudflare Pages</strong> — our hosting provider. Cloudflare may log standard HTTP request metadata (IP, request path, timestamp) for security and performance purposes.</li>
+            <li>Email addresses — there is no sign-up form on the site today.</li>
+            <li>Names, phone numbers, or postal addresses.</li>
+            <li>Payment information.</li>
+            <li>Health data or sensitive personal information.</li>
+            <li>Personally identifiable information through cookies or tracking pixels.</li>
           </ul>
           <p>
-            We do not share your email address with any other third party.
+            We do not run advertising networks. We do not sell, rent, or share visitor data
+            with third parties for commercial purposes.
           </p>
 
-          <h2>Data retention</h2>
+          <!-- ─── SECTION 4: [RESERVED] Email capture ───────────────────── -->
+          <h2>Email list</h2>
+
           <p>
-            We retain email addresses for as long as you remain subscribed. If you unsubscribe,
-            your address is removed from active lists. Residual data in backup systems is
-            purged on the schedule of our email provider.
+            This site does not currently collect email addresses. There is no sign-up form or
+            email capture flow active on this site. If that changes, this section will be updated
+            to describe what we collect, how we use it, which provider delivers messages, how
+            you can unsubscribe, and how long we retain your address.
           </p>
 
-          <h2>Your rights</h2>
+          <!-- ─── SECTION 5: [RESERVED] Personalized responses, Supabase, Resend ── -->
+          <h2>Personalized responses</h2>
+
           <p>
-            You may at any time:
+            This site does not currently offer personalized written responses. No personal
+            information is submitted or stored through this feature at this time. If this
+            changes, this section will be updated to describe what information is submitted,
+            how it is processed, how long it is stored, and which providers handle it.
           </p>
+
+          <!-- ─── SECTION 6: Third-party services currently in use ─────── -->
+          <h2>Third-party services currently in use</h2>
           <ul>
-            <li>Unsubscribe from the email list using the link at the bottom of any email.</li>
-            <li>Request a copy of any personal data we hold about you.</li>
-            <li>Request deletion of your data.</li>
+            <li>
+              <strong>Cloudflare Pages</strong> — hosting and CDN. Processes standard HTTP
+              request metadata for security and performance.
+            </li>
           </ul>
           <p>
-            To exercise any of these rights, contact us at
-            <strong>[contact email — confirm before launch]</strong>.
-            We will respond within 30 days.
+            No other third-party services receive visitor data at this time.
           </p>
 
+          <!-- ─── SECTION 7: Children ────────────────────────────────────── -->
           <h2>Children</h2>
           <p>
-            This site is not directed at children under 13. We do not knowingly collect
-            information from anyone under 13. If you believe a child has provided us with
-            an email address, please contact us and we will delete it promptly.
+            This site is not directed at children under 13. We do not knowingly collect any
+            information from anyone under 13. If you believe a child has submitted personal
+            information to us, please contact us and we will delete it promptly.
           </p>
 
+          <!-- ─── SECTION 8: Your rights ────────────────────────────────── -->
+          <h2>Your rights</h2>
+          <p>
+            Because we do not collect personal information from visitors today, there is
+            currently no personal data held by us to access, correct, or delete. If that
+            changes when future features go live, this section will be updated with specific
+            instructions for exercising your rights.
+          </p>
+          <p>
+            You can remove your consent preference at any time by clearing localStorage in
+            your browser.
+          </p>
+
+          <!-- ─── SECTION 9: Changes ─────────────────────────────────────── -->
           <h2>Changes to this policy</h2>
           <p>
-            If we make material changes to this policy, we will update the effective date at
-            the top of this page. Continued use of the site after changes constitutes
-            acceptance of the updated policy.
+            When we add new features — such as email capture, PostHog analytics, or
+            personalized responses — we will update this policy to reflect what data is
+            collected and how it is handled. Material changes will be reflected in an updated
+            effective date at the top of this page.
           </p>
 
+          <!-- ─── SECTION 10: Contact ────────────────────────────────────── -->
           <h2>Contact</h2>
           <p>
-            Questions about this policy can be sent to
-            <strong>[contact email — confirm before launch]</strong>.
+            Questions about this policy can be directed to
+            <strong>contact@myhgy.com</strong>.
+            We will respond within 30 days.
           </p>
 
         </div>
@@ -171,6 +220,10 @@ useSeoMeta({
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-stone);
   margin-top: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .legal-content h3 {
@@ -189,10 +242,19 @@ useSeoMeta({
   color: var(--color-ink);
 }
 
+.legal-content code {
+  font-family: monospace;
+  font-size: 0.875em;
+  background: var(--color-stone);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
 .legal-content ul {
   padding-left: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
+
 </style>

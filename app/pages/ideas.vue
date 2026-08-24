@@ -1,7 +1,17 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Ideas — HaveAGreatYesterday.com',
-  description: 'Articles, essays, and applied thinking about the MyHGY™ Method — written for people navigating difficult days and building visible progress on ordinary ones.',
+  description: 'Articles and applied thinking on the MyHGY™ Method — written for people navigating difficult days and building visible progress on ordinary ones.',
+  path: '/ideas',
+})
+
+const { public: { siteUrl } } = useRuntimeConfig()
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Ideas — HaveAGreatYesterday.com',
+  url: `${siteUrl}/ideas`,
+  description: 'Articles and applied thinking on the MyHGY™ Method — written for people navigating difficult days and building visible progress on ordinary ones.',
 })
 
 type Lane = 'green' | 'sun' | 'muted'

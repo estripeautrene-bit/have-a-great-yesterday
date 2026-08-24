@@ -1,7 +1,9 @@
 <script setup lang="ts">
-useSeoMeta({
+usePageSeo({
   title: 'Terms of Service — HaveAGreatYesterday.com',
   description: 'Terms governing your use of HaveAGreatYesterday.com.',
+  path: '/terms',
+  robots: 'noindex',
 })
 </script>
 
@@ -12,17 +14,12 @@ useSeoMeta({
       <div class="container container--md">
         <p class="legal-eyebrow">Legal</p>
         <h1 id="terms-heading" class="legal-heading">Terms of Service</h1>
-        <p class="legal-meta">Effective date: <strong>[To be confirmed before launch]</strong></p>
+        <p class="legal-meta">Effective date: <strong>August 24, 2026</strong></p>
       </div>
     </section>
 
     <section class="legal-body section bg-paper">
       <div class="container container--md">
-
-        <p class="draft-copy">
-          DRAFT — These terms have not been reviewed by René or legal counsel.
-          Do not publish until reviewed and approved before launch.
-        </p>
 
         <div class="legal-content">
 
@@ -113,14 +110,14 @@ useSeoMeta({
           <h2>Governing law</h2>
           <p>
             These terms are governed by the laws of
-            <strong>[Jurisdiction — confirm before launch]</strong>,
+            <strong>Wyoming, United States</strong>,
             without regard to conflict-of-law principles.
           </p>
 
           <h2>Contact</h2>
           <p>
             Questions about these terms can be sent to
-            <strong>[contact email — confirm before launch]</strong>.
+            <strong>contact@myhgy.com</strong>.
           </p>
 
         </div>

@@ -61,13 +61,12 @@ const year = new Date().getFullYear()
         </div>
       </div>
 
-      <!-- PLACEHOLDER — attribution wording requires pre-publication editorial/legal review.
-           The Lior Weinstein / Dan Sullivan attribution must be verified with the whole
-           site in view before launch. Do not finalize this text early. -->
       <p class="footer__attribution">
-        The <InlineWordmark variant="dark" /> Method draws on concepts from the work of
-        <strong>Dan Sullivan</strong> and <strong>Lior Weinstein</strong>.
-        HaveAGreatYesterday.com is not affiliated with or endorsed by either individual.
+        The "Have a Great Yesterday" idea has a history. <strong>Dan Sullivan</strong> has
+        publicly credited <strong>Lior Weinstein</strong> with the original insight, and
+        Sullivan has developed and shared the idea through his own work. Their contributions
+        are acknowledged on this site. <InlineWordmark variant="dark" />™ is an independently
+        developed methodology and is not affiliated with or endorsed by either individual.
       </p>
 
       <!-- Bottom bar -->
@@ -183,18 +182,6 @@ const year = new Date().getFullYear()
   padding-block: var(--space-6);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   max-width: 68ch;
-}
-
-.footer__attribution::before {
-  content: 'DRAFT — pre-publication review';
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.625rem;
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(244, 197, 66, 0.45);
-  margin-bottom: var(--space-2);
 }
 
 .footer__attribution strong {
