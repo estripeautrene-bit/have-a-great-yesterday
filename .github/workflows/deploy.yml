@@ -29,6 +29,7 @@ jobs:
         run: npx nuxi generate --no-fork
         env:
           NUXT_PUBLIC_SITE_URL: https://haveagreatyesterday.com
+          NUXT_PUBLIC_POSTHOG_KEY: ${{ secrets.NUXT_PUBLIC_POSTHOG_KEY }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .output/public
