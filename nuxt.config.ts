@@ -32,7 +32,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogKey: '',
-      posthogHost: 'https://app.posthog.com',
+      posthogHost: 'https://us.i.posthog.com',
       siteUrl: 'http://localhost:3000',
     },
   },

@@ -19,7 +19,12 @@ export function useCookieConsent() {
     choice.value = 'accepted'
     localStorage.setItem(STORAGE_KEY, 'accepted')
     // Triggers PostHog init via the analytics plugin (no-ops while key is empty)
-    useNuxtApp().$initAnalytics()
+    const app = useNuxtApp()
+    app.$initAnalytics()
+    // Capture consent event now that PostHog is initialised
+    if (app.$posthog.__loaded) {
+      app.$posthog.capture('cookie_consent_accepted')
+    }
   }
 
   function decline() {
