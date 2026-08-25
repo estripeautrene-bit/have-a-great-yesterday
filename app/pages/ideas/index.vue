@@ -14,65 +14,7 @@ useJsonLd({
   description: 'Articles and applied thinking on the MyHGY™ Method — written for people navigating difficult days and building visible progress on ordinary ones.',
 })
 
-type Lane = 'green' | 'sun' | 'muted'
-
-interface Article {
-  lane: string
-  color: Lane
-  title: string
-  excerpt: string
-}
-
-const articles: Article[] = [
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'Why insight fades',
-    excerpt: 'Why an idea can feel life-changing on Sunday and disappear by Wednesday — and what it takes to make it stick.',
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: "The raw material you're already sitting on",
-    excerpt: 'The wins that happen to you every single day, and why most people never learn to use them.',
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'Why three is the number',
-    excerpt: "The floor behind the MyHGY practice, and why fewer than three a day isn't enough for the mechanism to work.",
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'Confidence comes from evidence',
-    excerpt: 'Why real self-confidence has to be built on a record, not a mood or a pep talk.',
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'The wish-to-goal gap',
-    excerpt: "What actually separates something you want from something you go get — and why it isn't ambition.",
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'Earned anticipation',
-    excerpt: "The feeling that shows up before a good result arrives, and why it only exists once you've put in the work.",
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'The power of returning',
-    excerpt: "Why missing a day doesn't break the practice, and why the return is the practice.",
-  },
-  {
-    lane: 'Method',
-    color: 'sun',
-    title: 'What CAS actually builds',
-    excerpt: 'Clarity, Accuracy, Self-Confidence — and how each one shows up in real decisions, not just theory.',
-  },
-]
+const { articles } = useIdeasArticles()
 </script>
 
 <template>
@@ -97,24 +39,22 @@ const articles: Article[] = [
     <section class="idg section--lg bg-stone" aria-label="Article index">
       <div class="container">
 
-        <p class="idg__notice">
-          This library is being built. The articles below are confirmed topics currently in progress.
-        </p>
-
         <div class="idg__grid">
           <article
-            v-for="(article, i) in articles"
-            :key="i"
+            v-for="article in articles"
+            :key="article.slug"
             class="idcard"
             :class="`idcard--${article.color}`"
           >
             <div class="idcard__meta">
               <span class="idcard__lane">{{ article.lane }}</span>
-              <span class="idcard__status">Coming soon</span>
+              <span class="idcard__read-time">{{ article.readTime }}</span>
             </div>
             <h2 class="idcard__title">{{ article.title }}</h2>
             <p class="idcard__excerpt">{{ article.excerpt }}</p>
-            <span class="idcard__placeholder" aria-hidden="true">Article in progress →</span>
+            <NuxtLink :to="`/ideas/${article.slug}`" class="idcard__link">
+              Read article →
+            </NuxtLink>
           </article>
         </div>
 
@@ -193,14 +133,6 @@ const articles: Article[] = [
    2. ARTICLE GRID
    ══════════════════════════════════════════════════════════════════════ */
 
-.idg__notice {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--color-muted-ink);
-  font-style: italic;
-  margin-bottom: var(--space-10);
-}
-
 .idg__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -248,17 +180,11 @@ const articles: Article[] = [
 .idcard--sun   .idcard__lane { color: var(--color-ink); }
 .idcard--muted .idcard__lane { color: var(--color-muted-ink); }
 
-.idcard__status {
+.idcard__read-time {
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
   color: var(--color-muted-ink);
-  background: transparent;
-  border: 1px solid var(--color-stone);
-  border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-3);
   white-space: nowrap;
-  letter-spacing: 0.04em;
 }
 
 .idcard__title {
@@ -277,14 +203,21 @@ const articles: Article[] = [
   color: var(--color-ink);
 }
 
-.idcard__placeholder {
+.idcard__link {
   font-family: var(--font-body);
   font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-muted-ink);
-  opacity: 0.5;
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-sun);
+  padding-bottom: 1px;
+  align-self: flex-start;
   margin-top: var(--space-2);
-  cursor: default;
+  transition: color var(--transition-fast);
+}
+
+.idcard__link:hover {
+  color: var(--color-muted-ink);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
