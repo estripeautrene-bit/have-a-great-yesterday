@@ -1,3 +1,13 @@
+<script setup lang="ts">
+const { $posthog } = useNuxtApp()
+
+function trackMyDopaInvitation() {
+  if ($posthog.__loaded) {
+    $posthog.capture('mydopa_invitation_clicked', { source: 'home_bridge' })
+  }
+}
+</script>
+
 <template>
   <section class="bridge section bg-ink" aria-labelledby="bridge-heading">
     <div class="container">
@@ -11,15 +21,19 @@
         </div>
 
         <h2 id="bridge-heading" class="bridge__heading">
-          A manual practice can work. And it has natural limits.
+          The notebook is where the practice starts.
         </h2>
 
         <p class="bridge__body">
-          Everything in the <InlineWordmark variant="dark" /> Method can be practiced without software. That independence is intentional. If the practice only works after purchasing a product, it is not a methodology — it is marketing.
+          Every entry, every day, at least three — that's what builds Clarity, Accuracy, and Self-Confidence. That part never changes, and it works with nothing more than a notebook.
         </p>
 
         <p class="bridge__body bridge__product">
-          <InlineMyDopa /> is the purpose-built equipment for the practice. <strong>MyToday</strong> captures meaningful moments while life is happening. <strong>MyYesterday</strong> helps you understand what the accumulated evidence means. <strong>MyProgress</strong> makes continuity and accumulation visible.
+          As the practice grows, so does the record. <InlineMyDopa /> provides visibility and continuity to your process.
+        </p>
+
+        <p class="bridge__body">
+          MyHGY teaches the practice. <InlineMyDopa /> provides the equipment.
         </p>
 
         <a
@@ -27,8 +41,9 @@
           class="bridge__cta"
           target="_blank"
           rel="noopener noreferrer"
+          @click="trackMyDopaInvitation"
         >
-          Request a MyDopa invitation →
+          Meet MyDopa →
         </a>
 
         <p class="bridge__note">

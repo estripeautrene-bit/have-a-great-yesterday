@@ -28,10 +28,10 @@ useJsonLd({
         <div class="osh__inner">
           <p class="osh__eyebrow">Our Story</p>
           <h1 id="os-heading" class="osh__heading">
-            Where this came from.
+            I thought I had a discipline problem for most of my life.
           </h1>
           <p class="osh__deck">
-            A practice drawn from time-tested ideas and developed through firsthand experience.
+            Then I started keeping track of what I was actually doing, and the story I'd told myself for decades began to fall apart. That experience became MyHGY.
           </p>
         </div>
       </div>
@@ -48,73 +48,43 @@ useJsonLd({
             <p class="osn__byline">By René Estripeaut</p>
 
             <p class="osn__body">
-              Years ago, <em>The Power of Now</em> helped me see the difference between what is happening in the present and the story my mind creates about it. Later, Quantum Growth—a nine-month mindset course led by Lue Araujo through Boost Your Mind and based on the Bob Proctor and Sandra Gallagher framework—helped me understand how repetition can reinforce patterns in the subconscious and influence what I came to think of as my personal frequency: the state from which I think, feel, and act.
+              I knew how I saw myself. I had a simple explanation for a lot of my life. I was creative. I was good at spotting opportunities. I was good at getting excited. Structure was harder. Consistency was harder. Following a plan was harder. I had enough history to make that story believable, so I believed it.
             </p>
             <p class="osn__body">
-              I started putting those ideas into practice in two simple ways. Every morning, while having coffee, I wrote ten things I was grateful for. Every night, I recorded at least three good things that had happened.
+              The problem with a story you've told yourself for years is that you stop checking whether it's still true.
             </p>
             <p class="osn__body">
-              The morning practice helped me begin with gratitude. The nighttime practice helped me close the day on a positive note.
+              Somewhere in that process, I learned something that changed everything: your subconscious doesn't evaluate whether a belief is true. It accepts whatever gets repeated into it, over and over, until repetition alone makes it feel like fact.
             </p>
             <p class="osn__body">
-              They became the bookends of my day.
+              That's exactly how "I have no structure" became true for me. Not because it was — because I said it to myself, one way or another, for fifty years. Nobody sat me down and installed that belief. I installed it myself, by accident, through pure repetition.
             </p>
             <p class="osn__body">
-              What was missing was the middle.
+              Once I saw that, I saw the opening. If repetition builds a belief by accident, it can build one on purpose.
             </p>
             <p class="osn__body">
-              Good things were happening throughout the day: an unexpected hug, a smile from one of my daughters, a lead calling back, a productive conversation, a moment when I handled something well. Each one could elevate how I felt right then, while I was living my life.
+              I started carrying a notebook every day. I began committed to finding at least three real instances of good every single day, and writing them down. My boss stopping me in the hallway to say I'd done great work. A client calling to say he wanted to bring me more business. One of my daughters looking me dead in the eyes and smiling at me for no reason at all.
             </p>
             <p class="osn__body">
-              Most of them disappeared before nighttime.
+              The more I looked, the more I noticed how many good things were actually happening. The more I wrote them down, the more I could feel my subconscious handing me back a different, more positive reality.
             </p>
             <p class="osn__body">
-              I realized that these moments could do much more if I captured them in real time, while they were still alive. A more accurate picture of my life would require making this a consistent practice: notice the good, capture it, and allow it to register.
+              My behavior started changing before my self-image did. I stopped drinking. That took repetition. I trained for a half marathon. That took repetition. I read 27 books in eight months, after fifty years of believing I couldn't sit still long enough to finish one. I rode a three-day off-road rally across Panama — preparation, follow-through, repetition.
             </p>
             <p class="osn__body">
-              I came to believe that anchoring the good through consistent conscious effort could help impress a fuller and more accurate record of my life upon my subconscious. That was the practice I had been missing.
+              And somewhere in the middle of doing all of it, I noticed something: I wasn't chasing these things out of desperation. I was going after them with Clarity about where I stood, Accuracy about what was actually true, and Self-Confidence built from a growing pile of evidence I could see with my own eyes.
             </p>
             <p class="osn__body">
-              As artificial intelligence began changing the world of work, I took an AI course to learn how it could support my finance business. That experience gave me the confidence to approach Claude Code with an idea.
+              Confidence comes from evidence. The more evidence I had, the less I needed to give myself a speech.
             </p>
             <p class="osn__body">
-              I built the MVP of <InlineMyDopa /> to make one essential personal-development practice possible throughout the day: capture each good thing as it happens, preserve it, and create a continuous record of the reality I was actually living.
+              I became my own turnaround case. I don't mean I reached some perfect, finished version of myself. I mean the evidence changed enough that I could no longer describe myself the way I had for decades. That mattered to me — and I wanted to understand why.
             </p>
             <p class="osn__body">
-              <InlineMyDopa /> turns those captures into something more useful than disconnected notes in a notebook. As they accumulate, AI can organize the evidence and develop a clearer understanding of how we are living, responding, and progressing.
+              MyHGY is the system that came out of that search. We're documenting the ideas that shaped it, the research on the parts we can study, and the practices that helped — including the tool we're building to make it easier: MyDopa.
             </p>
             <p class="osn__body">
-              <InlineMyProgress /> makes that evidence visible. We already use scorecards to understand our money, health, sleep, and exercise. Strava shows us that one run belongs to a larger journey. A banking app turns hundreds of transactions into a clear financial picture. <InlineMyProgress /> does something similar for personal development: it turns everyday actions and moments into a visible record of our progress as people.
-            </p>
-            <p class="osn__body">
-              While I was already developing <InlineMyDopa />, I heard a podcast story about a father who believed his job was to help his children collect great days—and therefore great yesterdays. The story reinforced my conviction that consciously preserving the good in our lives can change how we experience the present and approach the future.
-            </p>
-            <p class="osn__body">
-              I immediately recognized the connection. Someone else understood the value of collecting what is good today, carrying it forward, and using a stronger past to approach the future.
-            </p>
-            <p class="osn__body">
-              <InlineMyDopa /> became the tool for practicing the missing middle.
-            </p>
-            <p class="osn__body">
-              As I kept practicing, the idea expanded beyond capturing good moments. It became a way of returning to present reality, identifying what remained within my control, choosing meaningful direction, taking constructive action, continuing after interruption, preserving lived evidence, and making progress visible over time.
-            </p>
-            <p class="osn__body">
-              The complete practice became the <InlineWordmark variant="light" /> Method.
-            </p>
-            <p class="osn__body">
-              In my own life, these practices have helped me feel calmer, sleep better, strengthen my relationships, work more productively, follow through more consistently, and get more meaningful things done. Consistent practice has helped me replace distorted stories with visible evidence of what is actually happening and what I am capable of doing.
-            </p>
-            <p class="osn__body">
-              That is the deeper return: greater accuracy about my life, greater clarity about what to do next, and greater self-confidence built from evidence I can see.
-            </p>
-            <p class="osn__body">
-              Inside organizations, the same problem appears after training, coaching, and leadership programs: people understand something valuable, then ordinary work resumes. <InlineWordmark variant="light" /> gives that learning a continuing practice—helping people return to what is real, act on what they can control, preserve evidence of application, and make progress visible over time.
-            </p>
-            <p class="osn__body">
-              Personal development becomes sustainable when it moves from something we occasionally understand to something we consistently practice.
-            </p>
-            <p class="osn__body">
-              I am still inside this practice.
+              You can try the practice yourself. You don't need to believe my story. Build your own evidence.
             </p>
 
             <p class="osn__signature">— René Estripeaut, founder</p>

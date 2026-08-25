@@ -1,3 +1,13 @@
+<script setup lang="ts">
+const { $posthog } = useNuxtApp()
+
+function trackHeroCta() {
+  if ($posthog.__loaded) {
+    $posthog.capture('primary_cta_clicked', { source: 'hero' })
+  }
+}
+</script>
+
 <template>
   <section class="hero bg-warm-paper" aria-labelledby="hero-headline">
     <div class="hero__inner container">
@@ -9,14 +19,18 @@
       </h1>
 
       <p class="hero__sub">
-        Your mind can take one difficult event and make it feel like the only thing that is true about your life. It is not.
+        Maybe you lost a job, or a relationship. Maybe the news was bad, or the year has been hard, or you just woke up feeling behind and unlike yourself.
       </p>
 
       <p class="hero__sub">
-        Tell us what you're going through. <InlineWordmark variant="light" /> will help you separate what actually happened from what it now feels like it means — and find what you can do from here.
+        Whatever brought you here, start where you actually are.
       </p>
 
-      <NuxtLink to="/what-are-you-going-through" class="hero__cta">
+      <p class="hero__sub">
+        MyHGY™ helps you separate what happened from what your mind is now telling you it means — and shows you one real thing you can do from here.
+      </p>
+
+      <NuxtLink to="/what-are-you-going-through" class="hero__cta" @click="trackHeroCta">
         Show me what I can do from here.
       </NuxtLink>
 

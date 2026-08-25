@@ -94,7 +94,7 @@ function onKeydown(e: KeyboardEvent) {
                 v-else
                 :to="item.href"
                 class="mobile-menu__link"
-              >{{ item.label }}</NuxtLink>
+              ><InlineMyDopa v-if="item.label === 'MyDopa'" /><template v-else>{{ item.label }}</template></NuxtLink>
             </li>
           </ul>
         </nav>

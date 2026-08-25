@@ -6,6 +6,20 @@ usePageSeo({
 })
 
 const { public: { siteUrl } } = useRuntimeConfig()
+
+const { $posthog } = useNuxtApp()
+
+function trackMethodCta(cta: string) {
+  if ($posthog.__loaded) {
+    $posthog.capture('method_cta_clicked', { cta })
+  }
+}
+
+function trackMyDopaInvitation() {
+  if ($posthog.__loaded) {
+    $posthog.capture('mydopa_invitation_clicked', { source: 'method_page' })
+  }
+}
 useJsonLd({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -36,9 +50,9 @@ const practiceSteps = [
 ]
 
 const pillars = [
-  { name: 'Clarity',         number: '01', desc: 'Understand where you actually are, what still matters, and where you can go from here.' },
-  { name: 'Accuracy',        number: '02', desc: 'See your situation through present facts and lived evidence — not through unlimited prediction or an old story about yourself.' },
-  { name: 'Self-Confidence', number: '03', desc: 'Build belief from visible evidence of your own action, capability, recovery, and progress — not from encouragement that has nothing underneath it.' },
+  { name: 'Clarity',         number: '01', desc: 'You know exactly where you stand, without the fog.' },
+  { name: 'Accuracy',        number: '02', desc: 'You\'re reading your life through what\'s actually true, not a mood or an old story.' },
+  { name: 'Self-Confidence', number: '03', desc: 'You believe the version of you the evidence has been building this whole time.' },
 ]
 </script>
 
@@ -51,18 +65,16 @@ const pillars = [
         <div class="mph__inner">
           <p class="mph__eyebrow">The Method</p>
           <h1 id="method-page-heading" class="mph__heading">
-            The <InlineWordmark variant="light" /> Method
+            Knowing what to do is only the beginning.
           </h1>
           <p class="mph__deck">
-            A recurring practice for returning to what is actually true, identifying what
-            you can still do, acting on it, and keeping the evidence so that progress
-            becomes visible — not only felt.
+            The hard part is remembering it, using it, and doing it enough for it to become part of your life. That is the job of the MyHGY™ Method. It turns personal development into something you can practice.
           </p>
           <p class="mph__sub">
             Not a checklist to complete once. A practice to return to.
           </p>
-          <NuxtLink to="/what-are-you-going-through" class="mph__cta">
-            Begin where you are →
+          <NuxtLink to="/what-are-you-going-through" class="mph__cta" @click="trackMethodCta('begin_where_you_are')">
+            Try the Method →
           </NuxtLink>
         </div>
       </div>
@@ -76,42 +88,12 @@ const pillars = [
           <div class="mth__accent" aria-hidden="true" />
 
           <h2 id="thesis-heading" class="mth__statement">
-            Personal development deserves a practice.
+            Insight fades the moment you stop repeating it.
           </h2>
 
           <div class="mth__body">
-            <p>The problem is not that people lack insight.</p>
-            <p>
-              Most people who are trying to grow have already encountered something useful.
-              They have read a book that landed. Heard an idea that changed how they saw
-              something. Finished a course, a session, a seminar, a conversation — and
-              understood, at least for a while, exactly how they wanted to live.
-            </p>
-            <p>The problem is that insight is episodic, while life is continuous.</p>
-            <p>
-              A book ends. A podcast finishes. A seminar sends everyone home. A coaching
-              session concludes. Then ordinary life resumes — the commute, the difficult
-              conversation, the distraction, the moment when the idea would have mattered
-              but had already faded back into the background.
-            </p>
-            <p>
-              Athletes do not show up for competition without having practiced. Musicians
-              do not perform without having rehearsed. A language is not learned by
-              listening to one podcast. In every domain where meaningful change is expected,
-              improvement comes through repeated practice — not through a single episode of
-              understanding, however powerful.
-            </p>
-            <p>
-              Personal development is frequently delivered differently. It is delivered in
-              episodes. The insight may be real. The question is what happens in the middle:
-              between the book and the next book, the session and the next session, the
-              moment of understanding and the moment it is most needed.
-            </p>
-            <p>That middle is where most personal development is either kept or lost.</p>
-            <p class="mth__closing">
-              <InlineWordmark variant="light" /> is not another source of insight.<br>
-              It is the continuity mechanism between insights.
-            </p>
+            <p>A book can hand you a real breakthrough. A coach can show you exactly what you're doing wrong. A podcast can hand you the one idea you needed. For a moment, it's real. Then life keeps moving, and if nothing repeats that insight into place, it's gone — absorbed for a day, then lost.</p>
+            <p>That's the actual gap. Not that the idea was wrong. That nothing turned it into a practice.</p>
             <blockquote class="mth__pull-quote">
               The only way to have a great yesterday is to be here today.
             </blockquote>
@@ -155,12 +137,10 @@ const pillars = [
         <div class="mprac__header">
           <p class="mprac__eyebrow">What the practice looks like</p>
           <h2 id="practice-heading" class="mprac__heading">
-            The practice is something you can begin today.
+            Buy one notebook. Use it every day.
           </h2>
           <p class="mprac__sub">
-            The <InlineWordmark variant="light" /> Method is not an app.
-            It is a repeatable structure for the ordinary days — one you can begin
-            manually, with whatever you have at hand.
+            Carry it with you, or use your phone. Every single day, find at least three real instances — things you did, things that happened to you, wins you'd normally let slide — and write them down.
           </p>
         </div>
 
@@ -177,7 +157,7 @@ const pillars = [
         </div>
 
         <blockquote class="mprac__pull-quote">
-          Continuity does not require perfection. When the practice breaks, return.
+          Missed a day? Come back and pick it up today. There's no streak to protect. The return is part of the practice.
         </blockquote>
 
       </div>
@@ -190,11 +170,10 @@ const pillars = [
         <div class="mdest__header">
           <p class="mdest__eyebrow">Where the work leads</p>
           <h2 id="destination-heading" class="mdest__heading">
-            This is where the work leads.
+            Clarity, Accuracy, and Self-Confidence.
           </h2>
           <p class="mdest__sub">
-            Success starts with awareness and focus, requires commitment, and is visible
-            when it becomes consistent.
+            CAS is what turns a wish into a goal, and a goal into a target. Without it, you're only dreaming. With it, you go looking for what's next.
           </p>
         </div>
 
@@ -219,36 +198,23 @@ const pillars = [
         <div class="mbridge__inner">
 
           <h2 id="bridge-heading" class="mbridge__heading">
-            A manual practice can work. And it has natural limits.
+            The notebook is where it starts.
           </h2>
 
           <p class="mbridge__body">
-            Everything in the <InlineWordmark variant="dark" /> Method can be practiced
-            without software. That independence is intentional. If the practice only works
-            after purchasing a product, it is not a methodology — it is marketing.
+            The practice works with nothing more than a notebook. That part never changes.
           </p>
 
           <p class="mbridge__body">
-            But a manual practice runs into real friction over time. Memory scatters.
-            Captured moments accumulate in places you cannot easily find. The context that
-            made a particular day meaningful is difficult to reconstruct weeks later.
-            Patterns that are forming across months are nearly impossible to see without a
-            way to look at the whole. And when continuity breaks — as it will — there is
-            no system that remembers where you were or helps you return.
+            As it grows, so does the record — and <InlineMyDopa /> provides visibility and continuity to your process, so what you've built keeps getting easier to see.
           </p>
 
           <p class="mbridge__body mbridge__product">
-            <InlineMyDopa /> is the purpose-built equipment for the practice.
-            <strong>MyToday</strong> captures meaningful moments while life is happening.
-            <strong>MyYesterday</strong> helps you understand what the accumulated evidence
-            means. <strong>MyProgress</strong> makes continuity and accumulation visible —
-            so that confidence is built on what you have actually lived, not on a feeling
-            that changes with every difficult morning.
+            Confidence comes from evidence.
           </p>
 
           <p class="mbridge__body">
-            <InlineMyDopa /> does not replace the practice. It removes the friction that causes the
-            practice to break.
+            MyHGY teaches the practice. <InlineMyDopa /> provides the equipment.
           </p>
 
           <p class="mbridge__supporting">
@@ -260,8 +226,9 @@ const pillars = [
             class="mbridge__cta"
             target="_blank"
             rel="noopener noreferrer"
+            @click="trackMyDopaInvitation"
           >
-            Request a MyDopa invitation →
+            Meet MyDopa →
           </a>
 
           <p class="mbridge__note">
@@ -293,7 +260,7 @@ const pillars = [
             what remains available to you, and what you can do from here.
           </p>
 
-          <NuxtLink to="/what-are-you-going-through" class="mfinal__cta">
+          <NuxtLink to="/what-are-you-going-through" class="mfinal__cta" @click="trackMethodCta('show_me_what_i_can_do')">
             Show me what I can do from here.
           </NuxtLink>
 

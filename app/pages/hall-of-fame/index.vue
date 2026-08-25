@@ -27,10 +27,10 @@ const { entries } = useHallOfFame()
         <div class="hofp__header">
           <p class="hofp__eyebrow">Hall of Fame</p>
           <h1 id="hofp-heading" class="hofp__heading">
-            This territory has a history.
+            We didn't get here alone.
           </h1>
           <p class="hofp__intro">
-            The ideas behind the <InlineWordmark variant="light" /> Method grew from a long tradition of serious thinking about attention, self-image, agency, evidence, and what it means to remain a capable person in the face of difficulty. The figures recognized here each contributed something precise and durable to this territory through their published work.
+            MyHGY™ sits inside a long line of people who studied presence, self-image, meaning, confidence, and human change. This is where we give credit, and show how their work connects to the practice.
           </p>
           <p class="hofp__sub">
             These are intellectual lineages, not affiliations. None of the individuals listed here are affiliated with or endorse HaveAGreatYesterday.com or the <InlineWordmark variant="light" :show-tm="false" /> Method.

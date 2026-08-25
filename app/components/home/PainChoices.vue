@@ -7,7 +7,7 @@ const choices = usePainChoices()
 
     <div class="container">
 
-      <h2 id="pain-prompt" class="pain-prompt">Tell us what you're going through</h2>
+      <h2 id="pain-prompt" class="pain-prompt">Tell us what you're going through.</h2>
 
       <p class="pain-note">
         The <InlineWordmark variant="light" /> Method is built for where you actually are.

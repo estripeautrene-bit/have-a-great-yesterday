@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { label: 'Hall of Fame',             href: '/hall-of-fame' },
   { label: 'Our Story',                href: '/our-story' },
   { label: 'For Organizations',        href: '/for-organizations' },
-  { label: 'MyDopa',                   href: 'https://mydopa.app', external: true },
+  { label: 'MyDopa',                   href: '/mydopa' },
 ]
 
 const route = useRoute()
@@ -68,7 +68,7 @@ onUnmounted(() => {
               :to="item.href"
               class="nav__link"
               :class="{ 'nav__link--active': route.path === item.href }"
-            >{{ item.label }}</NuxtLink>
+            ><InlineMyDopa v-if="item.label === 'MyDopa'" /><template v-else>{{ item.label }}</template></NuxtLink>
           </li>
         </ul>
 

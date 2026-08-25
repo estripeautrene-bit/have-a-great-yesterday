@@ -1,3 +1,13 @@
+<script setup lang="ts">
+const { $posthog } = useNuxtApp()
+
+function trackFinalCta() {
+  if ($posthog.__loaded) {
+    $posthog.capture('primary_cta_clicked', { source: 'home_final' })
+  }
+}
+</script>
+
 <template>
   <section class="final section--lg bg-warm-paper" aria-labelledby="final-heading">
     <div class="container">
@@ -7,18 +17,18 @@
         <p class="final__eyebrow">Ready when you are</p>
 
         <h2 id="final-heading" class="final__statement">
-          Whatever you are carrying right now —
+          Start with your actual life.
         </h2>
 
         <p class="final__body">
-          You do not need to have this figured out before you begin.
+          You don't need to understand the whole Method before you use it.
         </p>
 
         <p class="final__body">
-          The practice starts where you actually are. Tell us what you're going through. <InlineWordmark variant="light" /> will help you understand what is real, what remains available to you, and what you can do from here. The response is free, specific to your situation, and takes less than five minutes to begin.
+          Tell us what's happening in your life right now — work, family, money, a loss, a goal, something you're worried about, something you're trying to build. We'll help you apply the MyHGY practice to your situation and give you one place to start.
         </p>
 
-        <NuxtLink to="/what-are-you-going-through" class="final__cta">
+        <NuxtLink to="/what-are-you-going-through" class="final__cta" @click="trackFinalCta">
           Show me what I can do from here.
         </NuxtLink>
 

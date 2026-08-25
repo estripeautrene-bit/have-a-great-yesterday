@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const pillars = [
-  { name: 'Clarity', number: '01', desc: 'Understand where you actually are, what still matters, and where you can go from here.' },
-  { name: 'Accuracy', number: '02', desc: 'See your situation through present facts and lived evidence — not through unlimited prediction or an old story about yourself.' },
-  { name: 'Self-Confidence', number: '03', desc: 'Build belief from visible evidence of your own action, capability, recovery, and progress — not from encouragement that has nothing underneath it.' },
+  { name: 'Clarity', number: '01', desc: 'Knowing exactly where you stand, right now, without the fog.' },
+  { name: 'Accuracy', number: '02', desc: 'Reading your own life through what\'s actually true — through your own record — instead of a mood, a fear, or an old story about who you are.' },
+  { name: 'Self-Confidence', number: '03', desc: 'Finally trusting the version of you that the evidence has been proving, one entry at a time.' },
 ]
 </script>
 
@@ -12,10 +12,10 @@ const pillars = [
 
       <div class="triad__header">
         <h2 id="triad-heading" class="triad__heading">
-          This is where the work leads.
+          Clarity, Accuracy, and Self-Confidence — and going after what you actually want.
         </h2>
         <p class="triad__sub">
-          Success starts with awareness and focus, requires commitment, and is visible when it becomes consistent.
+          There's a difference between a wish and a goal, and most people never close the gap. CAS is what closes it.
         </p>
       </div>
 

@@ -6,6 +6,15 @@ usePageSeo({
 })
 
 const { public: { siteUrl } } = useRuntimeConfig()
+
+const { $posthog } = useNuxtApp()
+
+function trackPilotConversation() {
+  if ($posthog.__loaded) {
+    $posthog.capture('pilot_conversation_requested')
+  }
+}
+
 useJsonLd({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
@@ -205,6 +214,7 @@ const mechanisms = [
           <a
             href="mailto:organizations@haveagreatyesterday.com"
             class="foct__cta"
+            @click="trackPilotConversation"
           >
             Request a pilot conversation →
           </a>

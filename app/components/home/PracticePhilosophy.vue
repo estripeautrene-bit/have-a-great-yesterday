@@ -7,37 +7,27 @@
         <div class="philosophy__accent" aria-hidden="true" />
 
         <h2 id="philosophy-heading" class="philosophy__statement">
-          Personal development deserves a practice.
+          Personal development works like everything else you've ever gotten good at... PRACTICE
         </h2>
 
         <div class="philosophy__body">
           <p class="philosophy__para">
-            The problem is not that people lack insight.
+            Athletes train. Musicians rehearse. Students study. Pilots run checklists before every flight. Teams practice before the game.
           </p>
           <p class="philosophy__para">
-            Most people who are trying to grow have already encountered something useful. They have read a book that landed. Heard an idea that changed how they saw something. Finished a course, a session, a seminar, a conversation — and understood, at least for a while, exactly how they wanted to live.
+            You already know this is true in your own life, in the simplest ways. To become leaner, you take up an exercise routine. To become healthier, you start to eat better. To enhance your career, you get more prepared and certified. To become a better parent, you pay more attention and become more present.
           </p>
           <p class="philosophy__para">
-            The problem is that insight is episodic, while life is continuous.
+            Personal development works the same way. One lesson, one book, one great conversation can show you something true — but it only becomes part of you through a proven system, built by doing it again. And again — until it's no longer something you're choosing. It's something your subconscious has already accepted as true.
           </p>
           <p class="philosophy__para">
-            A book ends. A podcast finishes. A seminar sends everyone home. A coaching session concludes. Then ordinary life resumes — the commute, the difficult conversation, the distraction, the moment when the idea would have mattered but had already faded back into the background.
-          </p>
-          <p class="philosophy__para">
-            Athletes do not show up for competition without having practiced. Musicians do not perform without having rehearsed. A language is not learned by listening to one podcast. In every domain where meaningful change is expected, improvement comes through repeated practice — not through a single episode of understanding, however powerful.
-          </p>
-          <p class="philosophy__para">
-            Personal development is frequently delivered differently. It is delivered in episodes. The insight may be real. The question is what happens in the middle: between the book and the next book, the session and the next session, the moment of understanding and the moment it is most needed.
-          </p>
-          <p class="philosophy__para">
-            That middle is where most personal development is either kept or lost.
+            Here's the practice. Every day, life hands you real fuel — a win at work, a hard moment you got through, a look from someone who loves you. Carry a notebook, or use your phone. Every single day, find at least three real instances and write them down. Writing them down is what gets them into your subconscious. Do this without exception, and a record builds — one you can trust, because you wrote it while it was happening, not after your memory reshaped it.
           </p>
           <p class="philosophy__para philosophy__closing">
-            <InlineWordmark variant="light" /> is not another source of insight.<br>
-            It is the continuity mechanism between insights.
+            That record is where Clarity, Accuracy, and Self-Confidence come from.
           </p>
           <blockquote class="philosophy__pull-quote">
-            The only way to have a great yesterday is to be here today.
+            Personal development deserves a practice — the same way anything worth becoming great at deserves one.
           </blockquote>
         </div>
 

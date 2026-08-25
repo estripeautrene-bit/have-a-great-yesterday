@@ -8,17 +8,23 @@
         <div class="founder__text">
           <p class="founder__eyebrow">Our Story</p>
           <h2 id="founder-heading" class="founder__heading">
-            Where this came from.
+            I found the fuel in my own life. I just wasn't using it.
           </h2>
           <p class="founder__byline">By René Estripeaut</p>
           <p class="founder__body">
-            For most of my life, I did not trust myself to create structure. I could begin with energy and ideas, but I was insecure about my ability to stay with a process and finish what I started.
+            For most of my life I told myself the same story: I was talented, but I had no structure. School had been hard. Structure felt unnatural to me. I started things and didn't finish them, and over the years, "I don't stick with things" became part of how I saw myself. I believed it, because I had years of proof to back it up.
           </p>
           <p class="founder__body">
-            So I stopped trying to think my way forward and started doing. I built two small daily practices that became the bookends of my day. Each morning I wrote ten things I was grateful for. Each night I wrote down at least three good things that had actually happened: a confirmed deal, a real conversation, a moment with one of my daughters. The point was to preserve what actually occurred, so the day would not collapse into the mind's one-word verdict by evening.
+            Then I learned something that changed everything: your mind doesn't check whether a belief is true. It just accepts whatever you repeat into it, over and over, until repetition alone makes it feel like fact. That's exactly how "I have no structure" became true for me. Not because it was — because I said it to myself for fifty years.
           </p>
           <p class="founder__body">
-            I didn't want to carry a notebook all day, and my phone was already in my hand. So I started capturing moments the instant they happened, while the words and the feeling were still alive. What began as a way to stop forgetting became something else: an accumulating body of evidence that I was building, acting, connecting, recovering, and progressing — even on the days my mind was ready to call the whole thing ordinary or lost.
+            So I started carrying a notebook every day and using the small instances of magic that happened in my life. My boss stopping me in the hallway to say I'd done great work. A client calling to say he wanted to bring me more business. One of my daughters looking me dead in the eyes and smiling at me for no reason at all. I became committed to finding at least three of them every single day and writing them down. The more I looked, the more I noticed how many good things were actually happening that I'd been disregarding. And the more I wrote them down, the more I could feel my subconscious handing me back a different, more positive reality.
+          </p>
+          <p class="founder__body">
+            I stopped drinking. I trained for and finished a half marathon. I read 27 books in eight months, after fifty years of believing I couldn't sit still long enough to finish one. I rode a three-day off-road rally across Panama. And somewhere in the middle of doing all of it, I noticed something: I wasn't chasing these things out of desperation anymore. I was going after them with Clarity about where I stood, Accuracy about what was actually true, and Self-Confidence built from a growing pile of evidence I could see with my own eyes.
+          </p>
+          <p class="founder__body">
+            That's what MyHGY is. I found the fuel that was already in my life every day. I built a practice around catching it. And I want to hand you the same practice.
           </p>
           <NuxtLink to="/our-story" class="founder__link">Read our story →</NuxtLink>
         </div>

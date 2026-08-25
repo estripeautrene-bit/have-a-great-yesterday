@@ -22,7 +22,7 @@ export function useHallOfFame() {
       name: 'Dan Sullivan',
       role: 'Founder, Strategic Coach',
       keyWork: 'The Gap and the Gain (with Benjamin Hardy) · 10x Is Easier Than 2x (with Benjamin Hardy)',
-      previewDesc: "Sullivan's work on consciously collecting good days as a way to shape identity and future capability brought this territory to a wide audience.",
+      previewDesc: "The idea that a life built on great todays produces great yesterdays — and that the past is one of the best predictors of the future.",
       metaDesc: "Dan Sullivan and Dr. Benjamin Hardy address an important problem: people can make real progress and still fail to experience it because they lose sight of how far they have come. That insight strongly reinforces the territory MyHGY™ occupies.",
       intro: [
         "Dan Sullivan is the founder of Strategic Coach, an entrepreneurial coaching program that has run continuously since 1988. Over more than three decades of working directly with entrepreneurs, Sullivan developed a set of frameworks around the relationship between past experience, present identity, and future capability.",
@@ -56,7 +56,7 @@ export function useHallOfFame() {
       name: 'Eckhart Tolle',
       role: 'Author and teacher',
       keyWork: 'The Power of Now · A New Earth',
-      previewDesc: "His central distinction — between present lived reality and the mind's construction of what happened — is foundational to the method's insistence that a painful event and the story around it are not the same thing.",
+      previewDesc: "The distinction between the present moment and the mind's version of the past or future — the foundation of staying present enough to actually build a practice.",
       metaDesc: "Eckhart Tolle's distinction between a painful event and the story constructed around it underpins the MyHGY™ Method's view of difficult days.",
       intro: [
         "Eckhart Tolle is a contemporary spiritual author whose work centers on the distinction between direct present experience and the mind's narration of experience. His two most widely read books — The Power of Now (1997) and A New Earth (2005) — examine what happens when human beings live primarily inside their own mental commentary rather than in contact with what is actually occurring.",
@@ -89,7 +89,7 @@ export function useHallOfFame() {
       name: 'Maxwell Maltz',
       role: 'Plastic surgeon and author',
       keyWork: 'Psycho-Cybernetics (1960)',
-      previewDesc: "Maltz identified self-image as the governing mechanism of behavior — a model in which mistakes become correction information rather than permanent verdicts, and preserved evidence of past capability becomes usable material for future confidence.",
+      previewDesc: "Self-image, and the idea that evidence of past success becomes the material for future confidence.",
       metaDesc: "Maxwell Maltz's model of self-image as a feedback mechanism is the direct intellectual basis for the MyHGY™ Method's evidence practice.",
       intro: [
         "Maxwell Maltz was a plastic surgeon who noticed something unexpected in his practice: patients who underwent surgery to correct a physical flaw sometimes continued to feel disfigured despite the successful outcome. The problem was not the face. It was the internal picture the patient held of themselves. This observation led Maltz to develop a model of self-image as the governing mechanism of human behavior, published in 1960 as Psycho-Cybernetics.",
@@ -129,7 +129,7 @@ export function useHallOfFame() {
       name: 'Viktor Frankl',
       role: 'Psychiatrist and author',
       keyWork: "Man's Search for Meaning (1946) · Logotherapy",
-      previewDesc: "Frankl's work on agency, meaning, and the possibility of a constructive response even when circumstances cannot be changed is central to the method's position on what remains available to a person after a painful event.",
+      previewDesc: "Meaning, responsibility, and the ability to choose a constructive response even when circumstances can't be changed.",
       metaDesc: "Viktor Frankl's work on what remains available after extremity grounds the MyHGY™ Method's view of what a difficult day still holds.",
       intro: [
         "Viktor Frankl was a Viennese psychiatrist who survived four Nazi concentration camps, including Theresienstadt and Auschwitz. His observations during that period — about what allowed some people to maintain psychological coherence and a sense of purpose under conditions of extreme deprivation — became the foundation for a form of psychotherapy he called logotherapy, and for the book he published after liberation in 1946.",
@@ -164,7 +164,7 @@ export function useHallOfFame() {
       name: 'Martin Seligman',
       role: 'Psychologist · University of Pennsylvania',
       keyWork: 'Learned Optimism · Flourish · "Three Good Things" (2005 paper)',
-      previewDesc: "Seligman's positive psychology research — particularly the Three Good Things practice and the body of work on wellbeing and attention — provides adjacent scientific support for the deliberate notice of meaningful experience that underpins the method's evidence practice.",
+      previewDesc: "Positive psychology and Three Good Things — the direct ancestor of the nightly practice that shaped MyHGY.",
       metaDesc: "Martin Seligman's positive psychology research — including Three Good Things — provides scientific support for the MyHGY™ Method's evidence practice.",
       intro: [
         "Martin Seligman is a research psychologist at the University of Pennsylvania who, as president of the American Psychological Association in 1998, helped establish positive psychology as a recognized research field. The founding premise: psychology had spent most of its history studying pathology — what goes wrong in human beings. Positive psychology asks a different question: what allows human beings to function well, and what makes a life worth living?",
@@ -204,7 +204,7 @@ export function useHallOfFame() {
       name: 'James Clear',
       role: 'Author',
       keyWork: 'Atomic Habits (2018)',
-      previewDesc: "Clear's work on systems over goals, identity built from accumulated evidence, and practices small enough to repeat on an ordinary day provides modern context for MyHGY's emphasis on repetition, continuity, and returning after interruption.",
+      previewDesc: "Small actions, repetition, identity, and how a system — not a single burst of motivation — is what actually builds change.",
       metaDesc: "James Clear's work on identity built through repeated small actions provides modern context for the MyHGY™ Method's emphasis on continuity.",
       intro: [
         "James Clear is an author whose work focuses on how repeated behavior, systems, environment, and identity interact over time. His 2018 book Atomic Habits translated a large body of behavioral thinking into a practical framework built around a simple proposition: meaningful change often emerges from actions small enough to repeat consistently.",
@@ -254,7 +254,7 @@ export function useHallOfFame() {
       name: 'Bob Proctor',
       role: 'Personal-development teacher and author',
       keyWork: 'Paradigms · repetition · A/B/C goals',
-      previewDesc: "Proctor's work on paradigms and the knowing–doing gap — and its direct influence on the founder's development — forms part of the conceptual foundation for why MyHGY is built around continuous practice rather than singular insight.",
+      previewDesc: "Paradigms · repetition · A/B/C goals",
       metaDesc: "Bob Proctor's work on paradigms and the knowing–doing gap — and his influence on the founder — explains why MyHGY is built around continuous practice.",
       intro: [
         "Bob Proctor spent decades teaching a model of personal development centered on paradigms — deeply established patterns of thought and behavior that continue operating even after a person consciously decides they want something different.",

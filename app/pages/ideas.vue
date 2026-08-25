@@ -25,28 +25,52 @@ interface Article {
 
 const articles: Article[] = [
   {
-    lane: 'Pain-Led Help',
-    color: 'green',
-    title: "When the story you’re telling yourself is harder than the situation",
-    excerpt: 'The mind builds a narrative around what happened — and that narrative often arrives faster and hits harder than the event itself. Here is how to tell the two apart.',
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘Why insight fades’,
+    excerpt: ‘Why an idea can feel life-changing on Sunday and disappear by Wednesday — and what it takes to make it stick.’,
   },
   {
-    lane: 'Pain-Led Help',
-    color: 'green',
-    title: "What to do when you can't find your footing",
-    excerpt: 'A step-by-step walk through three practical moves drawn from the MyHGY™ Method — written for the days when starting feels impossible.',
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘The raw material you’re already sitting on’,
+    excerpt: ‘The wins that happen to you every single day, and why most people never learn to use them.’,
   },
   {
-    lane: 'Method',
-    color: 'sun',
-    title: 'Why the practice works on ordinary days, not just hard ones',
-    excerpt: 'Most people reach for a practice when things get difficult. The MyHGY™ Method is built for the ordinary day — because that is where most of life actually happens.',
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘Why three is the number’,
+    excerpt: ‘The floor behind the MyHGY practice, and why fewer than three a day isn’t enough for the mechanism to work.’,
   },
   {
-    lane: 'Founder Essay',
-    color: 'muted',
-    title: 'The moments your mind forgets: why I started preserving evidence from ordinary days',
-    excerpt: 'René Estripeaut on discovering that meaningful evidence from ordinary days — action, capability, courage, connection, contribution, learning, recovery, enjoyment, progress — disappears unless it is deliberately noticed and preserved.',
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘Confidence comes from evidence’,
+    excerpt: ‘Why real self-confidence has to be built on a record, not a mood or a pep talk.’,
+  },
+  {
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘The wish-to-goal gap’,
+    excerpt: ‘What actually separates something you want from something you go get — and why it isn’t ambition.’,
+  },
+  {
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘Earned anticipation’,
+    excerpt: ‘The feeling that shows up before a good result arrives, and why it only exists once you’ve put in the work.’,
+  },
+  {
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘The power of returning’,
+    excerpt: ‘Why missing a day doesn’t break the practice, and why the return is the practice.’,
+  },
+  {
+    lane: ‘Method’,
+    color: ‘sun’,
+    title: ‘What CAS actually builds’,
+    excerpt: ‘Clarity, Accuracy, Self-Confidence — and how each one shows up in real decisions, not just theory.’,
   },
 ]
 </script>
@@ -60,11 +84,10 @@ const articles: Article[] = [
         <div class="idh__inner">
           <p class="idh__eyebrow">Ideas</p>
           <h1 id="ideas-heading" class="idh__heading">
-            Ideas worth carrying.
+            What helps personal development survive real life?
           </h1>
           <p class="idh__deck">
-            Articles, essays, and applied thinking about the <InlineWordmark variant="light" /> Method —
-            written for people navigating difficult days and building visible progress on ordinary ones.
+            That question has taken us into psychology, behavior, memory, self-image, progress, attention, goals, and practice. This is where we share what we're learning.
           </p>
         </div>
       </div>
