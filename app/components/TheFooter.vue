@@ -5,7 +5,7 @@ const navLinks = [
   { label: 'Ideas',                     href: '/ideas' },
   { label: 'Hall of Fame',              href: '/hall-of-fame' },
   { label: 'Our Story',                 href: '/our-story' },
-  { label: 'Provenance',               href: '/history' },
+  { label: 'Where the phrase comes from', href: '/history' },
 ]
 
 const legalLinks = [
@@ -63,11 +63,11 @@ const year = new Date().getFullYear()
       </div>
 
       <p class="footer__attribution">
-        <NuxtLink to="/history" class="footer__link footer__link--muted">The "Have a Great Yesterday" idea has a history.</NuxtLink> <strong>Dan Sullivan</strong> has
-        publicly credited <strong>Lior Weinstein</strong> with the original insight, and
-        Sullivan has developed and shared the idea through his own work. Their contributions
-        are acknowledged on this site. <InlineWordmark variant="dark" />™ is an independently
-        developed methodology and is not affiliated with or endorsed by either individual.
+        <strong>Dan Sullivan</strong> has publicly credited <strong>Lior Weinstein</strong>
+        with the original insight, and Sullivan has developed and shared the idea through his
+        own work. Their contributions are acknowledged on this site. <InlineWordmark variant="dark" />™
+        is an independently developed methodology and is not affiliated with or endorsed by either
+        individual. <NuxtLink to="/history" class="footer__link footer__link--muted">Where the phrase "Have a Great Yesterday" comes from →</NuxtLink>
       </p>
 
       <!-- Bottom bar -->

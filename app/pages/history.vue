@@ -1,7 +1,7 @@
 <script setup lang="ts">
 usePageSeo({
-  title: 'Why Have a Great Yesterday — HaveAGreatYesterday.com',
-  description: 'A great yesterday is something you build while today is still happening — through the actions you take, the moments you notice, and the things you keep.',
+  title: 'Where "Have a Great Yesterday" Comes From — HaveAGreatYesterday.com',
+  description: 'The origin of the phrase "Have a Great Yesterday" — who coined it, how Dan Sullivan and Lior Weinstein are connected to it, and how it reached René Estripeaut.',
   path: '/history',
 })
 
@@ -9,9 +9,9 @@ const { public: { siteUrl } } = useRuntimeConfig()
 useJsonLd({
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Why Have a Great Yesterday — HaveAGreatYesterday.com',
+  name: 'Where "Have a Great Yesterday" Comes From — HaveAGreatYesterday.com',
   url: `${siteUrl}/history`,
-  description: 'A great yesterday is something you build while today is still happening — through the actions you take, the moments you notice, and the things you keep.',
+  description: 'The origin of the phrase "Have a Great Yesterday" — who coined it, how Dan Sullivan and Lior Weinstein are connected to it, and how it reached René Estripeaut.',
 })
 </script>
 
@@ -22,11 +22,12 @@ useJsonLd({
     <section class="hist__hero section--lg bg-warm-paper" aria-labelledby="hist-heading">
       <div class="container">
         <div class="hist__hero-inner">
+          <p class="hist__eyebrow">Where the phrase comes from</p>
           <h1 id="hist-heading" class="hist__heading">
-            Tomorrow's yesterday is today.
+            Where "Have a Great Yesterday" comes from.
           </h1>
           <p class="hist__deck">
-            A great yesterday is something you build while today is still happening — through the actions you take, the moments you notice, and the things you keep.
+            This page is about the phrase — who coined it, how it reached René Estripeaut, and how it connects to the independently developed MyHGY™ Method. For the practice itself, see the Method page.
           </p>
         </div>
       </div>

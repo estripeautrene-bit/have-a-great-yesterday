@@ -49,7 +49,7 @@ export function useHallOfFame() {
         "The MyHGY Method grew from René Estripeaut's own practice — a years-long habit of gratitude work, structured reflection, Three Good Things exercises, and real-time capture of what actually happened in a day. That practice was already the foundation of MyDopa when René encountered Sullivan's work and the story behind the name \"Have a Great Yesterday.\" Sullivan and Hardy address an important related problem: that people can make real progress and still fail to experience it, because they lose sight of how far they have come. That insight strongly reinforces the territory MyHGY™ occupies. The method was developed independently and follows its own methodology.",
         "Sullivan's work provides a practical language for a common human problem, and The Gap and the Gain makes that dynamic legible for a wide audience. The relationship between Sullivan and Hardy's framework and MyHGY™ is one of important intellectual adjacency and reinforcement — not shared mechanism or derivation.",
       ],
-      seeAlso: { label: 'The history of "Have a Great Yesterday"', path: '/history' },
+      seeAlso: { label: 'Where the phrase "Have a Great Yesterday" comes from', path: '/history' },
     },
     {
       slug: 'eckhart-tolle',
