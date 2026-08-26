@@ -45,9 +45,9 @@ useJsonLd({
           </p>
 
           <!-- ─── 2. HOW SULLIVAN DEVELOPED THE IDEA ───────────────────── -->
-          <h2>How Sullivan developed the idea</h2>
+          <h2>How Sullivan developed the phrase</h2>
           <p>
-            Dan Sullivan has publicly credited the "Have a Great Yesterday" idea to Lior Weinstein, a Strategic Coach client. Weinstein raised it during a couples conference in Africa, telling other parents that he couldn't control his children's future — but he could make sure they had a great past.
+            Dan Sullivan has publicly credited the "Have a Great Yesterday" phrase to Lior Weinstein, a Strategic Coach client. Weinstein raised it during a couples conference in Africa, telling other parents that he couldn't control his children's future — but he could make sure they had a great past.
           </p>
 
           <div class="hist__cite">

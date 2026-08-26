@@ -64,7 +64,7 @@ const year = new Date().getFullYear()
 
       <p class="footer__attribution">
         <strong>Dan Sullivan</strong> has publicly credited <strong>Lior Weinstein</strong>
-        with the original insight, and Sullivan has developed and shared the idea through his
+        with the original insight, and Sullivan has developed and shared the phrase through his
         own work. Their contributions are acknowledged on this site. <InlineWordmark variant="dark" />™
         is an independently developed methodology and is not affiliated with or endorsed by either
         individual. <NuxtLink to="/history" class="footer__link footer__link--muted">Where the phrase "Have a Great Yesterday" comes from →</NuxtLink>
