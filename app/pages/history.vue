@@ -87,6 +87,14 @@ useJsonLd({
             </p>
           </div>
 
+          <!-- ─── AFFILIATION NOTICE ──────────────────────────────────── -->
+          <div class="hist__source-box">
+            <p class="hist__source-label">Affiliation notice</p>
+            <p class="hist__source-body">
+              HaveAGreatYesterday.com, the MyHGY™ Method, and MyDopa™ are not affiliated with, sponsored by, or endorsed by Dan Sullivan, Lior Weinstein, Strategic Coach, or any related organization. Dan Sullivan and Lior Weinstein are cited here solely for their publicly documented intellectual contributions.
+            </p>
+          </div>
+
           <!-- ─── 3. WHERE MYHGY™ BEGINS ────────────────────────────────── -->
           <h2>Where MyHGY™ begins</h2>
           <p>
