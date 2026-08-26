@@ -53,6 +53,13 @@ const { entries } = useHallOfFame()
             >
               Read the full entry <span class="hofp__arrow" aria-hidden="true">→</span>
             </NuxtLink>
+            <NuxtLink
+              v-if="entry.seeAlso"
+              :to="entry.seeAlso.path"
+              class="hofp__see-also"
+            >
+              {{ entry.seeAlso.label }} →
+            </NuxtLink>
           </article>
         </div>
 
@@ -195,6 +202,15 @@ const { entries } = useHallOfFame()
 .hofp__entry-link:hover {
   color: var(--color-ink);
   text-decoration: underline;
+}
+
+.hofp__see-also {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--color-muted-ink);
+  text-decoration: none;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
 }
 
 /* ══════════════════════════════════════════════════════════════════════
