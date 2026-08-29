@@ -1,3 +1,8 @@
+export interface ArticleBlock {
+  type: 'lead' | 'h2' | 'p'
+  text: string
+}
+
 export interface IdeasArticle {
   slug: string
   title: string
@@ -6,9 +11,10 @@ export interface IdeasArticle {
   color: 'green' | 'sun' | 'muted'
   date: string
   readTime: string
-  intro: string[]
-  callout: string
-  outro: string[]
+  intro?: string[]
+  callout?: string
+  outro?: string[]
+  body?: ArticleBlock[]
   closingLine: string
   closingPath: string
 }
@@ -204,6 +210,127 @@ export function useIdeasArticles() {
         "Build CAS the direct way, one honest day at a time, and let confidence arrive as the output it always was.",
       ],
       closingLine: 'See how the full Method builds CAS on the Method page, and write your three today.',
+      closingPath: '/method',
+    },
+    {
+      slug: 'how-to-practice-personal-development',
+      title: 'How to Practice Personal Development: The MyHGY™ Method',
+      excerpt: 'A simple daily practice: notice at least three good things while they are happening, write each one down immediately, and repeat every day.',
+      lane: 'Method',
+      color: 'sun',
+      date: 'August 2026',
+      readTime: '7 min read',
+      body: [
+        {
+          type: 'lead',
+          text: 'The MyHGY™ Method is a simple daily personal-development practice: notice at least three good things while they are happening, write each one down immediately, and repeat the practice every day.',
+        },
+        {
+          type: 'p',
+          text: 'There are days when one bad email, one argument, one disappointment, or one thing that did not go your way seems to become the story of the entire day. By the evening, you can feel behind, frustrated, or discouraged even though other good things happened too. The problem is not that those good moments were unimportant. The problem is that they disappeared from attention while the negative one stayed loud.',
+        },
+        {
+          type: 'p',
+          text: 'That is one of the quiet problems personal development rarely solves on its own. We can understand negativity bias, presence, confidence, or perspective intellectually and still spend most of the day being pulled around by whatever thought or event has the most emotional weight. What we need is a simple practice that brings us back to what is actually happening while the day is still happening.',
+        },
+        {
+          type: 'p',
+          text: 'Most people who care about personal development already know a surprising amount. They have read books, listened to podcasts, taken courses, worked with coaches, or had conversations that changed the way they saw something important. The problem is rarely a complete lack of insight. The problem is what happens afterward. A useful idea can feel obvious on Sunday and almost disappear by Wednesday because ordinary life has resumed and nothing is keeping that idea active.',
+        },
+        {
+          type: 'p',
+          text: 'That is why personal development deserves a practice. We accept this in almost every other area of life. If you want to become stronger, you exercise repeatedly. If you want to improve at a sport or learn an instrument, you practice. You do not expect understanding alone to create improvement. MyHGY™ Method applies the same logic to personal development by giving you one small thing to practice every day: consciously notice the good things that happen in your life and write them down while they are still happening.',
+        },
+        {
+          type: 'h2',
+          text: 'The practice is simple on purpose',
+        },
+        {
+          type: 'p',
+          text: 'Carry a small notebook and a pen with you during the day. As you move through normal life, pay attention to moments that make you feel good, encourage you, show you that something is moving in the right direction, or simply make the day better. When one happens, stop for a few seconds and write it down. Aim for at least three captures every day.',
+        },
+        {
+          type: 'p',
+          text: "The moments do not need to be important by anyone else's standards. A client can send you an encouraging email. Someone can compliment your work. You can have a good conversation with your child, finally solve a problem that has been bothering you, hear from an old friend, finish something you had been putting off, or simply enjoy a cup of coffee more than usual. The question is not whether the moment is impressive. The question is whether it affected you positively and is worth keeping.",
+        },
+        {
+          type: 'p',
+          text: 'The reason to write it down immediately is simple: these moments disappear quickly. At 10:30 in the morning, a compliment may genuinely lift your mood. By 4:00 in the afternoon, several problems may have pushed it almost completely out of your attention. By the time someone asks how your day went, you may answer based on the last difficult thing that happened rather than on the full day you actually lived. MyHGY interrupts that process by preserving the moment before memory has a chance to flatten it.',
+        },
+        {
+          type: 'h2',
+          text: 'Writing is part of the practice',
+        },
+        {
+          type: 'p',
+          text: 'It is tempting to think that noticing is enough, but writing changes the experience. The moment you reach for the notebook, you have to stop briefly and pay attention to what just happened. You choose a few words to describe it, which forces the experience to register more clearly. You also create a record that remains after the feeling itself has faded.',
+        },
+        {
+          type: 'p',
+          text: 'This is not meant to become elaborate journaling. One or two sentences are enough. "Great call with Maria about the project." "Lou told me she was proud of me." "Finished the workout even though I wanted to skip it." "Received the email I had been waiting for." The purpose is not to produce beautiful writing. The writing is simply the mechanism that helps you notice, preserve, and keep something that would otherwise be easy to lose.',
+        },
+        {
+          type: 'p',
+          text: 'That is also why the practice happens during the day rather than as an exercise before bed. Looking back at night can be useful, but it relies on memory after many of the smaller moments have already faded. MyHGY begins earlier. It trains you to become aware of the day while you are actually living it.',
+        },
+        {
+          type: 'p',
+          text: 'There is another reason the practice matters. It anchors your attention in the day you are actually living. Our minds constantly move ahead of reality, predicting what may happen, rehearsing conversations, imagining outcomes, and turning possibilities into experiences that can feel real before they are real. MyHGY creates a small daily counterweight to that tendency. Each time you notice something good that actually happened and write it down, you return your attention to lived reality. You are not imagining a better life or trying to think positively about the future. You are recording something positive that is true now. Repeated every day, that becomes a practical way of staying more connected to the life that is actually happening.',
+        },
+        {
+          type: 'h2',
+          text: 'Why three, and why every day?',
+        },
+        {
+          type: 'p',
+          text: 'There is nothing special about the number three. It is a floor. Telling yourself to "notice more good things" is an intention, but it does not give you a clear practice. A minimum of three creates a simple boundary. You know what you are trying to do, and you know whether you did it.',
+        },
+        {
+          type: 'p',
+          text: 'Some days you may capture exactly three moments. Other days you may find five, eight, or twelve. The number above three matters less than the fact that you are looking. Over time, that repeated search begins to change what gets your attention. Experiences that once would have passed unnoticed start becoming easier to see because you have trained yourself to recognize them.',
+        },
+        {
+          type: 'p',
+          text: 'Continuity is the most important part. MyHGY is not something to do occasionally when you happen to remember or when life is going particularly well. The practice is to do it every day. The old patterns of attention in your life already have years of repetition behind them. A new way of paying attention needs repetition too. The value comes from consciously returning to the practice tomorrow, and then doing the same thing the day after that.',
+        },
+        {
+          type: 'h2',
+          text: 'What begins to change',
+        },
+        {
+          type: 'p',
+          text: 'At first, the most obvious benefit may simply be that you remember more of what actually happened. Your notebook starts containing things that would otherwise have disappeared. That alone can change the way you look back at a day or a week because you are no longer depending entirely on whatever your mind happens to retrieve in the moment.',
+        },
+        {
+          type: 'p',
+          text: 'With repetition, something more interesting can happen. You become more conscious while the day is unfolding. You notice encouragement sooner. You notice progress that is too small to announce itself. You notice moments of connection, competence, enjoyment, follow-through, and movement that previously would have been absorbed into the background of ordinary life.',
+        },
+        {
+          type: 'p',
+          text: 'This does not mean pretending that everything is good. Difficult things still happen, and MyHGY does not ask you to deny them. The purpose is to make your record of life more complete. One frustrating conversation should not automatically erase the three good conversations that happened before it. One disappointing result should not be allowed to become the entire story when other evidence was present too.',
+        },
+        {
+          type: 'p',
+          text: 'That fuller view is where the broader MyHGY destination begins to make sense: <strong>Clarity. Accuracy. Self-Confidence.</strong> Clarity comes from paying closer attention to the life you are actually living. Accuracy improves when your judgment of a day, a period of your life, or even yourself is informed by more than the loudest negative event. Self-confidence can grow when you repeatedly see that you are moving, contributing, connecting, learning, and showing up in ways that memory might otherwise fail to preserve.',
+        },
+        {
+          type: 'h2',
+          text: 'How to start today',
+        },
+        {
+          type: 'p',
+          text: 'You do not need to prepare for this practice. Get a small notebook, put a pen with it, and carry both with you. During the day, notice what feels worth keeping and write it down while it is still fresh. Reach three before the day is over, then do the same thing tomorrow.',
+        },
+        {
+          type: 'p',
+          text: 'If you want to look back through the notebook later, you can. You may discover patterns or see progress that was difficult to recognize while it was happening. But reviewing is optional. The essential practice is happening in the present: noticing, writing, and continuing every day.',
+        },
+        {
+          type: 'p',
+          text: 'That is the MyHGY™ Method in its simplest form. It turns personal development from something you only read, hear, or think about into something you actually practice. <strong>Personal development deserves a practice.</strong>',
+        },
+      ],
+      closingLine: 'Begin the practice on the Method page.',
       closingPath: '/method',
     },
   ]

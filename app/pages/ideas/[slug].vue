@@ -65,21 +65,33 @@ const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex +
       <div class="container">
         <div class="idart__body-inner">
 
-          <p
-            v-for="(p, i) in article.intro"
-            :key="`intro-${i}`"
-            class="idart__p"
-          >{{ p }}</p>
+          <!-- Flexible block format (new articles) -->
+          <template v-if="article.body">
+            <template v-for="(block, i) in article.body" :key="i">
+              <p v-if="block.type === 'lead'" class="idart__lead" v-html="block.text" />
+              <h2 v-else-if="block.type === 'h2'" class="idart__h2">{{ block.text }}</h2>
+              <p v-else class="idart__p" v-html="block.text" />
+            </template>
+          </template>
 
-          <div class="idart__callout">
-            <p class="idart__callout-text">{{ article.callout }}</p>
-          </div>
+          <!-- Legacy format (existing articles) -->
+          <template v-else>
+            <p
+              v-for="(p, i) in article.intro"
+              :key="`intro-${i}`"
+              class="idart__p"
+            >{{ p }}</p>
 
-          <p
-            v-for="(p, i) in article.outro"
-            :key="`outro-${i}`"
-            class="idart__p"
-          >{{ p }}</p>
+            <div class="idart__callout">
+              <p class="idart__callout-text">{{ article.callout }}</p>
+            </div>
+
+            <p
+              v-for="(p, i) in article.outro"
+              :key="`outro-${i}`"
+              class="idart__p"
+            >{{ p }}</p>
+          </template>
 
         </div>
       </div>
@@ -197,6 +209,25 @@ const nextArticle = currentIndex < articles.length - 1 ? articles[currentIndex +
 
 .idart__body-inner {
   max-width: var(--container-md);
+}
+
+.idart__lead {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-ink);
+  font-weight: var(--weight-semibold);
+  margin-bottom: var(--space-8);
+}
+
+.idart__h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-extrabold);
+  color: var(--color-ink);
+  line-height: var(--lh-heading);
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-6);
 }
 
 .idart__p {
