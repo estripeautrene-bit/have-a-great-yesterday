@@ -10,6 +10,7 @@ export interface IdeasArticle {
   lane: string
   color: 'green' | 'sun' | 'muted'
   date: string
+  publishDate: string
   readTime: string
   intro?: string[]
   callout?: string
@@ -28,6 +29,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You read the book in two nights. Something in chapter four landed hard, and you underlined half the page. At dinner you told your partner about it, because the idea was that good. You went to bed sure that this time something would shift.",
@@ -54,6 +56,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You think you need more before anything changes. More discipline. Another course. A cleaner morning routine. The right planner. You keep searching for the missing piece that finally makes you feel like you are getting somewhere.",
@@ -79,6 +82,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You have tried to keep track of your progress before. It went one of two ways. Either you captured nothing, because life moved too fast to stop and write. Or you went the opposite direction, tried to record everything, turned it into a giant daily task, and quit within a week because it felt like homework.",
@@ -104,6 +108,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You are waiting to feel ready. You want the confidence first, and then you will make the call, ask for the raise, start the thing you keep circling. So you wait for the feeling to arrive on its own. It stays just out of reach, and the waiting stretches into months.",
@@ -127,6 +132,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You have a wish you have carried for years. Start the business. Write the book. Get the body back. Leave the job. It sits in your mind, real and specific, and somehow it stays exactly where it has always been: a wish. Time passes and it moves nowhere, and you start to wonder whether you are the kind of person who ever actually does the big thing.",
@@ -150,6 +156,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "There is a version of looking forward that lifts you, and a version that lets you down. You know both. The pump-up video and the big Sunday-night plan give you a rush of anticipation that feels great for an evening and collapses by Tuesday. Then there is the quieter kind of forward pull, the one that has you wake up actually expecting the day to go somewhere. The second kind lasts. The difference between them is worth understanding, because one of them you can build on purpose.",
@@ -172,6 +179,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You started strong. Five nights in a row you wrote your three wins, and it felt good. Then a chaotic day hit, you skipped it, and the next night you skipped it again because now there was a gap. By the end of the week the whole thing felt broken, so you let it go, told yourself you would restart properly on Monday, and Monday came and went. Sound familiar? This is how most good practices die, and the cause is a single belief worth correcting.",
@@ -195,6 +203,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-25',
       readTime: '4 min read',
       intro: [
         "You have chased confidence directly and watched it slip away every time. You told yourself to think positive, to believe in yourself, to walk in like you owned the room. It worked for about an hour. Confidence pursued head-on behaves like a shy animal: the harder you reach for it, the faster it backs away. There is a reason for that, and understanding it points to a far more reliable path.",
@@ -219,6 +228,7 @@ export function useIdeasArticles() {
       lane: 'Method',
       color: 'sun',
       date: 'August 2026',
+      publishDate: '2026-08-29',
       readTime: '7 min read',
       body: [
         {

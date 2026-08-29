@@ -13,16 +13,20 @@ usePageSeo({
   title: `${article.title} — Ideas — HaveAGreatYesterday.com`,
   description: article.excerpt,
   path: route.path,
+  ogType: 'article',
 })
 
 const { public: { siteUrl } } = useRuntimeConfig()
+const ogImage = `${siteUrl}/og-default.png`
 useJsonLd({
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: article.title,
   description: article.excerpt,
   url: `${siteUrl}${route.path}`,
-  datePublished: '2026-08-25',
+  image: ogImage,
+  datePublished: article.publishDate,
+  dateModified: article.publishDate,
   author: {
     '@type': 'Person',
     name: 'René Estripeaut',
