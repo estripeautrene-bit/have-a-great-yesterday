@@ -127,25 +127,8 @@ function directSubmit() {
       </div>
     </section>
 
-    <!-- Screen 3 placeholder — FOLLOWUP (full component in Item 3) -->
-    <section
-      v-else-if="state === 'FOLLOWUP'"
-      class="shell-screen section--lg bg-warm-paper"
-      aria-labelledby="followup-heading"
-    >
-      <div class="container container--md shell-screen__inner">
-        <p id="followup-heading" class="shell-screen__prompt">
-          One thing before we show you this: when a day does go a little right — a small one
-          counts — where does it usually come from?
-        </p>
-        <p class="shell-screen__note">
-          Full Screen 3 chip component added in Item 3.
-        </p>
-        <button type="button" class="shell-screen__skip" @click="skipFollowup()">
-          Skip — show me what you found
-        </button>
-      </div>
-    </section>
+    <!-- Screen 3 — FOLLOWUP -->
+    <DoorwayScreenFollowup v-else-if="state === 'FOLLOWUP'" />
 
     <!-- ENTRY / INPUT_SUBMITTED — minimal direct-URL input (Screen 0/1 in Item 3) -->
     <section

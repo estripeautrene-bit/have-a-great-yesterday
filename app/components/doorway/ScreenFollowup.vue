@@ -1,0 +1,144 @@
+<script setup lang="ts">
+const CHIPS = ['Work', 'The kids / family', 'Something for me', 'Someone else'] as const
+
+const { submitFollowup, skipFollowup } = useDoorwaySession()
+const selected = ref<string | null>(null)
+
+function selectChip(chip: string) {
+  selected.value = chip
+  submitFollowup({ chip, freeText: '' })
+}
+</script>
+
+<template>
+  <section
+    class="followup section--lg bg-warm-paper"
+    aria-labelledby="followup-heading"
+  >
+    <div class="container container--md followup__inner">
+
+      <p id="followup-heading" class="followup__question">
+        One thing before we show you this: when a day does go a little right — a small one
+        counts — where does it usually come from?
+      </p>
+
+      <div
+        class="followup__chips"
+        role="group"
+        aria-label="Where a good day usually comes from"
+      >
+        <button
+          v-for="chip in CHIPS"
+          :key="chip"
+          type="button"
+          class="followup__chip"
+          :class="{ 'followup__chip--selected': selected === chip }"
+          :aria-pressed="selected === chip"
+          @click="selectChip(chip)"
+        >
+          {{ chip }}
+        </button>
+      </div>
+
+      <button type="button" class="followup__skip" @click="skipFollowup()">
+        Skip — show me what you found
+      </button>
+
+    </div>
+  </section>
+</template>
+
+<style scoped>
+.followup__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  max-width: var(--container-md);
+}
+
+.followup__question {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  line-height: var(--lh-heading);
+  max-width: 38ch;
+}
+
+/* ── Chips ───────────────────────────────────────────────── */
+
+.followup__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.followup__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-7);
+  background: var(--color-paper);
+  border: 1.5px solid rgba(17, 17, 17, 0.12);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgba(17, 17, 17, 0.05);
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.followup__chip:hover:not(.followup__chip--selected) {
+  border-color: rgba(17, 17, 17, 0.28);
+  box-shadow: 0 2px 10px rgba(17, 17, 17, 0.08);
+}
+
+.followup__chip:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.followup__chip--selected {
+  background: var(--color-sun);
+  border-color: var(--color-sun);
+  border-width: 2px;
+  font-weight: var(--weight-semibold);
+  box-shadow: 0 2px 10px rgba(244, 197, 66, 0.25);
+}
+
+/* ── Skip ────────────────────────────────────────────────── */
+
+.followup__skip {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-muted-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  padding: 0;
+  align-self: flex-start;
+  transition: color var(--transition-fast);
+}
+
+.followup__skip:hover { color: var(--color-ink); }
+
+.followup__skip:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .followup__chips { gap: var(--space-2); }
+  .followup__chip  { padding: var(--space-3) var(--space-6); font-size: var(--text-body); }
+}
+</style>

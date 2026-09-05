@@ -11,7 +11,6 @@ usePageSeo({
 const {
   state,
   response,
-  skipFollowup,
   retryGeneration,
 } = useDoorwaySession()
 </script>
@@ -113,22 +112,8 @@ const {
       </div>
     </section>
 
-    <!-- FOLLOWUP — full chip component in Item 3 -->
-    <section
-      v-else-if="state === 'FOLLOWUP'"
-      class="wayg-screen section--lg bg-warm-paper"
-      aria-labelledby="followup-heading"
-    >
-      <div class="container container--md wayg-screen__inner">
-        <p id="followup-heading" class="wayg-screen__prompt">
-          One thing before we show you this: when a day does go a little right — a small one
-          counts — where does it usually come from?
-        </p>
-        <button type="button" class="wayg-screen__skip" @click="skipFollowup()">
-          Skip — show me what you found
-        </button>
-      </div>
-    </section>
+    <!-- Screen 3 — FOLLOWUP -->
+    <DoorwayScreenFollowup v-else-if="state === 'FOLLOWUP'" />
 
     <!-- ENTRY / INPUT_SUBMITTED — Screen 0 + Screen 1 -->
     <DoorwayScreenEntry v-else />
