@@ -8,6 +8,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [] }>()
 
+const route = useRoute()
+
 const menuRef = ref<HTMLElement | null>(null)
 const closeBtn = ref<HTMLElement | null>(null)
 
@@ -101,9 +103,17 @@ function onKeydown(e: KeyboardEvent) {
 
         <!-- Primary CTA — exact locked copy -->
         <div class="mobile-menu__footer">
-          <NuxtLink to="/what-are-you-going-through" class="mobile-menu__cta">
-            Show me what I can do from here.
-          </NuxtLink>
+          <a
+            v-if="route.path === '/'"
+            href="#doorway"
+            class="mobile-menu__cta"
+            @click="emit('close')"
+          >Show me what I can do from here.</a>
+          <NuxtLink
+            v-else
+            to="/what-are-you-going-through"
+            class="mobile-menu__cta"
+          >Show me what I can do from here.</NuxtLink>
         </div>
       </div>
     </Transition>

@@ -30,9 +30,9 @@ function trackHeroCta() {
         MyHGY™ helps you separate what happened from what your mind is now telling you it means — and shows you one real thing you can do from here.
       </p>
 
-      <NuxtLink to="/what-are-you-going-through" class="hero__cta" @click="trackHeroCta">
+      <a href="#doorway" class="hero__cta" @click="trackHeroCta">
         Show me what I can do from here.
-      </NuxtLink>
+      </a>
 
       <NuxtLink to="/method" class="hero__secondary">
         What is the MyHGY™ Method? →

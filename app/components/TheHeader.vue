@@ -72,9 +72,16 @@ onUnmounted(() => {
           </li>
         </ul>
 
-        <NuxtLink to="/what-are-you-going-through" class="header__cta">
-          Show me what I can do from here.
-        </NuxtLink>
+        <a
+          v-if="route.path === '/'"
+          href="#doorway"
+          class="header__cta"
+        >Show me what I can do from here.</a>
+        <NuxtLink
+          v-else
+          to="/what-are-you-going-through"
+          class="header__cta"
+        >Show me what I can do from here.</NuxtLink>
       </nav>
 
       <!-- Mobile hamburger -->

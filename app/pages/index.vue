@@ -29,7 +29,7 @@ useJsonLd([
 
 <template>
   <HomeHero />
-  <HomePainChoices />
+  <HomeDoorwayModule />
   <HomeInvisibleProgress />
   <HomeDestinationTriad />
   <HomeMethodRail />
