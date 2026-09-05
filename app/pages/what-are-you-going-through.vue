@@ -1,344 +1,231 @@
 <script setup lang="ts">
+import { FIXED_PRACTICE_LINE } from '~/composables/useDoorwaySession'
+
 usePageSeo({
   title: 'What Are You Going Through? — HaveAGreatYesterday.com',
-  description: 'The MyHGY™ Method guided experience is coming. Find your footing from exactly where you are.',
+  description: 'Tell us a little about your actual life. We\'ll show you where meaningful moments may already be happening in your week, and a simple way to keep them.',
   path: '/what-are-you-going-through',
   robots: 'noindex',
 })
+
+const {
+  state,
+  response,
+  skipFollowup,
+  retryGeneration,
+} = useDoorwaySession()
 </script>
 
 <template>
   <div class="wayg">
 
-    <!-- Page hero -->
-    <section class="wayg-hero section--lg bg-warm-paper" aria-labelledby="wayg-heading">
-      <div class="container">
-        <div class="wayg-hero__inner">
-          <p class="wayg-hero__eyebrow">You're in the right place</p>
-          <h1 id="wayg-heading" class="wayg-hero__heading">
-            The guided experience<br>is on its way.
-          </h1>
-          <p class="wayg-hero__body">
-            We're building a step-by-step experience that meets you exactly where you are —
-            whatever you're going through. It will help you find your footing using the
-            <InlineWordmark variant="light" /> Method, without requiring you to have a plan first.
-          </p>
-          <p class="wayg-hero__body">
-            Until it's ready, everything you need to understand the Method is already on the site.
-          </p>
-        </div>
-      </div>
-    </section>
+    <!-- Screen 4 — GENERATING -->
+    <DoorwayScreenGenerating v-if="state === 'GENERATING'" />
 
-    <!-- Coming-soon preview (clearly marked non-functional) -->
-    <section class="wayg-preview section bg-stone" aria-labelledby="preview-heading" aria-label="Non-functional visual preview of the coming guided experience">
-      <div class="container">
+    <!-- Screens 5 + 6 — RESPONSE_READY / EMAIL_INVITED / EMAIL_SUBMITTING / EMAIL_FAILED -->
+    <DoorwayScreenResponse
+      v-else-if="response && ['RESPONSE_READY', 'EMAIL_INVITED', 'EMAIL_SUBMITTING', 'EMAIL_FAILED'].includes(state)"
+      :response="response"
+    />
 
-        <div class="wayg-preview__label" aria-hidden="true">
-          <span class="wayg-preview__badge">Preview — not yet active</span>
-        </div>
-
-        <h2 id="preview-heading" class="wayg-preview__heading">
-          Here's what the experience will look like
-        </h2>
-
-        <p class="wayg-preview__sub">
-          The panels below are visual placeholders only. Nothing here collects data or submits anything.
+    <!-- Screen 7 — email path -->
+    <section
+      v-else-if="state === 'EMAIL_SUBMITTED'"
+      class="wayg-screen section--lg bg-warm-paper"
+      aria-labelledby="confirm-heading"
+    >
+      <div class="container container--md wayg-screen__inner">
+        <h1 id="confirm-heading" class="wayg-screen__heading">
+          You're set. Now go catch your first one.
+        </h1>
+        <p class="wayg-screen__body">
+          Your Starting Point is on its way to your inbox. For now, keep a notebook and pen within
+          reach — when the next good moment appears in one of these parts of your day, write it
+          down before the day moves on. That's the practice, and you've begun it.
         </p>
-
-        <div class="wayg-steps" role="list" aria-label="Visual preview of upcoming guided steps">
-
-          <div class="wayg-step" role="listitem">
-            <div class="wayg-step__number" aria-hidden="true">1</div>
-            <div class="wayg-step__content">
-              <p class="wayg-step__title">Tell us what you're going through</p>
-              <p class="wayg-step__desc">You'll choose your situation from a set of honest, recognised categories — job disruption, health uncertainty, starting over, and more.</p>
-              <!-- Non-functional visual mock of the choice cards -->
-              <div class="wayg-step__mock" aria-hidden="true">
-                <div class="wayg-mock-card">Job or career disruption</div>
-                <div class="wayg-mock-card">Divorce or breakup</div>
-                <div class="wayg-mock-card">Health uncertainty</div>
-                <div class="wayg-mock-card wayg-mock-card--more">+ 4 more</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="wayg-step" role="listitem">
-            <div class="wayg-step__number" aria-hidden="true">2</div>
-            <div class="wayg-step__content">
-              <p class="wayg-step__title">See what the Method says about where you are</p>
-              <p class="wayg-step__desc">The experience applies <InlineWordmark variant="light" /> principles to your situation — helping you separate what happened from the story around it, understand what is true now, identify what remains within your influence, and find a constructive place to begin.</p>
-            </div>
-          </div>
-
-          <div class="wayg-step" role="listitem">
-            <div class="wayg-step__number" aria-hidden="true">3</div>
-            <div class="wayg-step__content">
-              <p class="wayg-step__title">Get a starting point, not a finished plan</p>
-              <p class="wayg-step__desc">You'll leave with one clear, concrete next action drawn from your situation — something you can do from exactly where you are right now.</p>
-            </div>
-          </div>
-
-        </div>
-
+        <NuxtLink to="/" class="wayg-screen__cta">Back to the home page</NuxtLink>
       </div>
     </section>
 
-    <!-- In the meantime -->
-    <section class="wayg-meanwhile section bg-paper" aria-labelledby="meanwhile-heading">
-      <div class="container">
-
-        <div class="wayg-meanwhile__inner">
-          <h2 id="meanwhile-heading" class="wayg-meanwhile__heading">In the meantime</h2>
-          <p class="wayg-meanwhile__body">
-            The core ideas behind the Method are already available throughout the site. You can begin understanding the practice now while we continue building the guided experience.
-          </p>
-
-          <div class="wayg-meanwhile__links">
-            <NuxtLink to="/method" class="wayg-meanwhile__link wayg-meanwhile__link--primary">
-              Read the MyHGY™ Method →
-            </NuxtLink>
-            <NuxtLink to="/ideas" class="wayg-meanwhile__link">
-              Browse ideas and practice notes →
-            </NuxtLink>
-            <NuxtLink to="/" class="wayg-meanwhile__link">
-              Back to the home page →
-            </NuxtLink>
-          </div>
-        </div>
-
+    <!-- Screen 7 — decline path -->
+    <section
+      v-else-if="state === 'EMAIL_DECLINED'"
+      class="wayg-screen section--lg bg-warm-paper"
+      aria-labelledby="confirm-heading"
+    >
+      <div class="container container--md wayg-screen__inner">
+        <h1 id="confirm-heading" class="wayg-screen__heading">
+          Good. You've got everything you need.
+        </h1>
+        <p class="wayg-screen__body">
+          Keep a notebook and pen within reach. When the next good moment appears in one of these
+          parts of your day, write it down. At least three a day, caught while they happen.
+          The door's open whenever you'd like a hand.
+        </p>
+        <NuxtLink to="/" class="wayg-screen__cta">Back to the home page</NuxtLink>
       </div>
     </section>
+
+    <!-- GENERATION_FAILED -->
+    <section
+      v-else-if="state === 'GENERATION_FAILED'"
+      class="wayg-screen section--lg bg-warm-paper"
+      aria-labelledby="fallback-heading"
+    >
+      <div class="container container--md wayg-screen__inner">
+        <h1 id="fallback-heading" class="wayg-screen__heading">
+          Something went wrong on our end.
+        </h1>
+        <p class="wayg-screen__practice">{{ FIXED_PRACTICE_LINE }}</p>
+        <p class="wayg-screen__body">
+          Take a moment and name three places in your own day where a good moment could happen.
+          Write each one down when it does.
+        </p>
+        <button type="button" class="wayg-screen__cta wayg-screen__cta--sun" @click="retryGeneration()">
+          Try again
+        </button>
+      </div>
+    </section>
+
+    <!-- SAFETY_INTERRUPTED -->
+    <section
+      v-else-if="state === 'SAFETY_INTERRUPTED'"
+      class="wayg-screen section--lg bg-warm-paper"
+      aria-labelledby="safety-heading"
+    >
+      <div class="container container--md wayg-screen__inner">
+        <h1 id="safety-heading" class="wayg-screen__heading">
+          You don't have to carry this alone.
+        </h1>
+        <p class="wayg-screen__body">
+          If you're in crisis or need to talk to someone right now, please reach out.
+        </p>
+        <ul class="wayg-screen__resources">
+          <li><strong>988 Suicide &amp; Crisis Lifeline:</strong> call or text <strong>988</strong></li>
+          <li><strong>Crisis Text Line:</strong> text HOME to <strong>741741</strong></li>
+          <li>
+            <strong>International Association for Suicide Prevention:</strong>
+            <a href="https://www.iasp.info/resources/Crisis_Centres/" target="_blank" rel="noopener noreferrer">
+              find a crisis centre near you
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FOLLOWUP — full chip component in Item 3 -->
+    <section
+      v-else-if="state === 'FOLLOWUP'"
+      class="wayg-screen section--lg bg-warm-paper"
+      aria-labelledby="followup-heading"
+    >
+      <div class="container container--md wayg-screen__inner">
+        <p id="followup-heading" class="wayg-screen__prompt">
+          One thing before we show you this: when a day does go a little right — a small one
+          counts — where does it usually come from?
+        </p>
+        <button type="button" class="wayg-screen__skip" @click="skipFollowup()">
+          Skip — show me what you found
+        </button>
+      </div>
+    </section>
+
+    <!-- ENTRY / INPUT_SUBMITTED — Screen 0 + Screen 1 -->
+    <DoorwayScreenEntry v-else />
 
   </div>
 </template>
 
 <style scoped>
-/* Hero */
-.wayg-hero__inner {
-  max-width: var(--container-md);
+.wayg-screen__inner {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+  max-width: var(--container-md);
 }
 
-.wayg-hero__eyebrow {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-muted-ink);
-}
-
-.wayg-hero__heading {
+.wayg-screen__heading {
   font-family: var(--font-display);
   font-size: var(--text-h1);
   font-weight: var(--weight-extrabold);
   color: var(--color-ink);
   line-height: var(--lh-heading);
+  max-width: 26ch;
 }
 
-.wayg-hero__body {
-  font-family: var(--font-body);
-  font-size: var(--text-body-lg);
-  line-height: var(--lh-body);
-  color: var(--color-ink);
-  max-width: 60ch;
-}
-
-/* Preview section */
-.wayg-preview__label {
-  margin-bottom: var(--space-6);
-}
-
-.wayg-preview__badge {
-  display: inline-block;
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-muted-ink);
-  background: var(--color-paper);
-  border: 1.5px solid rgba(0, 0, 0, 0.12);
-  border-radius: var(--radius-full);
-  padding: var(--space-1) var(--space-4);
-}
-
-.wayg-preview__heading {
+.wayg-screen__prompt {
   font-family: var(--font-display);
   font-size: var(--text-h2);
-  font-weight: var(--weight-extrabold);
-  color: var(--color-ink);
-  line-height: var(--lh-heading);
-  margin-bottom: var(--space-3);
-  max-width: var(--container-md);
-}
-
-.wayg-preview__sub {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--color-muted-ink);
-  margin-bottom: var(--space-10);
-  max-width: 60ch;
-}
-
-/* Step list */
-.wayg-steps {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  max-width: var(--container-md);
-}
-
-.wayg-step {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  gap: var(--space-6);
-  padding: var(--space-6);
-  background: var(--color-paper);
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(0, 0, 0, 0.07);
-}
-
-.wayg-step__number {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-full);
-  background: var(--color-sun);
-  color: var(--color-ink);
-  font-family: var(--font-display);
-  font-size: var(--text-body);
-  font-weight: var(--weight-bold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-.wayg-step__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.wayg-step__title {
-  font-family: var(--font-display);
-  font-size: var(--text-body-lg);
   font-weight: var(--weight-bold);
   color: var(--color-ink);
   line-height: var(--lh-heading);
+  max-width: 40ch;
 }
 
-.wayg-step__desc {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  line-height: var(--lh-body);
-  color: var(--color-ink);
-}
-
-/* Mock card strip inside step 1 */
-.wayg-step__mock {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-  pointer-events: none;
-  user-select: none;
-}
-
-.wayg-mock-card {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: var(--weight-medium);
-  color: var(--color-muted-ink);
-  background: var(--color-stone);
-  border: 1.5px dashed rgba(0, 0, 0, 0.15);
-  border-radius: var(--radius-lg);
-  padding: var(--space-2) var(--space-4);
-  cursor: default;
-  opacity: 0.7;
-}
-
-.wayg-mock-card--more {
-  opacity: 0.45;
-}
-
-/* Meanwhile */
-.wayg-meanwhile__inner {
-  max-width: var(--container-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.wayg-meanwhile__heading {
-  font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: var(--weight-extrabold);
-  color: var(--color-ink);
-  line-height: var(--lh-heading);
-}
-
-.wayg-meanwhile__body {
-  font-family: var(--font-body);
+.wayg-screen__body {
   font-size: var(--text-body-lg);
   line-height: var(--lh-body);
+  color: var(--color-ink);
+  max-width: 58ch;
+}
+
+.wayg-screen__practice {
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--color-sun);
+  font-size: var(--text-body-lg);
+  line-height: 1.65;
   color: var(--color-ink);
   max-width: 60ch;
 }
 
-.wayg-meanwhile__links {
+.wayg-screen__resources {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  margin-top: var(--space-2);
-}
-
-.wayg-meanwhile__link {
-  font-family: var(--font-body);
+  padding-left: var(--space-5);
   font-size: var(--text-body);
-  font-weight: var(--weight-semibold);
+  line-height: var(--lh-body);
   color: var(--color-ink);
-  text-decoration: none;
-  text-underline-offset: 3px;
 }
 
-.wayg-meanwhile__link:hover {
-  text-decoration: underline;
-}
-
-.wayg-meanwhile__link--primary {
+.wayg-screen__cta {
   display: inline-flex;
   align-items: center;
   background: var(--color-ink);
   color: var(--color-paper);
-  padding: var(--space-4) var(--space-8);
-  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
   font-weight: var(--weight-semibold);
+  border: none;
+  border-radius: var(--radius-full);
+  padding: var(--space-4) var(--space-8);
+  cursor: pointer;
   text-decoration: none;
+  min-height: 48px;
   align-self: flex-start;
-  transition: background var(--transition-fast), color var(--transition-fast);
-  margin-bottom: var(--space-2);
+  transition: filter var(--transition-fast), opacity var(--transition-fast);
 }
 
-.wayg-meanwhile__link--primary:hover {
+.wayg-screen__cta--sun {
   background: var(--color-sun);
   color: var(--color-ink);
-  text-decoration: none;
 }
 
-@media (max-width: 640px) {
-  .wayg-step {
-    grid-template-columns: 36px 1fr;
-    gap: var(--space-4);
-  }
+.wayg-screen__cta--sun:hover:not(:disabled) { filter: brightness(0.94); }
+.wayg-screen__cta--sun:disabled { opacity: 0.38; cursor: not-allowed; }
 
-  .wayg-meanwhile__link--primary {
-    width: 100%;
-    justify-content: center;
-  }
+.wayg-screen__skip {
+  background: none;
+  border: 1.5px solid rgba(17, 17, 17, 0.2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-muted-ink);
+  padding: var(--space-3) var(--space-6);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
 }
+
+.wayg-screen__skip:hover { border-color: var(--color-ink); color: var(--color-ink); }
 </style>
