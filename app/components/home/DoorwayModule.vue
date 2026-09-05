@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const choices = usePainChoices()
+const { reset, submitInput } = useDoorwaySession()
 
 const writtenText = ref('')
 const selectedCardIndex = ref<number | null>(null)
@@ -34,15 +35,16 @@ function handleSubmit() {
     source: 'homepage',
     card_selected: selectedCardIndex.value !== null,
   })
-  // Item 2: state machine wired here
-  console.log('[doorway] submit', {
+  submitInput({
     text: writtenText.value,
     situationCard: selectedCardIndex.value !== null ? choices[selectedCardIndex.value] : null,
     source: 'homepage',
   })
+  navigateTo('/doorway')
 }
 
 onMounted(() => {
+  reset() // clear any previous session when the homepage loads
   viewObserver = new IntersectionObserver(
     ([entry]) => {
       if (entry?.isIntersecting) {
