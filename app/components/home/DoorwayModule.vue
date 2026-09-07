@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const choices = usePainChoices()
 const { reset, submitInput } = useDoorwaySession()
 
 const writtenText = ref('')
-const selectedCardIndex = ref<number | null>(null)
 const hasTrackedStart = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
 let viewObserver: IntersectionObserver | null = null
@@ -13,10 +11,6 @@ const canSubmit = computed(() => writtenText.value.trim().length > 0)
 const { $posthog } = useNuxtApp()
 function track(name: string, props: Record<string, unknown> = {}) {
   if ($posthog.__loaded) $posthog.capture(name, props)
-}
-
-function selectCard(index: number) {
-  selectedCardIndex.value = selectedCardIndex.value === index ? null : index
 }
 
 function onInput(e: Event) {
@@ -31,15 +25,8 @@ function onInput(e: Event) {
 
 function handleSubmit() {
   if (!canSubmit.value) return
-  track('doorway_homepage_submitted', {
-    source: 'homepage',
-    card_selected: selectedCardIndex.value !== null,
-  })
-  submitInput({
-    text: writtenText.value,
-    situationCard: selectedCardIndex.value !== null ? choices[selectedCardIndex.value] : null,
-    source: 'homepage',
-  })
+  track('doorway_homepage_submitted', { source: 'homepage' })
+  submitInput({ text: writtenText.value, situationCard: null, source: 'homepage' })
   navigateTo('/doorway')
 }
 
@@ -93,48 +80,12 @@ onUnmounted(() => {
           class="doorway__submit"
           :disabled="!canSubmit"
         >
-          <svg
-            aria-hidden="true"
-            class="doorway__submit-icon"
-            fill="currentColor"
-            height="18"
-            viewBox="0 0 24 24"
-            width="18"
-          >
-            <circle cx="12" cy="12" r="4.5" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="12" x2="12" y1="2" y2="5" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="12" x2="12" y1="19" y2="22" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="2" x2="5" y1="12" y2="12" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="19" x2="22" y1="12" y2="12" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="4.93" x2="6.34" y1="4.93" y2="6.34" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="17.66" x2="19.07" y1="17.66" y2="19.07" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="4.93" x2="6.34" y1="19.07" y2="17.66" />
-            <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="17.66" x2="19.07" y1="6.34" y2="4.93" />
-          </svg>
           Show Me How MyHGY Could Help
         </button>
         <p id="doorway-reassurance" class="doorway__reassurance">
           No account or email needed to see it.
         </p>
       </form>
-
-      <div class="doorway__cards" role="group" aria-label="Situation categories — optional context">
-        <p class="doorway__cards-intro">Or start with what brought you here:</p>
-        <ul class="doorway__cards-list" role="list">
-          <li v-for="(choice, index) in choices" :key="choice">
-            <button
-              type="button"
-              class="doorway__card"
-              :class="{ 'doorway__card--selected': selectedCardIndex === index }"
-              :aria-pressed="selectedCardIndex === index"
-              @click="selectCard(index)"
-            >
-              <span aria-hidden="true" class="doorway__card-dot" />
-              <span class="doorway__card-label">{{ choice }}</span>
-            </button>
-          </li>
-        </ul>
-      </div>
     </div>
   </section>
 </template>
@@ -165,7 +116,6 @@ onUnmounted(() => {
   flex-direction: column;
   gap: var(--space-3);
   max-width: var(--container-md);
-  margin-bottom: var(--space-12);
 }
 
 .doorway__textarea {
@@ -201,7 +151,6 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-2);
   width: 100%;
   min-height: 52px;
   padding: var(--space-4) var(--space-6);
@@ -230,10 +179,6 @@ onUnmounted(() => {
   cursor: not-allowed;
 }
 
-.doorway__submit-icon {
-  flex-shrink: 0;
-}
-
 .doorway__reassurance {
   font-size: var(--text-small);
   color: var(--color-muted-ink);
@@ -241,87 +186,7 @@ onUnmounted(() => {
   text-align: center;
 }
 
-/* ── Situation cards ─────────────────────────────────────── */
-
-.doorway__cards-intro {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
-  color: var(--color-muted-ink);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-4);
-}
-
-.doorway__cards-list {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: var(--space-3);
-}
-
-.doorway__card {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  width: 100%;
-  padding: var(--space-4) var(--space-5);
-  background: var(--color-paper);
-  border: 1.5px solid rgba(17, 17, 17, 0.1);
-  border-radius: var(--radius-lg);
-  cursor: pointer;
-  text-align: left;
-  box-shadow: 0 1px 6px rgba(17, 17, 17, 0.04);
-  transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
-}
-
-.doorway__card:hover:not(.doorway__card--selected) {
-  border-color: rgba(17, 17, 17, 0.22);
-  box-shadow: 0 2px 12px rgba(17, 17, 17, 0.08);
-}
-
-.doorway__card:focus-visible {
-  outline: 3px solid var(--color-ink);
-  outline-offset: 2px;
-}
-
-.doorway__card--selected {
-  background: var(--color-warm-paper);
-  border-color: var(--color-sun);
-  border-width: 2px;
-  box-shadow: 0 2px 12px rgba(244, 197, 66, 0.18);
-}
-
-.doorway__card-dot {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(17, 17, 17, 0.25);
-  background: transparent;
-  transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast);
-}
-
-.doorway__card--selected .doorway__card-dot {
-  background: var(--color-sun);
-  border-color: var(--color-sun);
-}
-
-.doorway__card-label {
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: var(--weight-medium);
-  color: var(--color-ink);
-  line-height: var(--lh-ui);
-}
-
 @media (max-width: 640px) {
-  .doorway__cards-list { grid-template-columns: 1fr; }
   .doorway__form { max-width: 100%; }
 }
 </style>

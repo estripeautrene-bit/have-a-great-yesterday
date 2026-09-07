@@ -17,9 +17,15 @@ The MyDopa project is a separate repository and product. Never modify it. Do not
 
 **Hero CTA (exact copy):** `Show me what I can do from here.`
 
-**Pain-choice prompt (exact copy):** `Tell us what you're going through`
+**Doorway module (homepage `#doorway` section) — v1 scope:**
+The situation-card selector ("Or start with what brought you here") and all seven pain-choice cards were removed from the initial release to focus on the core writing + submission flow. The doorway now contains only: heading, subhead, textarea, submit button, and reassurance. `situationCard` is always `null` from the homepage.
 
-**Seven pain choices (stored in `content/pain-choices.json`):**
+**Pain-point pages — postponed:**
+The seven situation-specific guided pages (`/what-are-you-going-through/[slug]`) are postponed as a separate future SEO and LLM-discovery project. `content/pain-choices.json`, `usePainChoices.ts`, and `PainChoices.vue` are retained in the repo but not mounted on the homepage.
+
+**Pain-choice prompt (exact copy, for future use):** `Tell us what you're going through`
+
+**Seven pain choices (stored in `content/pain-choices.json`, not currently active):**
 1. Job or career disruption
 2. Divorce or breakup
 3. Health uncertainty
