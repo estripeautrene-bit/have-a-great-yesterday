@@ -71,12 +71,10 @@ onUnmounted(() => {
   >
     <div class="container">
       <h2 id="doorway-heading" class="doorway__heading">
-        Tell us a little about your actual life.
+        Would you like to see how MyHGY could help you?
       </h2>
       <p class="doorway__subhead">
-        A few sentences about your days is plenty—the people in them, what you do, what you carry,
-        what you enjoy, and anything specific that brought you here. We'll show you a personalized
-        Starting Point: where meaningful moments may already be happening.
+        Tell us what's going on in your life and why MyHGY caught your attention. We'll show you where the practice could make a difference.
       </p>
 
       <form class="doorway__form" novalidate @submit.prevent="handleSubmit">
@@ -85,7 +83,7 @@ onUnmounted(() => {
           id="doorway-input"
           v-model="writtenText"
           class="doorway__textarea"
-          placeholder="Start anywhere—a normal Tuesday is perfect."
+          placeholder="Tell us a little about your life…"
           rows="3"
           aria-describedby="doorway-reassurance"
           @input="onInput"
@@ -113,7 +111,7 @@ onUnmounted(() => {
             <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="4.93" x2="6.34" y1="19.07" y2="17.66" />
             <line stroke="currentColor" stroke-linecap="round" stroke-width="2" x1="17.66" x2="19.07" y1="6.34" y2="4.93" />
           </svg>
-          Show me my Starting Point
+          Show Me How MyHGY Could Help
         </button>
         <p id="doorway-reassurance" class="doorway__reassurance">
           No account or email needed to see it.
