@@ -60,6 +60,7 @@ export const FIXED_PRACTICE_LINE =
 // ── Composable ───────────────────────────────────────────────────────────
 
 export function useDoorwaySession() {
+  const { apiBase } = useRuntimeConfig().public
   const state = useState<DoorwayState>('doorway.state', () => 'ENTRY')
   const sessionInput = useState<SessionInput | null>('doorway.input', () => null)
   const followupAnswer = useState<FollowupAnswer | null>('doorway.followup', () => null)
@@ -79,7 +80,7 @@ export function useDoorwaySession() {
       followupChip: followupAnswer.value?.chip ?? null,
       followupText: followupAnswer.value?.freeText ?? null,
     }
-    const res = await fetch('/api/doorway', {
+    const res = await fetch(`${apiBase}/api/doorway`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -148,7 +149,7 @@ export function useDoorwaySession() {
   async function submitEmail(fields: { firstName: string; email: string; consent: boolean }) {
     state.value = 'EMAIL_SUBMITTING'
     try {
-      const res = await fetch('/api/capture-email', {
+      const res = await fetch(`${apiBase}/api/capture-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(fields),

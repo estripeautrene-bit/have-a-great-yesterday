@@ -41,6 +41,10 @@ export default defineNuxtConfig({
       posthogKey: '',
       posthogHost: 'https://us.i.posthog.com',
       siteUrl: 'http://localhost:3000',
+      // Empty on Cloudflare Pages (Functions co-located); set to the Cloudflare
+      // Pages URL via NUXT_PUBLIC_API_BASE in GitHub Actions so that the GitHub
+      // Pages build routes API calls to the correct host.
+      apiBase: '',
     },
   },
 })

@@ -16,6 +16,7 @@ const formValid = computed(
     && consent.value === true,
 )
 
+const { apiBase } = useRuntimeConfig().public
 const { $posthog } = useNuxtApp()
 function track(name: string, extras: Record<string, unknown> = {}) {
   if ($posthog.__loaded) $posthog.capture(name, extras)
@@ -25,7 +26,7 @@ async function submitForm() {
   if (!formValid.value || formState.value === 'submitting') return
   formState.value = 'submitting'
   try {
-    const res = await fetch('/api/capture-email', {
+    const res = await fetch(`${apiBase}/api/capture-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
