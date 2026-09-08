@@ -84,8 +84,8 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
 
   const combined = combinedText(response)
   const combinedWords = wordCount(combined)
-  if (combinedWords < 150 || combinedWords > 500) {
-    failures.push(`word count out of range (150–500): got ${combinedWords}`)
+  if (combinedWords < 230 || combinedWords > 330) {
+    failures.push(`word count out of range (230–330): got ${combinedWords}`)
   }
 
   // Banned phrases (case-insensitive)

@@ -66,9 +66,8 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   const firstName = b.firstName.trim()
   const email = b.email.trim()
 
-  // If Loops key absent, queue silently — never break the user flow.
   if (!env.LOOPS_API_KEY) {
-    return jsonResponse({ ok: true, queued: true }, 200)
+    return jsonResponse({ error: 'service_misconfigured' }, 502)
   }
 
   try {
