@@ -30,19 +30,9 @@ describe('SYSTEM_PROMPT content checks', () => {
     expect(SYSTEM_PROMPT).not.toContain('OPENAI_API_KEY')
   })
 
-  it('does not contain the banned word "free," as a standalone in prose', () => {
-    // We check for the banned form (word "free" followed by comma), which
-    // would only appear in prose — not inside the banned-words list itself,
-    // where "free," is followed by " proof" per the source-of-truth list.
-    // The banned list in the prompt is: "free, proof, evidence, one step..."
-    // So "free, proof" appears there. We assert no OTHER "free," appears —
-    // simpler: the banned word list is fixed, so we just check that outside
-    // the banned-words line the prose does not use "free,".
-    const withoutBannedLine = SYSTEM_PROMPT.replace(
-      /BANNED WORDS AND PHRASES[\s\S]*?reason/,
-      '',
-    )
-    expect(withoutBannedLine).not.toContain('free,')
+  it('bans the canned phrase "feel free" in the BANNED WORDS section', () => {
+    const bannedSection = SYSTEM_PROMPT.match(/BANNED WORDS AND PHRASES[\s\S]*/)
+    expect(bannedSection?.[0]).toMatch(/feel free/i)
   })
 
   // ── Canon section 2 — governing belief ──────────────────────────────────
@@ -134,6 +124,54 @@ describe('SYSTEM_PROMPT content checks', () => {
 
   it('exports MYHGY_DOORWAY_BRAIN_VERSION as "1.0.0"', () => {
     expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('1.0.0')
+  })
+
+  // ── New situations: gambling, procrastination, pornography, anxiety ──────
+
+  it('contains gambling guidance positioned as supportive practice not treatment', () => {
+    expect(SYSTEM_PROMPT.toLowerCase()).toContain('gambling')
+    // Must explicitly state it is alongside, not a replacement for, specialized help
+    const gamblingBlock = SYSTEM_PROMPT.match(/compulsive gambling[\s\S]{0,600}/)
+    expect(gamblingBlock?.[0]).toMatch(/not a replacement for|alongside.*not|Gamblers Anonymous/i)
+  })
+
+  it('gambling guidance names a recognized specialized resource', () => {
+    const gamblingBlock = SYSTEM_PROMPT.match(/compulsive gambling[\s\S]{0,600}/)
+    expect(gamblingBlock?.[0]).toMatch(/Gamblers Anonymous|counseling|treatment program/i)
+  })
+
+  it('gambling guidance explicitly prohibits claiming MyHGY treats gambling disorder', () => {
+    const gamblingBlock = SYSTEM_PROMPT.match(/With compulsive gambling:[\s\S]{0,800}/)
+    expect(gamblingBlock?.[0]).toMatch(/Never claim MyHGY treats gambling/i)
+  })
+
+  it('contains procrastination guidance', () => {
+    expect(SYSTEM_PROMPT).toMatch(/procrastinat/i)
+  })
+
+  it('procrastination guidance names observable moments (task started, decision made)', () => {
+    const procBlock = SYSTEM_PROMPT.match(/With procrastination[\s\S]{0,600}/)
+    expect(procBlock?.[0]).toMatch(/task started|decision made|moved forward/i)
+  })
+
+  it('contains pornography guidance positioned as supportive practice not treatment', () => {
+    expect(SYSTEM_PROMPT).toMatch(/pornograph/i)
+    const pornBlock = SYSTEM_PROMPT.match(/With compulsive pornograph[\s\S]{0,800}/)
+    expect(pornBlock?.[0]).toMatch(/not a replacement for|professional support|recovery program/i)
+  })
+
+  it('pornography guidance explicitly prohibits claiming MyHGY treats sexual compulsion', () => {
+    const pornBlock = SYSTEM_PROMPT.match(/With compulsive pornograph[\s\S]{0,800}/)
+    expect(pornBlock?.[0]).toMatch(/Never claim MyHGY treats sexual compulsion/i)
+  })
+
+  it('contains anxiety or overwhelm guidance', () => {
+    expect(SYSTEM_PROMPT).toMatch(/anxiety or overwhelm/i)
+  })
+
+  it('anxiety guidance prohibits diagnosing or claiming MyHGY treats anxiety disorders', () => {
+    const anxBlock = SYSTEM_PROMPT.match(/With anxiety or overwhelm:[\s\S]{0,600}/)
+    expect(anxBlock?.[0]).toMatch(/Do not diagnose anxiety|claim MyHGY treats anxiety/i)
   })
 })
 

@@ -10,8 +10,7 @@ const textareaRef = ref<HTMLTextAreaElement | null>(null)
 let viewObserver: IntersectionObserver | null = null
 
 const EXAMPLE_CARDS: readonly string[] = [
-  'I have ADD.',
-  'I have ADHD.',
+  'I have ADD or ADHD.',
   "I'm getting divorced.",
   'I stopped drinking.',
   'I lost my job.',
@@ -19,6 +18,10 @@ const EXAMPLE_CARDS: readonly string[] = [
   'I am overweight.',
   'I am depressed.',
   'I feel behind in life.',
+  "I can't stop gambling.",
+  'I keep putting things off.',
+  'Porn is affecting my life.',
+  'I feel anxious or overwhelmed.',
 ] as const
 
 const { $posthog } = useNuxtApp()
