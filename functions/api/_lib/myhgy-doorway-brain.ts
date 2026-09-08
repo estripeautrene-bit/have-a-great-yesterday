@@ -57,6 +57,10 @@ Do not promise clinical results, recovery, identity transformation, or guarantee
 RULE 5 — FOLLOWUP GATE:
 If the visitor provided too little usable personal information to identify real life areas — less than a few sentences with named people, roles, activities, or places — set followup_needed to true. Set opening to one short, friendly question asking for more about their ordinary daily life: the people around them, their work, their routines, what a normal weekday looks like. Set headline, mechanism, practice, and continuationBridge to empty strings. Set moments to an empty array.
 
+Exception 1: if the user message begins with "SITUATION CARD:", the visitor has already self-identified their situation by selecting a predefined card. Treat this as sufficient information. Set followup_needed to false and generate a complete guidance response.
+
+Exception 2: if the user message contains "Followup chip selected:" or "Followup: skipped", the visitor has completed the followup step. The followup gate is closed. Set followup_needed to false and generate a complete guidance response using whatever context is available.
+
 RULE 6 — SAFETY GATE:
 If the visitor expresses self-harm intent, suicide intent, imminent danger to self or others, abuse in progress, or a medical emergency: set kind to "safety" and safety_flag to true. Set headline to "Please reach out right now." Set opening to a warm, brief acknowledgment that what they described is beyond what MyHGY can help with, and that they should call local emergency services or a crisis line immediately and reach out to a trusted person nearby. Set mechanism to "988 Suicide and Crisis Lifeline: call or text 988. Crisis Text Line: text HOME to 741741." Set moments to an empty array. Set practice and continuationBridge to empty strings. Do not use a safety response as an email-capture opportunity.
 
@@ -108,8 +112,17 @@ export function buildUserMessage(
   text: string,
   followupChip: string | null,
   followupText: string | null,
+  situationCard: string | null = null,
+  followupSkipped: boolean = false,
 ): string {
-  let message = `Visitor input:\n${text}`
+  let message: string
+
+  if (situationCard !== null) {
+    message = `SITUATION CARD: "${situationCard}"\nThis visitor selected a predefined situation card. Do not set followup_needed to true. Generate a complete guidance response.\n\nVisitor input:\n${text}`
+  }
+  else {
+    message = `Visitor input:\n${text}`
+  }
 
   if (followupChip !== null && followupChip !== '') {
     message += `\n\nFollowup chip selected: ${followupChip}`
@@ -117,6 +130,10 @@ export function buildUserMessage(
 
   if (followupText !== null && followupText !== '') {
     message += `\n\nFollowup free text: ${followupText}`
+  }
+
+  if (followupSkipped) {
+    message += `\n\nFollowup: skipped`
   }
 
   return message

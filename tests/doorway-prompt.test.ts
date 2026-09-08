@@ -215,3 +215,74 @@ describe('buildUserMessage', () => {
     expect(msg).not.toContain('Followup free text:')
   })
 })
+
+// ── Card submission routing ──────────────────────────────────────────────────
+
+const SITUATION_CARDS = [
+  'I have ADD or ADHD.',
+  "I'm getting divorced.",
+  'I stopped drinking.',
+  'I lost my job.',
+  'Someone I love died.',
+  'I am overweight.',
+  'I am depressed.',
+  'I feel behind in life.',
+  "I can't stop gambling.",
+  'I keep putting things off.',
+  'Porn is affecting my life.',
+  'I feel anxious or overwhelmed.',
+] as const
+
+describe('buildUserMessage — all 12 situation cards bypass followup gate', () => {
+  for (const card of SITUATION_CARDS) {
+    it(`card "${card}" includes SITUATION CARD marker`, () => {
+      const msg = buildUserMessage(card, null, null, card)
+      expect(msg).toContain('SITUATION CARD:')
+      expect(msg).toContain(card)
+    })
+
+    it(`card "${card}" does not include followup chip section`, () => {
+      const msg = buildUserMessage(card, null, null, card)
+      expect(msg).not.toContain('Followup chip selected:')
+    })
+  }
+
+  it('card submission includes directive against followup_needed', () => {
+    const msg = buildUserMessage('I have ADD or ADHD.', null, null, 'I have ADD or ADHD.')
+    expect(msg).toMatch(/do not set followup_needed to true/i)
+  })
+
+  it('typed entry without a card does not include SITUATION CARD marker', () => {
+    const msg = buildUserMessage('I work at a school and I have two kids.', null, null, null)
+    expect(msg).not.toContain('SITUATION CARD:')
+  })
+
+  it('typed entry without a card starts with Visitor input:', () => {
+    const msg = buildUserMessage('I work at a school and I have two kids.', null, null, null)
+    expect(msg).toMatch(/^Visitor input:/)
+  })
+})
+
+// ── Follow-up chip buttons and skip ─────────────────────────────────────────
+
+const FOLLOWUP_CHIPS = ['Work', 'The kids / family', 'Something for me', 'Someone else'] as const
+
+describe('buildUserMessage — followup chip buttons', () => {
+  for (const chip of FOLLOWUP_CHIPS) {
+    it(`chip "${chip}" appears in the Followup chip section`, () => {
+      const msg = buildUserMessage('My days are pretty typical.', chip, null, null)
+      expect(msg).toContain(`Followup chip selected: ${chip}`)
+    })
+  }
+
+  it('skip (null chip) does not include Followup chip section', () => {
+    const msg = buildUserMessage('My days are pretty typical.', null, null, null)
+    expect(msg).not.toContain('Followup chip selected:')
+  })
+
+  it('chip and followup text both appear when provided together', () => {
+    const msg = buildUserMessage('My days are pretty typical.', 'Work', 'mornings are hectic', null)
+    expect(msg).toContain('Followup chip selected: Work')
+    expect(msg).toContain('mornings are hectic')
+  })
+})

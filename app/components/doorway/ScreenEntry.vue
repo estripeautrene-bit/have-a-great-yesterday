@@ -2,6 +2,7 @@
 const { reset, submitInput } = useDoorwaySession()
 
 const writtenText = ref('')
+const selectedCard = ref<string | null>(null)
 const hasTyped = ref(false)
 const hasTrackedStart = ref(false)
 const showEmptyHint = ref(false)
@@ -32,6 +33,7 @@ function onInput(e: Event) {
   const el = e.target as HTMLTextAreaElement
   el.style.height = 'auto'
   el.style.height = `${el.scrollHeight}px`
+  selectedCard.value = null // user is now typing, not using a card
   if (!hasTyped.value) hasTyped.value = true
   if (writtenText.value.trim().length > 0) showEmptyHint.value = false
   if (!hasTrackedStart.value) {
@@ -48,6 +50,7 @@ function focusTextarea() {
 
 function handleCardClick(text: string) {
   writtenText.value = text
+  selectedCard.value = text
   showEmptyHint.value = false
   hasTyped.value = true
   if (!hasTrackedStart.value) {
@@ -66,7 +69,7 @@ function handleSubmit() {
   }
   isSubmitting.value = true
   track('doorway_submitted', { source: 'direct' })
-  submitInput({ text: writtenText.value, situationCard: null, source: 'direct' })
+  submitInput({ text: writtenText.value, situationCard: selectedCard.value, source: 'direct' })
 }
 
 onMounted(() => {

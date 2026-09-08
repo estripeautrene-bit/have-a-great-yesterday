@@ -38,5 +38,17 @@ export function validateInput(body: unknown): string | null {
     }
   }
 
+  if (b.situationCard !== undefined && b.situationCard !== null) {
+    if (typeof b.situationCard !== 'string') {
+      return 'Field "situationCard", if present and non-null, must be a string.'
+    }
+  }
+
+  if (b.followupSkipped !== undefined && b.followupSkipped !== null) {
+    if (typeof b.followupSkipped !== 'boolean') {
+      return 'Field "followupSkipped", if present and non-null, must be a boolean.'
+    }
+  }
+
   return null
 }

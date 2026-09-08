@@ -32,6 +32,7 @@ async function callOpenAI(
   userMessage: string,
   reqId: string,
   attempt: number,
+  forceGuidance: boolean = false,
 ): Promise<{ response: DoorwayApiResponse | null; log: AttemptLog }> {
   let openaiRespId: string | null = null
   let openaiStatus: number | null = null
@@ -76,6 +77,17 @@ async function callOpenAI(
       const log: AttemptLog = {
         attempt, category: 'quality', failures: quality.failures,
         wordCount: quality.wordCount, openaiStatus: null, openaiRespId,
+      }
+      console.log(JSON.stringify({ reqId, ...log }))
+      return { response: null, log }
+    }
+
+    // Guard: card submissions and followup completions must never produce a followup response.
+    if (forceGuidance && parsed.meta.followup_needed) {
+      const log: AttemptLog = {
+        attempt, category: 'quality',
+        failures: ['force_guidance: followup_needed must be false for card or followup-complete submissions'],
+        wordCount: 0, openaiStatus: null, openaiRespId,
       }
       console.log(JSON.stringify({ reqId, ...log }))
       return { response: null, log }
@@ -139,8 +151,13 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   const text = b.text as string
   const followupChip = (b.followupChip as string | null | undefined) ?? null
   const followupText = (b.followupText as string | null | undefined) ?? null
+  const situationCard = (b.situationCard as string | null | undefined) ?? null
+  const followupSkipped = (b.followupSkipped as boolean | undefined) ?? false
+  const isCard = situationCard !== null
+  const isFollowup = (followupChip !== null && followupChip !== '') || followupSkipped
+  const forceGuidance = isCard || isFollowup
 
-  const userMessage = buildUserMessage(text, followupChip, followupText)
+  const userMessage = buildUserMessage(text, followupChip, followupText, situationCard, followupSkipped)
   const reqId = crypto.randomUUID().slice(0, 8)
 
   let client: OpenAI
@@ -152,11 +169,11 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   }
 
   try {
-    const { response: r1, log: l1 } = await callOpenAI(client, userMessage, reqId, 1)
+    const { response: r1, log: l1 } = await callOpenAI(client, userMessage, reqId, 1, isCard)
     if (r1 !== null) return jsonResponse(r1, 200)
 
     const retryMessage = `${userMessage}\n\nPrevious response failed validation: ${l1.failures.join('; ')}. Please correct these issues.`
-    const { response: r2, log: l2 } = await callOpenAI(client, retryMessage, reqId, 2)
+    const { response: r2 } = await callOpenAI(client, retryMessage, reqId, 2, isCard)
     if (r2 !== null) return jsonResponse(r2, 200)
 
     return jsonResponse({ error: 'service_error' }, 502)

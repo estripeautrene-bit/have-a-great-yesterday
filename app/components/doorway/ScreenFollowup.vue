@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useDoorwaySession } from '~/composables/useDoorwaySession'
+
 const CHIPS = ['Work', 'The kids / family', 'Something for me', 'Someone else'] as const
 
 const { submitFollowup, skipFollowup } = useDoorwaySession()
@@ -17,15 +20,18 @@ function selectChip(chip: string) {
   >
     <div class="container container--md followup__inner">
 
-      <p id="followup-heading" class="followup__question">
-        One thing before we show you this: when a day does go a little right — a small one
-        counts — where does it usually come from?
+      <h1 id="followup-heading" class="followup__heading">
+        One quick question
+      </h1>
+
+      <p class="followup__body">
+        To make this more useful for you, where do the better moments in your day usually come from?
       </p>
 
       <div
         class="followup__chips"
         role="group"
-        aria-label="Where a good day usually comes from"
+        aria-label="Where the better moments in your day usually come from"
       >
         <button
           v-for="chip in CHIPS"
@@ -41,7 +47,7 @@ function selectChip(chip: string) {
       </div>
 
       <button type="button" class="followup__skip" @click="skipFollowup()">
-        Skip — show me what you found
+        Skip this question
       </button>
 
     </div>
@@ -52,17 +58,25 @@ function selectChip(chip: string) {
 .followup__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: var(--space-8);
   max-width: var(--container-md);
 }
 
-.followup__question {
+.followup__heading {
   font-family: var(--font-display);
-  font-size: var(--text-h2);
-  font-weight: var(--weight-bold);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-extrabold);
   color: var(--color-ink);
   line-height: var(--lh-heading);
-  max-width: 38ch;
+  max-width: 22ch;
+}
+
+.followup__body {
+  font-size: var(--text-body-lg);
+  line-height: var(--lh-body);
+  color: var(--color-ink);
+  max-width: 48ch;
+  margin-top: calc(var(--space-8) * -0.5);
 }
 
 /* ── Chips ───────────────────────────────────────────────── */

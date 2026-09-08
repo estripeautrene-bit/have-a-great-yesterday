@@ -26,6 +26,7 @@ export interface SessionInput {
 export interface FollowupAnswer {
   chip: string | null
   freeText: string
+  skipped?: boolean
 }
 
 export interface MomentItem {
@@ -77,8 +78,10 @@ export function useDoorwaySession() {
     const body = {
       text: sessionInput.value!.text,
       source: sessionInput.value!.source,
+      situationCard: sessionInput.value!.situationCard,
       followupChip: followupAnswer.value?.chip ?? null,
       followupText: followupAnswer.value?.freeText ?? null,
+      followupSkipped: followupAnswer.value?.skipped ?? false,
     }
     const res = await fetch(`${apiBase}/api/doorway`, {
       method: 'POST',
@@ -130,6 +133,7 @@ export function useDoorwaySession() {
   }
 
   function skipFollowup() {
+    followupAnswer.value = { chip: null, freeText: '', skipped: true }
     void generate()
   }
 
