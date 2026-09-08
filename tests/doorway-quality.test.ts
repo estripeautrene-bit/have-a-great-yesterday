@@ -48,12 +48,19 @@ describe('qualityCheck', () => {
     expect(result.failures).toEqual([])
   })
 
-  it('rejects a response that uses the banned phrase "free"', () => {
+  it('rejects a response that uses the banned phrase "feel free"', () => {
     const bad = makeValidGuidance()
-    bad.opening = `Your Starting Point is free and yours to keep. ${bad.opening}`
+    bad.opening = `Feel free to start whenever you are ready. ${bad.opening}`
     const result = qualityCheck(bad)
     expect(result.valid).toBe(false)
-    expect(result.failures.some(f => f.toLowerCase().includes('free'))).toBe(true)
+    expect(result.failures.some(f => f.includes('"feel free"'))).toBe(true)
+  })
+
+  it('allows normal uses of the word "free" such as "free time"', () => {
+    const good = makeValidGuidance()
+    good.opening = `You mentioned having some free time in your schedule. ${good.opening}`
+    const result = qualityCheck(good)
+    expect(result.failures.some(f => f.includes('"feel free"'))).toBe(false)
   })
 
   it('rejects a response that uses the banned word "journey"', () => {
@@ -184,7 +191,7 @@ describe('qualityCheck', () => {
   })
 
   it('exports the full BANNED_PHRASES list including canon section 6 additions', () => {
-    expect(BANNED_PHRASES).toContain('free')
+    expect(BANNED_PHRASES).toContain('feel free')
     expect(BANNED_PHRASES).toContain('journey')
     expect(BANNED_PHRASES).toContain('proof')
     // Canon section 6 additions

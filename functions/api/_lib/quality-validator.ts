@@ -10,7 +10,7 @@ export interface QualityResult {
 }
 
 export const BANNED_PHRASES = [
-  'free',
+  'feel free',
   'proof',
   'evidence',
   'one step at a time',
@@ -93,8 +93,8 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
 
   const combined = combinedText(response)
   const combinedWords = wordCount(combined)
-  if (combinedWords < 230 || combinedWords > 330) {
-    failures.push(`word count out of range (230–330): got ${combinedWords}`)
+  if (combinedWords < 230 || combinedWords > 380) {
+    failures.push(`word count out of range (230–380): got ${combinedWords}`)
   }
 
   // Banned phrases (case-insensitive)

@@ -8,8 +8,6 @@ interface Env {
   OPENAI_API_KEY: string
 }
 
-// TEMPORARY: debug fields included in 502 body so failures are observable
-// without wrangler tail. Remove debug field once the diagnostic pass is done.
 interface AttemptLog {
   attempt: number
   category: 'structural' | 'quality' | 'openai_threw' | 'success'
@@ -161,11 +159,7 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
     const { response: r2, log: l2 } = await callOpenAI(client, retryMessage, reqId, 2)
     if (r2 !== null) return jsonResponse(r2, 200)
 
-    // TEMPORARY debug body — remove after diagnostic pass
-    return jsonResponse({
-      error: 'service_error',
-      debug: { reqId, attempt1: l1, attempt2: l2 },
-    }, 502)
+    return jsonResponse({ error: 'service_error' }, 502)
   }
   catch {
     return jsonResponse({ error: 'service_error' }, 502)
