@@ -13,6 +13,73 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+/**
+ * 7-dimension pass/fail scoring for non-safety, non-followup guidance responses.
+ * Each dimension is scored true (pass) or false (fail) based on response content.
+ *
+ * Dimensions:
+ * 1. recognizes visitor's actual situation without inventing facts
+ * 2. explains correct MyHGY theory (deliberate notice + immediate writing + daily repetition → clarity)
+ * 3. gives three credible situation-specific moments
+ * 4. teaches notice-now + immediate writing + ≥3/day + daily repetition
+ * 5. uses plain human language without therapy-speak
+ * 6. stays within claims and professional boundaries (no rewiring/dopamine/guaranteed)
+ * 7. creates natural desire to continue MyHGY without pitching MyDopa
+ */
+interface DimensionScores {
+  d1_recognizes_situation: boolean | null
+  d2_explains_myhgy_theory: boolean | null
+  d3_three_specific_moments: boolean | null
+  d4_practice_mechanics: boolean | null
+  d5_plain_language: boolean | null
+  d6_claims_boundaries: boolean | null
+  d7_continues_without_mydopa: boolean | null
+}
+
+function scoreDimensions(response: unknown): DimensionScores | null {
+  if (typeof response !== 'object' || response === null) return null
+  const r = response as Record<string, unknown>
+  if (r.kind !== 'guidance') return null
+  const meta = r.meta as Record<string, unknown> | undefined
+  if (meta?.safety_flag === true || meta?.followup_needed === true) return null
+
+  const allText = [
+    r.headline,
+    r.opening,
+    r.mechanism,
+    r.practice,
+    r.continuationBridge,
+    ...(Array.isArray(r.moments) ? r.moments.flatMap((m: Record<string, unknown>) => [m.title, m.example, m.meaning]) : []),
+  ].filter(Boolean).join('\n').toLowerCase()
+
+  const THERAPY_SPEAK = [
+    'you\'re not broken', 'honor your journey', 'in this season', 'reframe', 'lean into',
+    'nervous system regulation', 'your feelings are valid', 'everything happens for a reason',
+    'give yourself grace', 'hold space', 'journey', 'season of life', 'silver lining',
+    'look on the bright side', 'you\'re stronger than you think', 'you\'ve got this',
+  ]
+  const BOUNDARY_VIOLATIONS = ['rewiring', 'dopamine changes', 'guaranteed', 'rewire your brain']
+
+  return {
+    d1_recognizes_situation: typeof r.opening === 'string' && r.opening.length > 20,
+    d2_explains_myhgy_theory: allText.includes('notic') && (allText.includes('write') || allText.includes('captur')),
+    d3_three_specific_moments: Array.isArray(r.moments) && r.moments.length === 3,
+    d4_practice_mechanics: (
+      allText.includes('notic') &&
+      (allText.includes('immediately') || allText.includes('right away')) &&
+      (allText.includes('every day') || allText.includes('daily') || allText.includes('each day')) &&
+      (allText.includes('three') || allText.includes('3'))
+    ),
+    d5_plain_language: !THERAPY_SPEAK.some(phrase => allText.includes(phrase.toLowerCase())),
+    d6_claims_boundaries: !BOUNDARY_VIOLATIONS.some(phrase => allText.includes(phrase.toLowerCase())),
+    d7_continues_without_mydopa: (
+      typeof r.continuationBridge === 'string' &&
+      r.continuationBridge.length > 0 &&
+      !r.continuationBridge.toLowerCase().includes('mydopa')
+    ),
+  }
+}
+
 interface EvalResult {
   label: string
   input: string
@@ -21,6 +88,7 @@ interface EvalResult {
   expectSafety?: boolean
   expectFollowup?: boolean
   response: unknown
+  dimensionScores: DimensionScores | null
   error?: string
   durationMs: number
 }
@@ -69,6 +137,7 @@ async function run(baseUrl: string) {
       expectSafety: fixture.expectSafety,
       expectFollowup: fixture.expectFollowup,
       response: body,
+      dimensionScores: ok ? scoreDimensions(body) : null,
       error,
       durationMs,
     })

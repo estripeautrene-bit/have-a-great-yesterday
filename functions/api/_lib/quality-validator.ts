@@ -24,6 +24,14 @@ export const BANNED_PHRASES = [
   'the hardest part',
   'silver lining',
   'look on the bright side',
+  "you're not broken",
+  'honor your journey',
+  'in this season',
+  'reframe',
+  'lean into',
+  'nervous system regulation',
+  'your feelings are valid',
+  'everything happens for a reason',
 ]
 
 function combinedText(response: DoorwayApiResponse): string {

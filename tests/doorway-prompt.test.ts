@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { SYSTEM_PROMPT, buildUserMessage } from '../functions/api/_lib/myhgy-doorway-brain'
+import { SYSTEM_PROMPT, MYHGY_DOORWAY_BRAIN_VERSION, buildUserMessage } from '../functions/api/_lib/myhgy-doorway-brain'
 
 describe('SYSTEM_PROMPT content checks', () => {
   it('contains "Never invent"', () => {
@@ -39,10 +39,101 @@ describe('SYSTEM_PROMPT content checks', () => {
     // simpler: the banned word list is fixed, so we just check that outside
     // the banned-words line the prose does not use "free,".
     const withoutBannedLine = SYSTEM_PROMPT.replace(
-      /BANNED WORDS AND PHRASES[\s\S]*?bright side/,
+      /BANNED WORDS AND PHRASES[\s\S]*?reason/,
       '',
     )
     expect(withoutBannedLine).not.toContain('free,')
+  })
+
+  // ── Canon section 2 — governing belief ──────────────────────────────────
+
+  it('contains "personal development deserves a practice" governing belief', () => {
+    expect(SYSTEM_PROMPT.toLowerCase()).toContain('personal development deserves a practice')
+  })
+
+  // ── Canon section 3 — canonical practice ────────────────────────────────
+
+  it('requires at least three good things (≥3)', () => {
+    expect(SYSTEM_PROMPT).toMatch(/at least three|three.*minimum/i)
+  })
+
+  it('specifies noticing while happening', () => {
+    expect(SYSTEM_PROMPT).toMatch(/notic\w* .{0,30}happen/i)
+  })
+
+  it('specifies writing immediately', () => {
+    expect(SYSTEM_PROMPT).toMatch(/write .{0,20}immediately|immediately .{0,20}write/i)
+  })
+
+  it('specifies repeating every day / daily', () => {
+    expect(SYSTEM_PROMPT).toMatch(/repeat .{0,20}every day|repeat .{0,20}daily/i)
+  })
+
+  it('specifies carrying a small notebook and pen', () => {
+    expect(SYSTEM_PROMPT).toMatch(/small notebook and pen/i)
+  })
+
+  it('specifies that later review is optional', () => {
+    expect(SYSTEM_PROMPT).toMatch(/review.{0,20}optional|optional.{0,20}review/i)
+  })
+
+  // ── Canon section 6 — not gratitude journaling ──────────────────────────
+
+  it('explicitly states it is not gratitude journaling', () => {
+    expect(SYSTEM_PROMPT).toMatch(/not gratitude journal/i)
+  })
+
+  // ── Canon section 7 — no unsupported claims ─────────────────────────────
+
+  it('bans "rewiring" claims in the prompt', () => {
+    expect(SYSTEM_PROMPT).toMatch(/rewiring/i)
+    // Must appear in the banned list, not as a positive claim
+    const bannedSection = SYSTEM_PROMPT.match(/BANNED WORDS[\s\S]*/)
+    expect(bannedSection?.[0]).toMatch(/rewiring/i)
+  })
+
+  it('bans "dopamine changes" claims in the prompt', () => {
+    const bannedSection = SYSTEM_PROMPT.match(/BANNED WORDS[\s\S]*/)
+    expect(bannedSection?.[0]).toMatch(/dopamine/i)
+  })
+
+  it('bans "guaranteed" claims in the prompt', () => {
+    const bannedSection = SYSTEM_PROMPT.match(/BANNED WORDS[\s\S]*/)
+    expect(bannedSection?.[0]).toMatch(/guaranteed/i)
+  })
+
+  // ── Canon section 8 — MyDopa separation ────────────────────────────────
+
+  it('instructs continuationBridge must not mention MyDopa', () => {
+    expect(SYSTEM_PROMPT).toMatch(/[Dd]o not mention MyDopa|not mention MyDopa|[Mm]y[Dd]opa.*[Ss]eparation|[Dd]oes not mention MyDopa/i)
+  })
+
+  // ── Canon section 9 — no external authors ───────────────────────────────
+
+  it('prohibits citing external authors', () => {
+    expect(SYSTEM_PROMPT).toMatch(/external author|no.*author|Do not cite/i)
+  })
+
+  // ── Voice — plain language instruction ──────────────────────────────────
+
+  it('instructs plain/ordinary language at ~7th grade level', () => {
+    expect(SYSTEM_PROMPT).toMatch(/7th grade|thirteen.year.old|ordinary words/i)
+  })
+
+  // ── Safety branch is separate and distinct ──────────────────────────────
+
+  it('safety branch is a distinct numbered rule (RULE 6)', () => {
+    expect(SYSTEM_PROMPT).toContain('RULE 6 — SAFETY GATE')
+  })
+
+  it('safety response must set kind to "safety"', () => {
+    expect(SYSTEM_PROMPT).toMatch(/set kind to .safety./i)
+  })
+
+  // ── Version export ───────────────────────────────────────────────────────
+
+  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "1.0.0"', () => {
+    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('1.0.0')
   })
 })
 

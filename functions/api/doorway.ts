@@ -26,6 +26,7 @@ async function callOpenAI(
     const response = await client.responses.create({
       model: 'gpt-5.6-terra',
       store: false,
+      reasoning: { effort: 'none' },
       input: [
         { role: 'system', content: SYSTEM_PROMPT },
         { role: 'user', content: userMessage },

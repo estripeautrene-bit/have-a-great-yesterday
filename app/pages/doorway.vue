@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { FIXED_PRACTICE_LINE } from '~/composables/useDoorwaySession'
 
-// Testing shell for Item 2. Exercises all state-machine transitions end-to-end.
-// /what-are-you-going-through retains its existing placeholder — untouched.
-// When Screen 0/1 components land in Item 3, this shell gets replaced.
 usePageSeo({
   title: 'Your Starting Point — HaveAGreatYesterday.com',
   description: 'A personalized Starting Point for your days.',
@@ -14,20 +11,8 @@ usePageSeo({
 const {
   state,
   response,
-  reset,
-  submitInput,
-  skipFollowup,
   retryGeneration,
 } = useDoorwaySession()
-
-// Standalone/direct entry: minimal form — Screen 0/1 components replace this in Item 3.
-const directText = ref('')
-const directCanSubmit = computed(() => directText.value.trim().length > 0)
-
-function directSubmit() {
-  if (!directCanSubmit.value) return
-  submitInput({ text: directText.value, situationCard: null, source: 'direct' })
-}
 </script>
 
 <template>
@@ -130,41 +115,8 @@ function directSubmit() {
     <!-- Screen 3 — FOLLOWUP -->
     <DoorwayScreenFollowup v-else-if="state === 'FOLLOWUP'" />
 
-    <!-- ENTRY / INPUT_SUBMITTED — minimal direct-URL input (Screen 0/1 in Item 3) -->
-    <section
-      v-else
-      class="shell-screen section--lg bg-warm-paper"
-      aria-labelledby="entry-heading"
-    >
-      <div class="container container--md shell-screen__inner">
-        <h1 id="entry-heading" class="shell-screen__heading">
-          Let's start with your actual life.
-        </h1>
-        <p class="shell-screen__body">
-          Tell us a little about your days — the work, the people in them, what you carry, what
-          you enjoy. A few sentences is plenty.
-          <em>(Screen 0/1 polish comes in Item 3.)</em>
-        </p>
-        <form novalidate @submit.prevent="directSubmit">
-          <label class="sr-only" for="direct-input">Tell us about your days</label>
-          <textarea
-            id="direct-input"
-            v-model="directText"
-            class="shell-screen__textarea"
-            placeholder="Start anywhere — a normal Tuesday is perfect."
-            rows="4"
-          />
-          <button
-            type="submit"
-            class="shell-screen__cta shell-screen__cta--sun"
-            :disabled="!directCanSubmit"
-          >
-            Show me
-          </button>
-        </form>
-        <p class="shell-screen__reassurance">No account needed.</p>
-      </div>
-    </section>
+    <!-- ENTRY / INPUT_SUBMITTED — canonical entry experience -->
+    <DoorwayScreenEntry v-else />
 
   </div>
 </template>

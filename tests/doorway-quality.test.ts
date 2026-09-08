@@ -183,10 +183,43 @@ describe('qualityCheck', () => {
     expect(result.failures.some(f => f.toLowerCase().includes('code fence'))).toBe(true)
   })
 
-  it('exports the full BANNED_PHRASES list', () => {
+  it('exports the full BANNED_PHRASES list including canon section 6 additions', () => {
     expect(BANNED_PHRASES).toContain('free')
     expect(BANNED_PHRASES).toContain('journey')
     expect(BANNED_PHRASES).toContain('proof')
-    expect(BANNED_PHRASES.length).toBeGreaterThanOrEqual(15)
+    // Canon section 6 additions
+    expect(BANNED_PHRASES).toContain("you're not broken")
+    expect(BANNED_PHRASES).toContain('honor your journey')
+    expect(BANNED_PHRASES).toContain('in this season')
+    expect(BANNED_PHRASES).toContain('reframe')
+    expect(BANNED_PHRASES).toContain('lean into')
+    expect(BANNED_PHRASES).toContain('nervous system regulation')
+    expect(BANNED_PHRASES).toContain('your feelings are valid')
+    expect(BANNED_PHRASES).toContain('everything happens for a reason')
+    expect(BANNED_PHRASES.length).toBeGreaterThanOrEqual(23)
+  })
+
+  it('rejects a response using banned phrase "reframe"', () => {
+    const bad = makeValidGuidance()
+    bad.opening = `${bad.opening} Let's reframe how you see this.`
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('reframe'))).toBe(true)
+  })
+
+  it('rejects a response using banned phrase "nervous system regulation"', () => {
+    const bad = makeValidGuidance()
+    bad.mechanism = `${bad.mechanism} This supports nervous system regulation.`
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('nervous system'))).toBe(true)
+  })
+
+  it('rejects a response using banned phrase "you\'re not broken"', () => {
+    const bad = makeValidGuidance()
+    bad.opening = `You're not broken. ${bad.opening}`
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes("you're not broken"))).toBe(true)
   })
 })
