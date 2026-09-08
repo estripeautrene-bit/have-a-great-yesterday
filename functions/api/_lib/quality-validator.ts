@@ -6,6 +6,7 @@ import { validateDoorwayResponse, type DoorwayApiResponse } from './schema'
 export interface QualityResult {
   valid: boolean
   failures: string[]
+  wordCount: number
 }
 
 export const BANNED_PHRASES = [
@@ -73,7 +74,7 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
 
   // Structural
   if (!validateDoorwayResponse(response)) {
-    return { valid: false, failures: ['structural: validateDoorwayResponse failed'] }
+    return { valid: false, failures: ['structural: validateDoorwayResponse failed'], wordCount: 0 }
   }
 
   const isGuidance = response.kind === 'guidance'
@@ -82,7 +83,7 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
 
   // For safety and followup responses: skip content checks
   if (!isGuidance || followupNeeded || safetyFlag) {
-    return { valid: true, failures: [] }
+    return { valid: true, failures: [], wordCount: 0 }
   }
 
   // Guidance content checks
@@ -129,5 +130,5 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
     failures.push('markdown code fences present')
   }
 
-  return { valid: failures.length === 0, failures }
+  return { valid: failures.length === 0, failures, wordCount: combinedWords }
 }

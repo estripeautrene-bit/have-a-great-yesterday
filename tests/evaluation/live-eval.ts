@@ -88,19 +88,21 @@ interface EvalResult {
   expectSafety?: boolean
   expectFollowup?: boolean
   response: unknown
+  debug: unknown
   dimensionScores: DimensionScores | null
   error?: string
   durationMs: number
 }
 
-async function run(baseUrl: string) {
+async function run(baseUrl: string, labelFilter: Set<string> | null) {
   const endpoint = `${baseUrl.replace(/\/$/, '')}/api/doorway`
+  const activeFixtures = labelFilter ? fixtures.filter(f => labelFilter.has(f.label)) : fixtures
   console.log(`[eval] POST → ${endpoint}`)
-  console.log(`[eval] ${fixtures.length} fixtures`)
+  console.log(`[eval] ${activeFixtures.length} fixtures${labelFilter ? ` (filtered: ${[...labelFilter].join(',')})` : ''}`)
 
   const results: EvalResult[] = []
 
-  for (const fixture of fixtures) {
+  for (const fixture of activeFixtures) {
     const t0 = Date.now()
     let status = 0
     let ok = false
@@ -129,6 +131,10 @@ async function run(baseUrl: string) {
     const durationMs = Date.now() - t0
     console.log(`[${status || 'ERR'}] ${fixture.label} (${durationMs}ms)`)
 
+    const debugField = (!ok && typeof body === 'object' && body !== null)
+      ? (body as Record<string, unknown>).debug ?? null
+      : null
+
     results.push({
       label: fixture.label,
       input: fixture.text,
@@ -137,6 +143,7 @@ async function run(baseUrl: string) {
       expectSafety: fixture.expectSafety,
       expectFollowup: fixture.expectFollowup,
       response: body,
+      debug: debugField,
       dimensionScores: ok ? scoreDimensions(body) : null,
       error,
       durationMs,
@@ -149,7 +156,12 @@ async function run(baseUrl: string) {
 }
 
 const baseUrl = process.argv[2] ?? 'https://have-a-great-yesterday.pages.dev'
-run(baseUrl).catch((err) => {
+const labelsArg = process.argv.find(a => a.startsWith('--labels='))
+const labelFilter: Set<string> | null = labelsArg
+  ? new Set(labelsArg.slice('--labels='.length).split(','))
+  : null
+
+run(baseUrl, labelFilter).catch((err) => {
   console.error('[eval] fatal:', err)
   process.exit(1)
 })

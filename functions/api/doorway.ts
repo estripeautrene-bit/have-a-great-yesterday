@@ -8,6 +8,17 @@ interface Env {
   OPENAI_API_KEY: string
 }
 
+// TEMPORARY: debug fields included in 502 body so failures are observable
+// without wrangler tail. Remove debug field once the diagnostic pass is done.
+interface AttemptLog {
+  attempt: number
+  category: 'structural' | 'quality' | 'openai_threw' | 'success'
+  failures: string[]
+  wordCount: number
+  openaiStatus: number | null
+  openaiRespId: string | null
+}
+
 function jsonResponse(body: unknown, status: number): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -21,9 +32,14 @@ function jsonResponse(body: unknown, status: number): Response {
 async function callOpenAI(
   client: OpenAI,
   userMessage: string,
-): Promise<{ response: DoorwayApiResponse | null; failures: string[] }> {
+  reqId: string,
+  attempt: number,
+): Promise<{ response: DoorwayApiResponse | null; log: AttemptLog }> {
+  let openaiRespId: string | null = null
+  let openaiStatus: number | null = null
+
   try {
-    const response = await client.responses.create({
+    const raw = await client.responses.create({
       model: 'gpt-5.6-terra',
       store: false,
       reasoning: { effort: 'none' },
@@ -41,25 +57,53 @@ async function callOpenAI(
       },
     } as Parameters<typeof client.responses.create>[0])
 
-    const parsed: unknown = JSON.parse(response.output_text)
+    openaiRespId = typeof (raw as Record<string, unknown>).id === 'string'
+      ? (raw as Record<string, unknown>).id as string
+      : null
+
+    const parsed: unknown = JSON.parse(raw.output_text)
+
     if (!validateDoorwayResponse(parsed)) {
-      return { response: null, failures: ['structural validation failed'] }
+      const log: AttemptLog = {
+        attempt, category: 'structural', failures: ['structural validation failed'],
+        wordCount: 0, openaiStatus: null, openaiRespId,
+      }
+      console.log(JSON.stringify({ reqId, ...log }))
+      return { response: null, log }
     }
+
     const quality = qualityCheck(parsed)
+
     if (!quality.valid) {
-      return { response: null, failures: quality.failures }
+      const log: AttemptLog = {
+        attempt, category: 'quality', failures: quality.failures,
+        wordCount: quality.wordCount, openaiStatus: null, openaiRespId,
+      }
+      console.log(JSON.stringify({ reqId, ...log }))
+      return { response: null, log }
     }
-    return { response: parsed, failures: [] }
+
+    const log: AttemptLog = {
+      attempt, category: 'success', failures: [],
+      wordCount: quality.wordCount, openaiStatus: null, openaiRespId,
+    }
+    console.log(JSON.stringify({ reqId, ...log }))
+    return { response: parsed, log }
   }
-  catch {
-    return { response: null, failures: ['openai call threw'] }
+  catch (e) {
+    if (e instanceof OpenAI.APIError) openaiStatus = e.status ?? null
+    const log: AttemptLog = {
+      attempt, category: 'openai_threw', failures: ['openai call threw'],
+      wordCount: 0, openaiStatus, openaiRespId,
+    }
+    console.log(JSON.stringify({ reqId, ...log }))
+    return { response: null, log }
   }
 }
 
 export async function onRequest(context: { request: Request; env: Env }): Promise<Response> {
   const { request, env } = context
 
-  // Handle CORS preflight
   if (request.method === 'OPTIONS') {
     return new Response(null, {
       status: 204,
@@ -71,18 +115,15 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
     })
   }
 
-  // POST only
   if (request.method !== 'POST') {
     return jsonResponse({ error: 'method_not_allowed' }, 405)
   }
 
-  // Content-Type check
   const contentType = request.headers.get('Content-Type') ?? ''
   if (!contentType.includes('application/json')) {
     return jsonResponse({ error: 'unsupported_media_type' }, 415)
   }
 
-  // Parse body
   let body: unknown
   try {
     body = await request.json()
@@ -91,7 +132,6 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
     return jsonResponse({ error: 'invalid_json' }, 400)
   }
 
-  // Validate input
   const inputError = validateInput(body)
   if (inputError !== null) {
     return jsonResponse({ error: inputError }, 422)
@@ -103,37 +143,29 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   const followupText = (b.followupText as string | null | undefined) ?? null
 
   const userMessage = buildUserMessage(text, followupChip, followupText)
+  const reqId = crypto.randomUUID().slice(0, 8)
 
-  // Build OpenAI client — API key only touches this scope
   let client: OpenAI
   try {
-    client = new OpenAI({
-      apiKey: env.OPENAI_API_KEY,
-      timeout: 25000,
-    })
+    client = new OpenAI({ apiKey: env.OPENAI_API_KEY, timeout: 25000 })
   }
   catch {
     return jsonResponse({ error: 'service_error' }, 502)
   }
 
   try {
-    // First attempt
-    const first = await callOpenAI(client, userMessage)
+    const { response: r1, log: l1 } = await callOpenAI(client, userMessage, reqId, 1)
+    if (r1 !== null) return jsonResponse(r1, 200)
 
-    if (first.response !== null) {
-      return jsonResponse(first.response, 200)
-    }
+    const retryMessage = `${userMessage}\n\nPrevious response failed validation: ${l1.failures.join('; ')}. Please correct these issues.`
+    const { response: r2, log: l2 } = await callOpenAI(client, retryMessage, reqId, 2)
+    if (r2 !== null) return jsonResponse(r2, 200)
 
-    // One retry — include failure hint on the user turn only (never in system prompt).
-    const retryMessage
-      = `${userMessage}\n\nPrevious response failed validation: ${first.failures.join('; ')}. Please correct these issues.`
-    const second = await callOpenAI(client, retryMessage)
-
-    if (second.response !== null) {
-      return jsonResponse(second.response, 200)
-    }
-
-    return jsonResponse({ error: 'service_error' }, 502)
+    // TEMPORARY debug body — remove after diagnostic pass
+    return jsonResponse({
+      error: 'service_error',
+      debug: { reqId, attempt1: l1, attempt2: l2 },
+    }, 502)
   }
   catch {
     return jsonResponse({ error: 'service_error' }, 502)
