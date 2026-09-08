@@ -1,74 +1,82 @@
 // Pure TypeScript — no Cloudflare-specific imports.
 // Defines the OpenAI JSON Schema for Structured Outputs and a runtime validator.
 
-export interface TerrainItem {
+export interface MomentItem {
   title: string
-  kind_of_moment: string
-  privacy_note: string | null
-  be_ready: string
-  source_span: string
+  example: string
+  meaning: string
 }
 
 export interface DoorwayApiResponse {
+  kind: 'guidance' | 'safety'
+  headline: string
   opening: string
-  terrains: TerrainItem[]
-  closing: string
+  mechanism: string
+  moments: MomentItem[]
+  practice: string
+  continuationBridge: string
   meta: {
-    terrains_detected: number
-    used_followup: boolean
     safety_flag: boolean
     followup_needed: boolean
+    word_count: number
   }
 }
 
 // OpenAI JSON Schema for Structured Outputs (strict mode).
-// All objects have additionalProperties: false.
-// Nullable strings use anyOf: [{type:'string'},{type:'null'}] as required by strict mode.
+// All objects have additionalProperties: false. All fields required.
 export const DOORWAY_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['opening', 'terrains', 'closing', 'meta'],
+  required: [
+    'kind',
+    'headline',
+    'opening',
+    'mechanism',
+    'moments',
+    'practice',
+    'continuationBridge',
+    'meta',
+  ],
   properties: {
+    kind: { type: 'string', enum: ['guidance', 'safety'] },
+    headline: { type: 'string' },
     opening: { type: 'string' },
-    terrains: {
+    mechanism: { type: 'string' },
+    moments: {
       type: 'array',
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'kind_of_moment', 'privacy_note', 'be_ready', 'source_span'],
+        required: ['title', 'example', 'meaning'],
         properties: {
           title: { type: 'string' },
-          kind_of_moment: { type: 'string' },
-          privacy_note: { anyOf: [{ type: 'string' }, { type: 'null' }] },
-          be_ready: { type: 'string' },
-          source_span: { type: 'string' },
+          example: { type: 'string' },
+          meaning: { type: 'string' },
         },
       },
     },
-    closing: { type: 'string' },
+    practice: { type: 'string' },
+    continuationBridge: { type: 'string' },
     meta: {
       type: 'object',
       additionalProperties: false,
-      required: ['terrains_detected', 'used_followup', 'safety_flag', 'followup_needed'],
+      required: ['safety_flag', 'followup_needed', 'word_count'],
       properties: {
-        terrains_detected: { type: 'number' },
-        used_followup: { type: 'boolean' },
         safety_flag: { type: 'boolean' },
         followup_needed: { type: 'boolean' },
+        word_count: { type: 'number' },
       },
     },
   },
 } as const
 
-function isTerrainItem(v: unknown): v is TerrainItem {
+function isMomentItem(v: unknown): v is MomentItem {
   if (typeof v !== 'object' || v === null) return false
-  const t = v as Record<string, unknown>
+  const m = v as Record<string, unknown>
   return (
-    typeof t.title === 'string'
-    && typeof t.kind_of_moment === 'string'
-    && (t.privacy_note === null || typeof t.privacy_note === 'string')
-    && typeof t.be_ready === 'string'
-    && typeof t.source_span === 'string'
+    typeof m.title === 'string'
+    && typeof m.example === 'string'
+    && typeof m.meaning === 'string'
   )
 }
 
@@ -77,27 +85,34 @@ export function validateDoorwayResponse(value: unknown): value is DoorwayApiResp
   const v = value as Record<string, unknown>
 
   // Top-level fields
+  if (v.kind !== 'guidance' && v.kind !== 'safety') return false
+  if (typeof v.headline !== 'string') return false
   if (typeof v.opening !== 'string') return false
-  if (!Array.isArray(v.terrains)) return false
-  if (typeof v.closing !== 'string') return false
+  if (typeof v.mechanism !== 'string') return false
+  if (!Array.isArray(v.moments)) return false
+  if (typeof v.practice !== 'string') return false
+  if (typeof v.continuationBridge !== 'string') return false
   if (typeof v.meta !== 'object' || v.meta === null) return false
 
   // Meta fields
   const meta = v.meta as Record<string, unknown>
-  if (typeof meta.terrains_detected !== 'number') return false
-  if (typeof meta.used_followup !== 'boolean') return false
   if (typeof meta.safety_flag !== 'boolean') return false
   if (typeof meta.followup_needed !== 'boolean') return false
+  if (typeof meta.word_count !== 'number') return false
 
-  // Terrain array items
-  if (!v.terrains.every(isTerrainItem)) return false
+  // Moment array items
+  if (!v.moments.every(isMomentItem)) return false
 
-  // Terrain count rules
-  if (!meta.followup_needed) {
-    // When followup is not needed, must have 2 or 3 terrains
-    if (v.terrains.length < 2 || v.terrains.length > 3) return false
+  // Moment count rules
+  const isGuidance = v.kind === 'guidance'
+  const followupNeeded = meta.followup_needed
+  const safetyFlag = meta.safety_flag
+
+  if (isGuidance && !followupNeeded && !safetyFlag) {
+    // Guidance path with no gates: exactly 3 moments required.
+    if (v.moments.length !== 3) return false
   }
-  // When followup_needed is true, terrains can be empty
+  // When followup_needed or safety_flag is true: moments can be empty (or non-empty; not enforced here).
 
   return true
 }

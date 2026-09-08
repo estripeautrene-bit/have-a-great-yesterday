@@ -1,180 +1,173 @@
 <script setup lang="ts">
-import { FIXED_PRACTICE_LINE, type DoorwayResponse } from '~/composables/useDoorwaySession'
+import type { DoorwayResponse } from '~/composables/useDoorwaySession'
 
 const props = defineProps<{ response: DoorwayResponse }>()
 
-const { state, showEmailGate, declineEmail, submitEmail } = useDoorwaySession()
+type FormState = 'idle' | 'submitting' | 'success' | 'error'
+const formState = ref<FormState>('idle')
+const firstName = ref('')
+const email = ref('')
+const consent = ref(false)
 
-const terrainCountWord = computed(() =>
-  props.response.terrains.length === 3 ? 'Three' : 'Two'
+const formValid = computed(
+  () =>
+    firstName.value.trim().length > 0
+    && /\S+@\S+/.test(email.value)
+    && consent.value === true,
 )
 
-// ── Email gate form (Screen 6 — minimal for Item 2, full component in Item 3) ──
-const emailFields = reactive({ firstName: '', email: '', consent: false })
-
-const emailValid = computed(() =>
-  emailFields.firstName.trim().length > 0
-  && /\S+@\S+/.test(emailFields.email)
-  && emailFields.consent
-)
-
-function onEmailSubmit() {
-  if (!emailValid.value) return
-  submitEmail({
-    firstName: emailFields.firstName.trim(),
-    email: emailFields.email.trim(),
-    consent: emailFields.consent,
-  })
+const { $posthog } = useNuxtApp()
+function track(name: string, extras: Record<string, unknown> = {}) {
+  if ($posthog.__loaded) $posthog.capture(name, extras)
 }
+
+async function submitForm() {
+  if (!formValid.value || formState.value === 'submitting') return
+  formState.value = 'submitting'
+  try {
+    const res = await fetch('/api/capture-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: firstName.value.trim(),
+        email: email.value.trim(),
+        consent: consent.value,
+      }),
+    })
+    if (!res.ok) throw new Error(`capture_error:${res.status}`)
+    formState.value = 'success'
+    track('doorway_email_captured', { source: props.response.kind })
+  }
+  catch {
+    formState.value = 'error'
+  }
+}
+
+onMounted(() => {
+  track('doorway_response_delivered', { kind: props.response.kind })
+  track('doorway_email_form_viewed', { source: props.response.kind })
+})
 </script>
 
 <template>
-  <div class="response-wrap">
+  <article
+    class="response bg-warm-paper"
+    :class="{ 'response--safety': response.kind === 'safety' }"
+    aria-labelledby="response-heading"
+  >
+    <div class="container container--md response__inner">
 
-    <!-- ── Screen 5 ────────────────────────────────────────── -->
-    <article class="response bg-warm-paper" aria-labelledby="response-heading">
-      <div class="container container--md response__inner">
-
+      <!-- Safety branch: no form -->
+      <template v-if="response.kind === 'safety'">
         <h1 id="response-heading" class="response__heading">
-          {{ terrainCountWord }} places in your day worth noticing.
+          {{ response.headline }}
+        </h1>
+        <p class="response__opening">{{ response.opening }}</p>
+        <p class="response__mechanism">{{ response.mechanism }}</p>
+      </template>
+
+      <!-- Guidance branch: full content + inline form -->
+      <template v-else>
+        <h1 id="response-heading" class="response__heading">
+          {{ response.headline }}
         </h1>
 
         <p class="response__opening">{{ response.opening }}</p>
 
-        <p class="response__practice">{{ FIXED_PRACTICE_LINE }}</p>
+        <p class="response__mechanism">{{ response.mechanism }}</p>
 
-        <div class="response__sp" aria-label="Your MyHGY Starting Point">
-          <p class="response__sp-divider" aria-hidden="true">⸻ Your MyHGY Starting Point ⸻</p>
+        <div class="response__moments" aria-label="Three places to notice">
+          <div
+            v-for="(moment, i) in response.moments"
+            :key="`${i}-${moment.title}`"
+            class="moment-item"
+          >
+            <h2 class="moment-item__heading">
+              <span class="moment-item__marker" aria-hidden="true">{{ i + 1 }}.</span>
+              {{ moment.title }}
+            </h2>
+            <p class="moment-item__example">{{ moment.example }}</p>
+            <p class="moment-item__meaning">{{ moment.meaning }}</p>
+          </div>
+        </div>
 
-          <div class="response__sp-card">
-            <div
-              v-for="(terrain, i) in response.terrains"
-              :key="terrain.title"
-              class="sp-item"
-            >
-              <h2 class="sp-item__heading">
-                <span class="sp-item__marker" aria-hidden="true">{{ i + 1 }} ·</span>
-                {{ terrain.title }}
-              </h2>
-              <p class="sp-item__moment">{{ terrain.kind_of_moment }}</p>
-              <p v-if="terrain.privacy_note" class="sp-item__privacy">{{ terrain.privacy_note }}</p>
-              <p class="sp-item__ready">{{ terrain.be_ready }}</p>
+        <p class="response__practice">{{ response.practice }}</p>
+
+        <p class="response__bridge">{{ response.continuationBridge }}</p>
+
+        <!-- Inline form — always visible below result -->
+        <section class="response__form-section" aria-labelledby="form-heading">
+          <h2 id="form-heading" class="response__form-heading">
+            Continue with MyHGY
+          </h2>
+
+          <div v-if="formState === 'success'" class="response__form-success" role="status">
+            <p>You're set. Check your inbox — your Starting Point is on its way.</p>
+          </div>
+
+          <form
+            v-else
+            class="response__form"
+            novalidate
+            @submit.prevent="submitForm"
+          >
+            <div class="response__field">
+              <label class="response__label" for="form-firstname">First name</label>
+              <input
+                id="form-firstname"
+                v-model="firstName"
+                class="response__input"
+                type="text"
+                autocomplete="given-name"
+                required
+              />
             </div>
-          </div>
-        </div>
 
-        <p class="response__closing">{{ response.closing }}</p>
+            <div class="response__field">
+              <label class="response__label" for="form-email">Email</label>
+              <input
+                id="form-email"
+                v-model="email"
+                class="response__input"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
 
-        <!-- Teaser — explicit tap only, visible in RESPONSE_READY only -->
-        <div v-if="state === 'RESPONSE_READY'" class="response__teaser">
-          <button
-            type="button"
-            class="response__teaser-btn"
-            @click="showEmailGate()"
-          >
-            Get your Starting Point by email
-          </button>
-        </div>
+            <label class="response__consent">
+              <input
+                v-model="consent"
+                class="response__checkbox"
+                type="checkbox"
+                required
+              />
+              <span class="response__consent-text">
+                I agree to receive my MyHGY Starting Point and guidance for continuing the practice.
+              </span>
+            </label>
 
-      </div>
-    </article>
+            <p v-if="formState === 'error'" class="response__form-error" role="alert">
+              Something went wrong — please try again.
+            </p>
 
-    <!-- ── Screen 6 — appears only after explicit tap above ─ -->
-    <!-- Full styled component in Item 3; functional minimal form here. -->
-    <section
-      v-if="['EMAIL_INVITED', 'EMAIL_SUBMITTING', 'EMAIL_FAILED'].includes(state)"
-      id="email-gate"
-      class="email-gate section bg-stone"
-      aria-labelledby="email-gate-heading"
-    >
-      <div class="container container--md">
+            <button
+              type="submit"
+              class="response__form-submit"
+              :disabled="!formValid || formState === 'submitting'"
+            >
+              {{ formState === 'submitting' ? 'Sending…' : 'Start My 7-Day Practice' }}
+            </button>
+          </form>
+        </section>
+      </template>
 
-        <h2 id="email-gate-heading" class="email-gate__heading">
-          Want your Starting Point in your inbox?
-        </h2>
-
-        <p class="email-gate__body">
-          You've got the practice, and your Starting Point is right here — free, yours, nothing
-          hidden. If you'd like, leave your first name and email and we'll send you a copy of it,
-          then follow with a few short notes to help you begin and continue the practice.
-        </p>
-
-        <form
-          class="email-gate__form"
-          novalidate
-          @submit.prevent="onEmailSubmit"
-        >
-          <div class="email-gate__field">
-            <label class="email-gate__label" for="gate-firstname">First name</label>
-            <input
-              id="gate-firstname"
-              v-model="emailFields.firstName"
-              class="email-gate__input"
-              type="text"
-              autocomplete="given-name"
-              required
-            />
-          </div>
-
-          <div class="email-gate__field">
-            <label class="email-gate__label" for="gate-email">Email</label>
-            <input
-              id="gate-email"
-              v-model="emailFields.email"
-              class="email-gate__input"
-              type="email"
-              autocomplete="email"
-              required
-            />
-          </div>
-
-          <label class="email-gate__consent">
-            <input
-              v-model="emailFields.consent"
-              class="email-gate__checkbox"
-              type="checkbox"
-              required
-            />
-            <span class="email-gate__consent-text">
-              I agree to receive these emails and to the
-              <NuxtLink to="/privacy">Privacy Policy</NuxtLink> and
-              <NuxtLink to="/terms">Terms of Service</NuxtLink>.
-            </span>
-          </label>
-
-          <p v-if="state === 'EMAIL_FAILED'" class="email-gate__error" role="alert">
-            We couldn't send it just now — try again.
-          </p>
-
-          <button
-            type="submit"
-            class="email-gate__submit"
-            :disabled="!emailValid || state === 'EMAIL_SUBMITTING'"
-          >
-            {{ state === 'EMAIL_SUBMITTING' ? 'Sending…' : 'Email my Starting Point' }}
-          </button>
-
-          <p class="email-gate__microcopy">
-            One helpful note at a time. Leave whenever you like.
-          </p>
-
-          <button
-            type="button"
-            class="email-gate__decline"
-            @click="declineEmail()"
-          >
-            I've got what I need for now.
-          </button>
-        </form>
-
-      </div>
-    </section>
-
-  </div>
+    </div>
+  </article>
 </template>
 
 <style scoped>
-/* ── Screen 5 ─────────────────────────────────────────────── */
+/* ── Article layout ─────────────────────────────────────── */
 
 .response__inner {
   display: flex;
@@ -192,14 +185,16 @@ function onEmailSubmit() {
   max-width: 26ch;
 }
 
-.response__opening {
+.response__opening,
+.response__mechanism,
+.response__bridge {
   font-size: var(--text-body-lg);
   line-height: 1.65;
   color: var(--color-ink);
   max-width: 66ch;
 }
 
-/* Fixed practice line — thin Sun left-rule to set it apart */
+/* Practice line: thin Sun left-rule for emphasis */
 .response__practice {
   padding-left: var(--space-5);
   border-left: 3px solid var(--color-sun);
@@ -209,40 +204,30 @@ function onEmailSubmit() {
   max-width: 64ch;
 }
 
-/* ── Starting Point card ────────────────────────────────── */
+/* ── Moments ────────────────────────────────────────────── */
 
-.response__sp-divider {
-  font-family: var(--font-display);
-  font-size: var(--text-small);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.06em;
-  color: var(--color-muted-ink);
-  text-align: center;
-  margin-bottom: var(--space-6);
-}
-
-.response__sp-card {
+.response__moments {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
   background: var(--color-stone);
   border: 1px solid rgba(17, 17, 17, 0.08);
   border-radius: var(--radius-lg);
   padding: var(--space-8);
-  display: flex;
-  flex-direction: column;
-  gap: 0;
 }
 
-.sp-item {
+.moment-item {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding-block: var(--space-6);
+  padding-block: var(--space-5);
   border-bottom: 1px solid rgba(17, 17, 17, 0.07);
 }
 
-.sp-item:first-child { padding-top: 0; }
-.sp-item:last-child  { padding-bottom: 0; border-bottom: none; }
+.moment-item:first-child { padding-top: 0; }
+.moment-item:last-child  { padding-bottom: 0; border-bottom: none; }
 
-.sp-item__heading {
+.moment-item__heading {
   display: flex;
   align-items: baseline;
   gap: var(--space-2);
@@ -253,104 +238,59 @@ function onEmailSubmit() {
   line-height: var(--lh-heading);
 }
 
-.sp-item__marker {
+.moment-item__marker {
   color: var(--color-sun);
   font-weight: var(--weight-extrabold);
   flex-shrink: 0;
 }
 
-.sp-item__moment {
+.moment-item__example {
   font-size: var(--text-body);
   line-height: var(--lh-body);
   color: var(--color-ink);
 }
 
-.sp-item__privacy {
+.moment-item__meaning {
   font-size: var(--text-small);
   line-height: var(--lh-body);
   color: var(--color-muted-ink);
   font-style: italic;
 }
 
-.sp-item__ready {
-  font-size: var(--text-body);
-  line-height: var(--lh-body);
-  color: var(--color-ink);
-  font-weight: var(--weight-medium);
-}
+/* ── Inline form section ────────────────────────────────── */
 
-.response__closing {
-  font-size: var(--text-body-lg);
-  line-height: 1.65;
-  color: var(--color-ink);
-  max-width: 60ch;
-}
-
-/* ── Teaser button (Screen 5 → Screen 6) ───────────────── */
-
-.response__teaser {
+.response__form-section {
   display: flex;
-  justify-content: center;
-  padding-top: var(--space-4);
+  flex-direction: column;
+  gap: var(--space-5);
+  background: var(--color-paper);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  max-width: var(--container-sm);
 }
 
-.response__teaser-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-sun);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
-  font-weight: var(--weight-semibold);
-  border: none;
-  border-radius: var(--radius-full);
-  padding: var(--space-4) var(--space-8);
-  cursor: pointer;
-  min-height: 52px;
-  transition: filter var(--transition-fast);
-}
-
-.response__teaser-btn:hover       { filter: brightness(0.94); }
-.response__teaser-btn:focus-visible {
-  outline: 3px solid var(--color-ink);
-  outline-offset: 3px;
-}
-
-/* ── Screen 6 — minimal for Item 2 ─────────────────────── */
-
-.email-gate__heading {
+.response__form-heading {
   font-family: var(--font-display);
   font-size: var(--text-h2);
   font-weight: var(--weight-extrabold);
   color: var(--color-ink);
   line-height: var(--lh-heading);
-  margin-bottom: var(--space-4);
-  max-width: 28ch;
 }
 
-.email-gate__body {
-  font-size: var(--text-body-lg);
-  line-height: var(--lh-body);
-  color: var(--color-ink);
-  max-width: 60ch;
-  margin-bottom: var(--space-8);
-}
-
-.email-gate__form {
+.response__form {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
-  max-width: var(--container-sm);
 }
 
-.email-gate__field {
+.response__field {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.email-gate__label {
+.response__label {
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: var(--weight-semibold);
@@ -358,7 +298,7 @@ function onEmailSubmit() {
   letter-spacing: 0.02em;
 }
 
-.email-gate__input {
+.response__input {
   width: 100%;
   padding: var(--space-4) var(--space-5);
   background: var(--color-paper);
@@ -370,19 +310,19 @@ function onEmailSubmit() {
   transition: border-color var(--transition-fast);
 }
 
-.email-gate__input:focus {
+.response__input:focus {
   outline: none;
   border-color: var(--color-ink);
 }
 
-.email-gate__consent {
+.response__consent {
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
   cursor: pointer;
 }
 
-.email-gate__checkbox {
+.response__checkbox {
   flex-shrink: 0;
   width: 18px;
   height: 18px;
@@ -391,19 +331,27 @@ function onEmailSubmit() {
   cursor: pointer;
 }
 
-.email-gate__consent-text {
+.response__consent-text {
   font-size: var(--text-small);
   line-height: var(--lh-body);
   color: var(--color-ink);
 }
 
-.email-gate__error {
+.response__form-error {
   font-size: var(--text-small);
   color: #b91c1c;
   font-weight: var(--weight-medium);
 }
 
-.email-gate__submit {
+.response__form-success {
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-warm-paper);
+  border-left: 3px solid var(--color-evidence-green, #4a9d5c);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+.response__form-submit {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -421,33 +369,10 @@ function onEmailSubmit() {
   transition: filter var(--transition-fast), opacity var(--transition-fast);
 }
 
-.email-gate__submit:hover:not(:disabled) { filter: brightness(0.94); }
-.email-gate__submit:disabled { opacity: 0.38; cursor: not-allowed; }
-.email-gate__submit:focus-visible {
+.response__form-submit:hover:not(:disabled) { filter: brightness(0.94); }
+.response__form-submit:disabled { opacity: 0.38; cursor: not-allowed; }
+.response__form-submit:focus-visible {
   outline: 3px solid var(--color-ink);
   outline-offset: 3px;
 }
-
-.email-gate__microcopy {
-  font-size: var(--text-small);
-  color: var(--color-muted-ink);
-  text-align: center;
-}
-
-.email-gate__decline {
-  background: none;
-  border: none;
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--color-muted-ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  padding: 0;
-  text-align: center;
-  align-self: center;
-  transition: color var(--transition-fast);
-}
-
-.email-gate__decline:hover { color: var(--color-ink); }
 </style>

@@ -14,8 +14,8 @@ describe('API key safety', () => {
     expect(source).not.toContain('OPENAI_API_KEY')
   })
 
-  it('prompt file does not contain literal "OPENAI_API_KEY"', () => {
-    const source = readSource('functions/api/_lib/prompt.ts')
+  it('brain file does not contain literal "OPENAI_API_KEY"', () => {
+    const source = readSource('functions/api/_lib/myhgy-doorway-brain.ts')
     expect(source).not.toContain('OPENAI_API_KEY')
   })
 

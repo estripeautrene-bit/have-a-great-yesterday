@@ -33,3 +33,6 @@ Thumbs.db
 
 # Internal working documents — not for public repo
 docs/
+
+# Live eval outputs — never commit
+tests/evaluation/results-*.json

@@ -14,9 +14,9 @@
       </div>
 
       <ul class="generating__lines" role="list">
-        <li class="generating__line generating__line--1">Reading what you shared…</li>
-        <li class="generating__line generating__line--2">Finding where meaningful moments may already appear…</li>
-        <li class="generating__line generating__line--3">Making this practical for your days…</li>
+        <li class="generating__line generating__line--1">Understanding your situation…</li>
+        <li class="generating__line generating__line--2">Identifying the strongest path forward…</li>
+        <li class="generating__line generating__line--3">Building your personal MyHGY practice…</li>
       </ul>
 
       <div

@@ -1,7 +1,8 @@
 import OpenAI from 'openai'
 import { DOORWAY_SCHEMA, validateDoorwayResponse, type DoorwayApiResponse } from './_lib/schema'
-import { SYSTEM_PROMPT, buildUserMessage } from './_lib/prompt'
+import { SYSTEM_PROMPT, buildUserMessage } from './_lib/myhgy-doorway-brain'
 import { validateInput } from './_lib/validate'
+import { qualityCheck } from './_lib/quality-validator'
 
 interface Env {
   OPENAI_API_KEY: string
@@ -20,7 +21,7 @@ function jsonResponse(body: unknown, status: number): Response {
 async function callOpenAI(
   client: OpenAI,
   userMessage: string,
-): Promise<DoorwayApiResponse | null> {
+): Promise<{ response: DoorwayApiResponse | null; failures: string[] }> {
   try {
     const response = await client.responses.create({
       model: 'gpt-5.6-terra',
@@ -40,13 +41,17 @@ async function callOpenAI(
     } as Parameters<typeof client.responses.create>[0])
 
     const parsed: unknown = JSON.parse(response.output_text)
-    if (validateDoorwayResponse(parsed)) {
-      return parsed
+    if (!validateDoorwayResponse(parsed)) {
+      return { response: null, failures: ['structural validation failed'] }
     }
-    return null
+    const quality = qualityCheck(parsed)
+    if (!quality.valid) {
+      return { response: null, failures: quality.failures }
+    }
+    return { response: parsed, failures: [] }
   }
   catch {
-    return null
+    return { response: null, failures: ['openai call threw'] }
   }
 }
 
@@ -112,18 +117,22 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
 
   try {
     // First attempt
-    let result = await callOpenAI(client, userMessage)
+    const first = await callOpenAI(client, userMessage)
 
-    // One retry if first attempt failed validation
-    if (result === null) {
-      result = await callOpenAI(client, userMessage)
+    if (first.response !== null) {
+      return jsonResponse(first.response, 200)
     }
 
-    if (result === null) {
-      return jsonResponse({ error: 'service_error' }, 502)
+    // One retry — include failure hint on the user turn only (never in system prompt).
+    const retryMessage
+      = `${userMessage}\n\nPrevious response failed validation: ${first.failures.join('; ')}. Please correct these issues.`
+    const second = await callOpenAI(client, retryMessage)
+
+    if (second.response !== null) {
+      return jsonResponse(second.response, 200)
     }
 
-    return jsonResponse(result, 200)
+    return jsonResponse({ error: 'service_error' }, 502)
   }
   catch {
     return jsonResponse({ error: 'service_error' }, 502)

@@ -1,25 +1,48 @@
 import { describe, it, expect } from 'vitest'
-import { SYSTEM_PROMPT, buildUserMessage } from '../functions/api/_lib/prompt'
+import { SYSTEM_PROMPT, buildUserMessage } from '../functions/api/_lib/myhgy-doorway-brain'
 
 describe('SYSTEM_PROMPT content checks', () => {
   it('contains "Never invent"', () => {
     expect(SYSTEM_PROMPT).toContain('Never invent')
   })
 
-  it('contains "facts the visitor actually"', () => {
-    expect(SYSTEM_PROMPT).toContain('facts the visitor actually')
-  })
-
-  it('contains "source_span"', () => {
-    expect(SYSTEM_PROMPT).toContain('source_span')
-  })
-
   it('contains "notebook and pen"', () => {
     expect(SYSTEM_PROMPT).toContain('notebook and pen')
   })
 
+  it('contains "immediately"', () => {
+    expect(SYSTEM_PROMPT).toContain('immediately')
+  })
+
+  it('contains "every day"', () => {
+    expect(SYSTEM_PROMPT).toContain('every day')
+  })
+
+  it('contains "safety" gate language', () => {
+    expect(SYSTEM_PROMPT.toLowerCase()).toContain('safety')
+  })
+
+  it('contains "988" crisis resource', () => {
+    expect(SYSTEM_PROMPT).toContain('988')
+  })
+
   it('does not contain the literal string "OPENAI_API_KEY"', () => {
     expect(SYSTEM_PROMPT).not.toContain('OPENAI_API_KEY')
+  })
+
+  it('does not contain the banned word "free," as a standalone in prose', () => {
+    // We check for the banned form (word "free" followed by comma), which
+    // would only appear in prose — not inside the banned-words list itself,
+    // where "free," is followed by " proof" per the source-of-truth list.
+    // The banned list in the prompt is: "free, proof, evidence, one step..."
+    // So "free, proof" appears there. We assert no OTHER "free," appears —
+    // simpler: the banned word list is fixed, so we just check that outside
+    // the banned-words line the prose does not use "free,".
+    const withoutBannedLine = SYSTEM_PROMPT.replace(
+      /BANNED WORDS AND PHRASES[\s\S]*?bright side/,
+      '',
+    )
+    expect(withoutBannedLine).not.toContain('free,')
   })
 })
 

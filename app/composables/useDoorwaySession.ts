@@ -28,23 +28,24 @@ export interface FollowupAnswer {
   freeText: string
 }
 
-export interface TerrainItem {
+export interface MomentItem {
   title: string
-  kind_of_moment: string
-  privacy_note: string | null
-  be_ready: string
-  source_span: string
+  example: string
+  meaning: string
 }
 
 export interface DoorwayResponse {
+  kind: 'guidance' | 'safety'
+  headline: string
   opening: string
-  terrains: TerrainItem[]
-  closing: string
+  mechanism: string
+  moments: MomentItem[]
+  practice: string
+  continuationBridge: string
   meta: {
-    terrains_detected: number
-    used_followup: boolean
     safety_flag: boolean
     followup_needed: boolean
+    word_count: number
   }
 }
 
@@ -147,9 +148,12 @@ export function useDoorwaySession() {
   async function submitEmail(fields: { firstName: string; email: string; consent: boolean }) {
     state.value = 'EMAIL_SUBMITTING'
     try {
-      // Stub: log payload, simulate Loops acceptance delay.
-      await new Promise(r => setTimeout(r, 1000))
-      console.log('[doorway] email stub — would POST to Loops', fields)
+      const res = await fetch('/api/capture-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(fields),
+      })
+      if (!res.ok) throw new Error(`capture_error:${res.status}`)
       state.value = 'EMAIL_SUBMITTED'
     }
     catch {

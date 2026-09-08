@@ -4,8 +4,21 @@ const { reset, submitInput } = useDoorwaySession()
 const writtenText = ref('')
 const hasTyped = ref(false)
 const hasTrackedStart = ref(false)
+const showEmptyHint = ref(false)
+const isSubmitting = ref(false)
+const textareaRef = ref<HTMLTextAreaElement | null>(null)
 
-const canSubmit = computed(() => writtenText.value.trim().length > 0)
+const EXAMPLE_CARDS: readonly string[] = [
+  'I have ADD.',
+  'I have ADHD.',
+  "I'm getting divorced.",
+  'I stopped drinking.',
+  'I lost my job.',
+  'Someone I love died.',
+  'I am overweight.',
+  'I am depressed.',
+  'I feel behind in life.',
+] as const
 
 const { $posthog } = useNuxtApp()
 function track(name: string, props: Record<string, unknown> = {}) {
@@ -17,14 +30,38 @@ function onInput(e: Event) {
   el.style.height = 'auto'
   el.style.height = `${el.scrollHeight}px`
   if (!hasTyped.value) hasTyped.value = true
+  if (writtenText.value.trim().length > 0) showEmptyHint.value = false
   if (!hasTrackedStart.value) {
     hasTrackedStart.value = true
-    track('doorway_input_started', { source: 'direct' })
+    track('doorway_started', { source: 'direct' })
   }
 }
 
+function focusTextarea() {
+  nextTick(() => {
+    textareaRef.value?.focus()
+  })
+}
+
+function handleCardClick(text: string) {
+  writtenText.value = text
+  showEmptyHint.value = false
+  hasTyped.value = true
+  if (!hasTrackedStart.value) {
+    hasTrackedStart.value = true
+    track('doorway_started', { source: 'direct' })
+  }
+  focusTextarea()
+}
+
 function handleSubmit() {
-  if (!canSubmit.value) return
+  if (isSubmitting.value) return
+  if (writtenText.value.trim().length === 0) {
+    showEmptyHint.value = true
+    focusTextarea()
+    return
+  }
+  isSubmitting.value = true
   track('doorway_submitted', { source: 'direct' })
   submitInput({ text: writtenText.value, situationCard: null, source: 'direct' })
 }
@@ -73,6 +110,7 @@ onMounted(() => {
         <label class="sr-only" for="entry-input">Tell us about your days</label>
         <textarea
           id="entry-input"
+          ref="textareaRef"
           v-model="writtenText"
           class="entry__textarea"
           placeholder="Start anywhere — a normal Tuesday is perfect."
@@ -80,13 +118,30 @@ onMounted(() => {
           aria-describedby="entry-reassurance"
           @input="onInput"
         />
+
+        <p class="entry__cards-header">Or start here:</p>
+        <div class="entry__cards" role="group" aria-label="Example starting points">
+          <button
+            v-for="card in EXAMPLE_CARDS"
+            :key="card"
+            type="button"
+            class="entry__card"
+            @click="handleCardClick(card)"
+          >
+            {{ card }}
+          </button>
+        </div>
+
         <button
           type="submit"
           class="entry__submit"
-          :disabled="!canSubmit"
+          :disabled="isSubmitting"
         >
-          Show me
+          Show Me How MyHGY Could Help
         </button>
+        <p v-if="showEmptyHint" class="entry__empty-hint" role="alert">
+          Describe what's going on in your life — a few sentences is plenty.
+        </p>
         <p id="entry-reassurance" class="entry__reassurance">
           No account needed to see this.
         </p>
@@ -234,6 +289,56 @@ onMounted(() => {
   box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.08), 0 2px 8px rgba(17, 17, 17, 0.04);
 }
 
+/* ── Example cards ──────────────────────────────────────── */
+
+.entry__cards-header {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  color: var(--color-muted-ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.entry__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.entry__card {
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-paper);
+  border: 1.5px solid rgba(17, 17, 17, 0.12);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.entry__card:hover {
+  border-color: rgba(17, 17, 17, 0.3);
+}
+
+.entry__card:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.entry__empty-hint {
+  font-size: var(--text-small);
+  color: var(--color-muted-ink);
+  text-align: center;
+}
+
+/* ── Submit ─────────────────────────────────────────────── */
+
 .entry__submit {
   display: flex;
   align-items: center;
@@ -260,7 +365,7 @@ onMounted(() => {
 }
 
 .entry__submit:disabled {
-  opacity: 0.38;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 

@@ -1,92 +1,140 @@
 import { describe, it, expect } from 'vitest'
 import { validateDoorwayResponse, type DoorwayApiResponse } from '../functions/api/_lib/schema'
 
-function makeValidResponse(overrides: Partial<DoorwayApiResponse> = {}): DoorwayApiResponse {
+function makeValidGuidance(overrides: Partial<DoorwayApiResponse> = {}): DoorwayApiResponse {
   return {
-    opening: 'You mentioned working at a school, spending evenings with your kids, and running on weekends.',
-    terrains: [
+    kind: 'guidance',
+    headline: 'You have real places worth catching in your week.',
+    opening:
+      'You mentioned working at a school, evenings with your kids, and running on weekends. That is enough to begin.',
+    mechanism:
+      'MyHGY works by helping you notice specific good things as they happen and writing them down before they fade. In your context that means catching what a normal day already contains.',
+    moments: [
       {
         title: 'At the school',
-        kind_of_moment: 'A moment when a student says or does something that catches you off guard.',
-        privacy_note: 'Keep the capture about the moment, not student names.',
-        be_ready: 'Be ready: keep a small notebook and pen in your desk drawer.',
-        source_span: 'working at a school',
+        example: 'A student says something that catches you off guard. Write it down before the rest of the day covers it.',
+        meaning: 'Capturing it immediately keeps it from fading into the noise of the afternoon.',
       },
       {
-        title: 'With your kids',
-        kind_of_moment: 'A small thing one of them says or does that makes you pause.',
-        privacy_note: null,
-        be_ready: 'Be ready: notebook and pen on the kitchen counter for evening moments.',
-        source_span: 'evenings with your kids',
+        title: 'With your kids in the evening',
+        example: 'One of them says or does something small that makes you pause. Write down what happened.',
+        meaning: 'Small evening moments are the ones most easily lost by the next morning.',
       },
       {
-        title: 'On the run',
-        kind_of_moment: 'A moment when the pace drops and something simple catches your eye.',
-        privacy_note: null,
-        be_ready: 'Be ready: keep a small notebook and pen in your running bag.',
-        source_span: 'running on weekends',
+        title: 'On the weekend run',
+        example: 'A moment when the pace drops and something simple catches your eye. Capture the moment.',
+        meaning: 'These count as much as anything else — write them the moment you notice them.',
       },
     ],
-    closing: 'Keep a small notebook and pen nearby. Write the next good moment down before it fades.',
+    practice:
+      'Carry a small notebook and pen. Notice at least three specific good things while they happen, write each one down immediately, and repeat every day.',
+    continuationBridge:
+      'If you want your Starting Point in your inbox with a few short notes to keep you going, enter your name and email below.',
     meta: {
-      terrains_detected: 3,
-      used_followup: false,
       safety_flag: false,
       followup_needed: false,
+      word_count: 220,
     },
     ...overrides,
   }
 }
 
 describe('validateDoorwayResponse', () => {
-  it('accepts a valid full response with 3 terrains and followup_needed: false', () => {
-    expect(validateDoorwayResponse(makeValidResponse())).toBe(true)
+  it('accepts a valid guidance response (3 moments, followup_needed: false)', () => {
+    expect(validateDoorwayResponse(makeValidGuidance())).toBe(true)
   })
 
-  it('accepts a valid followup response with 0 terrains and followup_needed: true', () => {
-    const followupResponse: DoorwayApiResponse = {
-      opening: 'Could you tell me a bit more about what your ordinary days look like?',
-      terrains: [],
-      closing: '',
+  it('accepts a valid safety response (0 moments, safety_flag: true)', () => {
+    const safety: DoorwayApiResponse = {
+      kind: 'safety',
+      headline: 'Please reach out right now.',
+      opening: 'What you described is beyond what MyHGY can help with. Please call a crisis line or a trusted person nearby.',
+      mechanism: '988 Suicide and Crisis Lifeline: call or text 988. Crisis Text Line: text HOME to 741741.',
+      moments: [],
+      practice: '',
+      continuationBridge: '',
       meta: {
-        terrains_detected: 0,
-        used_followup: false,
-        safety_flag: false,
-        followup_needed: true,
+        safety_flag: true,
+        followup_needed: false,
+        word_count: 40,
       },
     }
-    expect(validateDoorwayResponse(followupResponse)).toBe(true)
+    expect(validateDoorwayResponse(safety)).toBe(true)
   })
 
-  it('accepts a valid response with 2 terrains and followup_needed: false', () => {
-    const twoTerrains = makeValidResponse()
-    twoTerrains.terrains = twoTerrains.terrains.slice(0, 2)
-    expect(validateDoorwayResponse(twoTerrains)).toBe(true)
+  it('accepts a valid followup response (0 moments, guidance kind, followup_needed: true)', () => {
+    const followup: DoorwayApiResponse = {
+      kind: 'guidance',
+      headline: '',
+      opening: 'Could you tell me a bit more about what your ordinary days look like?',
+      mechanism: '',
+      moments: [],
+      practice: '',
+      continuationBridge: '',
+      meta: {
+        safety_flag: false,
+        followup_needed: true,
+        word_count: 15,
+      },
+    }
+    expect(validateDoorwayResponse(followup)).toBe(true)
   })
 
-  it('rejects response missing "opening" field', () => {
-    const bad = makeValidResponse() as Record<string, unknown>
-    delete bad.opening
+  it('rejects guidance with 1 moment when followup_needed: false', () => {
+    const bad = makeValidGuidance()
+    bad.moments = [bad.moments[0]]
     expect(validateDoorwayResponse(bad)).toBe(false)
   })
 
-  it('rejects response missing "followup_needed" in meta', () => {
-    const bad = makeValidResponse()
+  it('rejects guidance with 4 moments', () => {
+    const bad = makeValidGuidance()
+    bad.moments = [...bad.moments, bad.moments[0]]
+    expect(validateDoorwayResponse(bad)).toBe(false)
+  })
+
+  it('rejects response missing headline', () => {
+    const bad = makeValidGuidance() as Record<string, unknown>
+    delete bad.headline
+    expect(validateDoorwayResponse(bad)).toBe(false)
+  })
+
+  it('rejects response missing kind', () => {
+    const bad = makeValidGuidance() as Record<string, unknown>
+    delete bad.kind
+    expect(validateDoorwayResponse(bad)).toBe(false)
+  })
+
+  it('rejects response with a wrong kind value', () => {
+    const bad = makeValidGuidance() as Record<string, unknown>
+    bad.kind = 'other'
+    expect(validateDoorwayResponse(bad)).toBe(false)
+  })
+
+  it('rejects response missing meta.safety_flag', () => {
+    const bad = makeValidGuidance()
+    const meta = bad.meta as Record<string, unknown>
+    delete meta.safety_flag
+    expect(validateDoorwayResponse(bad)).toBe(false)
+  })
+
+  it('rejects response missing meta.followup_needed', () => {
+    const bad = makeValidGuidance()
     const meta = bad.meta as Record<string, unknown>
     delete meta.followup_needed
     expect(validateDoorwayResponse(bad)).toBe(false)
   })
 
-  it('rejects response with terrains containing wrong types', () => {
-    const bad = makeValidResponse()
-    // @ts-expect-error intentional bad data
-    bad.terrains[0].title = 42
+  it('rejects moment missing "example"', () => {
+    const bad = makeValidGuidance()
+    const m0 = bad.moments[0] as Record<string, unknown>
+    delete m0.example
     expect(validateDoorwayResponse(bad)).toBe(false)
   })
 
-  it('rejects response with only 1 terrain when followup_needed is false', () => {
-    const bad = makeValidResponse()
-    bad.terrains = [bad.terrains[0]]
+  it('rejects moment missing "meaning"', () => {
+    const bad = makeValidGuidance()
+    const m0 = bad.moments[0] as Record<string, unknown>
+    delete m0.meaning
     expect(validateDoorwayResponse(bad)).toBe(false)
   })
 
