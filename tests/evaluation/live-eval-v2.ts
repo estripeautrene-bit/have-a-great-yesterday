@@ -269,7 +269,7 @@ const fixtures: EvalFixture[] = [
   },
 ]
 
-// ── 10-dimension scorer ─────────────────────────────────────────────────────
+// ── 11-dimension scorer ─────────────────────────────────────────────────────
 
 interface DimResult {
   pass: boolean
@@ -277,7 +277,7 @@ interface DimResult {
   missing?: string
 }
 
-interface TenDimScores {
+interface ElevenDimScores {
   d1_recognition: DimResult
   d2_pain_to_practice: DimResult
   d3_present_anchoring: DimResult
@@ -288,9 +288,10 @@ interface TenDimScores {
   d8_practice_fidelity: DimResult
   d9_voice_claims: DimResult
   d10_continuation: DimResult
+  d11_payoff_destination: DimResult
 }
 
-function scoreGuidance(r: Record<string, unknown>): TenDimScores {
+function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
   const headline = String(r.headline ?? '')
   const opening = String(r.opening ?? '')
   const mechanism = String(r.mechanism ?? '')
@@ -425,7 +426,72 @@ function scoreGuidance(r: Record<string, unknown>): TenDimScores {
     ].filter(Boolean).join('; '),
   }
 
-  return { d1_recognition: d1, d2_pain_to_practice: d2, d3_present_anchoring: d3, d4_savoring: d4, d5_evidence: d5, d6_progress: d6, d7_direction: d7, d8_practice_fidelity: d8, d9_voice_claims: d9, d10_continuation: d10 }
+  // D11 — Payoff/Destination Value
+  // PASS only if the response explicitly connects accumulated practice to a fuller/more accurate
+  // picture of life or self AND connects that to earned confidence or ability to act.
+  // FAIL: merely mentioning "Accuracy", "direction", "where you are moving", "forward motion".
+  // Required: (A) fuller/more-accurate-record language AND (B) earned-confidence or agency language.
+  const hasFullerRecord
+    = allText.includes('more accurate')
+    || allText.includes('fuller record')
+    || allText.includes('fuller picture')
+    || allText.includes('fuller account')
+    || allText.includes('fuller view')
+    || allText.includes('accurate account')
+    || allText.includes('accurate record')
+    || allText.includes('accurate picture')
+    || allText.includes('accurate view')
+    || allText.includes('clearer picture')
+    || allText.includes('clearer view')
+    || allText.includes('truer picture')
+    || allText.includes('truer account')
+
+  const hasEarnedConfidence
+    = allText.includes('confidence comes from')
+    || allText.includes('confidence is built')
+    || allText.includes('confidence builds')
+    || allText.includes('confidence grows')
+    || allText.includes('confidence can grow')
+    || allText.includes('confidence will grow')
+    || allText.includes('earned confidence')
+    || allText.includes('built from evidence')
+    || allText.includes('grounded confidence')
+    || allText.includes('confidence from evidence')
+    || allText.includes('confidence grows from')
+    || allText.includes('confidence that grows')
+
+  const hasForwardAgency
+    = allText.includes('make choices')
+    || allText.includes('keep moving toward')
+    || allText.includes('what you actually want')
+    || allText.includes('what they actually want')
+    || allText.includes('clearer basis')
+    || allText.includes('trust what')
+    || allText.includes('grounded confidence')
+    || allText.includes('to shape your')
+    || allText.includes('choose how')
+    || (allText.includes('confidence') && allText.includes('to act'))
+    || (allText.includes('confidence') && allText.includes('choice'))
+    || (allText.includes('confidence') && allText.includes('choose'))
+
+  const d11Pass = hasFullerRecord && (hasEarnedConfidence || hasForwardAgency)
+  const d11: DimResult = {
+    pass: d11Pass,
+    evidence: (() => {
+      const hits = [
+        hasFullerRecord && allText.match(/more accurate|fuller record|fuller picture|accurate record|accurate picture|clearer picture/)?.[0],
+        hasEarnedConfidence && allText.match(/confidence comes from|confidence grows|confidence is built|earned confidence/)?.[0],
+        hasForwardAgency && allText.match(/make choices|keep moving toward|what you actually want/)?.[0],
+      ].filter(Boolean)
+      return hits.length ? hits.join(' | ') : 'payoff chain absent'
+    })(),
+    missing: d11Pass ? undefined : [
+      !hasFullerRecord && 'Missing: fuller/more accurate record language (e.g. "more accurate picture", "fuller record")',
+      !hasEarnedConfidence && !hasForwardAgency && 'Missing: earned-confidence or agency language (e.g. "confidence grows from", "confidence comes from", "make choices")',
+    ].filter(Boolean).join('; '),
+  }
+
+  return { d1_recognition: d1, d2_pain_to_practice: d2, d3_present_anchoring: d3, d4_savoring: d4, d5_evidence: d5, d6_progress: d6, d7_direction: d7, d8_practice_fidelity: d8, d9_voice_claims: d9, d10_continuation: d10, d11_payoff_destination: d11 }
 }
 
 // ── OpenAI call ─────────────────────────────────────────────────────────────
@@ -440,7 +506,7 @@ interface RunResult {
   ok: boolean
   response: unknown
   qualityResult: { valid: boolean; failures: string[] } | null
-  dims: TenDimScores | null
+  dims: ElevenDimScores | null
   fixturePass: boolean
   failureReasons: string[]
   durationMs: number
@@ -559,8 +625,8 @@ async function main() {
   let passed = 0
   let failed = 0
 
-  console.log(`[v2-eval] MyHGY™ Doorway v2.0.0 — Live Brain Certification`)
-  console.log(`[v2-eval] ${fixtures.length} fixtures | 10 dimensions each`)
+  console.log(`[v2-eval] MyHGY™ Doorway v2.1.0 — Live Brain Certification`)
+  console.log(`[v2-eval] ${fixtures.length} fixtures | 11 dimensions each`)
   console.log('')
 
   for (const fixture of fixtures) {
@@ -593,8 +659,8 @@ async function main() {
   const guidanceResults = results.filter(r => !r.expectSafety && !r.expectFollowup && r.dims !== null)
   if (guidanceResults.length > 0) {
     console.log('')
-    console.log('10-Dimension Summary (guidance fixtures only):')
-    const dimKeys: (keyof TenDimScores)[] = ['d1_recognition', 'd2_pain_to_practice', 'd3_present_anchoring', 'd4_savoring', 'd5_evidence', 'd6_progress', 'd7_direction', 'd8_practice_fidelity', 'd9_voice_claims', 'd10_continuation']
+    console.log('11-Dimension Summary (guidance fixtures only):')
+    const dimKeys: (keyof ElevenDimScores)[] = ['d1_recognition', 'd2_pain_to_practice', 'd3_present_anchoring', 'd4_savoring', 'd5_evidence', 'd6_progress', 'd7_direction', 'd8_practice_fidelity', 'd9_voice_claims', 'd10_continuation', 'd11_payoff_destination']
     for (const key of dimKeys) {
       const dimPassed = guidanceResults.filter(r => r.dims?.[key].pass).length
       const status = dimPassed === guidanceResults.length ? '✓' : '✗'

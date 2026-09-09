@@ -122,8 +122,8 @@ describe('SYSTEM_PROMPT content checks', () => {
 
   // ── Version export ───────────────────────────────────────────────────────
 
-  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "2.0.0"', () => {
-    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('2.0.0')
+  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "2.1.0"', () => {
+    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('2.1.0')
   })
 
   // ── New situations: gambling, procrastination, pornography, anxiety ──────
@@ -220,6 +220,42 @@ describe('SYSTEM_PROMPT content checks', () => {
     const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
     const meaningSpec = outputSection?.[0].match(/meaning:[\s\S]{0,300}/)
     expect(meaningSpec?.[0]).toMatch(/evidence|proves|what.{0,20}show/i)
+  })
+
+  // ── v2.1.0 additions — Payoff/Destination requirement ────────────────────
+
+  it('contains THE PAYOFF REQUIREMENT section', () => {
+    expect(SYSTEM_PROMPT).toMatch(/THE PAYOFF REQUIREMENT/i)
+  })
+
+  it('payoff requirement names the payoff chain including record and confidence', () => {
+    const payoff = SYSTEM_PROMPT.match(/THE PAYOFF REQUIREMENT[\s\S]{0,1000}/)
+    expect(payoff?.[0]).toMatch(/more accurate|fuller.*record|accurate.*record/i)
+    expect(payoff?.[0]).toMatch(/confidence.*built|confidence.*grows|confidence.*earned/i)
+  })
+
+  it('mechanism output spec requires 3 sentences with payoff in sentence 3', () => {
+    const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
+    const mechSpec = outputSection?.[0].match(/mechanism:[\s\S]{0,600}/)
+    expect(mechSpec?.[0]).toMatch(/3 sentences|three sentences/i)
+    expect(mechSpec?.[0]).toMatch(/more accurate|fuller.*record|confidence grows/i)
+  })
+
+  it('continuationBridge spec requires naming what the practice builds', () => {
+    const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
+    const bridgeSpec = outputSection?.[0].match(/continuationBridge:[\s\S]{0,500}/)
+    expect(bridgeSpec?.[0]).toMatch(/more accurate|fuller.*record|confidence.*grows|what.*builds/i)
+  })
+
+  it('RESPONSE COMPOSITION includes payoff check question', () => {
+    const compSection = SYSTEM_PROMPT.match(/RESPONSE COMPOSITION[\s\S]{0,1000}/)
+    expect(compSection?.[0]).toMatch(/PAYOFF CHECK|payoff check/i)
+  })
+
+  it('VALUE BRIDGE arc includes self-story displacement and ability to make choices', () => {
+    const bridge = SYSTEM_PROMPT.match(/THE VALUE BRIDGE[\s\S]{0,800}/)
+    expect(bridge?.[0]).toMatch(/self-story|incomplete.*story|old.*story/i)
+    expect(bridge?.[0]).toMatch(/make choices|keep moving toward/i)
   })
 })
 
