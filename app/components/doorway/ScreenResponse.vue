@@ -3,6 +3,13 @@ import type { DoorwayResponse } from '~/composables/useDoorwaySession'
 
 const props = defineProps<{ response: DoorwayResponse }>()
 
+const mechanismParagraphs = computed(() =>
+  props.response.mechanism
+    .split(/\n\n+/)
+    .map(p => p.trim())
+    .filter(p => p.length > 0),
+)
+
 type FormState = 'idle' | 'submitting' | 'success' | 'error'
 const formState = ref<FormState>('idle')
 const firstName = ref('')
@@ -75,7 +82,15 @@ onMounted(() => {
 
         <p class="response__opening">{{ response.opening }}</p>
 
-        <p class="response__mechanism">{{ response.mechanism }}</p>
+        <div class="response__mechanism-body">
+          <p
+            v-for="(para, idx) in mechanismParagraphs"
+            :key="idx"
+            class="response__mechanism-para"
+          >{{ para }}</p>
+        </div>
+
+        <p class="response__pull-quote">{{ response.continuationBridge }}</p>
 
         <div class="response__moments" aria-label="Three places to notice">
           <div
@@ -93,8 +108,6 @@ onMounted(() => {
         </div>
 
         <p class="response__practice">{{ response.practice }}</p>
-
-        <p class="response__bridge">{{ response.continuationBridge }}</p>
 
         <!-- Founder continuation — replaces email form until MyHGY Starting Point is built -->
         <!-- To re-enable the email form: remove this section and restore response__form-section below -->
@@ -194,12 +207,32 @@ onMounted(() => {
 }
 
 .response__opening,
-.response__mechanism,
-.response__bridge {
+.response__mechanism-para {
   font-size: var(--text-body-lg);
   line-height: 1.65;
   color: var(--color-ink);
   max-width: 66ch;
+}
+
+.response__mechanism-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 66ch;
+}
+
+/* Editorial pull-quote treatment for the continuationBridge */
+.response__pull-quote {
+  margin: 0;
+  padding: var(--space-8) 0;
+  border-top: 2px solid var(--color-sun);
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.5vw, 1.625rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.5;
+  color: var(--color-ink);
+  max-width: 52ch;
+  font-style: normal;
 }
 
 /* Practice line: thin Sun left-rule for emphasis */
