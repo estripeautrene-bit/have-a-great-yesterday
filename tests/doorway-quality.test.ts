@@ -2,40 +2,43 @@ import { describe, it, expect } from 'vitest'
 import { qualityCheck, BANNED_PHRASES } from '../functions/api/_lib/quality-validator'
 import type { DoorwayApiResponse } from '../functions/api/_lib/schema'
 
+// SOP v1.1.0 compliant fixture (~630 actual words; passes all validator checks)
 function makeValidGuidance(overrides: Partial<DoorwayApiResponse> = {}): DoorwayApiResponse {
   return {
     kind: 'guidance',
-    headline: 'You have real places worth catching in your week.',
+    headline: 'Your work, your kids, and your run give you real ground.',
     opening:
-      'You mentioned working at a school, evenings with your kids, and running on weekends. That is enough to begin. There is real material in your ordinary week that MyHGY is built to help you keep.',
+      'You work at a school, you have kids in the evenings, and you run on weekends. That is already a life with real moments in it — moments that matter and are worth keeping. MyHGY is built to help you hold on to what is actually happening before it slips by.',
     mechanism:
-      'MyHGY works by helping you notice specific good things as they happen and writing them down before they fade. In your context that means catching what a normal day already contains and preserving it before it slips out of reach.',
+      'When the weight of a hard day fills your attention, it can crowd out everything else — the useful exchange at the school, what your kids said that evening, the stretch when the run felt open and clear. Those moments happen but can go unregistered when something heavier is taking up the space. MyHGY works by helping you return to what is actually true right now, while it is still here. When a good moment arrives — a student who thanks you, an evening laugh with your kids, a clear mile on the run — the first move is to let it fully reach you before you write it down. That is the savoring step. Do not just notice and move on. Let the moment land before life moves on, so you actually feel it. Then write it down immediately, while the detail is still alive and clear. Writing turns a passing experience into evidence. One captured moment is evidence that something good is still happening in your days. One moment shows you are still capable, still connected, still moving forward in some real way. Through repetition and consistency — coming back to this practice every day — it gains continuity. Continuity means the evidence does not disappear between days; it accumulates. Through visibility — the growing pages of your notebook — you can begin to see what your ordinary days are actually made of across time. That visible record gives you something no hard day can: a fuller and more accurate picture of your life than the weight of any one afternoon allows. Clarity means seeing where you are, what matters, and where you want to go — and this record gives you exactly that, built from real days, not from how today felt. Accuracy means evaluating your life from what actually happened, not from one difficult moment or an old story about yourself that has not caught up to what you keep doing. Self-Confidence means having real evidence of what you can do, how you show up, and what you carry through — and that is exactly what your pages keep adding. Confidence comes from evidence. Over days and weeks, the pages become a record that gives you grounded confidence to keep moving toward the life you want.',
     moments: [
       {
         title: 'At the school',
         example:
-          'Watch for a student saying something that catches you off guard, or a colleague thanking you for a small favor. Write down what happened and the feeling it created before the rest of the day covers it.',
-        meaning: 'Capturing it immediately keeps the moment from fading into the noise of the afternoon.',
+          'Watch for a student who thanks you or catches you off guard with something they say. Write down what happened and how it landed before the afternoon covers it.',
+        meaning: 'That moment is evidence that your work is still reaching people, even on the hard days.',
       },
       {
         title: 'With your kids in the evening',
-        example: 'One of them says or does something small that makes you pause. Write down what happened and what it meant to you.',
-        meaning: 'Small evening moments are the ones most easily lost by the next morning if not captured now.',
+        example:
+          'One of them says or does something small that makes you pause — a funny line, a question, a moment of care. Write it down before the next morning takes it.',
+        meaning: 'Capturing it shows that connection is still happening, right here in your ordinary evenings.',
       },
       {
         title: 'On the weekend run',
-        example: 'A stretch when the pace drops and something simple catches your eye. Capture the moment and how it landed.',
-        meaning: 'These count as much as anything else — write them the moment you notice them.',
+        example:
+          'There is a stretch where the pace settles and something simple catches your eye or your mind clears. Write it down as soon as you stop.',
+        meaning: 'It is evidence that your body and your ordinary days still have something worth bringing back.',
       },
     ],
     practice:
-      'Carry a small notebook and pen. Notice at least three specific good things while they happen, write each one down immediately, and repeat every day.',
+      'Carry a small notebook and pen. Notice at least three specific good things while they happen, write each one down immediately, and repeat every day. Reviewing later is optional.',
     continuationBridge:
-      'If you want to keep going with this, continue with MyHGY — the practice builds from here.',
+      'Continue with MyHGY so the pages fill into a record that gives you a more accurate picture of your ordinary days — and the Clarity, Accuracy, and Self-Confidence that grow from it are earned from what your life keeps showing you, not manufactured.',
     meta: {
       safety_flag: false,
       followup_needed: false,
-      word_count: 260,
+      word_count: 630,
     },
     ...overrides,
   }
@@ -80,7 +83,6 @@ describe('qualityCheck', () => {
 
   it('rejects a response missing the noticing mechanic', () => {
     const bad = makeValidGuidance()
-    // Strip "notic" from all text
     const scrub = (s: string) => s.replace(/notic\w*/gi, 'see')
     bad.headline = scrub(bad.headline)
     bad.opening = scrub(bad.opening)
@@ -308,5 +310,120 @@ describe('qualityCheck', () => {
     good.continuationBridge = 'Keep going with MyHGY — the practice builds from here.'
     const result = qualityCheck(good)
     expect(result.failures.some(f => f.toLowerCase().includes('continuationbridge'))).toBe(false)
+  })
+
+  // ── SOP v1.1.0 additions ──────────────────────────────────────────────────
+
+  it('rejects a response with fewer than 550 combined words', () => {
+    const bad: DoorwayApiResponse = {
+      kind: 'guidance',
+      headline: 'You have real places to notice and keep.',
+      opening: 'You mentioned your work and your family. Those are real places to begin.',
+      mechanism: 'When hard things happen, they can crowd your attention. Notice good moments while they happen and write them down immediately every day.',
+      moments: [
+        { title: 'At work', example: 'A colleague thanks you. Write it down.', meaning: 'Evidence that your work matters.' },
+        { title: 'With family', example: 'A good moment with someone you love. Write it down.', meaning: 'Shows connection is still there.' },
+        { title: 'On your own', example: 'A calm moment in your day. Write it down.', meaning: 'Evidence that rest is available to you.' },
+      ],
+      practice: 'Carry a small notebook and pen. Notice at least three specific good things while they happen, write each one down immediately, and repeat every day. Reviewing later is optional.',
+      continuationBridge: 'Continue with MyHGY so the pages build into a more accurate picture of your days.',
+      meta: { safety_flag: false, followup_needed: false, word_count: 100 },
+    }
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.includes('word count out of range'))).toBe(true)
+  })
+
+  it('rejects a response with more than 700 combined words', () => {
+    const bad = makeValidGuidance()
+    const filler = ' The practice continues to build every single day that you come back to it. Keep writing. The evidence grows. The record becomes clearer over time. More accurate. More complete. More useful than any single hard moment.'
+    bad.continuationBridge = bad.continuationBridge + filler.repeat(4)
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.includes('word count out of range'))).toBe(true)
+  })
+
+  it('rejects a response missing the savoring step', () => {
+    const bad = makeValidGuidance()
+    const scrub = (s: string) =>
+      s
+        .replace(/savor\w*/gi, 'notice')
+        .replace(/fully reach you/gi, 'happen')
+        .replace(/let it fully/gi, 'notice it')
+        .replace(/let the moment land/gi, 'write it down')
+        .replace(/land before/gi, 'write before')
+        .replace(/reach you/gi, 'happen')
+        .replace(/let it land/gi, 'write it down')
+    bad.mechanism = scrub(bad.mechanism)
+    bad.opening = scrub(bad.opening)
+    bad.practice = scrub(bad.practice)
+    bad.continuationBridge = scrub(bad.continuationBridge)
+    bad.moments = bad.moments.map(m => ({
+      title: scrub(m.title),
+      example: scrub(m.example),
+      meaning: scrub(m.meaning),
+    }))
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('savor'))).toBe(true)
+  })
+
+  it('rejects a response missing the CAS destination', () => {
+    const bad = makeValidGuidance()
+    const scrub = (s: string) =>
+      s
+        .replace(/\bClarity\b/gi, 'clearness')
+        .replace(/\bAccuracy\b/gi, 'correctness')
+        .replace(/\bSelf-Confidence\b/gi, 'assurance')
+        .replace(/\bself confidence\b/gi, 'assurance')
+    bad.headline = scrub(bad.headline)
+    bad.opening = scrub(bad.opening)
+    bad.mechanism = scrub(bad.mechanism)
+    bad.practice = scrub(bad.practice)
+    bad.continuationBridge = scrub(bad.continuationBridge)
+    bad.moments = bad.moments.map(m => ({
+      title: scrub(m.title),
+      example: scrub(m.example),
+      meaning: scrub(m.meaning),
+    }))
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('cas'))).toBe(true)
+  })
+
+  it('rejects a response missing repetition and consistency', () => {
+    const bad = makeValidGuidance()
+    const scrub = (s: string) =>
+      s
+        .replace(/repetit\w*/gi, 'practice')
+        .replace(/consisten\w*/gi, 'regular')
+    bad.mechanism = scrub(bad.mechanism)
+    bad.practice = scrub(bad.practice)
+    bad.opening = scrub(bad.opening)
+    bad.continuationBridge = scrub(bad.continuationBridge)
+    bad.moments = bad.moments.map(m => ({
+      title: scrub(m.title),
+      example: scrub(m.example),
+      meaning: scrub(m.meaning),
+    }))
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('repetition'))).toBe(true)
+  })
+
+  it('rejects a response missing continuity', () => {
+    const bad = makeValidGuidance()
+    bad.mechanism = bad.mechanism.replace(/continuity/gi, 'connection')
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('continuity'))).toBe(true)
+  })
+
+  it('rejects a response missing visibility', () => {
+    const bad = makeValidGuidance()
+    bad.mechanism = bad.mechanism.replace(/visib\w*/gi, 'seeing')
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('visibility'))).toBe(true)
   })
 })

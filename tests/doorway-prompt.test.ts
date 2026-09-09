@@ -122,8 +122,8 @@ describe('SYSTEM_PROMPT content checks', () => {
 
   // ── Version export ───────────────────────────────────────────────────────
 
-  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "2.1.0"', () => {
-    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('2.1.0')
+  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "3.0.0"', () => {
+    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('3.0.0')
   })
 
   // ── New situations: gambling, procrastination, pornography, anxiety ──────
@@ -174,15 +174,92 @@ describe('SYSTEM_PROMPT content checks', () => {
     expect(anxBlock?.[0]).toMatch(/Do not diagnose anxiety|claim MyHGY treats anxiety/i)
   })
 
-  // ── v2.0.0 additions ─────────────────────────────────────────────────────
+  // ── CAS destination ──────────────────────────────────────────────────────
 
   it('contains "Clarity, Accuracy, Self-Confidence" (CAS) as the destination', () => {
-    expect(SYSTEM_PROMPT).toMatch(/Clarity, Accuracy, Self-Confidence|CAS/i)
+    expect(SYSTEM_PROMPT).toMatch(/Clarity, Accuracy, and Self-Confidence|CAS/i)
   })
 
   it('contains "confidence comes from evidence" as a locked principle', () => {
     expect(SYSTEM_PROMPT.toLowerCase()).toContain('confidence comes from evidence')
   })
+
+  it('defines Clarity explicitly in the prompt', () => {
+    expect(SYSTEM_PROMPT).toMatch(/Clarity means seeing/i)
+  })
+
+  it('defines Accuracy explicitly in the prompt', () => {
+    expect(SYSTEM_PROMPT).toMatch(/Accuracy means separating/i)
+  })
+
+  it('defines Self-Confidence explicitly in the prompt', () => {
+    expect(SYSTEM_PROMPT).toMatch(/Self-Confidence means having lived evidence/i)
+  })
+
+  // ── Four operating keys ──────────────────────────────────────────────────
+
+  it('contains "repetition" as one of the four operating keys', () => {
+    expect(SYSTEM_PROMPT).toMatch(/FOUR OPERATING KEYS|four operating keys/i)
+    expect(SYSTEM_PROMPT).toMatch(/repetition/i)
+  })
+
+  it('contains "consistency" as one of the four operating keys', () => {
+    expect(SYSTEM_PROMPT).toMatch(/consistency/i)
+  })
+
+  it('contains "continuity" as one of the four operating keys', () => {
+    expect(SYSTEM_PROMPT).toMatch(/continuity/i)
+  })
+
+  it('contains "visibility" as one of the four operating keys', () => {
+    expect(SYSTEM_PROMPT).toMatch(/visibility/i)
+  })
+
+  it('Job 4 requires the four operating keys and savoring', () => {
+    const job4 = SYSTEM_PROMPT.match(/Job 4[\s\S]{0,500}/)
+    expect(job4?.[0]).toMatch(/repetition/i)
+    expect(job4?.[0]).toMatch(/consistency/i)
+    expect(job4?.[0]).toMatch(/continuity/i)
+    expect(job4?.[0]).toMatch(/visibility/i)
+    expect(job4?.[0]).toMatch(/savor/i)
+  })
+
+  it('Job 3 explicitly requires defining CAS in the visitor context', () => {
+    const job3 = SYSTEM_PROMPT.match(/Job 3[\s\S]{0,400}/)
+    expect(job3?.[0]).toMatch(/Clarity, Accuracy, and Self-Confidence/i)
+    expect(job3?.[0]).toMatch(/define|what.*means/i)
+  })
+
+  // ── Savoring ─────────────────────────────────────────────────────────────
+
+  it('contains savoring / letting the moment land', () => {
+    expect(SYSTEM_PROMPT).toMatch(/savor|let the moment.{0,30}reach|let it land/i)
+  })
+
+  it('savoring section uses the canonical phrase "Let the good moment fully reach you"', () => {
+    expect(SYSTEM_PROMPT).toMatch(/Let the good moment fully reach you/i)
+  })
+
+  // ── Seven required jobs ──────────────────────────────────────────────────
+
+  it('contains all seven required jobs', () => {
+    expect(SYSTEM_PROMPT).toMatch(/THE SEVEN REQUIRED JOBS|seven required jobs/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 1/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 2/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 3/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 4/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 5/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 6/i)
+    expect(SYSTEM_PROMPT).toMatch(/Job 7/i)
+  })
+
+  // ── Word count guidance ───────────────────────────────────────────────────
+
+  it('contains word count guidance for 550–700 actual words', () => {
+    expect(SYSTEM_PROMPT).toMatch(/550.{0,5}700/i)
+  })
+
+  // ── Two speeds and value bridge ──────────────────────────────────────────
 
   it('contains two connected speeds concept', () => {
     expect(SYSTEM_PROMPT).toMatch(/TWO CONNECTED SPEEDS|two connected speeds/i)
@@ -192,9 +269,13 @@ describe('SYSTEM_PROMPT content checks', () => {
     expect(SYSTEM_PROMPT).toMatch(/VALUE BRIDGE|value bridge/i)
   })
 
-  it('contains savoring / letting the moment land', () => {
-    expect(SYSTEM_PROMPT).toMatch(/savor|let the moment.{0,30}reach|let it land/i)
+  it('VALUE BRIDGE arc includes old-story displacement and ability to keep moving toward', () => {
+    const bridge = SYSTEM_PROMPT.match(/THE VALUE BRIDGE[\s\S]{0,800}/)
+    expect(bridge?.[0]).toMatch(/self-story|incomplete.*story|old.*story/i)
+    expect(bridge?.[0]).toMatch(/make choices|keep moving toward/i)
   })
+
+  // ── Never Negative ────────────────────────────────────────────────────────
 
   it('contains NEVER NEGATIVE rule', () => {
     expect(SYSTEM_PROMPT).toMatch(/NEVER NEGATIVE/i)
@@ -204,6 +285,8 @@ describe('SYSTEM_PROMPT content checks', () => {
     const neverNeg = SYSTEM_PROMPT.match(/NEVER NEGATIVE[\s\S]{0,500}/)
     expect(neverNeg?.[0]).toMatch(/identity|destination/i)
   })
+
+  // ── Output format ─────────────────────────────────────────────────────────
 
   it('continuationBridge output format does not instruct the model to invite email entry', () => {
     const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
@@ -222,40 +305,10 @@ describe('SYSTEM_PROMPT content checks', () => {
     expect(meaningSpec?.[0]).toMatch(/evidence|proves|what.{0,20}show/i)
   })
 
-  // ── v2.1.0 additions — Payoff/Destination requirement ────────────────────
-
-  it('contains THE PAYOFF REQUIREMENT section', () => {
-    expect(SYSTEM_PROMPT).toMatch(/THE PAYOFF REQUIREMENT/i)
-  })
-
-  it('payoff requirement names the payoff chain including record and confidence', () => {
-    const payoff = SYSTEM_PROMPT.match(/THE PAYOFF REQUIREMENT[\s\S]{0,1000}/)
-    expect(payoff?.[0]).toMatch(/more accurate|fuller.*record|accurate.*record/i)
-    expect(payoff?.[0]).toMatch(/confidence.*built|confidence.*grows|confidence.*earned/i)
-  })
-
-  it('mechanism output spec requires 3 sentences with payoff in sentence 3', () => {
-    const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
-    const mechSpec = outputSection?.[0].match(/mechanism:[\s\S]{0,600}/)
-    expect(mechSpec?.[0]).toMatch(/3 sentences|three sentences/i)
-    expect(mechSpec?.[0]).toMatch(/more accurate|fuller.*record|confidence grows/i)
-  })
-
   it('continuationBridge spec requires naming what the practice builds', () => {
     const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
     const bridgeSpec = outputSection?.[0].match(/continuationBridge:[\s\S]{0,500}/)
     expect(bridgeSpec?.[0]).toMatch(/more accurate|fuller.*record|confidence.*grows|what.*builds/i)
-  })
-
-  it('RESPONSE COMPOSITION includes payoff check question', () => {
-    const compSection = SYSTEM_PROMPT.match(/RESPONSE COMPOSITION[\s\S]{0,1000}/)
-    expect(compSection?.[0]).toMatch(/PAYOFF CHECK|payoff check/i)
-  })
-
-  it('VALUE BRIDGE arc includes self-story displacement and ability to make choices', () => {
-    const bridge = SYSTEM_PROMPT.match(/THE VALUE BRIDGE[\s\S]{0,800}/)
-    expect(bridge?.[0]).toMatch(/self-story|incomplete.*story|old.*story/i)
-    expect(bridge?.[0]).toMatch(/make choices|keep moving toward/i)
   })
 })
 

@@ -1,5 +1,6 @@
 // Pure TypeScript — no Cloudflare-specific imports.
 // Content-quality checks layered on top of the structural schema validator.
+// Governed by MyHGY™ Personalized Doorway SOP v1.1.0.
 
 import { validateDoorwayResponse, type DoorwayApiResponse } from './schema'
 
@@ -95,8 +96,8 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
 
   const combined = combinedText(response)
   const combinedWords = wordCount(combined)
-  if (combinedWords < 230 || combinedWords > 400) {
-    failures.push(`word count out of range (230–400): got ${combinedWords}`)
+  if (combinedWords < 550 || combinedWords > 700) {
+    failures.push(`word count out of range (550–700): got ${combinedWords}`)
   }
 
   // Banned phrases (case-insensitive)
@@ -106,8 +107,9 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
     }
   }
 
-  // Mechanic checks
   const lowerCombined = combined.toLowerCase()
+
+  // Core mechanics
   if (!lowerCombined.includes('notic')) {
     failures.push('missing noticing mechanic (no "notic" root)')
   }
@@ -125,6 +127,47 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
     && !lowerCombined.includes('each day')
   ) {
     failures.push('missing daily repetition mechanic (no "every day/daily/each day")')
+  }
+
+  // SOP v1.1.0 — savoring step
+  if (
+    !lowerCombined.includes('savor')
+    && !lowerCombined.includes('fully reach')
+    && !lowerCombined.includes('reach you')
+    && !lowerCombined.includes('let it fully')
+    && !lowerCombined.includes('let the moment')
+    && !lowerCombined.includes('let it land')
+    && !lowerCombined.includes('land before')
+  ) {
+    failures.push('missing savoring step (no "savor", "let the moment", "reach you", "land before", "fully reach", etc.)')
+  }
+
+  // SOP v1.1.0 — repetition and consistency (two of four operating keys)
+  if (!lowerCombined.includes('repetit') && !lowerCombined.includes('consisten')) {
+    failures.push('missing repetition/consistency mechanic (no "repetit" or "consisten" root)')
+  }
+
+  // SOP v1.1.0 — continuity (third operating key)
+  if (!lowerCombined.includes('continuity')) {
+    failures.push('missing continuity mechanic (no "continuity")')
+  }
+
+  // SOP v1.1.0 — visibility (fourth operating key)
+  if (!lowerCombined.includes('visib')) {
+    failures.push('missing visibility mechanic (no "visib" root)')
+  }
+
+  // SOP v1.1.0 — explicit CAS destination: all three named
+  const hasClarity = lowerCombined.includes('clarity')
+  const hasAccuracy = lowerCombined.includes('accuracy')
+  const hasSelfConfidence = lowerCombined.includes('self-confidence') || lowerCombined.includes('self confidence')
+  if (!hasClarity || !hasAccuracy || !hasSelfConfidence) {
+    const missing = [
+      !hasClarity && 'Clarity',
+      !hasAccuracy && 'Accuracy',
+      !hasSelfConfidence && 'Self-Confidence',
+    ].filter(Boolean).join(', ')
+    failures.push(`missing CAS destination — response must explicitly name all three: Clarity, Accuracy, and Self-Confidence (missing: ${missing})`)
   }
 
   // Markdown code fences

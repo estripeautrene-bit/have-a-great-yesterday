@@ -1,7 +1,7 @@
 /**
- * MyHGY™ Doorway v2.0.0 — Live Brain Certification Evaluator
+ * MyHGY™ Doorway v3.0.0 — Live Brain Certification Evaluator
  *
- * Calls OpenAI DIRECTLY with the new v2.0.0 SYSTEM_PROMPT so that
+ * Calls OpenAI DIRECTLY with the v3.0.0 SYSTEM_PROMPT so that
  * certification uses the new code regardless of what is deployed.
  *
  * Usage:
@@ -13,17 +13,19 @@
  *
  * NEVER commit results-v2-*.json. NEVER run in CI.
  *
- * 10 Dimensions (all must pass for fixture to pass — no averaging):
- *  D1  Recognition          Opening uses visitor's specific language/situation
- *  D2  Pain-to-practice     Mechanism connects pain to why the practice helps here
- *  D3  Present anchoring    Mechanism explains why NOW, not later
- *  D4  Savoring             "Let it reach you" quality present; not just notice-and-write
- *  D5  Evidence             Moment meanings name what each moment PROVES
- *  D6  Progress             Moments cumulatively suggest visible progress
- *  D7  Direction            Response points toward CAS / where things are moving
- *  D8  Practice fidelity    Notebook + pen, immediate capture, every day all present
- *  D9  Voice and claims     Plain language, no banned phrases, no overclaims
- * D10  Continuation value   Bridge invites practice; no email/Starting Point promise
+ * 11 Dimensions per SOP v1.1.0 Section 19 (all must pass — no averaging):
+ *  D1  Recognition                        Opening uses visitor's specific language/situation
+ *  D2  Pain connection                    Mechanism connects pain to why the practice helps here
+ *  D3  Presence                           Mechanism explains why NOW, not later
+ *  D4  Savoring                           "Let it reach you / fully" quality; not just notice-and-write
+ *  D5  Evidence                           Moment meanings name what each moment PROVES
+ *  D6  Progress and motivation            Moments cumulatively suggest visible progress and continued action
+ *  D7  Direction and CAS                  Response explicitly names and defines Clarity, Accuracy, Self-Confidence
+ *  D8  Repetition, consistency,           All four operating keys present and explained
+ *      continuity, and visibility
+ *  D9  Practice fidelity                  Notebook + pen, immediate capture, every day, three minimum
+ * D10  Voice and claims                   Plain language, no banned phrases, no overclaims
+ * D11  Continuation value                 Bridge invites practice; no email/Starting Point/MyDopa promise
  */
 
 import OpenAI from 'openai'
@@ -279,16 +281,16 @@ interface DimResult {
 
 interface ElevenDimScores {
   d1_recognition: DimResult
-  d2_pain_to_practice: DimResult
-  d3_present_anchoring: DimResult
+  d2_pain_connection: DimResult
+  d3_presence: DimResult
   d4_savoring: DimResult
   d5_evidence: DimResult
   d6_progress: DimResult
-  d7_direction: DimResult
-  d8_practice_fidelity: DimResult
-  d9_voice_claims: DimResult
-  d10_continuation: DimResult
-  d11_payoff_destination: DimResult
+  d7_direction_and_cas: DimResult
+  d8_repetition_continuity_visibility: DimResult
+  d9_practice_fidelity: DimResult
+  d10_voice_claims: DimResult
+  d11_continuation: DimResult
 }
 
 function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
@@ -309,7 +311,7 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     missing: d1Pass ? undefined : 'Opening is too short or generic to demonstrate situation recognition',
   }
 
-  // D2 — Pain-to-practice: mechanism connects difficulty to why practice helps here
+  // D2 — Pain connection: mechanism connects difficulty to why the practice helps here
   const d2Pass = mechanism.length > 80
     && (allText.includes('attent') || allText.includes('crowd') || allText.includes('difficult') || allText.includes('hard') || allText.includes('weight') || allText.includes('heavy') || allText.includes('dominat') || allText.includes('pressure') || allText.includes('pain') || allText.includes('blur') || allText.includes('worry') || allText.includes('take over') || allText.includes('miss') || allText.includes('lonel'))
     && (allText.includes('notic') || allText.includes('captur') || allText.includes('write'))
@@ -319,7 +321,7 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     missing: d2Pass ? undefined : 'Mechanism does not connect visitor pain to why the practice applies here',
   }
 
-  // D3 — Present anchoring: explains why NOW not later
+  // D3 — Presence: returns attention to what is real and available now
   const d3Pass = (allText.includes('immediately') || allText.includes('right now') || allText.includes('while it') || allText.includes('before the') || allText.includes('right away') || allText.includes('still here') || allText.includes('before it fades') || allText.includes('as it happens'))
   const d3: DimResult = {
     pass: d3Pass,
@@ -327,7 +329,7 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     missing: d3Pass ? undefined : 'No present anchoring — missing "immediately", "while it happens", "before the [next thing]", etc.',
   }
 
-  // D4 — Savoring: "let it land / reach you / fully" quality beyond just notice-write
+  // D4 — Savoring: explains value of fully experiencing a meaningful moment while it is alive
   const d4Pass = allText.includes('savor')
     || allText.includes('let it') || allText.includes('let the moment')
     || allText.includes('reach you') || allText.includes('land before')
@@ -348,7 +350,7 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
 
   // D5 — Evidence: moment meanings name what the moment PROVES
   const meaningTexts = moments.map(m => String(m.meaning ?? '').toLowerCase())
-  const evidenceWords = ['evidence', 'proves', 'proof', 'shows', 'demonstrates', 'indicate', 'reveal', 'confirm', 'still here', 'still happening', 'still capable', 'still working', 'still available', 'still active', 'still operating']
+  const evidenceWords = ['evidence', 'proves', 'shows', 'demonstrates', 'indicate', 'reveal', 'confirm', 'still here', 'still happening', 'still capable', 'still working', 'still available', 'still active', 'still operating']
   const evidenceHits = meaningTexts.filter(mt => evidenceWords.some(w => mt.includes(w))).length
   const d5Pass = evidenceHits >= 1
   const d5: DimResult = {
@@ -366,24 +368,53 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     missing: d6Pass ? undefined : 'No visible progress language — "record", "over time", "building", "still [capable/moving]" absent',
   }
 
-  // D7 — Direction: response points toward CAS / where things are moving
-  const d7Pass = allText.includes('direction') || allText.includes('where') || allText.includes('moving') || allText.includes('cas') || allText.includes('clarity') || allText.includes('confidence') || allText.includes('self-confidence') || allText.includes('accuracy') || allText.includes('accurat') || allText.includes('forward') || allText.includes('build') || allText.includes('continue') || allText.includes('keeps')
+  // D7 — Direction and CAS: response explicitly names and defines Clarity, Accuracy, Self-Confidence
+  const hasCASDirection = allText.includes('clarity') && allText.includes('accuracy')
+    && (allText.includes('self-confidence') || allText.includes('self confidence'))
+  const hasDirection = allText.includes('direction') || allText.includes('where') || allText.includes('moving')
+    || allText.includes('forward') || allText.includes('continue') || allText.includes('keeps')
+    || allText.includes('life you want') || allText.includes('toward')
+  const d7Pass = hasCASDirection && hasDirection
   const d7: DimResult = {
     pass: d7Pass,
-    evidence: allText.match(/direction|where\s\w+|moving|clarity|confidence|forward|building|keeps|continues/)?.[0] ?? 'not found',
-    missing: d7Pass ? undefined : 'No directional language — response does not point toward where things are moving or toward CAS',
+    evidence: (() => {
+      const hits = [
+        hasCASDirection && allText.match(/clarity|accuracy|self-confidence/)?.[0],
+        hasDirection && allText.match(/direction|moving|forward|toward|life you want/)?.[0],
+      ].filter(Boolean)
+      return hits.join(' | ') || 'CAS or direction absent'
+    })(),
+    missing: d7Pass ? undefined : [
+      !hasCASDirection && 'Missing: explicit CAS — response must name Clarity, Accuracy, and Self-Confidence',
+      !hasDirection && 'Missing: directional language toward where things are moving',
+    ].filter(Boolean).join('; '),
   }
 
-  // D8 — Practice fidelity: notebook+pen, immediate capture, every day all present
+  // D8 — Repetition, consistency, continuity, and visibility (all four operating keys)
+  const hasRepetitionConsistency = allText.includes('repetit') || allText.includes('consisten')
+  const hasContinuity = allText.includes('continuity')
+  const hasVisibility = allText.includes('visib')
+  const d8Pass = hasRepetitionConsistency && hasContinuity && hasVisibility
+  const d8: DimResult = {
+    pass: d8Pass,
+    evidence: `repetition/consistency:${hasRepetitionConsistency} | continuity:${hasContinuity} | visibility:${hasVisibility}`,
+    missing: d8Pass ? undefined : [
+      !hasRepetitionConsistency && 'Missing: repetition/consistency mechanic',
+      !hasContinuity && 'Missing: continuity mechanic',
+      !hasVisibility && 'Missing: visibility mechanic',
+    ].filter(Boolean).join('; '),
+  }
+
+  // D9 — Practice fidelity: notebook+pen, immediate capture, every day, three minimum
   const hasNotebook = allText.includes('notebook') && allText.includes('pen')
   const hasImmediate = allText.includes('immediately') || allText.includes('right away') || allText.includes('while it')
   const hasEveryDay = allText.includes('every day') || allText.includes('daily') || allText.includes('each day')
   const hasThree = allText.includes('three') || allText.includes('3')
-  const d8Pass = hasNotebook && hasImmediate && hasEveryDay && hasThree
-  const d8: DimResult = {
-    pass: d8Pass,
+  const d9Pass = hasNotebook && hasImmediate && hasEveryDay && hasThree
+  const d9: DimResult = {
+    pass: d9Pass,
     evidence: `notebook+pen:${hasNotebook} | immediate:${hasImmediate} | every-day:${hasEveryDay} | three:${hasThree}`,
-    missing: d8Pass ? undefined : [
+    missing: d9Pass ? undefined : [
       !hasNotebook && '"notebook and pen" missing from practice',
       !hasImmediate && 'immediate capture missing',
       !hasEveryDay && 'daily repetition missing',
@@ -391,7 +422,7 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     ].filter(Boolean).join('; '),
   }
 
-  // D9 — Voice and claims: no banned phrases, no therapeutic overclaims
+  // D10 — Voice and claims: no banned phrases, no therapeutic overclaims
   const banned = BANNED_PHRASES.filter(p => {
     const lower = p.toLowerCase()
     const escaped = lower.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -400,98 +431,33 @@ function scoreGuidance(r: Record<string, unknown>): ElevenDimScores {
     return new RegExp(`${startB}${escaped}${endB}`, 'i').test(allText)
   })
   const hasMedClaims = /rewires?\s+the\s+brain|changes?\s+dopamine|guaranteed\s+to/i.test(allText)
-  const d9Pass = banned.length === 0 && !hasMedClaims
-  const d9: DimResult = {
-    pass: d9Pass,
+  const d10Pass = banned.length === 0 && !hasMedClaims
+  const d10: DimResult = {
+    pass: d10Pass,
     evidence: banned.length === 0 ? 'No banned phrases found' : `Banned: ${banned.join(', ')}`,
-    missing: d9Pass ? undefined : [
+    missing: d10Pass ? undefined : [
       banned.length > 0 && `Banned phrases present: ${banned.join(', ')}`,
       hasMedClaims && 'Medical/outcome claims present',
     ].filter(Boolean).join('; '),
   }
 
-  // D10 — Continuation: bridge invites practice; no email/Starting Point/MyDopa
+  // D11 — Continuation value: bridge invites practice; no email/Starting Point/MyDopa
   const bridgeLower = bridge.toLowerCase()
   const hasBridgeContent = bridge.length > 5
   const noEmailPromise = !bridgeLower.includes('email') && !bridgeLower.includes('starting point') && !bridgeLower.includes('inbox') && !bridgeLower.includes('sent to you') && !bridgeLower.includes('name and email')
   const noMyDopa = !bridgeLower.includes('mydopa')
-  const d10Pass = hasBridgeContent && noEmailPromise && noMyDopa
-  const d10: DimResult = {
-    pass: d10Pass,
+  const d11Pass = hasBridgeContent && noEmailPromise && noMyDopa
+  const d11: DimResult = {
+    pass: d11Pass,
     evidence: bridge.slice(0, 120),
-    missing: d10Pass ? undefined : [
+    missing: d11Pass ? undefined : [
       !hasBridgeContent && 'continuationBridge is empty',
       !noEmailPromise && 'continuationBridge contains email/Starting Point/inbox promise',
       !noMyDopa && 'continuationBridge mentions MyDopa',
     ].filter(Boolean).join('; '),
   }
 
-  // D11 — Payoff/Destination Value
-  // PASS only if the response explicitly connects accumulated practice to a fuller/more accurate
-  // picture of life or self AND connects that to earned confidence or ability to act.
-  // FAIL: merely mentioning "Accuracy", "direction", "where you are moving", "forward motion".
-  // Required: (A) fuller/more-accurate-record language AND (B) earned-confidence or agency language.
-  const hasFullerRecord
-    = allText.includes('more accurate')
-    || allText.includes('fuller record')
-    || allText.includes('fuller picture')
-    || allText.includes('fuller account')
-    || allText.includes('fuller view')
-    || allText.includes('accurate account')
-    || allText.includes('accurate record')
-    || allText.includes('accurate picture')
-    || allText.includes('accurate view')
-    || allText.includes('clearer picture')
-    || allText.includes('clearer view')
-    || allText.includes('truer picture')
-    || allText.includes('truer account')
-
-  const hasEarnedConfidence
-    = allText.includes('confidence comes from')
-    || allText.includes('confidence is built')
-    || allText.includes('confidence builds')
-    || allText.includes('confidence grows')
-    || allText.includes('confidence can grow')
-    || allText.includes('confidence will grow')
-    || allText.includes('earned confidence')
-    || allText.includes('built from evidence')
-    || allText.includes('grounded confidence')
-    || allText.includes('confidence from evidence')
-    || allText.includes('confidence grows from')
-    || allText.includes('confidence that grows')
-
-  const hasForwardAgency
-    = allText.includes('make choices')
-    || allText.includes('keep moving toward')
-    || allText.includes('what you actually want')
-    || allText.includes('what they actually want')
-    || allText.includes('clearer basis')
-    || allText.includes('trust what')
-    || allText.includes('grounded confidence')
-    || allText.includes('to shape your')
-    || allText.includes('choose how')
-    || (allText.includes('confidence') && allText.includes('to act'))
-    || (allText.includes('confidence') && allText.includes('choice'))
-    || (allText.includes('confidence') && allText.includes('choose'))
-
-  const d11Pass = hasFullerRecord && (hasEarnedConfidence || hasForwardAgency)
-  const d11: DimResult = {
-    pass: d11Pass,
-    evidence: (() => {
-      const hits = [
-        hasFullerRecord && allText.match(/more accurate|fuller record|fuller picture|accurate record|accurate picture|clearer picture/)?.[0],
-        hasEarnedConfidence && allText.match(/confidence comes from|confidence grows|confidence is built|earned confidence/)?.[0],
-        hasForwardAgency && allText.match(/make choices|keep moving toward|what you actually want/)?.[0],
-      ].filter(Boolean)
-      return hits.length ? hits.join(' | ') : 'payoff chain absent'
-    })(),
-    missing: d11Pass ? undefined : [
-      !hasFullerRecord && 'Missing: fuller/more accurate record language (e.g. "more accurate picture", "fuller record")',
-      !hasEarnedConfidence && !hasForwardAgency && 'Missing: earned-confidence or agency language (e.g. "confidence grows from", "confidence comes from", "make choices")',
-    ].filter(Boolean).join('; '),
-  }
-
-  return { d1_recognition: d1, d2_pain_to_practice: d2, d3_present_anchoring: d3, d4_savoring: d4, d5_evidence: d5, d6_progress: d6, d7_direction: d7, d8_practice_fidelity: d8, d9_voice_claims: d9, d10_continuation: d10, d11_payoff_destination: d11 }
+  return { d1_recognition: d1, d2_pain_connection: d2, d3_presence: d3, d4_savoring: d4, d5_evidence: d5, d6_progress: d6, d7_direction_and_cas: d7, d8_repetition_continuity_visibility: d8, d9_practice_fidelity: d9, d10_voice_claims: d10, d11_continuation: d11 }
 }
 
 // ── OpenAI call ─────────────────────────────────────────────────────────────
@@ -625,7 +591,7 @@ async function main() {
   let passed = 0
   let failed = 0
 
-  console.log(`[v2-eval] MyHGY™ Doorway v2.1.0 — Live Brain Certification`)
+  console.log(`[v2-eval] MyHGY™ Doorway v3.0.0 — Live Brain Certification`)
   console.log(`[v2-eval] ${fixtures.length} fixtures | 11 dimensions each`)
   console.log('')
 
@@ -660,7 +626,7 @@ async function main() {
   if (guidanceResults.length > 0) {
     console.log('')
     console.log('11-Dimension Summary (guidance fixtures only):')
-    const dimKeys: (keyof ElevenDimScores)[] = ['d1_recognition', 'd2_pain_to_practice', 'd3_present_anchoring', 'd4_savoring', 'd5_evidence', 'd6_progress', 'd7_direction', 'd8_practice_fidelity', 'd9_voice_claims', 'd10_continuation', 'd11_payoff_destination']
+    const dimKeys: (keyof ElevenDimScores)[] = ['d1_recognition', 'd2_pain_connection', 'd3_presence', 'd4_savoring', 'd5_evidence', 'd6_progress', 'd7_direction_and_cas', 'd8_repetition_continuity_visibility', 'd9_practice_fidelity', 'd10_voice_claims', 'd11_continuation']
     for (const key of dimKeys) {
       const dimPassed = guidanceResults.filter(r => r.dims?.[key].pass).length
       const status = dimPassed === guidanceResults.length ? '✓' : '✗'
