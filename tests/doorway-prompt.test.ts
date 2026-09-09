@@ -122,8 +122,8 @@ describe('SYSTEM_PROMPT content checks', () => {
 
   // ── Version export ───────────────────────────────────────────────────────
 
-  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "1.0.0"', () => {
-    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('1.0.0')
+  it('exports MYHGY_DOORWAY_BRAIN_VERSION as "2.0.0"', () => {
+    expect(MYHGY_DOORWAY_BRAIN_VERSION).toBe('2.0.0')
   })
 
   // ── New situations: gambling, procrastination, pornography, anxiety ──────
@@ -172,6 +172,54 @@ describe('SYSTEM_PROMPT content checks', () => {
   it('anxiety guidance prohibits diagnosing or claiming MyHGY treats anxiety disorders', () => {
     const anxBlock = SYSTEM_PROMPT.match(/With anxiety or overwhelm:[\s\S]{0,600}/)
     expect(anxBlock?.[0]).toMatch(/Do not diagnose anxiety|claim MyHGY treats anxiety/i)
+  })
+
+  // ── v2.0.0 additions ─────────────────────────────────────────────────────
+
+  it('contains "Clarity, Accuracy, Self-Confidence" (CAS) as the destination', () => {
+    expect(SYSTEM_PROMPT).toMatch(/Clarity, Accuracy, Self-Confidence|CAS/i)
+  })
+
+  it('contains "confidence comes from evidence" as a locked principle', () => {
+    expect(SYSTEM_PROMPT.toLowerCase()).toContain('confidence comes from evidence')
+  })
+
+  it('contains two connected speeds concept', () => {
+    expect(SYSTEM_PROMPT).toMatch(/TWO CONNECTED SPEEDS|two connected speeds/i)
+  })
+
+  it('contains value bridge arc', () => {
+    expect(SYSTEM_PROMPT).toMatch(/VALUE BRIDGE|value bridge/i)
+  })
+
+  it('contains savoring / letting the moment land', () => {
+    expect(SYSTEM_PROMPT).toMatch(/savor|let the moment.{0,30}reach|let it land/i)
+  })
+
+  it('contains NEVER NEGATIVE rule', () => {
+    expect(SYSTEM_PROMPT).toMatch(/NEVER NEGATIVE/i)
+  })
+
+  it('NEVER NEGATIVE rule instructs not making pain the destination or identity', () => {
+    const neverNeg = SYSTEM_PROMPT.match(/NEVER NEGATIVE[\s\S]{0,500}/)
+    expect(neverNeg?.[0]).toMatch(/identity|destination/i)
+  })
+
+  it('continuationBridge output format does not instruct the model to invite email entry', () => {
+    const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
+    // Old form was "entering their name and email" — must be gone
+    expect(outputSection?.[0]).not.toMatch(/entering.{0,30}email|enter.{0,30}name and email/i)
+  })
+
+  it('RULE 7 explicitly prohibits email mention in continuationBridge', () => {
+    const rule7 = SYSTEM_PROMPT.match(/RULE 7[\s\S]{0,500}/)
+    expect(rule7?.[0]).toMatch(/email/i)
+  })
+
+  it('moment meaning spec requires evidence function', () => {
+    const outputSection = SYSTEM_PROMPT.match(/OUTPUT FORMAT[\s\S]*/)
+    const meaningSpec = outputSection?.[0].match(/meaning:[\s\S]{0,300}/)
+    expect(meaningSpec?.[0]).toMatch(/evidence|proves|what.{0,20}show/i)
   })
 })
 

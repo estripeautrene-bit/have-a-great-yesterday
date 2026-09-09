@@ -3,6 +3,7 @@ import { DOORWAY_SCHEMA, validateDoorwayResponse, type DoorwayApiResponse } from
 import { SYSTEM_PROMPT, buildUserMessage } from './_lib/myhgy-doorway-brain'
 import { validateInput } from './_lib/validate'
 import { qualityCheck } from './_lib/quality-validator'
+import { getFallback } from './_lib/fallbacks'
 
 interface Env {
   OPENAI_API_KEY: string
@@ -169,14 +170,16 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   }
 
   try {
-    const { response: r1, log: l1 } = await callOpenAI(client, userMessage, reqId, 1, isCard)
+    const { response: r1, log: l1 } = await callOpenAI(client, userMessage, reqId, 1, forceGuidance)
     if (r1 !== null) return jsonResponse(r1, 200)
 
-    const retryMessage = `${userMessage}\n\nPrevious response failed validation: ${l1.failures.join('; ')}. Please correct these issues.`
-    const { response: r2 } = await callOpenAI(client, retryMessage, reqId, 2, isCard)
+    const retryMessage = `${userMessage}\n\nPrevious response failed quality validation. Failures: ${l1.failures.join('; ')}. Requirements for a valid guidance response: (1) exactly 3 moments; (2) noticing mechanic present; (3) writing or capturing mechanic present; (4) daily repetition language (every day / daily / each day); (5) total word count 230–380; (6) continuationBridge must not mention email, name, inbox, Starting Point, or any delivery; (7) no banned phrases. Generate a corrected complete guidance response now.`
+    const { response: r2 } = await callOpenAI(client, retryMessage, reqId, 2, forceGuidance)
     if (r2 !== null) return jsonResponse(r2, 200)
 
-    return jsonResponse({ error: 'service_error' }, 502)
+    const fallback = getFallback(situationCard)
+    console.log(JSON.stringify({ reqId, category: 'fallback', situationCard }))
+    return jsonResponse(fallback, 200)
   }
   catch {
     return jsonResponse({ error: 'service_error' }, 502)

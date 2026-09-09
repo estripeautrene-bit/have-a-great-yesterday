@@ -12,7 +12,6 @@ export interface QualityResult {
 export const BANNED_PHRASES = [
   'feel free',
   'proof',
-  'evidence',
   'one step at a time',
   "you're stronger than you think",
   "you've got this",
@@ -33,6 +32,9 @@ export const BANNED_PHRASES = [
   'nervous system regulation',
   'your feelings are valid',
   'everything happens for a reason',
+  'rewiring',
+  'dopamine',
+  'guaranteed',
 ]
 
 function combinedText(response: DoorwayApiResponse): string {
@@ -128,6 +130,14 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
   // Markdown code fences
   if (combined.includes('```')) {
     failures.push('markdown code fences present')
+  }
+
+  // ContinuationBridge must not promise email delivery or mention Starting Point
+  if (
+    response.continuationBridge.length > 0
+    && /email|starting point|inbox|sent to you/i.test(response.continuationBridge)
+  ) {
+    failures.push('continuationBridge contains email or delivery promise (remove "email", "Starting Point", "inbox", "sent to you")')
   }
 
   return { valid: failures.length === 0, failures, wordCount: combinedWords }

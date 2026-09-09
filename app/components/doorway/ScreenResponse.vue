@@ -46,7 +46,7 @@ async function submitForm() {
 
 onMounted(() => {
   track('doorway_response_delivered', { kind: props.response.kind })
-  track('doorway_email_form_viewed', { source: props.response.kind })
+  // track('doorway_email_form_viewed', { source: props.response.kind }) — form suppressed until MyHGY Starting Point is built
 })
 </script>
 
@@ -96,8 +96,15 @@ onMounted(() => {
 
         <p class="response__bridge">{{ response.continuationBridge }}</p>
 
-        <!-- Inline form — always visible below result -->
-        <section class="response__form-section" aria-labelledby="form-heading">
+        <!-- Founder continuation — replaces email form until MyHGY Starting Point is built -->
+        <!-- To re-enable the email form: remove this section and restore response__form-section below -->
+        <section class="response__continuation">
+          <h2 class="response__continuation-heading">Begin with today.</h2>
+          <p class="response__continuation-body">Carry a small notebook and pen. When one of these moments happens, write it down while it is still alive. Aim for at least three today, then do it again tomorrow. Over time, those pages become visible evidence of what is still happening, what you are doing, and where you are moving.</p>
+        </section>
+
+        <!-- Email capture form — suppressed until MyHGY Starting Point is built -->
+        <section v-if="false" class="response__form-section" aria-labelledby="form-heading">
           <h2 id="form-heading" class="response__form-heading">
             Continue with MyHGY
           </h2>
@@ -350,6 +357,34 @@ onMounted(() => {
   border-left: 3px solid var(--color-evidence-green, #4a9d5c);
   font-size: var(--text-body);
   color: var(--color-ink);
+}
+
+/* ── Founder continuation section ───────────────────────── */
+
+.response__continuation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background: var(--color-paper);
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: var(--radius-lg);
+  max-width: var(--container-sm);
+}
+
+.response__continuation-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-extrabold);
+  color: var(--color-ink);
+  line-height: var(--lh-heading);
+}
+
+.response__continuation-body {
+  font-size: var(--text-body-lg);
+  line-height: 1.65;
+  color: var(--color-ink);
+  max-width: 56ch;
 }
 
 .response__form-submit {

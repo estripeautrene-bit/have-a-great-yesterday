@@ -31,7 +31,7 @@ function makeValidGuidance(overrides: Partial<DoorwayApiResponse> = {}): Doorway
     practice:
       'Carry a small notebook and pen. Notice at least three specific good things while they happen, write each one down immediately, and repeat every day.',
     continuationBridge:
-      'If you want to keep going with this, enter your name and email below to have your Starting Point sent to you.',
+      'If you want to keep going with this, continue with MyHGY — the practice builds from here.',
     meta: {
       safety_flag: false,
       followup_needed: false,
@@ -228,5 +228,85 @@ describe('qualityCheck', () => {
     const result = qualityCheck(bad)
     expect(result.valid).toBe(false)
     expect(result.failures.some(f => f.toLowerCase().includes("you're not broken"))).toBe(true)
+  })
+
+  // ── v2.0.0 additions ──────────────────────────────────────────────────────
+
+  it('BANNED_PHRASES now includes "rewiring"', () => {
+    expect(BANNED_PHRASES).toContain('rewiring')
+  })
+
+  it('BANNED_PHRASES now includes "dopamine"', () => {
+    expect(BANNED_PHRASES).toContain('dopamine')
+  })
+
+  it('BANNED_PHRASES now includes "guaranteed"', () => {
+    expect(BANNED_PHRASES).toContain('guaranteed')
+  })
+
+  it('rejects a response using banned word "rewiring"', () => {
+    const bad = makeValidGuidance()
+    bad.mechanism = `${bad.mechanism} This is like rewiring your outlook.`
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('rewiring'))).toBe(true)
+  })
+
+  it('rejects a response using banned word "dopamine"', () => {
+    const bad = makeValidGuidance()
+    bad.mechanism = `${bad.mechanism} It activates the dopamine pathway.`
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('dopamine'))).toBe(true)
+  })
+
+  it('rejects a response using banned word "guaranteed"', () => {
+    const bad = makeValidGuidance()
+    bad.continuationBridge = 'This is guaranteed to help you. Keep going with MyHGY.'
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('guaranteed'))).toBe(true)
+  })
+
+  it('"evidence" is no longer a banned phrase', () => {
+    expect(BANNED_PHRASES).not.toContain('evidence')
+  })
+
+  it('accepts a response that uses the word "evidence" in a moment meaning', () => {
+    const good = makeValidGuidance()
+    good.moments[0].meaning = 'This is evidence that you are still capable of action on hard days.'
+    const result = qualityCheck(good)
+    expect(result.failures.some(f => f.toLowerCase().includes('"evidence"'))).toBe(false)
+  })
+
+  it('rejects continuationBridge that mentions email', () => {
+    const bad = makeValidGuidance()
+    bad.continuationBridge = 'Enter your email below to get your Starting Point.'
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('continuationbridge'))).toBe(true)
+  })
+
+  it('rejects continuationBridge that mentions "Starting Point"', () => {
+    const bad = makeValidGuidance()
+    bad.continuationBridge = 'Sign up to receive your Starting Point.'
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('continuationbridge'))).toBe(true)
+  })
+
+  it('rejects continuationBridge that mentions "inbox"', () => {
+    const bad = makeValidGuidance()
+    bad.continuationBridge = 'Check your inbox for next steps with MyHGY.'
+    const result = qualityCheck(bad)
+    expect(result.valid).toBe(false)
+    expect(result.failures.some(f => f.toLowerCase().includes('continuationbridge'))).toBe(true)
+  })
+
+  it('accepts a clean continuationBridge with no delivery promise', () => {
+    const good = makeValidGuidance()
+    good.continuationBridge = 'Keep going with MyHGY — the practice builds from here.'
+    const result = qualityCheck(good)
+    expect(result.failures.some(f => f.toLowerCase().includes('continuationbridge'))).toBe(false)
   })
 })
