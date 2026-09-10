@@ -122,12 +122,12 @@ onMounted(() => {
           <template v-else>
             <div class="response__banner-copy">
               <h2 id="banner-heading" class="response__banner-heading">
-                Get Your <span class="banner__wordmark"><span class="banner__my">My</span><span class="banner__hgy">HGY</span><sup class="banner__tm">™</sup></span> Starting Point Tool
+                Get Your <WordmarkHGY variant="dark" size="sm" /> Starting Point Tool
               </h2>
               <p class="response__banner-sub">And one useful insight every week on our newsletter.</p>
             </div>
 
-            <form class="response__banner-form" novalidate @submit.prevent="submitForm">
+            <form class="response__banner-form" @submit.prevent="submitForm">
               <div class="response__banner-row">
                 <input
                   id="banner-firstname"
@@ -152,7 +152,7 @@ onMounted(() => {
                 <button
                   type="submit"
                   class="response__banner-submit"
-                  :disabled="!formValid || formState === 'submitting'"
+                  :disabled="formState === 'submitting'"
                 >
                   {{ formState === 'submitting' ? 'Sending…' : 'Submit' }}
                 </button>
@@ -439,8 +439,8 @@ onMounted(() => {
   margin-inline: calc(-1 * var(--page-gutter));
   padding: var(--space-6) var(--space-10);
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: var(--space-8);
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-6);
   align-items: center;
 }
 
@@ -456,32 +456,6 @@ onMounted(() => {
   font-weight: var(--weight-extrabold);
   color: var(--color-paper);
   line-height: var(--lh-heading);
-}
-
-/* Inline wordmark treatment — matches WordmarkHGY light/dark split */
-.banner__wordmark {
-  font-family: 'Playfair Display', Georgia, serif;
-  letter-spacing: -0.01em;
-}
-
-.banner__my {
-  font-weight: 900;
-  color: var(--color-sun);
-}
-
-.banner__hgy {
-  font-weight: 600;
-  color: var(--color-paper);
-}
-
-.banner__tm {
-  font-size: 0.36em;
-  font-weight: 700;
-  vertical-align: super;
-  margin-left: 0.04em;
-  line-height: 1;
-  color: var(--color-paper);
-  opacity: 0.55;
 }
 
 .response__banner-sub {
@@ -540,7 +514,7 @@ onMounted(() => {
 }
 
 .response__banner-submit:hover:not(:disabled) { opacity: 0.85; }
-.response__banner-submit:disabled { opacity: 0.38; cursor: not-allowed; }
+.response__banner-submit:disabled { opacity: 0.6; cursor: wait; }
 .response__banner-submit:focus-visible {
   outline: 3px solid var(--color-paper);
   outline-offset: 3px;
