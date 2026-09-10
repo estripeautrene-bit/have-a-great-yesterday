@@ -53,7 +53,7 @@ async function submitForm() {
 
 onMounted(() => {
   track('doorway_response_delivered', { kind: props.response.kind })
-  // track('doorway_email_form_viewed', { source: props.response.kind }) — form suppressed until MyHGY Starting Point is built
+  track('doorway_email_form_viewed', { source: props.response.kind })
 })
 </script>
 
@@ -116,8 +116,7 @@ onMounted(() => {
           <p class="response__continuation-body">Carry a small notebook and pen. When one of these moments happens, write it down while it is still alive. Aim for at least three today, then do it again tomorrow. Over time, those pages become visible evidence of what is still happening, what you are doing, and where you are moving.</p>
         </section>
 
-        <!-- Email capture form — suppressed until MyHGY Starting Point is built -->
-        <section v-if="false" class="response__form-section" aria-labelledby="form-heading">
+        <section class="response__form-section" aria-labelledby="form-heading">
           <h2 id="form-heading" class="response__form-heading">
             Continue with MyHGY
           </h2>
