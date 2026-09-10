@@ -72,7 +72,7 @@ function containsPhrase(text: string, phrase: string): boolean {
   return re.test(lowerText)
 }
 
-export function qualityCheck(response: DoorwayApiResponse): QualityResult {
+export function qualityCheck(response: DoorwayApiResponse, primaryInput?: string): QualityResult {
   const failures: string[] = []
 
   // Structural
@@ -168,6 +168,23 @@ export function qualityCheck(response: DoorwayApiResponse): QualityResult {
       !hasSelfConfidence && 'Self-Confidence',
     ].filter(Boolean).join(', ')
     failures.push(`missing CAS destination — response must explicitly name all three: Clarity, Accuracy, and Self-Confidence (missing: ${missing})`)
+  }
+
+  // Primary-situation drift: at least one meaningful word from the original input must appear in the response.
+  // Guards against the follow-up chip overriding the visitor's actual stated situation.
+  if (primaryInput && primaryInput.trim().length > 15) {
+    const COMMON = new Set(['about', 'after', 'again', 'being', 'before', 'could', 'doing', 'every', 'going', 'going', 'having', 'still', 'their', 'there', 'these', 'those', 'through', 'under', 'where', 'which', 'while', 'would', 'really', 'since', 'think', 'wants', 'quite', 'maybe', 'never', 'start', 'feels', 'things', 'other', 'right', 'might', 'until', 'truly', 'shall'])
+    const keyWords = primaryInput
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, ' ')
+      .split(/\s+/)
+      .filter(w => w.length >= 5 && !COMMON.has(w))
+      .slice(0, 8)
+    if (keyWords.length >= 2 && !keyWords.some(w => lowerCombined.includes(w))) {
+      failures.push(
+        `primary-situation drift: none of the key words from the original input ("${keyWords.join('", "')}") appear in the response — the follow-up chip may have replaced the visitor's stated situation`,
+      )
+    }
   }
 
   // Markdown code fences

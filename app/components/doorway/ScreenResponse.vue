@@ -122,7 +122,7 @@ onMounted(() => {
           </h2>
 
           <div v-if="formState === 'success'" class="response__form-success" role="status">
-            <p>You're set. Check your inbox — your Starting Point is on its way.</p>
+            <p>Done — check your inbox for the MyHGY Starting Point PDF. You'll also receive one MyHGY email each Thursday.</p>
           </div>
 
           <form
@@ -163,7 +163,7 @@ onMounted(() => {
                 required
               />
               <span class="response__consent-text">
-                I agree to receive my MyHGY Starting Point and guidance for continuing the practice.
+                I agree to receive the MyHGY Starting Point PDF and one weekly MyHGY email every Thursday.
               </span>
             </label>
 
@@ -176,7 +176,7 @@ onMounted(() => {
               class="response__form-submit"
               :disabled="!formValid || formState === 'submitting'"
             >
-              {{ formState === 'submitting' ? 'Sending…' : 'Start My 7-Day Practice' }}
+              {{ formState === 'submitting' ? 'Sending…' : 'Send Me the Starting Point' }}
             </button>
           </form>
         </section>

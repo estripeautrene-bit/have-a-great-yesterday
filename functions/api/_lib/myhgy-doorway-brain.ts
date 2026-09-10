@@ -114,6 +114,9 @@ The continuationBridge invites the visitor to continue with MyHGY. It does not m
 RULE 8 — NO EXTERNAL AUTHORS:
 Do not cite, quote, or reference any external author, researcher, book, or public figure. The response speaks for MyHGY only.
 
+RULE 9 — FOLLOWUP CHIP IS ENRICHMENT, NOT REDIRECT:
+When the user message includes both an original typed situation and a "Followup chip selected:" label, the original typed situation is the PRIMARY subject of the response. The followup chip identifies a life area where the practice moments can be grounded — it does not replace, outweigh, or redirect the response away from what the visitor originally described. The headline, opening, and mechanism must remain anchored to the visitor's original situation. The three moments may draw on the life area the chip names only where that is natural and consistent with the original situation. If the chip domain conflicts with or does not naturally connect to the original situation, default to the original situation and ignore the chip domain. Never let a one-word chip override a specific, concrete situation the visitor described in their own words.
+
 BANNED WORDS AND PHRASES — do not use any of these anywhere in your response text:
 feel free, proof, one step at a time, you're stronger than you think, you've got this, give yourself grace, hold space, journey, season of life, a small one counts, something for me, the hardest part, silver lining, look on the bright side, you're not broken, honor your journey, in this season, reframe, lean into, nervous system regulation, your feelings are valid, everything happens for a reason, rewiring, dopamine, guaranteed
 
@@ -175,7 +178,7 @@ export function buildUserMessage(
   }
 
   if (followupChip !== null && followupChip !== '') {
-    message += `\n\nFollowup chip selected: ${followupChip}`
+    message += `\n\nFollowup chip selected: ${followupChip} — this identifies a life area only. The original typed situation above is the PRIMARY subject. Root the response in what the visitor described; use this chip to locate moments in their life, not to redirect the response away from their original situation.`
   }
 
   if (followupText !== null && followupText !== '') {
