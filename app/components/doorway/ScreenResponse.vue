@@ -433,12 +433,15 @@ onMounted(() => {
 /* ── Signup banner ────────────────────────────────────────── */
 
 .response__banner {
-  background: var(--color-sun);
+  background: var(--color-ink);
   border-radius: var(--radius-xl);
-  padding: var(--space-8) var(--space-10);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+  /* Break out of container padding so the banner spans the full 768px container width */
+  margin-inline: calc(-1 * var(--page-gutter));
+  padding: var(--space-6) var(--space-10);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
 }
 
 .response__banner-copy {
@@ -449,9 +452,9 @@ onMounted(() => {
 
 .response__banner-heading {
   font-family: var(--font-display);
-  font-size: var(--text-h2);
+  font-size: 1.25rem;
   font-weight: var(--weight-extrabold);
-  color: var(--color-ink);
+  color: var(--color-paper);
   line-height: var(--lh-heading);
 }
 
@@ -463,12 +466,12 @@ onMounted(() => {
 
 .banner__my {
   font-weight: 900;
-  color: var(--color-paper);
+  color: var(--color-sun);
 }
 
 .banner__hgy {
   font-weight: 600;
-  color: var(--color-ink);
+  color: var(--color-paper);
 }
 
 .banner__tm {
@@ -477,13 +480,14 @@ onMounted(() => {
   vertical-align: super;
   margin-left: 0.04em;
   line-height: 1;
-  color: var(--color-ink);
+  color: var(--color-paper);
   opacity: 0.55;
 }
 
 .response__banner-sub {
   font-size: var(--text-body);
-  color: var(--color-ink);
+  color: var(--color-paper);
+  opacity: 0.8;
 }
 
 .response__banner-form {
@@ -494,7 +498,7 @@ onMounted(() => {
 
 .response__banner-row {
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
   align-items: stretch;
 }
 
@@ -517,14 +521,14 @@ onMounted(() => {
 
 .response__banner-input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px var(--color-ink);
+  box-shadow: 0 0 0 2px var(--color-sun);
 }
 
 .response__banner-submit {
   flex-shrink: 0;
   padding: var(--space-4) var(--space-6);
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-sun);
+  color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--text-body);
   font-weight: var(--weight-semibold);
@@ -538,29 +542,32 @@ onMounted(() => {
 .response__banner-submit:hover:not(:disabled) { opacity: 0.85; }
 .response__banner-submit:disabled { opacity: 0.38; cursor: not-allowed; }
 .response__banner-submit:focus-visible {
-  outline: 3px solid var(--color-ink);
+  outline: 3px solid var(--color-paper);
   outline-offset: 3px;
 }
 
 .response__banner-fine {
   font-size: var(--text-xs);
-  color: var(--color-ink);
-  opacity: 0.65;
+  color: var(--color-paper);
+  opacity: 0.5;
 }
 
 .response__banner-error {
   font-size: var(--text-small);
-  color: #7c1a1a;
+  color: #fca5a5;
   font-weight: var(--weight-medium);
 }
 
 .response__banner-success {
+  grid-column: 1 / -1;
   font-size: var(--text-body);
-  color: var(--color-ink);
+  color: var(--color-paper);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .response__banner {
+    margin-inline: 0;
+    grid-template-columns: 1fr;
     padding: var(--space-6);
   }
 
