@@ -435,12 +435,13 @@ onMounted(() => {
 .response__banner {
   background: var(--color-ink);
   border-radius: var(--radius-xl);
-  /* Break out of container padding so the banner spans the full 768px container width */
-  margin-inline: calc(-1 * var(--page-gutter));
-  padding: var(--space-6) var(--space-10);
+  /* Break out of the narrow 768px response column — centered at max 1100px */
+  align-self: center;
+  width: min(1100px, calc(100vw - 2 * var(--space-8)));
+  padding: var(--space-8) var(--space-10);
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: var(--space-6);
+  grid-template-columns: 2fr 3fr;
+  gap: var(--space-8);
   align-items: center;
 }
 
@@ -540,7 +541,8 @@ onMounted(() => {
 
 @media (max-width: 768px) {
   .response__banner {
-    margin-inline: 0;
+    align-self: stretch;
+    width: auto;
     grid-template-columns: 1fr;
     padding: var(--space-6);
   }
