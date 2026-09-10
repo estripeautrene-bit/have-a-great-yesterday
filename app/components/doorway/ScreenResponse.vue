@@ -14,13 +14,11 @@ type FormState = 'idle' | 'submitting' | 'success' | 'error'
 const formState = ref<FormState>('idle')
 const firstName = ref('')
 const email = ref('')
-const consent = ref(false)
 
 const formValid = computed(
   () =>
     firstName.value.trim().length > 0
-    && /\S+@\S+/.test(email.value)
-    && consent.value === true,
+    && /\S+@\S+/.test(email.value),
 )
 
 const { apiBase } = useRuntimeConfig().public
@@ -39,7 +37,7 @@ async function submitForm() {
       body: JSON.stringify({
         firstName: firstName.value.trim(),
         email: email.value.trim(),
-        consent: consent.value,
+        consent: true,
       }),
     })
     if (!res.ok) throw new Error(`capture_error:${res.status}`)
@@ -116,69 +114,57 @@ onMounted(() => {
           <p class="response__continuation-body">Carry a small notebook and pen. When one of these moments happens, write it down while it is still alive. Aim for at least three today, then do it again tomorrow. Over time, those pages become visible evidence of what is still happening, what you are doing, and where you are moving.</p>
         </section>
 
-        <section class="response__form-section" aria-labelledby="form-heading">
-          <h2 id="form-heading" class="response__form-heading">
-            Continue with MyHGY
-          </h2>
-
-          <div v-if="formState === 'success'" class="response__form-success" role="status">
+        <section class="response__banner" aria-labelledby="banner-heading">
+          <div v-if="formState === 'success'" class="response__banner-success" role="status">
             <p>Done — check your inbox for the MyHGY Starting Point PDF. You'll also receive one MyHGY email each Thursday.</p>
           </div>
 
-          <form
-            v-else
-            class="response__form"
-            novalidate
-            @submit.prevent="submitForm"
-          >
-            <div class="response__field">
-              <label class="response__label" for="form-firstname">First name</label>
-              <input
-                id="form-firstname"
-                v-model="firstName"
-                class="response__input"
-                type="text"
-                autocomplete="given-name"
-                required
-              />
+          <template v-else>
+            <div class="response__banner-copy">
+              <h2 id="banner-heading" class="response__banner-heading">
+                Get Your <span class="banner__wordmark"><span class="banner__my">My</span><span class="banner__hgy">HGY</span><sup class="banner__tm">™</sup></span> Starting Point Tool
+              </h2>
+              <p class="response__banner-sub">And one useful insight every week on our newsletter.</p>
             </div>
 
-            <div class="response__field">
-              <label class="response__label" for="form-email">Email</label>
-              <input
-                id="form-email"
-                v-model="email"
-                class="response__input"
-                type="email"
-                autocomplete="email"
-                required
-              />
-            </div>
+            <form class="response__banner-form" novalidate @submit.prevent="submitForm">
+              <div class="response__banner-row">
+                <input
+                  id="banner-firstname"
+                  v-model="firstName"
+                  class="response__banner-input"
+                  type="text"
+                  placeholder="First name"
+                  autocomplete="given-name"
+                  aria-label="First name"
+                  required
+                />
+                <input
+                  id="banner-email"
+                  v-model="email"
+                  class="response__banner-input"
+                  type="email"
+                  placeholder="Email"
+                  autocomplete="email"
+                  aria-label="Email"
+                  required
+                />
+                <button
+                  type="submit"
+                  class="response__banner-submit"
+                  :disabled="!formValid || formState === 'submitting'"
+                >
+                  {{ formState === 'submitting' ? 'Sending…' : 'Submit' }}
+                </button>
+              </div>
 
-            <label class="response__consent">
-              <input
-                v-model="consent"
-                class="response__checkbox"
-                type="checkbox"
-                required
-              />
-              <span class="response__consent-text">
-                I agree to receive the MyHGY Starting Point PDF and one weekly MyHGY email every Thursday.
-              </span>
-            </label>
+              <p v-if="formState === 'error'" class="response__banner-error" role="alert">
+                Something went wrong — please try again.
+              </p>
 
-            <p v-if="formState === 'error'" class="response__form-error" role="alert">
-              Something went wrong — please try again.
-            </p>
-
-            <button
-              type="submit"
-              class="response__form-submit"
-              :disabled="!formValid || formState === 'submitting'"
-            >
-              {{ formState === 'submitting' ? 'Sending…' : 'Send Me the Starting Point' }}
-            </button>
-          </form>
+              <p class="response__banner-fine">Unsubscribe anytime.</p>
+            </form>
+          </template>
         </section>
       </template>
 
@@ -442,5 +428,144 @@ onMounted(() => {
 .response__form-submit:focus-visible {
   outline: 3px solid var(--color-ink);
   outline-offset: 3px;
+}
+
+/* ── Signup banner ────────────────────────────────────────── */
+
+.response__banner {
+  background: var(--color-sun);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.response__banner-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.response__banner-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: var(--weight-extrabold);
+  color: var(--color-ink);
+  line-height: var(--lh-heading);
+}
+
+/* Inline wordmark treatment — matches WordmarkHGY light/dark split */
+.banner__wordmark {
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.banner__my {
+  font-weight: 900;
+  color: var(--color-paper);
+}
+
+.banner__hgy {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.banner__tm {
+  font-size: 0.36em;
+  font-weight: 700;
+  vertical-align: super;
+  margin-left: 0.04em;
+  line-height: 1;
+  color: var(--color-ink);
+  opacity: 0.55;
+}
+
+.response__banner-sub {
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+.response__banner-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.response__banner-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+.response__banner-input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-paper);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--color-ink);
+  transition: box-shadow var(--transition-fast);
+}
+
+.response__banner-input::placeholder {
+  color: var(--color-muted-ink);
+}
+
+.response__banner-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-ink);
+}
+
+.response__banner-submit {
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity var(--transition-fast);
+}
+
+.response__banner-submit:hover:not(:disabled) { opacity: 0.85; }
+.response__banner-submit:disabled { opacity: 0.38; cursor: not-allowed; }
+.response__banner-submit:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.response__banner-fine {
+  font-size: var(--text-xs);
+  color: var(--color-ink);
+  opacity: 0.65;
+}
+
+.response__banner-error {
+  font-size: var(--text-small);
+  color: #7c1a1a;
+  font-weight: var(--weight-medium);
+}
+
+.response__banner-success {
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+@media (max-width: 600px) {
+  .response__banner {
+    padding: var(--space-6);
+  }
+
+  .response__banner-row {
+    flex-direction: column;
+  }
 }
 </style>
