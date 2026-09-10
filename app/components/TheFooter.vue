@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const navLinks = [
   { label: 'Method',                    href: '/method' },
+  { label: 'FAQ',                       href: '/faq' },
   { label: "What You're Going Through", href: '/what-are-you-going-through' },
   { label: 'Ideas',                     href: '/ideas' },
   { label: 'Hall of Fame',              href: '/hall-of-fame' },

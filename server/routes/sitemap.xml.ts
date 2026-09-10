@@ -5,6 +5,7 @@ export default defineEventHandler((event) => {
   const routes = [
     '/',
     '/method',
+    '/faq',
     '/ideas',
     '/our-story',
     '/for-organizations',

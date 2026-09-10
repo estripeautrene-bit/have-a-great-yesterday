@@ -8,6 +8,7 @@ let darkObserver: IntersectionObserver | null = null
 
 const navItems: NavItem[] = [
   { label: 'Method',                   href: '/method' },
+  { label: 'FAQ',                      href: '/faq' },
   { label: "What You're Going Through", href: '/what-are-you-going-through' },
   { label: 'Ideas',                    href: '/ideas' },
   { label: 'Hall of Fame',             href: '/hall-of-fame' },
