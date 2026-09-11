@@ -122,7 +122,7 @@ onMounted(() => {
           <template v-else>
             <div class="response__banner-copy">
               <h2 id="banner-heading" class="response__banner-heading">
-                Get Your <WordmarkHGY variant="dark" size="sm" /> Starting Point Tool
+                Get Your <span class="banner__mark"><span class="banner__my">My</span><span class="banner__hgy">HGY</span><span class="banner__tm">™</span></span> Starting Point Tool
               </h2>
               <p class="response__banner-sub">And one useful insight every week on our newsletter.</p>
             </div>
@@ -435,7 +435,7 @@ onMounted(() => {
 .response__banner {
   background: var(--color-ink);
   border-radius: var(--radius-xl);
-  /* Break out of the narrow 768px response column — centered at max 1100px */
+  /* Overflow the narrow response column — centered at max 1100px */
   align-self: center;
   width: min(1100px, calc(100vw - 2 * var(--space-8)));
   padding: var(--space-8) var(--space-10);
@@ -448,21 +448,41 @@ onMounted(() => {
 .response__banner-copy {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .response__banner-heading {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   font-weight: var(--weight-extrabold);
   color: var(--color-paper);
-  line-height: var(--lh-heading);
+  line-height: 1.25;
+}
+
+/* Inline wordmark — inline-flex baseline keeps ™ at lower-right of the Y */
+.banner__mark {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  font-family: 'Playfair Display', Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.banner__my  { font-weight: 900; color: var(--color-sun); }
+.banner__hgy { font-weight: 600; color: var(--color-paper); }
+.banner__tm  {
+  font-size: 0.4em;
+  font-weight: 700;
+  margin-left: 0.04em;
+  color: var(--color-paper);
+  opacity: 0.75;
 }
 
 .response__banner-sub {
   font-size: var(--text-body);
   color: var(--color-paper);
-  opacity: 0.8;
+  opacity: 0.75;
+  line-height: 1.6;
 }
 
 .response__banner-form {
@@ -473,17 +493,18 @@ onMounted(() => {
 
 .response__banner-row {
   display: flex;
-  gap: var(--space-2);
+  gap: 12px;
   align-items: stretch;
 }
 
 .response__banner-input {
   flex: 1;
   min-width: 0;
-  padding: var(--space-4) var(--space-5);
+  height: 50px;
+  padding: 0 var(--space-5);
   background: var(--color-paper);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--color-ink);
@@ -501,14 +522,15 @@ onMounted(() => {
 
 .response__banner-submit {
   flex-shrink: 0;
-  padding: var(--space-4) var(--space-6);
+  height: 50px;
+  padding: 0 var(--space-8);
   background: var(--color-sun);
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--text-body);
-  font-weight: var(--weight-semibold);
+  font-weight: var(--weight-bold);
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   cursor: pointer;
   white-space: nowrap;
   transition: opacity var(--transition-fast);
@@ -544,7 +566,7 @@ onMounted(() => {
     align-self: stretch;
     width: auto;
     grid-template-columns: 1fr;
-    padding: var(--space-6);
+    padding: var(--space-8) var(--space-6);
   }
 
   .response__banner-row {
