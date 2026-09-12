@@ -18,6 +18,7 @@ export default defineEventHandler((event) => {
     '/hall-of-fame/martin-seligman',
     '/hall-of-fame/james-clear',
     '/hall-of-fame/bob-proctor',
+    '/what-are-you-going-through',
   ]
 
   const urls = routes

@@ -5,7 +5,6 @@ usePageSeo({
   title: 'What Are You Going Through? — HaveAGreatYesterday.com',
   description: 'Tell us a little about your actual life. We\'ll show you where meaningful moments may already be happening in your week, and a simple way to keep them.',
   path: '/what-are-you-going-through',
-  robots: 'noindex',
 })
 
 const {
