@@ -9,6 +9,7 @@ export default defineEventHandler((event) => {
     '/ideas',
     '/our-story',
     '/for-organizations',
+    '/for-professionals',
     '/hall-of-fame',
     '/hall-of-fame/dan-sullivan',
     '/history',

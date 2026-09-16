@@ -4,6 +4,7 @@ const navLinks = [
   { label: 'FAQ',                       href: '/faq' },
   { label: "What You're Going Through", href: '/what-are-you-going-through' },
   { label: 'Ideas',                     href: '/ideas' },
+  { label: 'For Professionals',         href: '/for-professionals' },
   { label: 'Hall of Fame',              href: '/hall-of-fame' },
   { label: 'Our Story',                 href: '/our-story' },
   { label: 'Where the phrase comes from', href: '/history' },
