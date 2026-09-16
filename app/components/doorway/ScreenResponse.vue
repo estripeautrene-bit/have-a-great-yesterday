@@ -116,12 +116,8 @@ onMounted(() => {
 
         <section class="response__banner" aria-labelledby="banner-heading">
           <div v-if="formState === 'success'" class="response__banner-success" role="status">
-            <p>Done — check your inbox for the MyHGY Starting Point PDF. You'll also receive one MyHGY email each Thursday.</p>
-            <a
-              href="/downloads/MyHGY-Starting-Point.pdf"
-              class="response__banner-download"
-              download
-            >Download Your Starting Point</a>
+            <p class="response__banner-success-hed">Success — check your email.</p>
+            <p class="response__banner-success-body">We've sent you a quick confirmation. Once you confirm, your MyHGY™ Starting Point will be waiting for you.</p>
           </div>
 
           <template v-else>
@@ -562,33 +558,25 @@ onMounted(() => {
 
 .response__banner-success {
   grid-column: 1 / -1;
-  font-size: var(--text-body);
-  color: var(--color-paper);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
-.response__banner-download {
-  display: inline-flex;
-  align-items: center;
-  height: 50px;
-  padding: 0 var(--space-8);
-  background: var(--color-sun);
-  color: var(--color-ink);
-  font-family: var(--font-body);
-  font-size: var(--text-body);
+.response__banner-success-hed {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
   font-weight: var(--weight-bold);
-  border-radius: var(--radius-full);
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
+  color: var(--color-paper);
+  line-height: var(--lh-heading);
 }
 
-.response__banner-download:hover { opacity: 0.85; }
-.response__banner-download:focus-visible {
-  outline: 3px solid var(--color-paper);
-  outline-offset: 3px;
+.response__banner-success-body {
+  font-size: var(--text-body);
+  line-height: var(--lh-body);
+  color: var(--color-paper);
+  opacity: 0.75;
+  max-width: 50ch;
 }
 
 @media (max-width: 768px) {
