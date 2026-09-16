@@ -191,8 +191,14 @@ function trackGuideAccess() {
 
           <div class="fpe__body">
             <p>MyHGY draws on established research and ideas around deliberate attention, written recording, small wins, progress monitoring, savoring, self-efficacy, continuity, and visible evidence.</p>
-            <p>A meta-analysis by Harkin and colleagues covering 138 studies and 19,951 participants found that interventions designed to increase progress monitoring improved goal attainment, with stronger effects when progress was physically recorded. MyHGY is not a goal-monitoring intervention, but the finding supports the broader principle that deliberately recording information can make it persistent and usable across time.</p>
-            <p>Teresa Amabile and Steven Kramer's research on progress in meaningful work found that even small signs of progress can meaningfully affect people's experience of their workday and that these small wins are often overlooked. MyHGY applies a broader version of that insight to ordinary lived evidence.</p>
+            <div class="fpe__citation">
+              <p>A meta-analysis by Harkin and colleagues covering 138 studies and 19,951 participants found that interventions designed to increase progress monitoring improved goal attainment, with stronger effects when progress was physically recorded. MyHGY is not a goal-monitoring intervention, but the finding supports the broader principle that deliberately recording information can make it persistent and usable across time.</p>
+              <a href="https://doi.org/10.1037/bul0000025" class="fpe__source" target="_blank" rel="noopener noreferrer">Harkin et al., Psychological Bulletin (2016) ↗</a>
+            </div>
+            <div class="fpe__citation">
+              <p>Teresa Amabile and Steven Kramer's research on progress in meaningful work found that even small signs of progress can meaningfully affect people's experience of their workday and that these small wins are often overlooked. MyHGY applies a broader version of that insight to ordinary lived evidence.</p>
+              <a href="https://hbr.org/2011/05/the-power-of-small-wins" class="fpe__source" target="_blank" rel="noopener noreferrer">Amabile &amp; Kramer, Harvard Business Review (2011) ↗</a>
+            </div>
           </div>
 
           <div class="fpe__claims-boundary">
@@ -201,11 +207,6 @@ function trackGuideAccess() {
 
           <div class="fpe__professional-boundary">
             <p>MyHGY is a personal-development practice. It is not therapy, diagnosis, medical treatment, crisis care, or a replacement for qualified professional support.</p>
-            <p>
-              If someone you work with needs urgent support, the
-              <NuxtLink to="/what-are-you-going-through" class="fpe__link">What You're Going Through</NuxtLink>
-              experience is available for that.
-            </p>
           </div>
         </div>
       </div>
@@ -478,7 +479,6 @@ function trackGuideAccess() {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  max-width: 58ch;
 }
 
 .fph__body p {
@@ -707,10 +707,22 @@ function trackGuideAccess() {
   font-style: italic;
 }
 
-.fpe__professional-boundary {
+.fpe__citation {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
+}
+
+.fpe__source {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-muted-ink);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.fpe__source:hover {
+  color: var(--color-ink);
 }
 
 .fpe__professional-boundary p {
@@ -718,16 +730,6 @@ function trackGuideAccess() {
   font-size: var(--text-body);
   line-height: var(--lh-body);
   color: var(--color-muted-ink);
-}
-
-.fpe__link {
-  color: var(--color-muted-ink);
-  text-decoration: underline;
-  transition: color var(--transition-fast);
-}
-
-.fpe__link:hover {
-  color: var(--color-ink);
 }
 
 
@@ -832,7 +834,7 @@ function trackGuideAccess() {
    ══════════════════════════════════════════════════════════════════════ */
 
 .fpf__inner {
-  max-width: var(--container-sm);
+  max-width: var(--container-md);
   margin-inline: auto;
   display: flex;
   flex-direction: column;
