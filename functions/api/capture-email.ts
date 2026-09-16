@@ -71,7 +71,7 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   }
 
   try {
-    const res = await fetch('https://app.loops.so/api/v1/contacts/create', {
+    const res = await fetch('https://app.loops.so/api/v1/contacts/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
