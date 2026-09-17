@@ -117,7 +117,7 @@ onMounted(() => {
         <section class="response__banner" aria-labelledby="banner-heading">
           <div v-if="formState === 'success'" class="response__banner-success" role="status">
             <p class="response__banner-success-hed"><span class="response__banner-gold">Success</span> — <span class="response__banner-gold">check your email.</span></p>
-            <p class="response__banner-success-body">Your <span class="response__banner-gold">MyHGY™</span> Starting Point is on its way.</p>
+            <p class="response__banner-success-body">Your <span class="response__banner-gold">My</span>HGY™ Starting Point is on its way.</p>
           </div>
 
           <template v-else>
