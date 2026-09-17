@@ -87,6 +87,21 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
     if (!res.ok) {
       return jsonResponse({ error: 'capture_failed' }, 502)
     }
+
+    const eventRes = await fetch('https://app.loops.so/api/v1/events/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.LOOPS_API_KEY}`,
+      },
+      body: JSON.stringify({ email, eventName: 'myhgy_signup' }),
+    })
+    if (!eventRes.ok) {
+      const detail = await eventRes.text().catch(() => '(unreadable)')
+      console.error(`loops event failed: ${eventRes.status} — ${detail}`)
+      return jsonResponse({ error: 'capture_failed' }, 502)
+    }
+
     return jsonResponse({ ok: true }, 200)
   }
   catch {
