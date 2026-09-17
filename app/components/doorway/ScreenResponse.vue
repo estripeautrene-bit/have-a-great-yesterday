@@ -117,7 +117,7 @@ onMounted(() => {
         <section class="response__banner" aria-labelledby="banner-heading">
           <div v-if="formState === 'success'" class="response__banner-success" role="status">
             <p class="response__banner-success-hed">Success — check your email.</p>
-            <p class="response__banner-success-body">We've sent you a quick confirmation. Once you confirm, your MyHGY™ Starting Point will be waiting for you.</p>
+            <p class="response__banner-success-body">Your MyHGY™ Starting Point is on its way.</p>
           </div>
 
           <template v-else>

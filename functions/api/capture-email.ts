@@ -2,7 +2,7 @@
 // Never logs firstName, email, or any visitor input.
 
 interface Env {
-  LOOPS_FORM_ENDPOINT?: string
+  LOOPS_API_KEY?: string
 }
 
 function jsonResponse(body: unknown, status: number): Response {
@@ -66,23 +66,25 @@ export async function onRequest(context: { request: Request; env: Env }): Promis
   const firstName = b.firstName.trim()
   const email = b.email.trim()
 
-  if (!env.LOOPS_FORM_ENDPOINT) {
+  if (!env.LOOPS_API_KEY) {
     return jsonResponse({ error: 'service_misconfigured' }, 502)
   }
 
   try {
-    const formData = new URLSearchParams()
-    formData.set('email', email)
-    formData.set('firstName', firstName)
-
-    const res = await fetch(env.LOOPS_FORM_ENDPOINT, {
+    const res = await fetch('https://app.loops.so/api/v1/contacts/update', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: formData.toString(),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${env.LOOPS_API_KEY}`,
+      },
+      body: JSON.stringify({
+        email,
+        firstName,
+        source: 'doorway',
+        mailingLists: {},
+      }),
     })
-
-    const data = await res.json() as { success?: boolean }
-    if (!res.ok || data.success === false) {
+    if (!res.ok) {
       return jsonResponse({ error: 'capture_failed' }, 502)
     }
     return jsonResponse({ ok: true }, 200)
