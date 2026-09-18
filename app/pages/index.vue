@@ -35,6 +35,7 @@ useJsonLd([
   <HomeMethodRail />
   <HomePracticePhilosophy />
   <HomePracticePreview />
+  <HomePracticeKitCta />
   <HomeHallOfFamePreview />
   <HomeFounderStory />
   <HomeMyDopaBridge />

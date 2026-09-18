@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const navLinks = [
   { label: 'Method',                    href: '/method' },
+  { label: '30-Day Practice Kit',       href: '/30-day-practice' },
   { label: 'FAQ',                       href: '/faq' },
   { label: "What You're Going Through", href: '/what-are-you-going-through' },
   { label: 'Ideas',                     href: '/ideas' },
